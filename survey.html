@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adaptive Leadership Survey</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <style>
-        * {
+    :root {
+    --AIMblue: #4353A3;
+    --darkBlue: #38416D;
+    --teal: #5DC8B9;
+    --cream: #F1EEDE;
+    --grey: #e7e9ec;
+    --rust: #AF4510;
+    --navy: #12195C;
+    --white: #ffffff;
+    --lightBlue: #AEBAE4;
+    }        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            min-height: 100vh;
+            font-family: "IBM Plex Sans", sans-serif;
+            min-height: 90vh;
             padding: 20px;
             display: flex;
             justify-content: center;
@@ -42,20 +55,20 @@
         }
 
         h1 {
-            color: #2d3748;
+            color: var(--darkBlue);
             font-size: 28px;
             margin-bottom: 10px;
         }
 
         .survey-intro {
-            color: #4a5568;
+            color: var(--darkBlue);
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 30px;
             padding: 20px;
             background: #f7fafc;
             border-radius: 8px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--teal);
         }
 
         .section {
@@ -68,12 +81,12 @@
         }
 
         .section:hover {
-            border-color: #667eea;
+            border-color: var(--lightBlue);
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
         }
 
         .section-title {
-            color: #2b6cb0;
+            color:  var(--darkBlue);
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 15px;
@@ -82,7 +95,7 @@
         }
 
         .section-number {
-            background: #667eea;
+            background: var(--darkBlue);
             color: white;
             width: 32px;
             height: 32px;
@@ -110,7 +123,7 @@
 
         .question-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--teal);
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
@@ -171,7 +184,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--AIMblue);
             color: white;
             border: none;
             padding: 15px 40px;
@@ -186,7 +199,7 @@
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 3px 5px rgba(102, 126, 234, 0.3);
         }
 
         .submit-btn:active {
@@ -203,7 +216,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #4353A3 0%, #12195C 100%);
             width: 0%;
             transition: width 0.3s ease;
         }
@@ -225,14 +238,177 @@
                 font-size: 18px;
             }
         }
+
+        /* Survey Preview Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: var(--AIMblue);
+            color: white;
+            padding: 30px;
+            border-radius: 12px 12px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .preview-intro {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+
+        .preview-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .preview-section-title {
+            color: #2b6cb0;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .preview-question {
+            margin-bottom: 15px;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .preview-answer-box {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            background: #f7fafc;
+            color: #a0aec0;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 2px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            position: sticky;
+            bottom: 0;
+            background: white;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .modal-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .empty-section {
+            color: #a0aec0;
+            font-style: italic;
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
     <div class="survey-container">
-        <h1>Activity: Adaptive Leadership Survey</h1>
+        <h1>Activity: Design Your Adaptive Leadership Survey</h1>
         
         <div class="survey-intro">
-            <strong>The purpose of the survey:</strong><br>
+            <strong>Your Task:</strong><br>
+            You are an adaptive leader investigating why employees' actual jobs differ from their formal job descriptions and KPIs. Create survey questions for each section below that will help uncover the underlying reasons for these discrepancies. Once complete, click "Generate Survey Preview" to see what your survey will look like to employees.
+            <br><br>
+            <strong>The survey purpose (will be shown to employees):</strong><br>
             This survey aims to understand discrepancies between job descriptions, KPIs and actual work, not to evaluate individual performance. Your responses are entirely anonymous and we encourage you to be as candid as possible in your responses.
         </div>
 
@@ -249,7 +425,7 @@
                 <textarea 
                     class="question-input" 
                     id="section1"
-                    placeholder="Type your survey questions here for this section..."
+                    placeholder="Write your survey questions for this section... (e.g., Which tasks do you perform regularly that are not in your job description?)"
                     data-section="1"
                 ></textarea>
                 <div class="char-count" id="count1">0 characters</div>
@@ -270,7 +446,7 @@
                 <textarea 
                     class="question-input" 
                     id="section2"
-                    placeholder="Type your survey questions here for this section..."
+                    placeholder="Write your survey questions for this section... (e.g., What factors influence which tasks you prioritise?)"
                     data-section="2"
                 ></textarea>
                 <div class="char-count" id="count2">0 characters</div>
@@ -292,7 +468,7 @@
                 <textarea 
                     class="question-input" 
                     id="section3"
-                    placeholder="Type your survey questions here for this section..."
+                    placeholder="Write your survey questions for this section... (e.g., Are there pressures that push you to take on work outside your role?)"
                     data-section="3"
                 ></textarea>
                 <div class="char-count" id="count3">0 characters</div>
@@ -307,8 +483,25 @@
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn">Complete Survey Design</button>
+            <button type="submit" class="submit-btn">Generate Survey Preview</button>
         </form>
+    </div>
+
+    <!-- Survey Preview Modal -->
+    <div class="modal-overlay" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 Survey Preview</h2>
+                <p>This is how employees will see your survey</p>
+            </div>
+            <div class="modal-body" id="previewBody">
+                <!-- Preview content will be generated here -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closePreview()">Edit Questions</button>
+                <button class="modal-btn modal-btn-primary" onclick="downloadSurvey()">Download Survey</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -364,24 +557,147 @@
             const hasContent = Object.values(responses).some(val => val.trim().length > 0);
 
             if (!hasContent) {
-                alert('Please fill in at least one section before submitting.');
+                alert('Please write at least one survey question before generating the preview.');
                 return;
             }
 
-            // Display results
-            let resultMessage = 'Survey Design Complete!\n\n';
-            resultMessage += 'You have created questions for:\n';
-            
-            if (responses.section1.trim()) resultMessage += '✓ Your tasks and responsibilities\n';
-            if (responses.section2.trim()) resultMessage += '✓ Prioritising tasks\n';
-            if (responses.section3.trim()) resultMessage += '✓ Work outside job description\n';
-            
-            resultMessage += '\nBy creating an anonymous survey with these targeted questions, an adaptive leader can gather honest insights from employees and uncover underlying systemic issues.';
+            // Generate and show preview
+            generatePreview(responses);
+        });
 
-            alert(resultMessage);
+        function generatePreview(responses) {
+            const previewBody = document.getElementById('previewBody');
+            
+            // Build preview HTML
+            let previewHTML = `
+                <div class="preview-intro">
+                    <strong>Purpose of this survey:</strong><br>
+                    This survey aims to understand discrepancies between job descriptions, KPIs and actual work, not to evaluate individual performance. Your responses are entirely anonymous and we encourage you to be as candid as possible in your responses.
+                </div>
+            `;
 
-            // Optional: Log to console for debugging
-            console.log('Survey Responses:', responses);
+            // Section 1
+            previewHTML += generateSectionPreview(
+                1,
+                'Your tasks and responsibilities',
+                responses.section1
+            );
+
+            // Section 2
+            previewHTML += generateSectionPreview(
+                2,
+                'Prioritising tasks',
+                responses.section2
+            );
+
+            // Section 3
+            previewHTML += generateSectionPreview(
+                3,
+                'Work that is outside your job description',
+                responses.section3
+            );
+
+            previewBody.innerHTML = previewHTML;
+            
+            // Show modal
+            document.getElementById('previewModal').classList.add('active');
+        }
+
+        function generateSectionPreview(num, title, content) {
+            let html = `
+                <div class="preview-section">
+                    <h3 class="preview-section-title">
+                        <span class="section-number">${num}</span>
+                        ${title}
+                    </h3>
+            `;
+
+            if (content.trim()) {
+                // Split questions by line breaks and filter empty lines
+                const questions = content.split('\n').filter(q => q.trim());
+                
+                questions.forEach((question, index) => {
+                    html += `
+                        <div class="preview-question">
+                            <strong>Question ${index + 1}:</strong> ${escapeHtml(question.trim())}
+                            <div class="preview-answer-box">Your answer here...</div>
+                        </div>
+                    `;
+                });
+            } else {
+                html += `<div class="empty-section">No questions added for this section</div>`;
+            }
+
+            html += `</div>`;
+            return html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').classList.remove('active');
+        }
+
+        function downloadSurvey() {
+            const responses = {
+                section1: document.getElementById('section1').value,
+                section2: document.getElementById('section2').value,
+                section3: document.getElementById('section3').value
+            };
+
+            // Create a formatted text version
+            let surveyText = 'ADAPTIVE LEADERSHIP SURVEY\n';
+            surveyText += '='.repeat(50) + '\n\n';
+            surveyText += 'PURPOSE:\n';
+            surveyText += 'This survey aims to understand discrepancies between job descriptions, KPIs and actual work, not to evaluate individual performance. Your responses are entirely anonymous and we encourage you to be as candid as possible in your responses.\n\n';
+            surveyText += '='.repeat(50) + '\n\n';
+
+            const sections = [
+                { title: 'SECTION 1: Your tasks and responsibilities', content: responses.section1 },
+                { title: 'SECTION 2: Prioritising tasks', content: responses.section2 },
+                { title: 'SECTION 3: Work that is outside your job description', content: responses.section3 }
+            ];
+
+            sections.forEach((section, index) => {
+                surveyText += `${section.title}\n`;
+                surveyText += '-'.repeat(50) + '\n';
+                
+                if (section.content.trim()) {
+                    const questions = section.content.split('\n').filter(q => q.trim());
+                    questions.forEach((q, i) => {
+                        surveyText += `\nQ${i + 1}. ${q.trim()}\n`;
+                        surveyText += 'Answer: \n\n\n';
+                    });
+                } else {
+                    surveyText += '\n[No questions added]\n';
+                }
+                
+                surveyText += '\n' + '='.repeat(50) + '\n\n';
+            });
+
+            // Create download
+            const blob = new Blob([surveyText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'adaptive-leadership-survey.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('Survey downloaded! You can now distribute this to employees.');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('previewModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePreview();
+            }
         });
 
         // Add smooth scrolling when examples appear
