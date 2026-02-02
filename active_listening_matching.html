@@ -55,9 +55,12 @@
     }
 
     .column {
-    flex: 1;
+    flex: 2;
     }
 
+    .column:last-of-type {
+    flex: 1;
+    }
     .column-header {
     font-weight: 600;
     font-size: 1.3em;
@@ -83,6 +86,7 @@
     font-weight: 500;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border: solid 2px var(--lightBlue);
+    height: 96px;
     }
 
     .draggable-item {
@@ -95,6 +99,7 @@
     transition: transform 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
     font-size: 1em;
     position: relative;
+    height: 96px;
     }
 
     .draggable-item:hover {
@@ -321,14 +326,12 @@
         <div class="matching-area">
             <!-- Static Answer Column -->
             <div class="column">
-                <div class="column-header">Match To</div>
+                <div class="column-header">Examples</div>
                 <div class="items-list">
-                    <div class="static-item">Item A</div>
-                    <div class="static-item">Item B</div>
-                    <div class="static-item">Item C</div>
-                    <div class="static-item">Item D</div>
-                    <div class="static-item">Item E</div>
-                    <div class="static-item">Item F</div>
+                    <div class="static-item">Repeats back what staff say in their own words and confirms understanding.</div>
+                    <div class="static-item">Asks, “Can you explain why updating the digital logs is challenging during busy site work?”</div>
+                    <div class="static-item">Observes staff body language and tone to notice frustration or hesitation that isn’t being verbalised.</div>
+                    <div class="static-item">Questions the leadership team’s belief that the drop in adoption is entirely due to staff resistance.</div>
                 </div>
             </div>
 
@@ -336,12 +339,10 @@
             <div class="column">
                 <div class="column-header">Your Answers</div>
                 <div class="items-list" id="answerList">
-                    <div class="draggable-item" draggable="true" data-id="item3" role="button" aria-grabbed="false" tabindex="0">Match C</div>
-                    <div class="draggable-item" draggable="true" data-id="item1" role="button" aria-grabbed="false" tabindex="0">Match A</div>
-                    <div class="draggable-item" draggable="true" data-id="item5" role="button" aria-grabbed="false" tabindex="0">Match E</div>
-                    <div class="draggable-item" draggable="true" data-id="item2" role="button" aria-grabbed="false" tabindex="0">Match B</div>
-                    <div class="draggable-item" draggable="true" data-id="item6" role="button" aria-grabbed="false" tabindex="0">Match F</div>
-                    <div class="draggable-item" draggable="true" data-id="item4" role="button" aria-grabbed="false" tabindex="0">Match D</div>
+                    <div class="draggable-item" draggable="true" data-id="item1" role="button" aria-grabbed="false" tabindex="0">Listen actively with empathy</div>
+                    <div class="draggable-item" draggable="true" data-id="item3" role="button" aria-grabbed="false" tabindex="0">Observe patterns and context</div>
+                    <div class="draggable-item" draggable="true" data-id="item4" role="button" aria-grabbed="false" tabindex="0">Challenge assumptions</div>
+                    <div class="draggable-item" draggable="true" data-id="item2" role="button" aria-grabbed="false" tabindex="0">Ask why repeatedly</div>
                 </div>
             </div>
         </div>
@@ -365,7 +366,7 @@ let draggedItem = null;
 let keyboardGrabbedItem = null;
 
 // Correct answer order
-const correctOrder = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'];
+const correctOrder = ['item1', 'item2', 'item3', 'item4'];
 
 function initDragAndDrop() {
     const items = document.querySelectorAll('.draggable-item');
@@ -606,7 +607,7 @@ function checkAnswers() {
 
     // Display results
     if (correctCount === correctOrder.length) {
-        showModal('Perfect! 🎉', '<p>All items are correctly matched in the right order!</p>');
+        showModal('Perfect!', '<p>All items are correctly matched in the right order!</p>');
         announceToScreenReader('Perfect! All items are correctly matched in the right order!');
     } else {
         const percentage = Math.round((correctCount / correctOrder.length) * 100);
