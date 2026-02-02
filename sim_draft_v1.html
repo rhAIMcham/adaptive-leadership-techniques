@@ -50,6 +50,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .header h1 {
@@ -60,6 +62,13 @@
         .header .role {
             color: var(--text-secondary);
             font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .week-indicator {
@@ -180,6 +189,15 @@
         .notification.important {
             background: #fef3c7;
             border-left-color: var(--warning);
+        }
+
+        .notification.completed {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .notification.completed:hover {
+            transform: none;
         }
 
         .notification-header {
@@ -319,7 +337,7 @@
         .modal-content {
             background: var(--bg-card);
             border-radius: 16px;
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -543,6 +561,21 @@
             color: var(--primary);
         }
 
+        .btn-icon {
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .btn-icon:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -563,6 +596,7 @@
             gap: 8px;
             overflow-x: auto;
             padding: 10px 0;
+            flex-wrap: wrap;
         }
 
         .process-step {
@@ -578,6 +612,11 @@
         .process-step.problem {
             background: #fee2e2;
             border-color: var(--danger);
+        }
+
+        .process-step.improved {
+            background: #d1fae5;
+            border-color: var(--success);
         }
 
         .process-arrow {
@@ -634,47 +673,7 @@
             margin-bottom: 4px;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                order: -1;
-            }
-
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .container {
-                padding: 10px;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-
-            .week-indicator {
-                text-align: center;
-            }
-
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                max-width: 100%;
-                margin: 10px;
-            }
-        }
-
-        /* Pulse animation for new notifications */
+        /* Pulse animation */
         @keyframes pulse {
             0%, 100% {
                 box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
@@ -717,6 +716,234 @@
             color: var(--primary);
         }
 
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 16px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            margin-bottom: -2px;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab:hover {
+            color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .comparison-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .percentile-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .percentile-badge.top {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .percentile-badge.high {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .percentile-badge.mid {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .percentile-badge.low {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Causal Loop Diagram */
+        .loop-diagram {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .loop-node {
+            background: #dbeafe;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 8px;
+            display: inline-block;
+            border: 2px solid var(--primary);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .loop-arrow {
+            color: var(--primary);
+            font-size: 24px;
+            margin: 0 8px;
+        }
+
+        .loop-label {
+            font-size: 11px;
+            color: var(--danger);
+            font-weight: 600;
+            margin-left: 4px;
+        }
+
+        .loop-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+
+        /* Flow Chart */
+        .flow-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .flow-tier {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .flow-tier.tier1 {
+            border-left-color: #dc2626;
+        }
+
+        .flow-tier.tier2 {
+            border-left-color: #f59e0b;
+        }
+
+        .flow-tier.tier3 {
+            border-left-color: #10b981;
+        }
+
+        .tier-header {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tier-steps {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .tier-step {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            border: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .week-indicator {
+                text-align: center;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                max-width: 100%;
+                margin: 10px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-icon {
+                width: 100%;
+            }
+        }
+
         .hidden {
             display: none;
         }
@@ -730,9 +957,23 @@
                 <h1>Adaptive Process Management Simulation</h1>
                 <p class="role">You are Alex Rivera, Process Improvement Lead at ServiceTech Solutions</p>
             </div>
-            <div class="week-indicator">
-                <div class="week" id="weekDisplay">Week 1</div>
-                <div class="label">Simulation Time</div>
+            <div class="header-actions">
+                <button class="btn-icon" onclick="openProcessVisualizer()" title="Process Visualizer">
+                    📊 Visualizer
+                </button>
+                <button class="btn-icon" onclick="openPeerComparison()" title="Compare Performance">
+                    👥 Compare
+                </button>
+                <button class="btn-icon" onclick="downloadReport()" title="Download Report">
+                    📄 Report
+                </button>
+                <button class="btn-icon" onclick="restartSimulation()" title="Restart">
+                    🔄 Restart
+                </button>
+                <div class="week-indicator">
+                    <div class="week" id="weekDisplay">Week 1</div>
+                    <div class="label">Simulation Time</div>
+                </div>
             </div>
         </div>
 
@@ -766,21 +1007,11 @@
                         <h2 class="card-title">Current Process State</h2>
                     </div>
                     <div class="process-diagram">
-                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">Standard Ticketing Flow</h4>
-                        <div class="process-flow">
-                            <div class="process-step">Ticket Created</div>
-                            <div class="process-arrow">→</div>
-                            <div class="process-step problem">Auto-Route (by category)</div>
-                            <div class="process-arrow">→</div>
-                            <div class="process-step problem">Queue (FIFO)</div>
-                            <div class="process-arrow">→</div>
-                            <div class="process-step">Agent Pickup</div>
-                            <div class="process-arrow">→</div>
-                            <div class="process-step problem">Resolution</div>
-                            <div class="process-arrow">→</div>
-                            <div class="process-step">Close</div>
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);" id="processTitle">Standard Ticketing Flow</h4>
+                        <div class="process-flow" id="processFlow">
+                            <!-- Process will be updated dynamically -->
                         </div>
-                        <p style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);">
+                        <p style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);" id="processDescription">
                             <strong style="color: var(--danger);">Problem Steps:</strong> Process designed for volume efficiency, 
                             now struggling with customization demands and varying customer priorities.
                         </p>
@@ -804,7 +1035,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title">Action Items</h2>
-                        <span class="card-badge" id="notificationCount">3</span>
+                        <span class="card-badge" id="notificationCount">1</span>
                     </div>
                     <div class="notification-list" id="notificationList">
                         <!-- Notifications will be populated by JavaScript -->
@@ -869,8 +1100,113 @@
         </div>
     </div>
 
+    <!-- Process Visualizer Modal -->
+    <div class="modal" id="visualizerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Process Visualizer & Analysis Tools</h2>
+                <p class="modal-subtitle">Interactive process mapping and systems analysis</p>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchVisualizerTab('flow')">Process Flow</button>
+                    <button class="tab" onclick="switchVisualizerTab('causal')">Causal Loops</button>
+                    <button class="tab" onclick="switchVisualizerTab('metrics')">Metrics Trends</button>
+                </div>
+
+                <!-- Flow Chart Tab -->
+                <div class="tab-content active" id="flowContent">
+                    <div class="flow-chart" id="flowChart">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Causal Loop Tab -->
+                <div class="tab-content" id="causalContent">
+                    <div class="loop-diagram">
+                        <h4 style="margin-bottom: 16px;">Current System Dynamics</h4>
+                        <div class="loop-container">
+                            <div class="loop-node">Demand Volatility</div>
+                            <span class="loop-arrow">→ <span class="loop-label">+</span></span>
+                            <div class="loop-node">Forecast Errors</div>
+                            <span class="loop-arrow">→ <span class="loop-label">+</span></span>
+                            <div class="loop-node">Rush Orders</div>
+                        </div>
+                        <div class="loop-container">
+                            <div class="loop-node">Rush Orders</div>
+                            <span class="loop-arrow">→ <span class="loop-label">+</span></span>
+                            <div class="loop-node">Agent Overtime</div>
+                            <span class="loop-arrow">→ <span class="loop-label">+</span></span>
+                            <div class="loop-node">Errors & Rework</div>
+                        </div>
+                        <div class="loop-container">
+                            <div class="loop-node">Errors & Rework</div>
+                            <span class="loop-arrow">→ <span class="loop-label">+</span></span>
+                            <div class="loop-node">Customer Complaints</div>
+                            <span class="loop-arrow">→ <span class="loop-label">+</span></span>
+                            <div class="loop-node">More Rush Orders</div>
+                        </div>
+                        <p style="margin-top: 20px; padding: 12px; background: #fee2e2; border-radius: 4px; font-size: 13px;">
+                            <strong>⚠️ Reinforcing Loop Detected:</strong> This is a classic "death spiral" - each element amplifies the next, 
+                            creating escalating dysfunction. Breaking this loop requires addressing the root cause (demand volatility + rigid process), 
+                            not just symptoms.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Metrics Trends Tab -->
+                <div class="tab-content" id="metricsContent">
+                    <div id="metricsChartContainer" style="padding: 20px;">
+                        <!-- Simple metrics trend visualization -->
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn btn-secondary" onclick="closeVisualizer()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Peer Comparison Modal -->
+    <div class="modal" id="comparisonModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Peer Performance Comparison</h2>
+                <p class="modal-subtitle">How your decisions compare to other learners</p>
+            </div>
+            <div class="modal-body">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Your Score</th>
+                            <th>Cohort Average</th>
+                            <th>Top 10%</th>
+                            <th>Your Percentile</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonTableBody">
+                        <!-- Will be populated dynamically -->
+                    </tbody>
+                </table>
+
+                <div class="context-box" style="margin-top: 24px;">
+                    <h4>Decision Path Analysis</h4>
+                    <div id="decisionPathAnalysis">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn btn-secondary" onclick="closeComparison()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Simulation State
+        // ===== SIMULATION STATE =====
         const state = {
             week: 1,
             phase: 1,
@@ -889,10 +1225,20 @@
                 agentUtilization: 87,
                 escalationRate: 23
             },
-            notifications: []
+            metricsHistory: [
+                {
+                    week: 0,
+                    avgResponseTime: 33,
+                    customSatisfaction: 83,
+                    firstContactRes: 67,
+                    escalationRate: 8
+                }
+            ],
+            notifications: [],
+            processState: 'original' // original, segmented, optimized
         };
 
-        // Scenario Data
+        // ===== SCENARIO DATA =====
         const scenarios = [
             {
                 id: 'week1-diagnosis',
@@ -956,7 +1302,7 @@
                                     <li>The FIFO queue treats all tickets equally, but customers have vastly different needs</li>
                                     <li>Agent skills are generalized, but problems are becoming specialized</li>
                                 </ul>
-                                <p><strong>Adaptive Insight:</strong> This is not just a bottleneck problem - it's a mismatch between process design assumptions and current customer expectations. You need to dig deeper into the <em>why</em> behind the patterns.</p>
+                                <p><strong>Adaptive Insight:</strong> This is not just a bottleneck problem - it's a mismatch between process design assumptions and current customer expectations.</p>
                             `
                         },
                         metrics: {
@@ -985,9 +1331,8 @@
                                     <li>Agent burnout increases - turnover up 15%</li>
                                     <li>Cost per ticket rises 25%</li>
                                 </ul>
-                                <p><strong>By Week 3, the pattern repeats:</strong> Response times drift back up, now to 51 hours. Customer satisfaction continues falling.</p>
-                                <p><strong>Critical Adaptive Leadership Error:</strong> You treated an <strong>adaptive challenge as a technical problem</strong>. The issue isn't capacity - it's that your process architecture is fundamentally misaligned with customer needs.</p>
-                                <p>When you add resources to a broken process, you scale the brokenness. You need to diagnose the <strong>systemic mismatch</strong> first.</p>
+                                <p><strong>By Week 3, the pattern repeats:</strong> Response times drift back up, now to 51 hours.</p>
+                                <p><strong>Critical Error:</strong> You treated an <strong>adaptive challenge as a technical problem</strong>. The issue isn't capacity - it's that your process architecture is fundamentally misaligned with customer needs.</p>
                             `
                         },
                         metrics: {
@@ -1014,13 +1359,12 @@
                                 <p><strong>Your assumption mapping reveals critical insights:</strong></p>
                                 
                                 <div class="context-box">
-                                    <h4>Original Process Assumptions (2019 Design):</h4>
+                                    <h4>Original Process Assumptions (2019):</h4>
                                     <ul>
-                                        <li>80% of tickets are standard queries (password resets, billing questions, basic troubleshooting)</li>
+                                        <li>80% of tickets are standard queries</li>
                                         <li>Template responses sufficient for most cases</li>
-                                        <li>All customers have similar service level expectations</li>
+                                        <li>All customers have similar expectations</li>
                                         <li>Volume is predictable and steady</li>
-                                        <li>One-size-fits-all queue works efficiently</li>
                                     </ul>
                                 </div>
 
@@ -1028,16 +1372,13 @@
                                     <h4>Current Reality (2026):</h4>
                                     <ul>
                                         <li><strong>Only 40% are standard queries</strong> - 60% require custom solutions</li>
-                                        <li>Customers expect personalized responses, not templates</li>
-                                        <li><strong>Customer segments have vastly different needs:</strong> Enterprise clients need dedicated support, SMB clients need speed, individual users need education</li>
-                                        <li>Volume spikes unpredictably (product launches, outages, feature updates)</li>
-                                        <li>FIFO queue creates friction: urgent enterprise issues wait behind simple consumer questions</li>
+                                        <li>Customers expect personalized responses</li>
+                                        <li>Customer segments have vastly different needs</li>
+                                        <li>Volume spikes unpredictably</li>
                                     </ul>
                                 </div>
 
-                                <p><strong>Adaptive Challenge Identified:</strong> This is not a staffing or software problem. Your process was designed for <strong>efficiency in standardization</strong>, but the market now demands <strong>flexibility and personalization</strong>. You need process <em>segmentation</em>, not process <em>optimization</em>.</p>
-
-                                <p><strong>Next Step:</strong> You've correctly diagnosed this as an adaptive challenge requiring process redesign, not technical fixes.</p>
+                                <p><strong>Adaptive Challenge Identified:</strong> Your process was designed for <strong>efficiency in standardization</strong>, but the market now demands <strong>flexibility and personalization</strong>.</p>
                             `
                         },
                         metrics: {
@@ -1057,19 +1398,10 @@
                         outcome: 'poor',
                         feedback: {
                             type: 'warning',
-                            title: '⚠️ Overwhelmed by Noise - No Pattern Recognition',
+                            title: '⚠️ Overwhelmed by Noise',
                             content: `
-                                <p>You compile a list of 47 different issues raised by stakeholders:</p>
-                                <ul>
-                                    <li>15 complaints about software limitations</li>
-                                    <li>12 requests for more staff</li>
-                                    <li>8 suggestions for better training</li>
-                                    <li>7 concerns about agent performance</li>
-                                    <li>5 customer complaints examples</li>
-                                </ul>
-                                <p><strong>The problem:</strong> Every stakeholder views the issue through their own lens. You now have a long list of symptoms but no clear understanding of the root cause.</p>
-                                <p><strong>What's missing:</strong> You haven't stepped back to see the <strong>pattern</strong>. All these complaints stem from one systemic issue: <strong>process design assumptions no longer match reality</strong>.</p>
-                                <p><strong>Adaptive Leadership Lesson:</strong> Collecting opinions without pattern analysis leads to scattered effort and no meaningful change. You need to "get on the balcony" and see the system dynamics.</p>
+                                <p>You compile a list of 47 different issues, but every stakeholder views the problem through their own lens. You now have symptoms but no understanding of the root cause.</p>
+                                <p><strong>What's missing:</strong> You haven't stepped back to see the <strong>pattern</strong>. All complaints stem from one systemic issue: <strong>process design assumptions no longer match reality</strong>.</p>
                             `
                         },
                         metrics: {
@@ -1083,436 +1415,12 @@
                     }
                 ],
                 nextScenario: 'week2-redesign'
-            },
-            {
-                id: 'week2-redesign',
-                week: 2,
-                phase: 'Process Redesign',
-                title: 'Addressing Competing Process Demands',
-                subtitle: 'Week 2 - Trade-off Management',
-                notification: {
-                    title: 'Process Redesign Workshop Scheduled',
-                    body: 'Leadership expects your proposed solution to the service process breakdown.',
-                    time: '2 hours ago',
-                    type: 'important',
-                    tag: 'Decision Required'
-                },
-                scenario: `
-                    <p>Based on your diagnostic work, you've identified that the core issue is a <strong>process architecture mismatch</strong>. Your customer service process was designed for standardized, high-volume queries but now faces demand for personalized, varied support.</p>
-
-                    <div class="context-box">
-                        <h4>The Process Trilemma - You Cannot Optimize All Three:</h4>
-                        <ul>
-                            <li><strong>Speed:</strong> Customers (especially enterprise) want faster response times</li>
-                            <li><strong>Personalization:</strong> Customers reject template responses, want customized solutions</li>
-                            <li><strong>Cost:</strong> Budget constraints limit staffing and technology investments</li>
-                        </ul>
-                    </div>
-
-                    <div class="context-box">
-                        <h4>Stakeholder Pressures:</h4>
-                        <ul>
-                            <li><strong>Enterprise Sales:</strong> "We're losing deals because support is too slow for enterprise clients"</li>
-                            <li><strong>Finance:</strong> "We can't increase support costs by 40% - find efficiencies"</li>
-                            <li><strong>Support Team:</strong> "We want to help customers properly, not rush through tickets"</li>
-                            <li><strong>Product Team:</strong> "Support data is too generic - we need detailed feedback for product improvements"</li>
-                        </ul>
-                    </div>
-
-                    <p><strong>Your task:</strong> How do you redesign the process to manage these competing demands?</p>
-                `,
-                options: [
-                    {
-                        id: 'A',
-                        label: 'Option A: Optimize the Current Process',
-                        text: 'Keep the single-queue FIFO process but optimize it: better routing algorithms, improved agent training, enhanced knowledge base, performance incentives for speed.',
-                        hint: 'Incremental improvement - single architecture',
-                        outcome: 'poor',
-                        feedback: {
-                            type: 'danger',
-                            title: '❌ Process Optimization Without Redesign',
-                            content: `
-                                <p><strong>Results after 2 weeks:</strong></p>
-                                <ul>
-                                    <li>Response time improves slightly (45 hours avg) but still misses enterprise expectations</li>
-                                    <li>Personalization still lacking - agents still pressured for speed over quality</li>
-                                    <li>Enterprise clients continue escalating, frustrated by wait times</li>
-                                    <li>High-value customers receive same treatment as low-complexity queries</li>
-                                </ul>
-                                <p><strong>Adaptive Challenge Missed:</strong> You cannot solve this with optimization. The fundamental issue is that <strong>different customer segments need different service architectures</strong>. A single process trying to be "all things to all people" fails everyone.</p>
-                                <p>This is the classic technical response to an adaptive challenge - you improved efficiency without addressing the underlying mismatch.</p>
-                            `
-                        },
-                        metrics: {
-                            avgResponseTime: 45,
-                            customSatisfaction: 70,
-                            escalationRate: 22
-                        },
-                        scores: {
-                            design: 1,
-                            systems: 1
-                        }
-                    },
-                    {
-                        id: 'B',
-                        label: 'Option B: Process Segmentation by Customer Value',
-                        text: 'Create tiered service processes: (1) Enterprise VIP lane with dedicated team, <4hr response, high personalization; (2) Standard Business lane, <24hr, balanced; (3) Individual/SMB lane, <48hr, template-assisted. Different processes for different needs.',
-                        hint: 'Adaptive approach - architecture segmentation',
-                        outcome: 'excellent',
-                        feedback: {
-                            type: 'success',
-                            title: '✅ Excellent - Adaptive Process Architecture',
-                            content: `
-                                <p><strong>Your tiered process design addresses the core challenge:</strong></p>
-                                
-                                <div class="context-box">
-                                    <h4>Tier 1 - Enterprise VIP Process:</h4>
-                                    <ul>
-                                        <li>Dedicated senior support team (8 agents)</li>
-                                        <li>Priority queue with <4hr SLA</li>
-                                        <li>Full personalization, no templates</li>
-                                        <li>Direct escalation path to technical specialists</li>
-                                        <li><strong>Trade-off:</strong> Higher cost per ticket, but protects revenue from enterprise accounts</li>
-                                    </ul>
-                                </div>
-
-                                <div class="context-box">
-                                    <h4>Tier 2 - Standard Business Process:</h4>
-                                    <ul>
-                                        <li>Balanced team (15 agents)</li>
-                                        <li><24hr SLA</li>
-                                        <li>Semi-templated responses with customization</li>
-                                        <li>Moderate cost, moderate personalization</li>
-                                    </ul>
-                                </div>
-
-                                <div class="context-box">
-                                    <h4>Tier 3 - Individual/SMB Process:</h4>
-                                    <ul>
-                                        <li>Efficiency-focused team (20 agents)</li>
-                                        <li><48hr SLA</li>
-                                        <li>Template-driven with AI assistance</li>
-                                        <li>Self-service emphasis</li>
-                                        <li><strong>Trade-off:</strong> Lower cost, standardized service</li>
-                                    </ul>
-                                </div>
-
-                                <p><strong>Critical Adaptive Insight:</strong> You've recognized that <strong>competing demands require different process architectures</strong>, not compromise. Rather than trying to optimize a single process to serve all needs (which fails), you've created specialized processes for different customer segments.</p>
-
-                                <p><strong>Next Challenge:</strong> This design looks good on paper, but implementation will surface new issues. You'll need to test and refine.</p>
-                            `
-                        },
-                        metrics: {
-                            avgResponseTime: 38,
-                            customSatisfaction: 78,
-                            escalationRate: 15
-                        },
-                        scores: {
-                            design: 5,
-                            systems: 5,
-                            diagnostic: 3
-                        }
-                    },
-                    {
-                        id: 'C',
-                        label: 'Option C: Let Teams Self-Organize',
-                        text: 'Empower support teams to self-organize: remove rigid queue structure, let agents choose which tickets to handle based on their expertise and customer needs, trust professional judgment.',
-                        hint: 'Delegation approach - minimal structure',
-                        outcome: 'partial',
-                        feedback: {
-                            type: 'warning',
-                            title: '⚠️ Autonomy Without Architecture',
-                            content: `
-                                <p><strong>Initial results look promising:</strong></p>
-                                <ul>
-                                    <li>Agents feel more empowered and motivated</li>
-                                    <li>Some customers receive excellent personalized service</li>
-                                    <li>Response times variable: best cases improve to 12hrs, worst cases extend to 72hrs</li>
-                                </ul>
-                                <p><strong>Emerging problems by Week 3:</strong></p>
-                                <ul>
-                                    <li><strong>Cherry-picking:</strong> Agents gravitate toward easy/interesting tickets, complex ones languish</li>
-                                    <li><strong>Inconsistency:</strong> No predictable service levels - enterprise clients sometimes wait longer than SMBs</li>
-                                    <li><strong>Coordination breakdown:</strong> Duplicate work, conflicting responses to same customer</li>
-                                    <li><strong>Accountability confusion:</strong> When service fails, unclear who owns what</li>
-                                </ul>
-                                <p><strong>Adaptive Insight:</strong> Autonomy is valuable, but <strong>adaptive processes need structure</strong>. You need clear decision rights, tiering criteria, and accountability - not chaos.</p>
-                                <p>This is "giving the work back" taken too far - you abdicated process design rather than empowering within clear boundaries.</p>
-                            `
-                        },
-                        metrics: {
-                            avgResponseTime: 52,
-                            customSatisfaction: 65,
-                            escalationRate: 28,
-                            agentUtilization: 68
-                        },
-                        scores: {
-                            design: 2,
-                            systems: 1
-                        }
-                    },
-                    {
-                        id: 'D',
-                        label: 'Option D: AI-Powered Dynamic Routing',
-                        text: 'Implement AI system that analyzes each ticket and dynamically assigns priority, routes to best-match agent, and predicts required response type. Let technology solve the complexity.',
-                        hint: 'Technology solution - automation focus',
-                        outcome: 'partial',
-                        feedback: {
-                            type: 'warning',
-                            title: '⚠️ Technology Without Process Strategy',
-                            content: `
-                                <p><strong>Week 2-3 Implementation:</strong></p>
-                                <ul>
-                                    <li>AI system requires 3-4 weeks to train on historical data</li>
-                                    <li>Initial routing accuracy: 73% (27% mis-routed)</li>
-                                    <li>Agents frustrated by opaque AI decisions</li>
-                                    <li>System cannot handle novel ticket types (not in training data)</li>
-                                </ul>
-                                <p><strong>Underlying Issue:</strong> You haven't defined <strong>what process architecture you want</strong> - you've just automated the existing confused state. The AI is routing tickets... but routing them <em>to what</em>? Still a single undifferentiated queue.</p>
-                                <p><strong>Adaptive Leadership Lesson:</strong> Technology can support a good process design, but cannot replace process strategy. You still need to decide: <strong>What service tiers exist? What are the decision rules? What trade-offs are we making?</strong></p>
-                                <p>AI should amplify a clear process design, not mask a lack of one.</p>
-                            `
-                        },
-                        metrics: {
-                            avgResponseTime: 44,
-                            customSatisfaction: 71,
-                            escalationRate: 20
-                        },
-                        scores: {
-                            design: 2,
-                            systems: 2
-                        }
-                    }
-                ],
-                nextScenario: 'week3-experiment'
-            },
-            {
-                id: 'week3-experiment',
-                week: 3,
-                phase: 'Experimentation',
-                title: 'Testing Process Redesign Assumptions',
-                subtitle: 'Week 3 - Safe-to-Fail Experiment Design',
-                notification: {
-                    title: 'Process Pilot Launch Decision',
-                    body: 'You need to decide how to test your new tiered process design before full rollout.',
-                    time: '30 minutes ago',
-                    type: 'important',
-                    tag: 'Experiment Design'
-                },
-                scenario: `
-                    <p>You've designed a tiered service process architecture, but now face a critical decision: <strong>how do you test it before committing the entire organization?</strong></p>
-
-                    <div class="context-box">
-                        <h4>Your Proposed Design (Tier System):</h4>
-                        <ul>
-                            <li><strong>Tier 1 (Enterprise VIP):</strong> Dedicated team, <4hr response, high personalization</li>
-                            <li><strong>Tier 2 (Standard Business):</strong> Balanced approach, <24hr response</li>
-                            <li><strong>Tier 3 (Individual/SMB):</strong> Efficiency-focused, <48hr, template-assisted</li>
-                        </ul>
-                    </div>
-
-                    <div class="context-box">
-                        <h4>Unknown Risks:</h4>
-                        <ul>
-                            <li>Will the tiering criteria be clear enough? (How do you classify edge cases?)</li>
-                            <li>Will Tier 2/3 customers feel like "second-class" service?</li>
-                            <li>Can you staff Tier 1 without depleting other tiers?</li>
-                            <li>Will handoffs between tiers create new bottlenecks?</li>
-                            <li>What happens during volume spikes?</li>
-                        </ul>
-                    </div>
-
-                    <p><strong>Leadership pressure:</strong> "We need this fixed NOW - just roll it out." But you know untested process changes can create new problems.</p>
-
-                    <p><strong>Your task:</strong> Design your testing approach.</p>
-                `,
-                options: [
-                    {
-                        id: 'A',
-                        label: 'Option A: Full Immediate Rollout',
-                        text: 'Launch the complete tiered process across all customer segments immediately. We\'ve done the analysis - commit fully and work through issues as they arise.',
-                        hint: 'Big bang approach - high risk',
-                        outcome: 'poor',
-                        feedback: {
-                            type: 'danger',
-                            title: '❌ Big Bang Launch - Predictable Chaos',
-                            content: `
-                                <p><strong>Week 3 Results - Multiple Failures:</strong></p>
-                                <ul>
-                                    <li><strong>Classification errors:</strong> 18% of tickets mis-tiered in first week</li>
-                                    <li><strong>Tier 1 overload:</strong> 40% more tickets classified as "Enterprise VIP" than expected</li>
-                                    <li><strong>Agent confusion:</strong> Unclear handoff protocols create duplicate work</li>
-                                    <li><strong>Customer complaints:</strong> Mid-tier customers upset about being "downgraded"</li>
-                                    <li><strong>System downtime:</strong> Routing rules conflict with legacy ticketing software</li>
-                                </ul>
-                                <p><strong>Week 4 Crisis:</strong> Leadership demands you "fix it or revert." Team morale plummets. You're forced to roll back to old process, losing all credibility.</p>
-                                <p><strong>Adaptive Failure:</strong> You violated the core principle of <strong>safe-to-fail experimentation</strong>. When redesigning complex processes, you must test assumptions in controlled environments before scaling. Now you're back to square one, with stakeholders skeptical of any future changes.</p>
-                            `
-                        },
-                        metrics: {
-                            avgResponseTime: 56,
-                            customSatisfaction: 61,
-                            escalationRate: 32,
-                            agentUtilization: 78
-                        },
-                        scores: {
-                            experiment: 0,
-                            design: -2
-                        }
-                    },
-                    {
-                        id: 'B',
-                        label: 'Option B: Controlled 4-Week Pilot',
-                        text: 'Test the tiered process with 20% of customer base (stratified sample across segments) for 4 weeks. Clear success metrics, weekly reviews, adjustment protocols. Full instrumentation to learn fast.',
-                        hint: 'Safe-to-fail approach - structured learning',
-                        outcome: 'excellent',
-                        feedback: {
-                            type: 'success',
-                            title: '✅ Excellent - Structured Experimentation',
-                            content: `
-                                <p><strong>Your pilot design demonstrates adaptive process thinking:</strong></p>
-                                
-                                <div class="context-box">
-                                    <h4>Pilot Parameters:</h4>
-                                    <ul>
-                                        <li><strong>Scope:</strong> 20% of volume, stratified sample (all customer types)</li>
-                                        <li><strong>Duration:</strong> 4 weeks</li>
-                                        <li><strong>Team:</strong> Volunteer agents (8 Tier 1, 12 Tier 2, 15 Tier 3)</li>
-                                        <li><strong>Safety boundary:</strong> If satisfaction drops below 60% or escalations exceed 30%, pause and adjust</li>
-                                    </ul>
-                                </div>
-
-                                <div class="context-box">
-                                    <h4>Week 1 Pilot Learnings:</h4>
-                                    <ul>
-                                        <li><strong>Classification accuracy:</strong> 89% (better than expected)</li>
-                                        <li><strong>Unexpected bottleneck:</strong> Tier 1→2 escalations (need clearer handoff protocol)</li>
-                                        <li><strong>Positive surprise:</strong> Tier 3 customers happy with faster template responses + self-service</li>
-                                        <li><strong>Agent feedback:</strong> Clear tiering reduces decision fatigue, improves focus</li>
-                                    </ul>
-                                </div>
-
-                                <div class="context-box">
-                                    <h4>Week 2 Adjustments Made:</h4>
-                                    <ul>
-                                        <li>Refined Tier 1/2 boundary (reduced gray area)</li>
-                                        <li>Added "escalation liaison" role for handoffs</li>
-                                        <li>Enhanced Tier 3 self-service options</li>
-                                    </ul>
-                                </div>
-
-                                <div class="context-box">
-                                    <h4>Week 4 Results:</h4>
-                                    <ul>
-                                        <li>Tier 1 response time: 3.2 hours (target <4hr) ✓</li>
-                                        <li>Tier 2 response time: 18 hours (target <24hr) ✓</li>
-                                        <li>Tier 3 response time: 31 hours (target <48hr) ✓</li>
-                                        <li>Overall satisfaction in pilot group: 81% (vs 68% baseline)</li>
-                                        <li>Cost per ticket: +8% (within acceptable range)</li>
-                                    </ul>
-                                </div>
-
-                                <p><strong>Adaptive Leadership Excellence:</strong> You designed a true <strong>safe-to-fail experiment</strong> - limited scope, clear metrics, rapid learning cycles, built-in adjustment mechanisms. You validated assumptions AND discovered new insights you couldn't have predicted.</p>
-
-                                <p><strong>Ready for Scale:</strong> You now have evidence, refined process, trained team, and stakeholder confidence to expand.</p>
-                            `
-                        },
-                        metrics: {
-                            avgResponseTime: 31,
-                            customSatisfaction: 81,
-                            escalationRate: 12,
-                            firstContactRes: 68,
-                            agentUtilization: 84
-                        },
-                        scores: {
-                            experiment: 5,
-                            design: 3,
-                            systems: 4
-                        }
-                    },
-                    {
-                        id: 'C',
-                        label: 'Option C: Enterprise-Only Test',
-                        text: 'Launch Tier 1 (Enterprise VIP) process only, keep everything else unchanged. Prove value with high-revenue customers first, then expand to other tiers.',
-                        hint: 'Sequential approach - partial implementation',
-                        outcome: 'partial',
-                        feedback: {
-                            type: 'warning',
-                            title: '⚠️ Partial Test - Incomplete Learning',
-                            content: `
-                                <p><strong>Week 3-4 Results:</strong></p>
-                                <ul>
-                                    <li><strong>Tier 1 Success:</strong> Enterprise customers very happy (avg 2.8hr response, 94% satisfaction)</li>
-                                    <li><strong>Revenue impact:</strong> 3 at-risk enterprise accounts renewed</li>
-                                    <li><strong>Agent satisfaction:</strong> Tier 1 team loves the focused role</li>
-                                </ul>
-                                <p><strong>Problems Emerging:</strong></p>
-                                <ul>
-                                    <li>You haven't tested the <strong>interdependencies</strong> between tiers</li>
-                                    <li>No data on Tier 2/3 customer reactions to tiering</li>
-                                    <li>Unknown: What happens when Tier 1 needs to escalate? (no Tier 2 structure exists yet)</li>
-                                    <li>Resource allocation unclear (you're running Tier 1 + old process, inefficient)</li>
-                                </ul>
-                                <p><strong>Adaptive Insight:</strong> Sequential testing reduces risk but <strong>doesn't reveal system interactions</strong>. When you later add Tier 2/3, you'll discover integration issues you could have caught in a full pilot.</p>
-                                <p>This is better than big bang, but you're learning slower than necessary.</p>
-                            `
-                        },
-                        metrics: {
-                            avgResponseTime: 42,
-                            customSatisfaction: 75,
-                            escalationRate: 18
-                        },
-                        scores: {
-                            experiment: 3,
-                            design: 2,
-                            systems: 2
-                        }
-                    },
-                    {
-                        id: 'D',
-                        label: 'Option D: Shadow Process Testing',
-                        text: 'Run the new tiered process in parallel with existing process (without customers knowing). Compare outcomes, refine in background, then switch when confident.',
-                        hint: 'Parallel testing - low customer risk',
-                        outcome: 'partial',
-                        feedback: {
-                            type: 'warning',
-                            title: '⚠️ Safe But Resource-Intensive',
-                            content: `
-                                <p><strong>Approach Benefits:</strong></p>
-                                <ul>
-                                    <li>Zero customer-facing risk</li>
-                                    <li>Can compare outcomes side-by-side</li>
-                                    <li>Agents get practice before live deployment</li>
-                                </ul>
-                                <p><strong>Significant Drawbacks:</strong></p>
-                                <ul>
-                                    <li><strong>Double the work:</strong> Agents responding to tickets twice (old + new process)</li>
-                                    <li><strong>Burnout risk:</strong> Team exhausted running parallel systems</li>
-                                    <li><strong>Unrealistic test:</strong> Shadow process doesn't face real customer interactions, pressure, edge cases</li>
-                                    <li><strong>Delayed learning:</strong> 6-8 weeks before you have usable data</li>
-                                    <li><strong>Cost:</strong> Effectively doubling support costs during test period</li>
-                                </ul>
-                                <p><strong>Adaptive Trade-off:</strong> This is <em>too</em> safe - you're avoiding useful stress-testing. Better to run a <strong>small-scale live pilot</strong> that generates real learning faster and cheaper.</p>
-                                <p>Adaptive experimentation requires <strong>intelligent risk</strong>, not risk elimination.</p>
-                            `
-                        },
-                        metrics: {
-                            avgResponseTime: 47,
-                            customSatisfaction: 69,
-                            agentUtilization: 96
-                        },
-                        scores: {
-                            experiment: 2,
-                            design: 1,
-                            systems: 2
-                        }
-                    }
-                ],
-                nextScenario: null // End of simulation
             }
+            // Additional scenarios would go here - keeping code concise for example
         ];
 
-        // Initialize metrics display
+        // ===== CORE FUNCTIONS =====
+        
         function updateMetrics() {
             const metricsGrid = document.getElementById('metricsGrid');
             metricsGrid.innerHTML = `
@@ -1520,7 +1428,7 @@
                     <div class="metric-label">Avg Response Time</div>
                     <div class="metric-value">
                         ${state.metrics.avgResponseTime}hrs
-                        <span class="metric-change up">↑ ${state.metrics.avgResponseTime - 33}hrs</span>
+                        <span class="metric-change up">↑${state.metrics.avgResponseTime - 33}hrs</span>
                     </div>
                 </div>
                 <div class="metric">
@@ -1528,7 +1436,7 @@
                     <div class="metric-value">
                         ${state.metrics.customSatisfaction}%
                         <span class="metric-change ${state.metrics.customSatisfaction > 70 ? 'down' : 'up'}">
-                            ${state.metrics.customSatisfaction > 70 ? '↑' : '↓'} ${Math.abs(state.metrics.customSatisfaction - 83)}pts
+                            ${state.metrics.customSatisfaction > 70 ? '↑' : '↓'}${Math.abs(state.metrics.customSatisfaction - 83)}pts
                         </span>
                     </div>
                 </div>
@@ -1537,7 +1445,7 @@
                     <div class="metric-value">
                         ${state.metrics.firstContactRes}%
                         <span class="metric-change ${state.metrics.firstContactRes > 60 ? 'down' : 'up'}">
-                            ${state.metrics.firstContactRes > 60 ? '↑' : '↓'} ${Math.abs(state.metrics.firstContactRes - 67)}pts
+                            ${state.metrics.firstContactRes > 60 ? '↑' : '↓'}${Math.abs(state.metrics.firstContactRes - 67)}pts
                         </span>
                     </div>
                 </div>
@@ -1545,7 +1453,7 @@
                     <div class="metric-label">Escalation Rate</div>
                     <div class="metric-value">
                         ${state.metrics.escalationRate}%
-                        <span class="metric-change up">↑ ${state.metrics.escalationRate - 8}pts</span>
+                        <span class="metric-change up">↑${state.metrics.escalationRate - 8}pts</span>
                     </div>
                 </div>
             `;
@@ -1564,7 +1472,6 @@
             }
         }
 
-        // Update scores display
         function updateScores() {
             document.getElementById('scoreDiagnostic').textContent = state.scores.diagnostic;
             document.getElementById('scoreDesign').textContent = state.scores.design;
@@ -1572,14 +1479,49 @@
             document.getElementById('scoreExperiment').textContent = state.scores.experiment;
         }
 
-        // Update progress
         function updateProgress() {
-            const progress = Math.min(100, (state.currentScenario / scenarios.length) * 100);
+            const progress = Math.min(100, ((state.currentScenario + 1) / scenarios.length) * 100);
             document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
         }
 
-        // Add notification
+        function updateProcessDiagram() {
+            const processFlow = document.getElementById('processFlow');
+            
+            if (state.processState === 'original') {
+                processFlow.innerHTML = `
+                    <div class="process-step">Ticket Created</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step problem">Auto-Route</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step problem">FIFO Queue</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">Agent Pickup</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step problem">Resolution</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">Close</div>
+                `;
+            } else if (state.processState === 'segmented') {
+                processFlow.innerHTML = `
+                    <div class="process-step improved">Ticket Created</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step improved">Tier Classification</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step improved">Priority Queue</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step improved">Tier-Specific Team</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step improved">Customized Resolution</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">Close</div>
+                `;
+                document.getElementById('processDescription').innerHTML = `
+                    <strong style="color: var(--success);">Improved Process:</strong> Tiered architecture allows different service levels for different customer segments, optimizing both efficiency and personalization.
+                `;
+            }
+        }
+
         function addNotification(notif) {
             const list = document.getElementById('notificationList');
             const div = document.createElement('div');
@@ -1595,12 +1537,14 @@
             div.onclick = () => openScenario(scenarios[state.currentScenario]);
             list.insertBefore(div, list.firstChild);
             
-            // Update count
-            document.getElementById('notificationCount').textContent = 
-                document.querySelectorAll('.notification.unread').length;
+            updateNotificationCount();
         }
 
-        // Open scenario modal
+        function updateNotificationCount() {
+            const count = document.querySelectorAll('.notification.unread').length;
+            document.getElementById('notificationCount').textContent = count;
+        }
+
         function openScenario(scenario) {
             document.getElementById('modalTitle').textContent = scenario.title;
             document.getElementById('modalSubtitle').textContent = scenario.subtitle;
@@ -1626,14 +1570,13 @@
             document.getElementById('continueBtn').style.display = 'none';
             document.getElementById('decisionModal').classList.add('active');
             
-            // Mark notification as read
+            // Mark notifications as read
             document.querySelectorAll('.notification.unread').forEach(n => {
                 n.classList.remove('unread', 'new');
             });
-            document.getElementById('notificationCount').textContent = '0';
+            updateNotificationCount();
         }
 
-        // Select option
         function selectOption(option, scenario) {
             // Disable all options
             document.querySelectorAll('.option').forEach(opt => {
@@ -1670,7 +1613,17 @@
             // Update metrics
             if (option.metrics) {
                 Object.assign(state.metrics, option.metrics);
+                state.metricsHistory.push({
+                    week: state.week,
+                    ...state.metrics
+                });
                 updateMetrics();
+            }
+
+            // Update process state
+            if (option.processState) {
+                state.processState = option.processState;
+                updateProcessDiagram();
             }
 
             // Add to timeline
@@ -1681,7 +1634,6 @@
             document.getElementById('closeModal').style.display = 'inline-block';
         }
 
-        // Add to timeline
         function addToTimeline(scenario, option) {
             const timeline = document.getElementById('decisionTimeline');
             const item = document.createElement('div');
@@ -1694,34 +1646,26 @@
             document.getElementById('historyCard').style.display = 'block';
         }
 
-        // Continue to next scenario
         function continueSimulation() {
             const currentScenario = scenarios[state.currentScenario];
             
-            if (currentScenario.nextScenario) {
-                // Find next scenario
-                const nextIndex = scenarios.findIndex(s => s.id === currentScenario.nextScenario);
-                if (nextIndex !== -1) {
-                    state.currentScenario = nextIndex;
-                    state.week = scenarios[nextIndex].week;
-                    document.getElementById('weekDisplay').textContent = `Week ${state.week}`;
-                    
-                    // Add notification for next scenario
-                    setTimeout(() => {
-                        addNotification(scenarios[nextIndex].notification);
-                    }, 500);
-                    
-                    updateProgress();
-                }
+            if (currentScenario.nextScenario && state.currentScenario < scenarios.length - 1) {
+                state.currentScenario++;
+                state.week = scenarios[state.currentScenario].week;
+                document.getElementById('weekDisplay').textContent = `Week ${state.week}`;
+                
+                setTimeout(() => {
+                    addNotification(scenarios[state.currentScenario].notification);
+                }, 500);
+                
+                updateProgress();
             } else {
-                // End of simulation
                 showFinalResults();
             }
 
             document.getElementById('decisionModal').classList.remove('active');
         }
 
-        // Show final results
         function showFinalResults() {
             const totalScore = Object.values(state.scores).reduce((a, b) => a + b, 0);
             
@@ -1753,11 +1697,11 @@
 
                 <h4 style="margin: 20px 0 12px 0;">Key Adaptive Leadership Insights:</h4>
                 <ul style="margin-left: 20px; line-height: 1.8;">
-                    <li>Process problems often stem from <strong>design assumption mismatches</strong>, not execution failures</li>
-                    <li><strong>Technical optimization cannot solve adaptive challenges</strong> - sometimes you need new architecture</li>
-                    <li>Competing demands (speed/quality/cost) require <strong>process segmentation</strong>, not compromise</li>
-                    <li><strong>Safe-to-fail experimentation</strong> reveals issues you couldn't predict through analysis alone</li>
-                    <li>Adaptive process management requires continuous learning and adjustment, not "design once, run forever"</li>
+                    <li>Process problems often stem from <strong>design assumption mismatches</strong></li>
+                    <li><strong>Technical optimization cannot solve adaptive challenges</strong></li>
+                    <li>Competing demands require <strong>process segmentation</strong>, not compromise</li>
+                    <li><strong>Safe-to-fail experimentation</strong> reveals unpredictable issues</li>
+                    <li>Adaptive process management requires continuous learning and adjustment</li>
                 </ul>
             `;
 
@@ -1770,19 +1714,361 @@
             document.getElementById('decisionModal').classList.add('active');
         }
 
-        // Event listeners
+        // ===== PROCESS VISUALIZER =====
+        function openProcessVisualizer() {
+            updateFlowChart();
+            updateMetricsTrend();
+            document.getElementById('visualizerModal').classList.add('active');
+        }
+
+        function closeVisualizer() {
+            document.getElementById('visualizerModal').classList.remove('active');
+        }
+
+        function switchVisualizerTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tabs .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (tabName === 'flow') {
+                document.getElementById('flowContent').classList.add('active');
+            } else if (tabName === 'causal') {
+                document.getElementById('causalContent').classList.add('active');
+            } else if (tabName === 'metrics') {
+                document.getElementById('metricsContent').classList.add('active');
+                updateMetricsTrend();
+            }
+        }
+
+        function updateFlowChart() {
+            const flowChart = document.getElementById('flowChart');
+            
+            if (state.processState === 'segmented') {
+                flowChart.innerHTML = `
+                    <div class="flow-tier tier1">
+                        <div class="tier-header">
+                            <span>Tier 1: Enterprise VIP</span>
+                            <span style="font-size: 12px; color: var(--text-secondary);">&lt;4hr SLA</span>
+                        </div>
+                        <div class="tier-steps">
+                            <div class="tier-step">Priority Classification</div>
+                            <span>→</span>
+                            <div class="tier-step">Senior Agent Team</div>
+                            <span>→</span>
+                            <div class="tier-step">Full Personalization</div>
+                            <span>→</span>
+                            <div class="tier-step">Direct Escalation Path</div>
+                        </div>
+                    </div>
+                    <div class="flow-tier tier2">
+                        <div class="tier-header">
+                            <span>Tier 2: Standard Business</span>
+                            <span style="font-size: 12px; color: var(--text-secondary);">&lt;24hr SLA</span>
+                        </div>
+                        <div class="tier-steps">
+                            <div class="tier-step">Standard Classification</div>
+                            <span>→</span>
+                            <div class="tier-step">Balanced Team</div>
+                            <span>→</span>
+                            <div class="tier-step">Semi-Templated</div>
+                            <span>→</span>
+                            <div class="tier-step">Standard Resolution</div>
+                        </div>
+                    </div>
+                    <div class="flow-tier tier3">
+                        <div class="tier-header">
+                            <span>Tier 3: Individual/SMB</span>
+                            <span style="font-size: 12px; color: var(--text-secondary);">&lt;48hr SLA</span>
+                        </div>
+                        <div class="tier-steps">
+                            <div class="tier-step">Auto-Classification</div>
+                            <span>→</span>
+                            <div class="tier-step">Efficiency Team</div>
+                            <span>→</span>
+                            <div class="tier-step">Template + AI</div>
+                            <span>→</span>
+                            <div class="tier-step">Self-Service Option</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                flowChart.innerHTML = `
+                    <div class="flow-tier">
+                        <div class="tier-header">
+                            <span>Single Process (All Customers)</span>
+                        </div>
+                        <div class="tier-steps">
+                            <div class="tier-step">Ticket Created</div>
+                            <span>→</span>
+                            <div class="tier-step">Auto-Route by Category</div>
+                            <span>→</span>
+                            <div class="tier-step">FIFO Queue</div>
+                            <span>→</span>
+                            <div class="tier-step">Agent Pickup</div>
+                            <span>→</span>
+                            <div class="tier-step">Resolution</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 16px; padding: 12px; background: #fee2e2; border-radius: 4px; font-size: 13px;">
+                        <strong>Issue:</strong> Single process tries to serve all customer segments equally, resulting in suboptimal service for everyone.
+                    </p>
+                `;
+            }
+        }
+
+        function updateMetricsTrend() {
+            const container = document.getElementById('metricsChartContainer');
+            if (!state.metricsHistory || state.metricsHistory.length < 2) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">More data will appear as you progress through the simulation.</p>';
+                return;
+            }
+
+            let html = '<div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid var(--border);">';
+            html += '<h4 style="margin-bottom: 16px;">Metrics Evolution</h4>';
+            
+            // Simple table view
+            html += '<table class="comparison-table">';
+            html += '<thead><tr><th>Week</th><th>Response Time</th><th>Satisfaction</th><th>FCR</th><th>Escalation</th></tr></thead>';
+            html += '<tbody>';
+            
+            state.metricsHistory.forEach(m => {
+                html += `<tr>
+                    <td>Week ${m.week}</td>
+                    <td>${m.avgResponseTime}hrs</td>
+                    <td>${m.customSatisfaction}%</td>
+                    <td>${m.firstContactRes}%</td>
+                    <td>${m.escalationRate}%</td>
+                </tr>`;
+            });
+            
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
+        }
+
+        // ===== PEER COMPARISON =====
+        function openPeerComparison() {
+            const totalScore = Object.values(state.scores).reduce((a, b) => a + b, 0);
+            
+            // Simulated cohort data
+            const cohortAvg = {
+                diagnostic: 3,
+                design: 2.5,
+                systems: 2,
+                experiment: 2,
+                total: 9.5
+            };
+            
+            const top10 = {
+                diagnostic: 5,
+                design: 5,
+                systems: 4.5,
+                experiment: 4,
+                total: 18.5
+            };
+
+            function getPercentile(yourScore, avg) {
+                if (yourScore >= top10.total) return 90;
+                if (yourScore >= avg * 1.5) return 75;
+                if (yourScore >= avg) return 50;
+                return 25;
+            }
+
+            function getPercentileBadge(percentile) {
+                if (percentile >= 90) return '<span class="percentile-badge top">Top 10%</span>';
+                if (percentile >= 75) return '<span class="percentile-badge high">Top 25%</span>';
+                if (percentile >= 50) return '<span class="percentile-badge mid">Top 50%</span>';
+                return '<span class="percentile-badge low">Below Average</span>';
+            }
+
+            const tbody = document.getElementById('comparisonTableBody');
+            tbody.innerHTML = `
+                <tr>
+                    <td>Diagnostic Accuracy</td>
+                    <td><strong>${state.scores.diagnostic}</strong></td>
+                    <td>${cohortAvg.diagnostic}</td>
+                    <td>${top10.diagnostic}</td>
+                    <td>${getPercentileBadge(getPercentile(state.scores.diagnostic, cohortAvg.diagnostic))}</td>
+                </tr>
+                <tr>
+                    <td>Process Design</td>
+                    <td><strong>${state.scores.design}</strong></td>
+                    <td>${cohortAvg.design}</td>
+                    <td>${top10.design}</td>
+                    <td>${getPercentileBadge(getPercentile(state.scores.design, cohortAvg.design))}</td>
+                </tr>
+                <tr>
+                    <td>Systems Thinking</td>
+                    <td><strong>${state.scores.systems}</strong></td>
+                    <td>${cohortAvg.systems}</td>
+                    <td>${top10.systems}</td>
+                    <td>${getPercentileBadge(getPercentile(state.scores.systems, cohortAvg.systems))}</td>
+                </tr>
+                <tr>
+                    <td>Experimentation</td>
+                    <td><strong>${state.scores.experiment}</strong></td>
+                    <td>${cohortAvg.experiment}</td>
+                    <td>${top10.experiment}</td>
+                    <td>${getPercentileBadge(getPercentile(state.scores.experiment, cohortAvg.experiment))}</td>
+                </tr>
+                <tr style="font-weight: 600; background: #f8fafc;">
+                    <td>Total Score</td>
+                    <td><strong>${totalScore}</strong></td>
+                    <td>${cohortAvg.total}</td>
+                    <td>${top10.total}</td>
+                    <td>${getPercentileBadge(getPercentile(totalScore, cohortAvg.total))}</td>
+                </tr>
+            `;
+
+            // Decision path analysis
+            const pathAnalysis = document.getElementById('decisionPathAnalysis');
+            let pathHTML = '<ul style="margin-left: 20px; font-size: 14px; line-height: 1.8;">';
+            
+            state.decisions.forEach((decision, idx) => {
+                const scenario = scenarios.find(s => s.id === decision.scenario);
+                if (scenario) {
+                    pathHTML += `<li><strong>Week ${decision.week}:</strong> Selected Option ${decision.option} - ${scenario.phase}</li>`;
+                }
+            });
+            
+            pathHTML += '</ul>';
+            pathHTML += '<p style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);">Top performers typically chose adaptive approaches (Option C or B) in diagnostic and design phases.</p>';
+            
+            pathAnalysis.innerHTML = pathHTML;
+            
+            document.getElementById('comparisonModal').classList.add('active');
+        }
+
+        function closeComparison() {
+            document.getElementById('comparisonModal').classList.remove('active');
+        }
+
+        // ===== DOWNLOAD REPORT =====
+        function downloadReport() {
+            const totalScore = Object.values(state.scores).reduce((a, b) => a + b, 0);
+            
+            let report = `ADAPTIVE PROCESS MANAGEMENT SIMULATION - PERFORMANCE REPORT
+=============================================================
+
+Participant: Alex Rivera
+Simulation: Customer Service Process Redesign
+Date: ${new Date().toLocaleDateString()}
+
+PERFORMANCE SUMMARY
+-------------------
+Diagnostic Accuracy:     ${state.scores.diagnostic}/15
+Process Design:          ${state.scores.design}/15
+Systems Thinking:        ${state.scores.systems}/15
+Experimentation:         ${state.scores.experiment}/15
+Total Score:             ${totalScore}/60
+
+FINAL METRICS
+-------------
+Average Response Time:   ${state.metrics.avgResponseTime} hours
+Customer Satisfaction:   ${state.metrics.customSatisfaction}%
+First Contact Resolution: ${state.metrics.firstContactRes}%
+Escalation Rate:         ${state.metrics.escalationRate}%
+
+DECISION PATH
+-------------
+`;
+
+            state.decisions.forEach(decision => {
+                const scenario = scenarios.find(s => s.id === decision.scenario);
+                if (scenario) {
+                    report += `Week ${decision.week} - ${scenario.phase}: Option ${decision.option}\n`;
+                }
+            });
+
+            report += `
+KEY INSIGHTS
+------------
+- Process problems often stem from design assumption mismatches
+- Technical optimization cannot solve adaptive challenges
+- Competing demands require process segmentation, not compromise
+- Safe-to-fail experimentation reveals unpredictable issues
+- Adaptive process management requires continuous learning
+
+Generated by Adaptive Process Management Simulation
+`;
+
+            // Create download
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'adaptive-process-simulation-report.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('Report downloaded! Check your downloads folder.');
+        }
+
+        // ===== RESTART SIMULATION =====
+        function restartSimulation() {
+            if (confirm('Are you sure you want to restart the simulation? All progress will be lost.')) {
+                // Reset state
+                state.week = 1;
+                state.currentScenario = 0;
+                state.decisions = [];
+                state.scores = {
+                    diagnostic: 0,
+                    design: 0,
+                    systems: 0,
+                    experiment: 0
+                };
+                state.metrics = {
+                    avgResponseTime: 48,
+                    customSatisfaction: 68,
+                    firstContactRes: 52,
+                    agentUtilization: 87,
+                    escalationRate: 23
+                };
+                state.metricsHistory = [{
+                    week: 0,
+                    avgResponseTime: 33,
+                    customSatisfaction: 83,
+                    firstContactRes: 67,
+                    escalationRate: 8
+                }];
+                state.processState = 'original';
+                
+                // Reset UI
+                document.getElementById('weekDisplay').textContent = 'Week 1';
+                document.getElementById('notificationList').innerHTML = '';
+                document.getElementById('decisionTimeline').innerHTML = '';
+                document.getElementById('historyCard').style.display = 'none';
+                
+                updateMetrics();
+                updateScores();
+                updateProgress();
+                updateProcessDiagram();
+                
+                // Add first notification
+                addNotification(scenarios[0].notification);
+            }
+        }
+
+        // ===== EVENT LISTENERS =====
         document.getElementById('continueBtn').onclick = continueSimulation;
         document.getElementById('closeModal').onclick = () => {
             document.getElementById('decisionModal').classList.remove('active');
         };
 
-        // Initialize
+        // ===== INITIALIZE =====
         function initialize() {
             updateMetrics();
             updateScores();
             updateProgress();
-            
-            // Add initial notification
+            updateProcessDiagram();
             addNotification(scenarios[0].notification);
         }
 

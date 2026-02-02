@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Leadership Survey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .survey-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .survey-intro {
+            color: #4a5568;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+
+        .section-title {
+            color: #2b6cb0;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-number {
+            background: #667eea;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .question-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            resize: vertical;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .question-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .question-input::placeholder {
+            color: #a0aec0;
+        }
+
+        .examples {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .examples.visible {
+            opacity: 1;
+            max-height: 500px;
+            margin-top: 15px;
+        }
+
+        .examples-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .examples ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .examples li {
+            color: #4a5568;
+            padding: 8px 0 8px 20px;
+            position: relative;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .examples li:before {
+            content: "•";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .survey-container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <h1>Activity: Adaptive Leadership Survey</h1>
+        
+        <div class="survey-intro">
+            <strong>The purpose of the survey:</strong><br>
+            This survey aims to understand discrepancies between job descriptions, KPIs and actual work, not to evaluate individual performance. Your responses are entirely anonymous and we encourage you to be as candid as possible in your responses.
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <form id="surveyForm">
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">1</span>
+                    Your tasks and responsibilities
+                </h2>
+                <textarea 
+                    class="question-input" 
+                    id="section1"
+                    placeholder="Type your survey questions here for this section..."
+                    data-section="1"
+                ></textarea>
+                <div class="char-count" id="count1">0 characters</div>
+                <div class="examples" id="examples1">
+                    <div class="examples-title">Example questions:</div>
+                    <ul>
+                        <li>"Which tasks do you perform regularly that are not included in your official job description?"</li>
+                        <li>"Which responsibilities in your job description do you rarely perform?"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">2</span>
+                    Prioritising tasks
+                </h2>
+                <textarea 
+                    class="question-input" 
+                    id="section2"
+                    placeholder="Type your survey questions here for this section..."
+                    data-section="2"
+                ></textarea>
+                <div class="char-count" id="count2">0 characters</div>
+                <div class="examples" id="examples2">
+                    <div class="examples-title">Example questions:</div>
+                    <ul>
+                        <li>"What factors influence the tasks you prioritise each day?"</li>
+                        <li>"What prevents you from performing tasks outlined in your job description?"</li>
+                        <li>"Are there tools, training or resources missing that make it difficult to follow your formal responsibilities?"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">3</span>
+                    Work that is outside your job description
+                </h2>
+                <textarea 
+                    class="question-input" 
+                    id="section3"
+                    placeholder="Type your survey questions here for this section..."
+                    data-section="3"
+                ></textarea>
+                <div class="char-count" id="count3">0 characters</div>
+                <div class="examples" id="examples3">
+                    <div class="examples-title">Example questions:</div>
+                    <ul>
+                        <li>"Are there incentives or pressures that push you to take on work outside your formal role?"</li>
+                        <li>"Are there unwritten expectations in your team about who does certain tasks?"</li>
+                        <li>"How do colleagues or managers react when someone focuses strictly on their job description?"</li>
+                        <li>"What changes would help align your job description, KPIs and actual work?"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Complete Survey Design</button>
+        </form>
+    </div>
+
+    <script>
+        // Get all textareas
+        const textareas = document.querySelectorAll('.question-input');
+        const progressFill = document.getElementById('progressFill');
+        
+        // Track which sections have content
+        let filledSections = new Set();
+
+        // Add input listeners to all textareas
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                const sectionNum = this.dataset.section;
+                const examplesDiv = document.getElementById(`examples${sectionNum}`);
+                const charCount = document.getElementById(`count${sectionNum}`);
+                
+                // Update character count
+                charCount.textContent = `${this.value.length} characters`;
+                
+                // Show examples if user has typed something
+                if (this.value.trim().length > 0) {
+                    examplesDiv.classList.add('visible');
+                    filledSections.add(sectionNum);
+                } else {
+                    examplesDiv.classList.remove('visible');
+                    filledSections.delete(sectionNum);
+                }
+
+                // Update progress bar
+                updateProgress();
+            });
+        });
+
+        function updateProgress() {
+            const totalSections = 3;
+            const percentage = (filledSections.size / totalSections) * 100;
+            progressFill.style.width = percentage + '%';
+        }
+
+        // Handle form submission
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect all responses
+            const responses = {
+                section1: document.getElementById('section1').value,
+                section2: document.getElementById('section2').value,
+                section3: document.getElementById('section3').value
+            };
+
+            // Check if at least one section is filled
+            const hasContent = Object.values(responses).some(val => val.trim().length > 0);
+
+            if (!hasContent) {
+                alert('Please fill in at least one section before submitting.');
+                return;
+            }
+
+            // Display results
+            let resultMessage = 'Survey Design Complete!\n\n';
+            resultMessage += 'You have created questions for:\n';
+            
+            if (responses.section1.trim()) resultMessage += '✓ Your tasks and responsibilities\n';
+            if (responses.section2.trim()) resultMessage += '✓ Prioritising tasks\n';
+            if (responses.section3.trim()) resultMessage += '✓ Work outside job description\n';
+            
+            resultMessage += '\nBy creating an anonymous survey with these targeted questions, an adaptive leader can gather honest insights from employees and uncover underlying systemic issues.';
+
+            alert(resultMessage);
+
+            // Optional: Log to console for debugging
+            console.log('Survey Responses:', responses);
+        });
+
+        // Add smooth scrolling when examples appear
+        document.addEventListener('DOMContentLoaded', function() {
+            textareas.forEach(textarea => {
+                textarea.addEventListener('focus', function() {
+                    this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
