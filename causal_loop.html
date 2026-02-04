@@ -1,22 +1,874 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta lang="en">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-<title>Leadership Style Quiz</title>
-<style>
- 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Causal Loop Diagram</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <style>
     :root {
-        --AIMblue: #4353A3;
-        --darkBlue: #38416D;
-        --teal: #5DC8B9;
-        --cream: #F1EEDE;
-        --grey: #e7e9ec;
-        --rust: #AF4510;
-        --navy: #12195C;
-        --white: #ffffff;
-        --lightBlue: #AEBAE4;
+      --AIMblue: #4353A3;
+      --darkBlue: #38416D;
+      --teal: #5DC8B9;
+      --cream: #F1EEDE;
+      --grey: #e7e9ec;
+      --rust: #AF4510;
+      --navy: #12195C;
+      --white: #ffffff;
+      --lightBlue: #AEBAE4;
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "IBM Plex Sans", sans-serif;
+      min-height: 100vh;
+      padding: 30px 20px;
+      background: #f5f6f8;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: var(--darkBlue);
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2em;
+      font-weight: 600;
+    }
+
+    .instructions {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .instructions p {
+      color: #5e6c84;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    .main-content {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .variables-panel {
+      flex: 0 0 320px;
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    .panel-header {
+      font-weight: 600;
+      font-size: 1.3em;
+      color: var(--darkBlue);
+      margin-bottom: 20px;
+      text-align: center;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--lightBlue);
+    }
+
+    .input-section {
+      margin-bottom: 20px;
+    }
+
+    .variable-input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--lightBlue);
+      border-radius: 8px;
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 0.95em;
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .variable-input:focus {
+      outline: none;
+      border-color: var(--AIMblue);
+    }
+
+    .add-variable-btn {
+      width: 100%;
+      padding: 10px;
+      background: var(--AIMblue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-variable-btn:hover:not(:disabled) {
+      background: var(--darkBlue);
+    }
+
+    .add-variable-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .item-counter {
+      text-align: center;
+      color: #5e6c84;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+    }
+
+    .item-counter.limit-reached {
+      color: var(--rust);
+      font-weight: 600;
+    }
+
+    .variable-item {
+      background: linear-gradient(135deg, var(--AIMblue) 0%, var(--darkBlue) 100%);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      cursor: move;
+      font-size: 0.95em;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border: solid 2px var(--lightBlue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      user-select: none;
+      position: relative;
+      padding-right: 35px;
+    }
+
+    .variable-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .variable-item.used {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .delete-variable-btn {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .delete-variable-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .variable-item.used .delete-variable-btn {
+      display: none;
+    }
+
+    .diagram-area {
+      flex: 1;
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: relative;
+      min-height: 600px;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 550px;
+    }
+
+    #diagramCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .node {
+      position: absolute;
+      background: linear-gradient(135deg, var(--AIMblue) 0%, var(--darkBlue) 100%);
+      color: white;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 0.95em;
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border: solid 3px var(--lightBlue);
+      cursor: move;
+      min-width: 180px;
+      text-align: center;
+      z-index: 10;
+      user-select: none;
+    }
+
+    .node:hover {
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      border-color: var(--teal);
+    }
+
+    .node.selected {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(93, 200, 185, 0.3);
+    }
+
+    .remove-btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--rust);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .node:hover .remove-btn {
+      display: flex;
+    }
+
+    .remove-btn:hover {
+      background: #8a3609;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      background: var(--AIMblue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+      background: var(--darkBlue);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn.secondary {
+      background: var(--teal);
+    }
+
+    .btn.secondary:hover {
+      background: #4db5a6;
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .legend {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95em;
+      color: var(--darkBlue);
+    }
+
+    .legend-line {
+      width: 40px;
+      height: 3px;
+      position: relative;
+    }
+
+    .legend-line.positive {
+      background: #28a745;
+    }
+
+    .legend-line.negative {
+      background: #dc3545;
+    }
+
+    .legend-line::after {
+      content: '▶';
+      position: absolute;
+      right: -8px;
+      top: -8px;
+      font-size: 12px;
+    }
+
+    .legend-line.positive::after {
+      color: #28a745;
+    }
+
+    .legend-line.negative::after {
+      color: #dc3545;
+    }
+
+    .connection-mode {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      text-align: center;
+      display: none;
+    }
+
+    .connection-mode.active {
+      display: block;
+    }
+
+    .connection-mode p {
+      color: var(--darkBlue);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .connection-mode .btn-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .connection-mode .btn {
+      padding: 8px 16px;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 1024px) {
+      .main-content {
+        flex-direction: column;
+      }
+
+      .variables-panel {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- <h1>Causal Loop Diagram</h1>
+    
+    <div class="instructions">
+      <p>Build a causal loop diagram by creating variables and connecting them.</p>
+      <p><strong>Instructions:</strong> Type a variable name and press Enter or click Add. Drag variables to the canvas, then click "Connect Nodes" to draw relationships.</p>
+    </div> -->
+
+    <div class="main-content">
+      <div class="variables-panel">
+        <div class="panel-header">Variables</div>
+        <div class="input-section">
+          <input type="text" id="variableInput" class="variable-input" placeholder="Enter variable name..." maxlength="100">
+          <button class="add-variable-btn" onclick="addVariable()">Add Variable</button>
+        </div>
+        <div class="item-counter" id="itemCounter">0 / 10 items</div>
+        <div id="variablesList"></div>
+      </div>
+
+      <div class="diagram-area">
+        <div class="connection-mode" id="connectionMode">
+          <p>Connection Mode: Click a node to start, then click another to connect</p>
+          <div class="btn-group">
+            <button class="btn secondary" onclick="setConnectionType('positive')">+ Positive</button>
+            <button class="btn secondary" onclick="setConnectionType('negative')">− Negative</button>
+            <button class="btn" onclick="cancelConnectionMode()">Cancel</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="btn" onclick="toggleConnectionMode()" id="connectBtn">Connect Nodes</button>
+          <button class="btn secondary" onclick="clearDiagram()">Clear Diagram</button>
+        </div>
+
+        <div class="canvas-container" id="canvasContainer">
+          <canvas id="diagramCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-line positive"></div>
+        <span>Positive relationship (increases together)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-line negative"></div>
+        <span>Negative relationship (one increases, other decreases)</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('diagramCanvas');
+    const ctx = canvas.getContext('2d');
+    const canvasContainer = document.getElementById('canvasContainer');
+    
+    let nodes = [];
+    let connections = [];
+    let draggedNode = null;
+    let offsetX = 0;
+    let offsetY = 0;
+    let isConnecting = false;
+    let connectionType = 'positive';
+    let selectedNode = null;
+    let variablesList = [];
+    let variableIdCounter = 0;
+    const MAX_VARIABLES = 10;
+
+    // Set canvas size
+    function resizeCanvas() {
+      const rect = canvasContainer.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      drawConnections();
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Add variable functionality
+    const variableInput = document.getElementById('variableInput');
+    
+    variableInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addVariable();
+      }
+    });
+
+    function addVariable() {
+      const input = document.getElementById('variableInput');
+      const text = input.value.trim();
+      
+      if (!text) {
+        alert('Please enter a variable name');
+        return;
+      }
+      
+      if (variablesList.length >= MAX_VARIABLES) {
+        alert(`Maximum of ${MAX_VARIABLES} variables allowed`);
+        return;
+      }
+      
+      const varId = `var-${variableIdCounter++}`;
+      variablesList.push({ id: varId, text: text, used: false });
+      
+      createVariableElement(varId, text);
+      updateItemCounter();
+      input.value = '';
+      input.focus();
+    }
+
+    function createVariableElement(id, text) {
+      const variablesContainer = document.getElementById('variablesList');
+      const item = document.createElement('div');
+      item.className = 'variable-item';
+      item.draggable = true;
+      item.setAttribute('data-var', id);
+      item.textContent = text;
+      
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delete-variable-btn';
+      deleteBtn.textContent = '×';
+      deleteBtn.onclick = (e) => {
+        e.stopPropagation();
+        deleteVariable(id);
+      };
+      item.appendChild(deleteBtn);
+      
+      item.addEventListener('dragstart', handleVarDragStart);
+      
+      variablesContainer.appendChild(item);
+    }
+
+    function deleteVariable(varId) {
+      // Check if variable is used in diagram
+      const isUsed = nodes.some(node => node.getAttribute('data-var') === varId);
+      
+      if (isUsed) {
+        alert('Cannot delete a variable that is currently in use on the diagram');
+        return;
+      }
+      
+      // Remove from list
+      variablesList = variablesList.filter(v => v.id !== varId);
+      
+      // Remove element
+      const element = document.querySelector(`#variablesList [data-var="${varId}"]`);
+      if (element) {
+        element.remove();
+      }
+      
+      updateItemCounter();
+    }
+
+    function updateItemCounter() {
+      const counter = document.getElementById('itemCounter');
+      const addBtn = document.querySelector('.add-variable-btn');
+      
+      counter.textContent = `${variablesList.length} / ${MAX_VARIABLES} items`;
+      
+      if (variablesList.length >= MAX_VARIABLES) {
+        counter.classList.add('limit-reached');
+        addBtn.disabled = true;
+      } else {
+        counter.classList.remove('limit-reached');
+        addBtn.disabled = false;
+      }
+    }
+
+    canvasContainer.addEventListener('dragover', handleDragOver);
+    canvasContainer.addEventListener('drop', handleDrop);
+
+    function handleVarDragStart(e) {
+      if (this.classList.contains('used')) {
+        e.preventDefault();
+        return;
+      }
+      e.dataTransfer.setData('text/plain', this.getAttribute('data-var'));
+      e.dataTransfer.setData('text', this.textContent.replace('×', '').trim());
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      const varId = e.dataTransfer.getData('text/plain');
+      const varText = e.dataTransfer.getData('text');
+      
+      if (!varId) return;
+
+      const rect = canvasContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      addNode(varId, varText, x, y);
+      
+      // Mark variable as used
+      const varElement = document.querySelector(`#variablesList [data-var="${varId}"]`);
+      if (varElement) {
+        varElement.classList.add('used');
+        varElement.draggable = false;
+      }
+      
+      // Update variablesList
+      const varIndex = variablesList.findIndex(v => v.id === varId);
+      if (varIndex !== -1) {
+        variablesList[varIndex].used = true;
+      }
+    }
+
+    function addNode(id, text, x, y) {
+      const node = document.createElement('div');
+      node.className = 'node';
+      node.textContent = text;
+      node.style.left = (x - 90) + 'px';
+      node.style.top = (y - 25) + 'px';
+      node.setAttribute('data-var', id);
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'remove-btn';
+      removeBtn.textContent = '×';
+      removeBtn.onclick = (e) => {
+        e.stopPropagation();
+        removeNode(node);
+      };
+      node.appendChild(removeBtn);
+
+      node.addEventListener('mousedown', handleNodeMouseDown);
+      node.addEventListener('click', handleNodeClick);
+
+      canvasContainer.appendChild(node);
+      nodes.push(node);
+      drawConnections();
+    }
+
+    function removeNode(node) {
+      const varId = node.getAttribute('data-var');
+      
+      // Remove connections involving this node
+      connections = connections.filter(conn => 
+        conn.from !== node && conn.to !== node
+      );
+      
+      // Remove node
+      node.remove();
+      nodes = nodes.filter(n => n !== node);
+      
+      // Mark variable as unused
+      const varElement = document.querySelector(`#variablesList [data-var="${varId}"]`);
+      if (varElement) {
+        varElement.classList.remove('used');
+        varElement.draggable = true;
+      }
+      
+      // Update variablesList
+      const varIndex = variablesList.findIndex(v => v.id === varId);
+      if (varIndex !== -1) {
+        variablesList[varIndex].used = false;
+      }
+      
+      drawConnections();
+    }
+
+    function handleNodeMouseDown(e) {
+      if (e.target.classList.contains('remove-btn')) return;
+      if (isConnecting) return;
+      
+      draggedNode = this;
+      const rect = this.getBoundingClientRect();
+      const containerRect = canvasContainer.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+      
+      document.addEventListener('mousemove', handleNodeDrag);
+      document.addEventListener('mouseup', handleNodeDragEnd);
+    }
+
+    function handleNodeDrag(e) {
+      if (!draggedNode) return;
+      
+      const containerRect = canvasContainer.getBoundingClientRect();
+      let x = e.clientX - containerRect.left - offsetX;
+      let y = e.clientY - containerRect.top - offsetY;
+      
+      // Keep within bounds
+      const nodeRect = draggedNode.getBoundingClientRect();
+      x = Math.max(0, Math.min(x, containerRect.width - nodeRect.width));
+      y = Math.max(0, Math.min(y, containerRect.height - nodeRect.height));
+      
+      draggedNode.style.left = x + 'px';
+      draggedNode.style.top = y + 'px';
+      
+      drawConnections();
+    }
+
+    function handleNodeDragEnd() {
+      draggedNode = null;
+      document.removeEventListener('mousemove', handleNodeDrag);
+      document.removeEventListener('mouseup', handleNodeDragEnd);
+    }
+
+    function handleNodeClick(e) {
+      if (!isConnecting) return;
+      e.stopPropagation();
+      
+      if (!selectedNode) {
+        // First node selected
+        selectedNode = this;
+        this.classList.add('selected');
+      } else if (selectedNode === this) {
+        // Clicked same node, deselect
+        selectedNode.classList.remove('selected');
+        selectedNode = null;
+      } else {
+        // Second node selected, create connection
+        createConnection(selectedNode, this, connectionType);
+        selectedNode.classList.remove('selected');
+        selectedNode = null;
+      }
+    }
+
+    function createConnection(fromNode, toNode, type) {
+      // Check if connection already exists
+      const exists = connections.some(conn => 
+        (conn.from === fromNode && conn.to === toNode) ||
+        (conn.from === toNode && conn.to === fromNode)
+      );
+      
+      if (!exists) {
+        connections.push({ from: fromNode, to: toNode, type: type });
+        drawConnections();
+      }
+    }
+
+    function drawConnections() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      connections.forEach(conn => {
+        const fromRect = conn.from.getBoundingClientRect();
+        const toRect = conn.to.getBoundingClientRect();
+        const containerRect = canvasContainer.getBoundingClientRect();
+        
+        const fromX = fromRect.left - containerRect.left + fromRect.width / 2;
+        const fromY = fromRect.top - containerRect.top + fromRect.height / 2;
+        const toX = toRect.left - containerRect.left + toRect.width / 2;
+        const toY = toRect.top - containerRect.top + toRect.height / 2;
+        
+        // Draw curved line
+        ctx.beginPath();
+        ctx.strokeStyle = conn.type === 'positive' ? '#28a745' : '#dc3545';
+        ctx.lineWidth = 3;
+        
+        const controlPointOffset = 50;
+        const dx = toX - fromX;
+        const dy = toY - fromY;
+        const controlX = fromX + dx / 2 + dy / 4;
+        const controlY = fromY + dy / 2 - dx / 4;
+        
+        ctx.moveTo(fromX, fromY);
+        ctx.quadraticCurveTo(controlX, controlY, toX, toY);
+        ctx.stroke();
+        
+        // Draw arrowhead
+        const angle = Math.atan2(toY - controlY, toX - controlX);
+        const arrowSize = 12;
+        
+        ctx.beginPath();
+        ctx.fillStyle = conn.type === 'positive' ? '#28a745' : '#dc3545';
+        ctx.moveTo(toX, toY);
+        ctx.lineTo(
+          toX - arrowSize * Math.cos(angle - Math.PI / 6),
+          toY - arrowSize * Math.sin(angle - Math.PI / 6)
+        );
+        ctx.lineTo(
+          toX - arrowSize * Math.cos(angle + Math.PI / 6),
+          toY - arrowSize * Math.sin(angle + Math.PI / 6)
+        );
+        ctx.closePath();
+        ctx.fill();
+        
+        // Draw label
+        const labelX = controlX;
+        const labelY = controlY;
+        ctx.font = 'bold 16px IBM Plex Sans';
+        ctx.fillStyle = conn.type === 'positive' ? '#28a745' : '#dc3545';
+        ctx.textAlign = 'center';
+        ctx.fillText(conn.type === 'positive' ? '+' : '−', labelX, labelY);
+      });
+    }
+
+    function toggleConnectionMode() {
+      isConnecting = !isConnecting;
+      const modeDiv = document.getElementById('connectionMode');
+      const btn = document.getElementById('connectBtn');
+      
+      if (isConnecting) {
+        modeDiv.classList.add('active');
+        btn.textContent = 'Exit Connection Mode';
+      } else {
+        modeDiv.classList.remove('active');
+        btn.textContent = 'Connect Nodes';
+        if (selectedNode) {
+          selectedNode.classList.remove('selected');
+          selectedNode = null;
+        }
+      }
+    }
+
+    function setConnectionType(type) {
+      connectionType = type;
+    }
+
+    function cancelConnectionMode() {
+      isConnecting = false;
+      document.getElementById('connectionMode').classList.remove('active');
+      document.getElementById('connectBtn').textContent = 'Connect Nodes';
+      if (selectedNode) {
+        selectedNode.classList.remove('selected');
+        selectedNode = null;
+      }
+    }
+
+    function clearDiagram() {
+      if (confirm('Are you sure you want to clear the entire diagram?')) {
+        // Remove all nodes
+        nodes.forEach(node => {
+          const varId = node.getAttribute('data-var');
+          const varElement = document.querySelector(`#variablesList [data-var="${varId}"]`);
+          if (varElement) {
+            varElement.classList.remove('used');
+            varElement.draggable = true;
+          }
+          
+          // Update variablesList
+          const varIndex = variablesList.findIndex(v => v.id === varId);
+          if (varIndex !== -1) {
+            variablesList[varIndex].used = false;
+          }
+          
+          node.remove();
+        });
+        
+        nodes = [];
+        connections = [];
+        selectedNode = null;
+        drawConnections();
+      }
+    }
+
+    // Click outside to deselect
+    canvasContainer.addEventListener('click', (e) => {
+      if (e.target === canvasContainer || e.target === canvas) {
+        if (selectedNode) {
+          selectedNode.classList.remove('selected');
+          selectedNode = null;
+        }
+      }
+    });
+    
+    // Initialize counter
+    updateItemCounter();
+  </script>
+</body>
+</html>
