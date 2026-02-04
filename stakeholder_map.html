@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stakeholder Mapping Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+    --AIMblue: #4353A3;
+    --darkBlue: #38416D;
+    --teal: #5DC8B9;
+    --cream: #F1EEDE;
+    --grey: #e7e9ec;
+    --rust: #AF4510;
+    --navy: #12195C;
+    --white: #ffffff;
+    --lightBlue: #AEBAE4;
+    }
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: "IBM Plex Sans", sans-serif;
+    min-height: 90vh;
+    padding: 30px 20px;
+    background: #f4f5f7;
+    }
+
+    .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    }
+
+    h1 {
+    color: var(--darkBlue);
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 2em;
+    font-weight: 600;
+    }
+
+    .scenario {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .scenario h2 {
+    color: var(--darkBlue);
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    }
+
+    .scenario p {
+    color: #5e6c84;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    }
+
+    .instructions {
+    text-align: center;
+    color: #5e6c84;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    font-weight: 500;
+    }
+
+    .dragItems {
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .column-header {
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: 8px 12px;
+    color: var(--darkBlue);
+    margin-bottom: 15px;
+    }
+
+    #cardHome {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 100px;
+    }
+
+    .card {
+    padding: 18px;
+    cursor: move;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 280px;
+    color: black;
+    background: rgba(174, 186, 228, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--lightBlue);
+    }
+
+    .card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+    }
+
+    .card.dragging {
+    opacity: 0.5;
+    transform: rotate(3deg);
+    }
+
+    .card-title {
+    font-weight: 600;
+    font-size: 1.05em;
+    color: var(--darkBlue);
+    margin-bottom: 8px;
+    }
+
+    .card-description {
+    font-size: 0.9em;
+    color: #5e6c84;
+    line-height: 1.4;
+    }
+
+    .matrix-container {
+    position: relative;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    }
+
+    .axis-labels {
+    position: absolute;
+    font-weight: 600;
+    color: var(--darkBlue);
+    font-size: 1.1em;
+    }
+
+    .y-axis-label {
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: center;
+    }
+
+    .x-axis-label {
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    }
+
+    .matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    background: var(--darkBlue);
+    border: 3px solid var(--darkBlue);
+    min-height: 500px;
+    }
+
+    .quadrant {
+    background: #fafbfc;
+    padding: 20px;
+    min-height: 250px;
+    position: relative;
+    transition: background 0.2s;
+    }
+
+    .quadrant-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    font-weight: 600;
+    color: var(--darkBlue);
+    font-size: 0.95em;
+    text-align: center;
+    padding: 8px;
+    background: rgba(174, 186, 228, 0.15);
+    border-radius: 6px;
+    }
+
+    .quadrant-cards {
+    margin-top: 50px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    }
+
+    .quadrant.drag-over {
+    background: #e3f2fd;
+    }
+
+    #submitBtn {
+    display: block;
+    margin: 30px auto;
+    padding: 14px 50px;
+    background: var(--AIMblue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s;
+    }
+
+    #submitBtn:not(:disabled):hover {
+    background: var(--darkBlue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    #submitBtn:disabled {
+    cursor: not-allowed;
+    }
+
+    .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    }
+
+    .modal-overlay.show {
+    display: flex;
+    }
+
+    .modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .modal-content h2 {
+    color: var(--darkBlue);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    }
+
+    .modal-content p {
+    font-size: 1.05em;
+    line-height: 1.6;
+    color: #5e6c84;
+    margin-bottom: 10px;
+    }
+
+    .feedback-item {
+    margin-bottom: 20px;
+    padding: 18px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    }
+
+    .feedback-item.correct {
+    border-left: 5px solid #0f7c2e;
+    background: #f1f8f4;
+    }
+
+    .feedback-item.incorrect {
+    border-left: 5px solid #d32f2f;
+    background: #fef5f5;
+    }
+
+    .feedback-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--darkBlue);
+    font-size: 1.05em;
+    }
+
+    .feedback-explanation {
+    font-size: 0.95em;
+    color: #5e6c84;
+    line-height: 1.5;
+    }
+
+    .modal-close-btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: var(--AIMblue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    }
+
+    .modal-close-btn:hover {
+    background: var(--darkBlue);
+    }
+
+    @media (max-width: 768px) {
+    .matrix {
+        min-height: 600px;
+    }
+    
+    .quadrant {
+        min-height: 300px;
+    }
+    
+    .card {
+        width: 100%;
+    }
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <p class="instructions">Drag each stakeholder into the correct quadrant based on their power and influence in this change initiative.</p>
+        
+        <div class="dragItems">
+            <div class="column-header">Stakeholders</div>
+            <div id="cardHome">
+                <div class="card" id="frontline" draggable="true">
+                    <div class="card-title">Frontline Employees</div>
+                    <div class="card-description">Staff who will use the new ordering system daily in their customer-facing roles.</div>
+                </div>
+                <div class="card" id="customers" draggable="true">
+                    <div class="card-title">Customers</div>
+                    <div class="card-description">End users who will interact with the new ordering process when making purchases.</div>
+                </div>
+                <div class="card" id="leadership" draggable="true">
+                    <div class="card-title">Senior Leadership</div>
+                    <div class="card-description">Executive team who approved and funded the system implementation.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="matrix-container">
+            <div class="axis-labels y-axis-label">POWER →</div>
+            <div class="axis-labels x-axis-label">INFLUENCE →</div>
+            
+            <div class="matrix">
+                <div class="quadrant" data-quadrant="high-power-low-influence">
+                    <div class="quadrant-label">High Power, Low Influence</div>
+                    <div class="quadrant-cards"></div>
+                </div>
+                <div class="quadrant" data-quadrant="high-power-high-influence">
+                    <div class="quadrant-label">High Power, High Influence</div>
+                    <div class="quadrant-cards"></div>
+                </div>
+                <div class="quadrant" data-quadrant="low-power-low-influence">
+                    <div class="quadrant-label">Low Power, Low Influence</div>
+                    <div class="quadrant-cards"></div>
+                </div>
+                <div class="quadrant" data-quadrant="low-power-high-influence">
+                    <div class="quadrant-label">Low Power, High Influence</div>
+                    <div class="quadrant-cards"></div>
+                </div>
+            </div>
+        </div>
+<br><br>
+        <button onclick="checkAnswers()" id="submitBtn" disabled>Submit Answers</button>
+    </div>
+
+    <div class="modal-overlay" id="resultsModal">
+        <div class="modal-content">
+            <h2 id="modalTitle"></h2>
+            <div id="modalMessage"></div>
+            <button class="modal-close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+<script>
+let draggedCard = null;
+
+// Define correct answers and feedback
+const stakeholderAnswers = {
+    frontline: {
+        correct: 'low-power-high-influence',
+        title: 'Frontline Employees',
+        explanation: 'Frontline employees have <strong>high interest/influence</strong> because they will be directly impacted by the system and their adoption is critical to success. However, they have <strong>low power</strong> as they have no say in the implementation decision. May experience uncertainty regarding increased performance transparency or changes to their responsibilities.'
+    },
+    customers: {
+        correct: 'high-power-low-influence',
+        title: 'Customers',
+        explanation: 'Customers have <strong>high power</strong> because without them the business will fail - their acceptance of the new system is crucial. However, they have <strong>low influence</strong> over the implementation process itself. May respond differently to new ordering processes depending on their familiarity with digital tools.'
+    },
+    leadership: {
+        correct: 'high-power-high-influence',
+        title: 'Senior Leadership',
+        explanation: 'Senior leadership has both <strong>high power and high influence</strong>. They made the decision to implement the system, control resources and funding, and expect measurable improvements in operational performance and customer satisfaction. They must be actively engaged and supportive.'
+    }
+};
+
+function initDragAndDrop() {
+    const cards = document.querySelectorAll('.card');
+    const quadrants = document.querySelectorAll('.quadrant');
+
+    cards.forEach(card => {
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragend', handleDragEnd);
+    });
+
+    quadrants.forEach(quadrant => {
+        quadrant.addEventListener('dragover', handleDragOver);
+        quadrant.addEventListener('drop', handleDrop);
+        quadrant.addEventListener('dragleave', handleDragLeave);
+        quadrant.addEventListener('dragenter', handleDragEnter);
+    });
+}
+
+function handleDragStart(e) {
+    draggedCard = this;
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+}
+
+function handleDragEnd(e) {
+    this.classList.remove('dragging');
+    document.querySelectorAll('.quadrant').forEach(quadrant => {
+        quadrant.classList.remove('drag-over');
+    });
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+}
+
+function handleDragEnter(e) {
+    let target = e.target;
+    if (!target.classList.contains('quadrant')) {
+        target = target.closest('.quadrant');
+    }
+    if (target && target.classList.contains('quadrant')) {
+        target.classList.add('drag-over');
+    }
+}
+
+function handleDragLeave(e) {
+    let target = e.target;
+    if (!target.classList.contains('quadrant')) {
+        target = target.closest('.quadrant');
+    }
+    if (target && target.classList.contains('quadrant')) {
+        target.classList.remove('drag-over');
+    }
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    let dropZone = e.target;
+    if (!dropZone.classList.contains('quadrant')) {
+        dropZone = dropZone.closest('.quadrant');
+    }
+    
+    if (dropZone && draggedCard) {
+        dropZone.classList.remove('drag-over');
+        const cardsContainer = dropZone.querySelector('.quadrant-cards');
+        cardsContainer.appendChild(draggedCard);
+        checkIfAllDragged();
+    }
+    
+    return false;
+}
+
+function checkIfAllDragged() {
+    const cardHome = document.getElementById('cardHome');
+    const remainingCards = cardHome.querySelectorAll('.card');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (remainingCards.length === 0) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.cursor = 'pointer';
+    }
+}
+
+function checkAnswers() {
+    let allCorrect = true;
+    let feedbackHTML = '';
+    let correctCount = 0;
+    let totalCount = 3;
+
+    // Check all quadrants
+    const quadrants = document.querySelectorAll('.quadrant');
+    
+    quadrants.forEach(quadrant => {
+        const quadrantType = quadrant.getAttribute('data-quadrant');
+        const cards = quadrant.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            const cardId = card.id;
+            const answer = stakeholderAnswers[cardId];
+            const isCorrect = answer.correct === quadrantType;
+            
+            if (isCorrect) {
+                correctCount++;
+                card.style.border = '3px solid #0f7c2e';
+                card.style.background = 'rgba(15, 124, 46, 0.1)';
+                feedbackHTML += `
+                    <div class="feedback-item correct">
+                        <div class="feedback-title">✓ ${answer.title}</div>
+                        <div class="feedback-explanation">${answer.explanation}</div>
+                    </div>
+                `;
+            } else {
+                allCorrect = false;
+                card.style.border = '3px solid #d32f2f';
+                card.style.background = 'rgba(211, 47, 47, 0.1)';
+                
+                const correctQuadrantName = answer.correct
+                    .split('-')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+                
+                feedbackHTML += `
+                    <div class="feedback-item incorrect">
+                        <div class="feedback-title">✗ ${answer.title}</div>
+                        <div class="feedback-explanation">
+                            This stakeholder should be in the <strong>${correctQuadrantName}</strong> quadrant. 
+                            ${answer.explanation}
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    });
+
+    // Display results
+    if (allCorrect) {
+        showModal('Perfect! All Correct! 🎉', `<p>You successfully mapped all ${correctCount} stakeholders to their correct quadrants!</p><p>Understanding stakeholder power and influence is crucial for effective change management and engagement strategies.</p>${feedbackHTML}`);
+    } else {
+        showModal(`Results: ${correctCount}/${totalCount} Correct`, feedbackHTML);
+    }
+}
+
+function showModal(title, message) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalMessage').innerHTML = message;
+    document.getElementById('resultsModal').classList.add('show');
+}
+
+function closeModal() {
+    document.getElementById('resultsModal').classList.remove('show');
+}
+
+// Initialize on page load
+initDragAndDrop();
+</script>
+</body>
+</html>
