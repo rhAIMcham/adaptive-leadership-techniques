@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlook Email</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f2f1;
+            padding: 20px;
+        }
+        .email-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border: 1px solid #d1d1d1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .email-header {
+            background-color: #0078d4;
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .email-subject {
+            padding: 20px 20px 10px 20px;
+            border-bottom: 1px solid #edebe9;
+        }
+        .subject-line {
+            font-size: 18px;
+            font-weight: 600;
+            color: #323130;
+            margin-bottom: 15px;
+        }
+        .email-meta {
+            font-size: 12px;
+            color: #605e5c;
+            line-height: 1.6;
+        }
+        .meta-row {
+            display: flex;
+            margin-bottom: 6px;
+        }
+        .meta-label {
+            font-weight: 600;
+            min-width: 60px;
+        }
+        .meta-value {
+            color: #323130;
+        }
+        .email-body {
+            padding: 30px 20px;
+            font-size: 14px;
+            color: #323130;
+            line-height: 1.6;
+        }
+        .email-body p {
+            margin-bottom: 16px;
+        }
+        .email-body strong {
+            font-weight: 600;
+        }
+        .email-body ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+        .email-body li {
+            margin-bottom: 8px;
+        }
+        .email-body ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+        .teams-link {
+            color: #0078d4;
+            text-decoration: none;
+        }
+        .teams-link:hover {
+            text-decoration: underline;
+        }
+        .signature {
+            margin-top: 24px;
+            color: #605e5c;
+        }
+        .section-heading {
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            Outlook Mail
+        </div>
+        
+        <div class="email-subject">
+            <div class="subject-line">
+                Managing this challenging time.
+            </div>
+            <div class="email-meta">
+                <div class="meta-row">
+                    <span class="meta-label">From:</span>
+                    <span class="meta-value">[Your Name] &lt;yourname@company.com&gt;</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">Sent:</span>
+                    <span class="meta-value">Monday, 14 October 2024 2:30 PM</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">To:</span>
+                    <span class="meta-value">Product Team</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="email-body">
+            <p>Hi team,</p>
+            
+            <p>I want to acknowledge upfront that we're working through an adaptive challenge right now: improving customer onboarding while our product, messaging and delivery timelines are all evolving. We don't have every detail locked in yet, but our intent is clear — we're simplifying the onboarding experience so customers reach value faster and our teams can deliver consistently.</p>
+            
+            <p class="section-heading">What we know (facts)</p>
+            <ul>
+                <li>Customer feedback shows onboarding is taking too long and creating avoidable support demand.</li>
+                <li>We have limited capacity this quarter, so we need a focused approach.</li>
+                <li>The outcome we're accountable for is a clearer, faster onboarding journey with measurable improvement in completion and confidence.</li>
+            </ul>
+
+            <p class="section-heading">What we don't know yet (still being worked out)</p>
+            <ul>
+                <li>The final design of the full onboarding journey (we will refine this as we test and learn).</li>
+                <li>The exact sequencing of all content and product changes beyond the next 4–6 weeks.</li>
+                <li>Which improvements will have the highest impact until we run the first round of experiments.</li>
+            </ul>
+            
+            <p class="section-heading">What's changing and what isn't</p>
+            <ul>
+                <li><strong>Changing:</strong> We're moving to smaller, faster releases and tighter collaboration between product, learning and marketing.</li>
+                <li><strong>Not changing:</strong> Our commitment to quality, customer impact and respectful ways of working.</li>
+            </ul>
+            
+            <p class="section-heading">The trade-offs we're making (and why)</p>
+            <p>To move faster and reduce confusion, we are choosing focus over breadth. That means:</p>
+            <ul>
+                <li>We will prioritise the top onboarding pain points first</li>
+                <li>We will pause or de-scope lower-impact enhancements until we've stabilised the core flow.</li>
+            </ul>
+            <p>This is not because those ideas aren't valuable — it's because doing everything at once slows progress and increases rework.</p>
+            
+            <p class="section-heading">I also want to name the human side of this</p>
+            <p>Uncertainty can feel tiring, frustrating and even personal — especially when it changes how we work or what we're known for. If you're feeling change fatigue, concern about workload, or unclear on expectations, that's a normal response. The goal is to stay honest about what's hard while still moving forward together.</p>
+            
+            <p class="section-heading">Next steps (what we're doing now)</p>
+            <p>This week we'll focus on three actions:</p>
+            <ol>
+                <li>Confirm the top 3 onboarding friction points using customer and support insights</li>
+                <li>Draft a v1 onboarding flow (simple, clear, testable)</li>
+                <li>Run a short review to agree on one experiment to ship next</li>
+            </ol>
+            <p>Owners will be shared in Monday's stand-up so everyone knows what they own and what support is available.</p>
+            
+            <p class="section-heading">Space for questions and sensemaking</p>
+            <p>We need reality from the frontline, not silent agreement. If something feels unclear, risky or misaligned, please raise it early.</p>
+            <p>You can:</p>
+            <ul>
+                <li>Bring questions to Thursday's 30-min drop-in Q&A (invite to follow)</li>
+                <li>Share concerns directly with me or your team lead</li>
+                <li>Add feedback to the onboarding working doc (link to follow)</li>
+            </ul>
+            
+            <p class="section-heading">Communication rhythm (so you're not guessing)</p>
+            <p>To reduce noise, I'll send a weekly update every Friday with:</p>
+            <ul>
+                <li>What changed / what didn't</li>
+                <li>What we learned</li>
+                <li>What we're doing next week</li>
+                <li>Any decisions made and trade-offs</li>
+            </ul>
+            
+            <p>And finally - credibility matters most right now: if we say we'll follow up, we will. If you raise a risk or concern, we'll close the loop with an answer or decision, even if that decision is "we don't know yet, here's when we will."</p>
+            
+            <p>Thanks for staying engaged through this. We'll navigate it by staying focused, honest and aligned on what matters.</p>
+            
+            <div class="signature">
+                <p>Regards,</p>
+                <p><strong>[Your Name]</strong></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
