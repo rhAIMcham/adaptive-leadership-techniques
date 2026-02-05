@@ -1,37 +1,658 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Technical vs Adaptive Challenges</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-    --AIMblue: #4353A3;
-    --darkBlue: #38416D;
-    --teal: #5DC8B9;
-    --cream: #F1EEDE;
-    --grey: #e7e9ec;
-    --rust: #AF4510;
-    --navy: #12195C;
-    --white: #ffffff;
-    --lightBlue: #AEBAE4;
+<meta charset="UTF-8">
+<meta lang="en">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<title>Psychological safety assessment</title>
+<style>
+    .checkContainer {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
     }
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    
+    :root {
+        --AIMblue: #4353A3;
+        --darkBlue: #38416D;
+        --teal: #5DC8B9;
+        --cream: #F1EEDE;
+        --grey: #e7e9ec;
+        --rust: #AF4510;
+        --navy: #12195C;
+        --white: #ffffff;
+        --lightBlue: #AEBAE4;
     }
 
     body {
-    font-family: "IBM Plex Sans", sans-serif;
-    min-height: 90vh;
-    padding: 30px 20px;
+        font-family: "IBM Plex Sans", sans-serif;
+        margin: 0;
+        padding: 20px;
     }
-    </style>
-    </head>
-    <body>
-        <p>Psychological safety</p>
-    </body>
+
+    .quiz-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #F1EEDE30;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .slide-container {
+        padding: 30px;
+        padding-top: 15px;
+    }
+
+    .slide {
+        display: none;
+        width: 100%;
+    }
+
+    .slide.active {
+        display: block;
+    }
+
+    .slide h3 {
+        color: var(--AIMblue);
+        margin-bottom: 25px;
+        text-align: left;
+    }
+
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .checkContainer {
+        display: flex;
+        align-items: flex-start;
+        margin: 20px 0;
+        padding: 15px;
+        background-color: var(--grey);
+        border-radius: 8px;
+    }
+
+    .instructions {
+        display: flex;
+        padding-left: 30px;
+        background-color: var(--cream);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border-left: 4px solid var(--AIMblue);
+    }
+
+    .instructions p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--darkBlue);
+    }
+
+    .checkContainer p {
+        margin: 0;
+        margin-right: 15px;
+        flex-grow: 1;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    input[type="radio"] {
+        margin: 0;
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 30px;
+        background-color: var(--grey);
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .nav-button {
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--AIMblue);
+        background-color: var(--white);
+        color: var(--AIMblue);
+        border-radius: 50%;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+        background-color: var(--lightBlue);
+    }
+
+    .nav-button.active {
+        background-color: var(--AIMblue);
+        color: var(--white);
+    }
+
+    .arrow-button {
+        padding: 10px 20px;
+        background-color: #5DC8B990;
+        color: black;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .arrow-button:hover:not(:disabled) {
+        background-color: var(--darkBlue);
+        color: white;
+    }
+
+    .arrow-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .submit-button {
+        padding: 15px 30px;
+        background-color: var(--teal);
+        color: var(--white);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px auto;
+        display: block;
+    }
+
+    .submit-button:hover {
+        background-color: #4db5a5;
+    }
+
+    .submit-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    #results {
+        max-width: 800px;
+        margin: 15px auto;
+        background-color: var(--cream);
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: none;
+        padding: 30px;
+    }
+
+    #results h2 {
+        color: var(--AIMblue);
+        margin-top: 0;
+    }
+
+    #results h3 {
+        color: var(--darkBlue);
+        margin-top: 25px;
+    }
+
+    #results ul {
+        line-height: 1.8;
+        color: var(--darkBlue);
+    }
+
+    #results .score-display {
+        background-color: var(--teal);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        height: 6px;
+        background-color: var(--grey);
+        margin: 0 30px 20px;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background-color: var(--teal);
+        transition: width 0.3s ease;
+        width: 33.33%;
+    }
+
+    .slidecontainer {
+        width: 100%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        border-radius: 90px;
+    }
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background: var(--AIMblue);
+        cursor: pointer;
+        border-radius: 90px;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: var(--AIMblue);
+        cursor: pointer;
+        border-radius: 90px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .answerSection {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .sliderValue {
+        min-width: 50px;
+        text-align: center;
+        padding: 8px 15px;
+        border: var(--AIMblue) solid 2px;
+        background: aliceblue;
+        border-radius: 90px;
+        font-weight: bold;
+        color: var(--AIMblue);
+    }
+
+    .submitBtn {
+        padding: 10px 20px;
+        background-color: var(--teal);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .submitBtn:hover {
+        background-color: #4db5a5;
+    }
+
+    .submitBtn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .answer-feedback {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: var(--cream);
+        border-radius: 8px;
+        border-left: 4px solid var(--AIMblue);
+    }
+
+    .answer-feedback h4 {
+        color: var(--AIMblue);
+        margin-top: 0;
+    }
+
+    .answer-feedback p {
+        line-height: 1.6;
+        color: var(--darkBlue);
+    }
+
+    .correct {
+        border-left-color: var(--teal);
+    }
+
+    .incorrect {
+        border-left-color: var(--rust);
+    }
+
+    .comparison {
+        display: flex;
+        gap: 20px;
+        margin: 15px 0;
+    }
+
+    .comparison div {
+        flex: 1;
+        padding: 10px;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    .your-answer {
+        background-color: #e3f2fd;
+        border: 2px solid #2196F3;
+    }
+
+    .correct-answer {
+        background-color: #e8f5e9;
+        border: 2px solid #4CAF50;
+    }
+
+    @media screen and (max-width: 600px) {
+        .quiz-container {
+            margin: 0;
+        }
+
+        .slide-container,
+        .navigation,
+        .instructions {
+            padding: 15px;
+        }
+
+        .nav-buttons {
+            gap: 5px;
+        }
+
+        .nav-button {
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .arrow-button {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .answerSection {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .comparison {
+            flex-direction: column;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="instructions">
+        <p><strong>Instructions:</strong> Use the slider to rate the psychological safety of the situation, with 5 being the safest and 1 the least safe.</p>
+    </div>
+
+    <div class="quiz-container">
+        <nav class="navigation" aria-label="Quiz navigation">
+            <div class="nav-buttons" role="tablist">
+                <button class="nav-button active" onclick="goToSlide(1)" role="tab" aria-selected="true" aria-controls="slide-1" id="tab-1" aria-label="Question 1">1</button>
+                <button class="nav-button" onclick="goToSlide(2)" role="tab" aria-selected="false" aria-controls="slide-2" id="tab-2" aria-label="Question 2">2</button>
+                <button class="nav-button" onclick="goToSlide(3)" role="tab" aria-selected="false" aria-controls="slide-3" id="tab-3" aria-label="Question 3">3</button>
+            </div>
+        </nav>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" role="progressbar"></div>
+        </div>
+        <div>
+            <div class="slide-container" id="slideContainer" role="region" aria-live="polite">
+                <!-- Slide 1 -->
+                <div class="slide active" id="slide-1" role="tabpanel" aria-labelledby="tab-1">
+                    <legend>
+                        <h3>Question 1</h3>
+                    </legend>
+                    <p>In a weekly team meeting, Jordan flags that a key deliverable will be late because of an earlier error. The manager responds by asking a few clarifying questions, then says, "Thanks for raising it early - let's understand what happened and what support you need," and the team offers ideas. Two people add, "I'm glad you said that - I was worried too" and the group agrees on a fix and next steps.</p>
+                    <div class="answerSection">
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="5" value="3" class="slider" id="q1">
+                        </div>
+                        <p class="sliderValue" id="q1Value">3</p>
+                        <button class="submitBtn" onclick="submitAnswer(1)">Submit</button>
+                    </div>
+                    <div class="hidden" id="answer1">
+                        <div class="answer-feedback" id="feedback1">
+                            <div class="comparison">
+                                <div class="your-answer">
+                                    <strong>Your Answer:</strong><br>
+                                    <span id="userAnswer1"></span>/5
+                                </div>
+                                <div class="correct-answer">
+                                    <strong>Correct Answer:</strong><br>
+                                    5/5
+                                </div>
+                            </div>
+                            <h4>Explanation:</h4>
+                            <p>The leader responds to bad news with curiosity and appreciation ("Thanks for raising it early"), which signals that speaking up is safe and valued. Multiple team members add their own concerns without fear, and the group focuses on learning and problem-solving rather than blame—strong indicators of a high psychological safety culture.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="slide" id="slide-2" role="tabpanel" aria-labelledby="tab-2">
+                    <legend>
+                        <h3>Question 2</h3>
+                    </legend>
+                    <p>During a decision meeting, Mei says, "I disagree with this approach - I think the risks are higher than we're acknowledging," but she gets interrupted twice. The leader continues talking and later says, "We don't have time for debates - just align," and moves to a decision. After the meeting, Mei messages a colleague privately that she won't raise concerns again because it "backfires."</p>
+                    <div class="answerSection">
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="5" value="3" class="slider" id="q2">
+                        </div>
+                        <p class="sliderValue" id="q2Value">3</p>
+                        <button class="submitBtn" onclick="submitAnswer(2)">Submit</button>
+                    </div>
+                    <div class="hidden" id="answer2">
+                        <div class="answer-feedback" id="feedback2">
+                            <div class="comparison">
+                                <div class="your-answer">
+                                    <strong>Your Answer:</strong><br>
+                                    <span id="userAnswer2"></span>/5
+                                </div>
+                                <div class="correct-answer">
+                                    <strong>Correct Answer:</strong><br>
+                                    1/5
+                                </div>
+                            </div>
+                            <h4>Explanation:</h4>
+                            <p>Dissent is interrupted and then shut down ("We don't have time for debates - just align"), which teaches the team that challenging ideas is risky and unwelcome. Mei's takeaway - she won't raise concerns again - shows psychological safety is low, even if it's not zero because someone attempted to speak up initially.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide" id="slide-3" role="tabpanel" aria-labelledby="tab-3">
+                    <legend>
+                        <h3>Question 3</h3>
+                    </legend>
+                    <p>A team member gives upward feedback: "I'm finding it hard to get clarity because priorities keep changing." The leader replies, "That's fair—I've been inconsistent," and asks the team to suggest one change that would improve clarity. They agree to a weekly priority list and a decision log. Two weeks later, the leader forgets to share the list, acknowledges it at the next meeting, and says, "That's on me—here it is now, and I'll send it every Monday by 9am," then follows through in the weeks that follow.</p>
+                    <div class="answerSection">
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="5" value="3" class="slider" id="q3">
+                        </div>
+                        <p class="sliderValue" id="q3Value">3</p>
+                        <button class="submitBtn" onclick="submitAnswer(3)">Submit</button>
+                    </div>
+                    <div class="hidden" id="answer3">
+                        <div class="answer-feedback" id="feedback3">
+                            <div class="comparison">
+                                <div class="your-answer">
+                                    <strong>Your Answer:</strong><br>
+                                    <span id="userAnswer3"></span>/5
+                                </div>
+                                <div class="correct-answer">
+                                    <strong>Correct Answer:</strong><br>
+                                    4/5
+                                </div>
+                            </div>
+                            <h4>Explanation:</h4>
+                            <p>The leader accepts upward feedback without defensiveness, admits their inconsistency and invites the team to co-design a solution - clear safety behaviours. When they miss a commitment, they acknowledge it and restore trust through follow-through; it's a 4 (not 5) because it's important that there is more evidence that this openness and respectful challenge is consistent across different situations and stakeholders.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navigation" aria-label="Quiz navigation">
+            <button class="arrow-button" id="prevBtn" onclick="previousSlide()" aria-label="Previous question">
+                ← Previous
+            </button>
+            
+            <button class="arrow-button" id="nextBtn" onclick="nextSlide()" aria-label="Next question">
+                Next →
+            </button>
+        </nav>
+    </div>
+
+<script>
+// Update slider values in real-time
+const sliders = ['q1', 'q2', 'q3'];
+sliders.forEach(sliderId => {
+    const slider = document.getElementById(sliderId);
+    const valueDisplay = document.getElementById(`${sliderId}Value`);
+    
+    slider.addEventListener('input', (e) => {
+        valueDisplay.textContent = e.target.value;
+    });
+});
+
+let currentSlide = 1;
+const totalSlides = 3;
+const answers = {
+    1: 5,
+    2: 1,
+    3: 4
+};
+const submitted = {
+    1: false,
+    2: false,
+    3: false
+};
+
+function submitAnswer(questionNum) {
+    const slider = document.getElementById(`q${questionNum}`);
+    const userAnswer = parseInt(slider.value);
+    const correctAnswer = answers[questionNum];
+    
+    // Display the answer feedback
+    const answerDiv = document.getElementById(`answer${questionNum}`);
+    const feedbackDiv = document.getElementById(`feedback${questionNum}`);
+    const userAnswerSpan = document.getElementById(`userAnswer${questionNum}`);
+    
+    userAnswerSpan.textContent = userAnswer;
+    
+    // Add class based on correctness
+    if (userAnswer === correctAnswer) {
+        feedbackDiv.classList.add('correct');
+        feedbackDiv.classList.remove('incorrect');
+    } else {
+        feedbackDiv.classList.add('incorrect');
+        feedbackDiv.classList.remove('correct');
+    }
+    
+    answerDiv.classList.remove('hidden');
+    submitted[questionNum] = true;
+    
+    // Disable the submit button for this question
+    event.target.disabled = true;
+    slider.disabled = true;
+}
+
+function goToSlide(slideNumber) {
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    document.getElementById(`slide-${slideNumber}`).classList.add('active');
+    
+    currentSlide = slideNumber;
+    updateButtons();
+    updateArrowButtons();
+    updateProgressBar();
+}
+
+function nextSlide() {
+    if (currentSlide < totalSlides) {
+        goToSlide(currentSlide + 1);
+    }
+}
+
+function previousSlide() {
+    if (currentSlide > 1) {
+        goToSlide(currentSlide - 1);
+    }
+}
+
+function updateButtons() {
+    const buttons = document.querySelectorAll('.nav-button');
+    buttons.forEach((btn, index) => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+        if (index === currentSlide - 1) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+        }
+    });
+}
+
+function updateArrowButtons() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    prevBtn.disabled = currentSlide === 1;
+    nextBtn.disabled = currentSlide === totalSlides;
+}
+
+function updateProgressBar() {
+    const progressFill = document.getElementById('progressFill');
+    const progress = (currentSlide / totalSlides) * 100;
+    progressFill.style.width = `${progress}%`;
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.target.tagName === 'INPUT') {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            return;
+        }
+        return;
+    }
+    
+    if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        previousSlide();
+    } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        nextSlide();
+    }
+});
+
+updateArrowButtons();
+updateProgressBar();
+</script>
+</body>
+</html>
