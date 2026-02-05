@@ -54,13 +54,13 @@
     min-width: 600px;
     }
 
-    .column {
-    flex: 2;
-    }
-
-    .column:last-of-type {
+.column {
     flex: 1;
     }
+    /* 
+    .column:last-of-type {
+    flex: 1;
+    } */
     .column-header {
     font-weight: 600;
     font-size: 1.3em;
@@ -368,7 +368,7 @@ let draggedItem = null;
 let keyboardGrabbedItem = null;
 
 // Correct answer order
-const correctOrder = ['item1', 'item2', 'item3', 'item4'];
+const correctOrder = ['item1', 'item2', 'item3', 'item4', 'item5'];
 
 function initDragAndDrop() {
     const items = document.querySelectorAll('.draggable-item');
