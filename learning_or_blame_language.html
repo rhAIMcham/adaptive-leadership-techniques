@@ -258,6 +258,16 @@
             <div class="dragItems">
                 <div class="column-header">Draggable Items</div>
                     <div class="cards-container" data-column="dragItems" id="cardHome">
+                        <div class="card" id="colb3" draggable="true">
+                            <p>
+                              “That was careless - why would you do that?”
+                            </p>
+                        </div>
+                        <div class="card" id="colb4" draggable="true">
+                            <p>
+                             “Marketing never gives us what we need.”
+                            </p>
+                        </div>
                         <div class="card"  id="cola1" draggable="true">
                             <p>
                                 “We missed the deadline—what changed, and where did the process break down?”
@@ -268,11 +278,7 @@
                                “What conditions made this defect likely, and how do we prevent it next time?”
                             </p>
                         </div>
-                        <div class="card"  id="cola3" draggable="true">
-                            <p>
-                               “Walk me through what happened. What was the pressure or constraint in that moment?”
-                            </p>
-                        </div>
+
                         <div class="card"  id="cola4" draggable="true">
                             <p>
                              “Our handoff isn’t working - what information was missing, and what should ‘ready’ look like?”
@@ -288,14 +294,9 @@
                                “Who messed this up?”
                             </p>
                         </div>
-                        <div class="card" id="colb3" draggable="true">
+                        <div class="card"  id="cola3" draggable="true">
                             <p>
-                              “That was careless - why would you do that?”
-                            </p>
-                        </div>
-                        <div class="card" id="colb4" draggable="true">
-                            <p>
-                             “Marketing never gives us what we need.”
+                               “Walk me through what happened. What was the pressure or constraint in that moment?”
                             </p>
                         </div>
                     </div>
@@ -452,7 +453,7 @@ function checkAnswers() {
     });
 
     // Display results
-    if (allCorrect && colaCards.length === 3 && colbCards.length === 3) {
+    if (allCorrect && colaCards.length === 4 && colbCards.length === 4) {
         showModal('Correct!', 'All cards are in the correct columns!');
     } else {
             let message = `<p>Not quite.</p>`;
