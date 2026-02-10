@@ -258,6 +258,11 @@
             <div class="dragItems">
                 <div class="column-header">Draggable Items</div>
                     <div class="cards-container" data-column="dragItems" id="cardHome">
+                        <div class="card" id="colb1" draggable="true">
+                            <p>
+                                In a planning meeting, feedback is taken as criticism and the discussion quickly turns into blame, defensiveness and people talking over each other.
+                            </p>
+                        </div>
                         <div class="card"  id="cola1" draggable="true">
                             <p>
                                 In a leadership meeting, two directors strongly disagree on priorities, but they stay respectful, surface the trade-offs and commit to a decision together.
@@ -268,14 +273,9 @@
                                 During a project debrief, a team member challenges a flawed assumption and the group leans into the discomfort to adjust the plan rather than defend it.
                             </p>
                         </div>
-                        <div class="card" id="colb1" draggable="true">
-                            <p>
-In a planning meeting, feedback is taken as criticism and the discussion quickly turns into blame, defensiveness and people talking over each other.
-                            </p>
-                        </div>
                         <div class="card"  id="colb2" draggable="true">
                             <p>
-                                Column B 2
+                                When a major deadline slips, the team goes silent, avoids raising risks and quietly reverts to old habits to protect themselves from being singled out.
                             </p>
                         </div>
                     </div>
@@ -394,15 +394,15 @@ function checkIfAllDragged() {
 function checkAnswers() {
     // Define correct answers
     const correctAnswers = {
-    cola: ['cola1', 'cola2', 'cola3'],
-    colb: ['colb1', 'colb2', 'colb3']
+    cola: ['cola1', 'cola2'],
+    colb: ['colb1', 'colb2']
     
     };
 
     let allCorrect = true;
     let results = {
-    cola: { correct: 0, total: 3 },
-    colb: { correct: 0, total: 3 }
+    cola: { correct: 0, total: 2 },
+    colb: { correct: 0, total: 2 }
     };
 
     // Check A group column
