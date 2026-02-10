@@ -324,7 +324,6 @@
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <button class="button button-secondary" onclick="loadExample()">Load Example</button>
                 <button class="button button-secondary" onclick="clearAll()">Clear All</button>
-                <button class="button button-secondary" onclick="saveToStorage()">Save Progress</button>
             </div>
             <div>
                 <button class="button button-primary" onclick="exportToPDF()">Export to PDF</button>
@@ -333,7 +332,7 @@
 
         <div class="content">
             <div class="instructions">
-                <strong>How to use:</strong> Click any field to edit. Add a daily practice/baseline routine above, then fill in your 30-day plan below. Your work auto-saves to your browser. Click "Export to PDF" when finished!
+                <strong>How to use:</strong> Click any field to edit. Add a daily practice/baseline routine, then fill in your 30-day plan below. View our example plan and then clear it to enter your own. Click "Export to PDF" when finished!
             </div>
 
             <!-- Daily Baseline -->
@@ -569,11 +568,6 @@ In the moment (whenever pressure spikes):
                     console.error('Error loading saved data:', e);
                 }
             }
-        }
-
-        // Save data to localStorage
-        function saveToStorage() {
-            localStorage.setItem('calendarData', JSON.stringify(calendarData));
         }
 
         // Render calendar from array
