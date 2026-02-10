@@ -7,6 +7,7 @@
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
     :root {
     --AIMblue: #4353A3;
@@ -398,6 +399,97 @@
             background: #f7fafc;
             border-radius: 6px;
         }
+
+        /* Success Modal Styles */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .success-modal.active {
+            display: flex;
+        }
+
+        .success-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--darkBlue);
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .success-btn {
+            background: var(--teal);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .success-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(93, 200, 185, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -494,8 +586,24 @@
             </div>
             <div class="modal-footer">
                 <button class="modal-btn modal-btn-secondary" onclick="closePreview()">Edit Questions</button>
-                <button class="modal-btn modal-btn-primary" onclick="downloadSurvey()">Download Survey</button>
+                <button class="modal-btn modal-btn-primary" onclick="downloadSurvey()">Download PDF</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">
+                <svg viewBox="0 0 52 52">
+                    <polyline points="14 27 22 35 38 19"/>
+                </svg>
+            </div>
+            <h3 class="success-title">Download Successful!</h3>
+            <p class="success-message">
+                Your survey has been exported as a PDF. You can now distribute this to employees.
+            </p>
+            <button class="success-btn" onclick="closeSuccessModal()">Close</button>
         </div>
     </div>
 
@@ -507,22 +615,26 @@
         // Track which sections have content
         let filledSections = new Set();
 
-        // Add input listeners to all textareas
+        // Add focus listeners to show examples when clicking/focusing
         textareas.forEach(textarea => {
-            textarea.addEventListener('input', function() {
+            textarea.addEventListener('focus', function() {
                 const sectionNum = this.dataset.section;
                 const examplesDiv = document.getElementById(`examples${sectionNum}`);
+                examplesDiv.classList.add('visible');
+            });
+
+            // Add input listener for character count and progress tracking
+            textarea.addEventListener('input', function() {
+                const sectionNum = this.dataset.section;
                 const charCount = document.getElementById(`count${sectionNum}`);
                 
                 // Update character count
                 charCount.textContent = `${this.value.length} characters`;
                 
-                // Show examples if user has typed something
+                // Track filled sections for progress bar
                 if (this.value.trim().length > 0) {
-                    examplesDiv.classList.add('visible');
                     filledSections.add(sectionNum);
                 } else {
-                    examplesDiv.classList.remove('visible');
                     filledSections.delete(sectionNum);
                 }
 
@@ -644,54 +756,121 @@
                 section3: document.getElementById('section3').value
             };
 
-            // Create a formatted text version
-            let surveyText = 'ADAPTIVE LEADERSHIP SURVEY\n';
-            surveyText += '='.repeat(50) + '\n\n';
-            surveyText += 'PURPOSE:\n';
-            surveyText += 'This survey aims to understand discrepancies between job descriptions, KPIs and actual work, not to evaluate individual performance. Your responses are entirely anonymous and we encourage you to be as candid as possible in your responses.\n\n';
-            surveyText += '='.repeat(50) + '\n\n';
+            // Use jsPDF to create PDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            let yPosition = 20;
+            const leftMargin = 20;
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const maxWidth = pageWidth - 40;
 
-            const sections = [
-                { title: 'SECTION 1: Your tasks and responsibilities', content: responses.section1 },
-                { title: 'SECTION 2: Prioritising tasks', content: responses.section2 },
-                { title: 'SECTION 3: Work that is outside your job description', content: responses.section3 }
-            ];
+            // Title
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text('ADAPTIVE LEADERSHIP SURVEY', leftMargin, yPosition);
+            yPosition += 15;
 
-            sections.forEach((section, index) => {
-                surveyText += `${section.title}\n`;
-                surveyText += '-'.repeat(50) + '\n';
-                
-                if (section.content.trim()) {
-                    const questions = section.content.split('\n').filter(q => q.trim());
-                    questions.forEach((q, i) => {
-                        surveyText += `\nQ${i + 1}. ${q.trim()}\n`;
-                        surveyText += 'Answer: \n\n\n';
+            // Purpose section
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'bold');
+            doc.text('PURPOSE:', leftMargin, yPosition);
+            yPosition += 7;
+            
+            doc.setFont(undefined, 'normal');
+            const purposeText = 'This survey aims to understand discrepancies between job descriptions, KPIs and actual work, not to evaluate individual performance. Your responses are entirely anonymous and we encourage you to be as candid as possible in your responses.';
+            const purposeLines = doc.splitTextToSize(purposeText, maxWidth);
+            doc.text(purposeLines, leftMargin, yPosition);
+            yPosition += (purposeLines.length * 5) + 10;
+
+            // Function to add section
+            function addSection(sectionNum, title, content) {
+                // Check if we need a new page
+                if (yPosition > 250) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+
+                // Section title
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text(`SECTION ${sectionNum}: ${title}`, leftMargin, yPosition);
+                yPosition += 10;
+
+                if (content.trim()) {
+                    const questions = content.split('\n').filter(q => q.trim());
+                    
+                    questions.forEach((question, index) => {
+                        // Check if we need a new page
+                        if (yPosition > 240) {
+                            doc.addPage();
+                            yPosition = 20;
+                        }
+
+                        // Question
+                        doc.setFontSize(11);
+                        doc.setFont(undefined, 'bold');
+                        doc.text(`Q${index + 1}.`, leftMargin, yPosition);
+                        
+                        doc.setFont(undefined, 'normal');
+                        const questionLines = doc.splitTextToSize(question.trim(), maxWidth - 10);
+                        doc.text(questionLines, leftMargin + 10, yPosition);
+                        yPosition += (questionLines.length * 5) + 5;
+
+                        // Answer space
+                        doc.setFontSize(10);
+                        doc.setTextColor(150);
+                        doc.text('Answer:', leftMargin + 5, yPosition);
+                        yPosition += 20;
+                        doc.setTextColor(0);
                     });
                 } else {
-                    surveyText += '\n[No questions added]\n';
+                    doc.setFontSize(10);
+                    doc.setFont(undefined, 'italic');
+                    doc.setTextColor(150);
+                    doc.text('[No questions added]', leftMargin + 5, yPosition);
+                    doc.setTextColor(0);
+                    yPosition += 10;
                 }
-                
-                surveyText += '\n' + '='.repeat(50) + '\n\n';
-            });
 
-            // Create download
-            const blob = new Blob([surveyText], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'adaptive-leadership-survey.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+                yPosition += 10;
+            }
 
-            alert('Survey downloaded! You can now distribute this to employees.');
+            // Add all sections
+            addSection(1, 'Your tasks and responsibilities', responses.section1);
+            addSection(2, 'Prioritising tasks', responses.section2);
+            addSection(3, 'Work that is outside your job description', responses.section3);
+
+            // Save the PDF
+            doc.save('adaptive-leadership-survey.pdf');
+
+            // Close preview modal and show success modal
+            closePreview();
+            showSuccessModal();
         }
 
-        // Close modal when clicking outside
+        function showSuccessModal() {
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').classList.remove('active');
+        }
+
+        // Close modals when clicking outside
         document.getElementById('previewModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closePreview();
+            }
+        });
+
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
             }
         });
 
