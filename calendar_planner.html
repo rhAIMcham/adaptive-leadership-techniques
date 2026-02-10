@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<title>30-Day Calendar Builder</title>
+<style>
+    :root {
+        --AIMblue: #4353A3;
+        --darkBlue: #38416D;
+        --teal: #5DC8B9;
+        --cream: #F1EEDE;
+        --grey: #e7e9ec;
+        --rust: #AF4510;
+        --navy: #12195C;
+        --white: #ffffff;
+        --lightBlue: #AEBAE4;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "IBM Plex Sans", sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: var(--grey);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: var(--white);
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .header {
+        background-color: var(--AIMblue);
+        color: var(--white);
+        padding: 30px;
+        text-align: center;
+    }
+
+    .header-editable {
+        background: transparent;
+        border: none;
+        color: var(--white);
+        font-size: 32px;
+        font-weight: 700;
+        font-family: "IBM Plex Sans", sans-serif;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .header-editable::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .subtitle-editable {
+        background: transparent;
+        border: none;
+        color: var(--white);
+        font-size: 16px;
+        font-family: "IBM Plex Sans", sans-serif;
+        text-align: center;
+        width: 100%;
+        opacity: 0.95;
+    }
+
+    .subtitle-editable::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .actions {
+        padding: 20px 30px;
+        background-color: var(--cream);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: "IBM Plex Sans", sans-serif;
+        transition: all 0.3s ease;
+    }
+
+    .button-primary {
+        background-color: var(--teal);
+        color: var(--white);
+    }
+
+    .button-primary:hover {
+        background-color: #4db5a5;
+    }
+
+    .button-secondary {
+        background-color: var(--white);
+        color: var(--AIMblue);
+        border: 2px solid var(--AIMblue);
+    }
+
+    .button-secondary:hover {
+        background-color: var(--lightBlue);
+    }
+
+    .content {
+        padding: 30px;
+    }
+
+    .baseline-section {
+        background-color: var(--cream);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .baseline-title {
+        color: var(--AIMblue);
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .baseline-textarea {
+        width: 100%;
+        min-height: 150px;
+        padding: 12px;
+        border: 2px solid var(--grey);
+        border-radius: 6px;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        resize: vertical;
+    }
+
+    .baseline-textarea:focus {
+        outline: none;
+        border-color: var(--teal);
+    }
+
+    .week-label {
+        background-color: var(--darkBlue);
+        color: var(--white);
+        padding: 8px 15px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .day-cell {
+        background-color: var(--grey);
+        border-radius: 8px;
+        padding: 15px;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: all 0.2s ease;
+    }
+
+    .day-cell:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .day-number {
+        color: var(--AIMblue);
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .day-input {
+        width: 100%;
+        flex-grow: 1;
+        border: none;
+        background: transparent;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 13px;
+        line-height: 1.4;
+        resize: none;
+        padding: 0;
+    }
+
+    .day-input:focus {
+        outline: none;
+    }
+
+    .day-input::placeholder {
+        color: #999;
+        font-style: italic;
+    }
+
+    @media print {
+        body {
+            background-color: white;
+            padding: 0;
+        }
+        
+        .container {
+            box-shadow: none;
+        }
+        
+        .actions {
+            display: none;
+        }
+
+        .day-cell {
+            break-inside: avoid;
+        }
+
+        .calendar-grid {
+            page-break-inside: avoid;
+        }
+    }
+
+    @media screen and (max-width: 1024px) {
+        .calendar-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .calendar-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .day-cell {
+            min-height: 150px;
+            padding: 12px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        body {
+            padding: 10px;
+        }
+
+        .calendar-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .header {
+            padding: 20px 15px;
+        }
+
+        .header-editable {
+            font-size: 24px;
+        }
+
+        .actions {
+            padding: 15px;
+        }
+
+        .button {
+            font-size: 14px;
+            padding: 10px 18px;
+        }
+    }
+
+    .instructions {
+        background-color: var(--lightBlue);
+        color: var(--darkBlue);
+        padding: 15px 20px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .instructions strong {
+        color: var(--navy);
+    }
+</style>
+</head>
+<body>
+    <div class="container" id="calendar">
+        <div class="header">
+            <input 
+                type="text" 
+                class="header-editable" 
+                id="calendarTitle"
+                placeholder="30-Day Challenge"
+                value="30-Day Challenge"
+            >
+            <input 
+                type="text" 
+                class="subtitle-editable" 
+                id="calendarSubtitle"
+                placeholder="Add your subtitle here..."
+                value=""
+            >
+        </div>
+
+        <div class="actions">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="button button-secondary" onclick="loadExample()">Load Example</button>
+                <button class="button button-secondary" onclick="clearAll()">Clear All</button>
+                <button class="button button-secondary" onclick="saveToStorage()">Save Progress</button>
+            </div>
+            <div>
+                <button class="button button-primary" onclick="exportToPDF()">Export to PDF</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="instructions">
+                <strong>How to use:</strong> Click any field to edit. Add a daily practice/baseline routine above, then fill in your 30-day plan below. Your work auto-saves to your browser. Click "Export to PDF" when finished!
+            </div>
+
+            <!-- Daily Baseline -->
+            <div class="baseline-section">
+                <div class="baseline-title">Daily Baseline (Optional - what to do every day)</div>
+                <textarea 
+                    class="baseline-textarea" 
+                    id="baselineContent"
+                    placeholder="Example:&#10;&#10;Morning (5 min):&#10;• Body check (stress 1-10)&#10;• Top 1 outcome for the day&#10;&#10;Evening (10 min):&#10;• What did I learn?&#10;• What will I do tomorrow?"
+                ></textarea>
+            </div>
+
+            <!-- Week 1 -->
+            <div class="week-label">Week 1 (Days 1-7)</div>
+            <div class="calendar-grid">
+                <div class="day-cell">
+                    <div class="day-number">Day 1</div>
+                    <textarea class="day-input" id="day1" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 2</div>
+                    <textarea class="day-input" id="day2" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 3</div>
+                    <textarea class="day-input" id="day3" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 4</div>
+                    <textarea class="day-input" id="day4" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 5</div>
+                    <textarea class="day-input" id="day5" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 6</div>
+                    <textarea class="day-input" id="day6" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 7</div>
+                    <textarea class="day-input" id="day7" placeholder="Enter your task or goal..."></textarea>
+                </div>
+            </div>
+
+            <!-- Week 2 -->
+            <div class="week-label">Week 2 (Days 8-14)</div>
+            <div class="calendar-grid">
+                <div class="day-cell">
+                    <div class="day-number">Day 8</div>
+                    <textarea class="day-input" id="day8" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 9</div>
+                    <textarea class="day-input" id="day9" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 10</div>
+                    <textarea class="day-input" id="day10" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 11</div>
+                    <textarea class="day-input" id="day11" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 12</div>
+                    <textarea class="day-input" id="day12" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 13</div>
+                    <textarea class="day-input" id="day13" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 14</div>
+                    <textarea class="day-input" id="day14" placeholder="Enter your task or goal..."></textarea>
+                </div>
+            </div>
+
+            <!-- Week 3 -->
+            <div class="week-label">Week 3 (Days 15-21)</div>
+            <div class="calendar-grid">
+                <div class="day-cell">
+                    <div class="day-number">Day 15</div>
+                    <textarea class="day-input" id="day15" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 16</div>
+                    <textarea class="day-input" id="day16" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 17</div>
+                    <textarea class="day-input" id="day17" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 18</div>
+                    <textarea class="day-input" id="day18" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 19</div>
+                    <textarea class="day-input" id="day19" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 20</div>
+                    <textarea class="day-input" id="day20" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 21</div>
+                    <textarea class="day-input" id="day21" placeholder="Enter your task or goal..."></textarea>
+                </div>
+            </div>
+
+            <!-- Week 4 -->
+            <div class="week-label">Week 4 (Days 22-30)</div>
+            <div class="calendar-grid">
+                <div class="day-cell">
+                    <div class="day-number">Day 22</div>
+                    <textarea class="day-input" id="day22" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 23</div>
+                    <textarea class="day-input" id="day23" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 24</div>
+                    <textarea class="day-input" id="day24" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 25</div>
+                    <textarea class="day-input" id="day25" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 26</div>
+                    <textarea class="day-input" id="day26" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 27</div>
+                    <textarea class="day-input" id="day27" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 28</div>
+                    <textarea class="day-input" id="day28" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 29</div>
+                    <textarea class="day-input" id="day29" placeholder="Enter your task or goal..."></textarea>
+                </div>
+                <div class="day-cell">
+                    <div class="day-number">Day 30</div>
+                    <textarea class="day-input" id="day30" placeholder="Enter your task or goal..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        // Example template (uneditable const array)
+        const EXAMPLE_TEMPLATE = {
+            title: '30-Day Adaptive Leadership Calendar',
+            subtitle: 'Build resilience and adaptability through daily practice',
+            baseline: `AM (5 min):
+1. Body check (stress 1–10)
+2. Top 1 outcome for the day
+3. One risk to watch (what could derail me?)
+
+Midday (2 min):
+• Reset: 6 slow breaths (long exhale) + ask "What matters most for the next hour?"
+
+PM (10 min):
+• Debrief:
+  - What happened (facts)?
+  - What did I learn?
+  - What will I do tomorrow?
+
+In the moment (whenever pressure spikes):
+• Say: "Name it → Frame it → Next step."`,
+            days: [
+                'Choose your "keystone habit" for the month: AM focus or PM debrief (commit to never miss it).',
+                'Write your 3 personal stress signals (e.g. rushing, irritability, doom-scrolling) + your 3 resets.',
+                'Build a 2-minute decision filter: "Facts → Priority → Next smallest step." Use it once today.',
+                'Add one boundary that protects energy (e.g. no meetings before 9:30; lunch away from screen).',
+                'Practice calm communication: send one message using "Situation → Impact → Next action → Ask."',
+                'Do a mini after-action review on something small (meeting, email thread). Capture 1 tweak.',
+                'Weekly review (15 min): What increased steadiness? What triggered stress? One change for Week 2.',
+                'Start an assumption log: list 3 assumptions you\'re operating under this week.',
+                'Run a pre-mortem (10 min) on your most important task: "If this fails, why?" Pick 1 prevention move.',
+                'Practice "3 hypotheses" on a problem (at least 3 plausible causes). Don\'t solve - just widen options.',
+                'Choose one recurring decision and standardise it (checklist/template/default).',
+                'Practice a reframe: write the problem as a challenge statement: "How might we…?"',
+                'Do one disconfirming check: ask someone, "What am I missing?" (and don\'t defend).',
+                'Weekly review: Which tools reduced drama/overwhelm? Update your decision filter or checklist.',
+                'Pick 1 area to improve (focus, delegation, meeting quality, stakeholder alignment). Define a simple metric.',
+                'Design a 7-day micro-experiment: Hypothesis: "If I do X, then Y will improve." Effort: <15 min/day.',
+                'Run experiment Day 1 + log result (1 minute).',
+                'Run experiment Day 2 + one adjustment.',
+                'Run experiment Day 3 + ask for one piece of feedback.',
+                'Run experiment Day 4 + document what surprised you.',
+                'Weekly review: keep / tweak / stop. Write one "rule of thumb" you earned.',
+                'Clarify decision rights for one area: Decider / Advisors / Doers (write it down, share it).',
+                'Run a 15-min alignment huddle: "Top priority, risks, owners, next check-in."',
+                'Practice delegating outcomes: "Goal, constraints, definition of done, check-in time."',
+                'Create a "first 10 minutes" mini-playbook for tough moments (who, what, comms).',
+                'Increase psychological safety with one move: "What\'s the hardest part?" + "What would make this easier?"',
+                'Do a stop-start-continue (10 min) with one colleague or your team. Capture 1 change.',
+                'Protect team energy: remove/shorten one meeting or drop one low-value deliverable.',
+                'Run a tabletop drill (20 min): scenario → first actions → comms → debrief → update playbook.',
+                'Month review (20 min): 3 habits that worked, 1 habit to drop, 1 "operating system" you\'ll keep weekly.'
+            ]
+        };
+
+        // Working array for user's calendar data
+        let calendarData = {
+            title: '30-Day Challenge',
+            subtitle: '',
+            baseline: '',
+            days: Array(30).fill('')
+        };
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadFromStorage();
+            renderCalendar();
+            setupAutoSave();
+        });
+
+        // Load data from localStorage
+        function loadFromStorage() {
+            const saved = localStorage.getItem('calendarData');
+            if (saved) {
+                try {
+                    calendarData = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Error loading saved data:', e);
+                }
+            }
+        }
+
+        // Save data to localStorage
+        function saveToStorage() {
+            localStorage.setItem('calendarData', JSON.stringify(calendarData));
+        }
+
+        // Render calendar from array
+        function renderCalendar() {
+            document.getElementById('calendarTitle').value = calendarData.title;
+            document.getElementById('calendarSubtitle').value = calendarData.subtitle;
+            document.getElementById('baselineContent').value = calendarData.baseline;
+            
+            for (let i = 0; i < 30; i++) {
+                document.getElementById(`day${i + 1}`).value = calendarData.days[i];
+            }
+        }
+
+        // Setup auto-save listeners
+        function setupAutoSave() {
+            document.getElementById('calendarTitle').addEventListener('input', function(e) {
+                calendarData.title = e.target.value;
+                saveToStorage();
+            });
+
+            document.getElementById('calendarSubtitle').addEventListener('input', function(e) {
+                calendarData.subtitle = e.target.value;
+                saveToStorage();
+            });
+
+            document.getElementById('baselineContent').addEventListener('input', function(e) {
+                calendarData.baseline = e.target.value;
+                saveToStorage();
+            });
+
+            for (let i = 0; i < 30; i++) {
+                document.getElementById(`day${i + 1}`).addEventListener('input', function(e) {
+                    calendarData.days[i] = e.target.value;
+                    saveToStorage();
+                });
+            }
+        }
+
+        // Load example template
+        function loadExample() {
+            if (!confirm('This will replace your current content with an example. Continue?')) {
+                return;
+            }
+
+            // Copy example template to working array
+            calendarData = {
+                title: EXAMPLE_TEMPLATE.title,
+                subtitle: EXAMPLE_TEMPLATE.subtitle,
+                baseline: EXAMPLE_TEMPLATE.baseline,
+                days: [...EXAMPLE_TEMPLATE.days] // Create new array from example
+            };
+
+            renderCalendar();
+            saveToStorage();
+        }
+
+        // Clear all content
+        function clearAll() {
+            if (!confirm('Are you sure you want to clear all content? This cannot be undone.')) {
+                return;
+            }
+
+            // Reset array to empty
+            calendarData = {
+                title: '30-Day Challenge',
+                subtitle: '',
+                baseline: '',
+                days: Array(30).fill('')
+            };
+
+            renderCalendar();
+            saveToStorage();
+        }
+
+        // Export to PDF
+        function exportToPDF() {
+            const element = document.getElementById('calendar');
+            const opt = {
+                margin: 0.5,
+                filename: '30-day-calendar.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            // Temporarily hide the action buttons and instructions
+            const actions = document.querySelector('.actions');
+            const instructions = document.querySelector('.instructions');
+            const originalActionsDisplay = actions.style.display;
+            const originalInstructionsDisplay = instructions.style.display;
+            actions.style.display = 'none';
+            instructions.style.display = 'none';
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                actions.style.display = originalActionsDisplay;
+                instructions.style.display = originalInstructionsDisplay;
+            });
+        }
+    </script>
+</body>
+</html>
