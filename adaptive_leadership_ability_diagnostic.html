@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta lang="en">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<title>Adaptive Leadership Quiz</title>
+<style>
+    .checkContainer {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+    }
+    
+    :root {
+        --AIMblue: #4353A3;
+        --darkBlue: #38416D;
+        --teal: #5DC8B9;
+        --cream: #F1EEDE;
+        --grey: #e7e9ec;
+        --rust: #AF4510;
+        --navy: #12195C;
+        --white: #ffffff;
+        --lightBlue: #AEBAE4;
+    }
+
+    body {
+        font-family: "IBM Plex Sans", sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .quiz-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #F1EEDE30;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .slide-container {
+        padding: 30px;
+        padding-top: 15px;
+    }
+
+    .slide {
+        display: none;
+        width: 100%;
+    }
+
+    .slide.active {
+        display: block;
+    }
+
+    .slide h3 {
+        color: var(--AIMblue);
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .checkContainer {
+        display: flex;
+        align-items: flex-start;
+        margin: 20px 0;
+        padding: 15px;
+        background-color: var(--grey);
+        border-radius: 8px;
+    }
+
+    .instructions {
+        display: flex;
+        padding-left: 30px;
+        background-color: var(--cream);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border-left: 4px solid var(--AIMblue);
+    }
+
+    .instructions p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--darkBlue);
+    }
+
+    .checkContainer p {
+        margin: 0;
+        margin-right: 15px;
+        flex-grow: 1;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    input[type="radio"] {
+        margin: 0;
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 30px;
+        background-color: var(--grey);
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .nav-button {
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--AIMblue);
+        background-color: var(--white);
+        color: var(--AIMblue);
+        border-radius: 50%;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+        background-color: var(--lightBlue);
+    }
+
+    .nav-button.active {
+        background-color: var(--AIMblue);
+        color: var(--white);
+    }
+
+    .arrow-button {
+        padding: 10px 20px;
+        background-color: #5DC8B990;
+        color: black;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .arrow-button:hover:not(:disabled) {
+        background-color: var(--darkBlue);
+        color: white;
+    }
+
+    .arrow-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .submit-button {
+        padding: 15px 30px;
+        background-color: var(--teal);
+        color: var(--white);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px auto;
+        display: none;
+    }
+
+    .submit-button:hover {
+        background-color: #4db5a5;
+    }
+
+    .submit-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    #results {
+        max-width: 800px;
+        margin: 15px auto;
+        background-color: var(--cream);
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: none;
+        padding: 30px;
+    }
+
+    #results h2 {
+        color: var(--AIMblue);
+        margin-top: 0;
+    }
+
+    #results h3 {
+        color: var(--darkBlue);
+        margin-top: 25px;
+    }
+
+    #results ul {
+        line-height: 1.8;
+        color: var(--darkBlue);
+    }
+
+    #results p {
+        line-height: 1.8;
+        color: var(--darkBlue);
+    }
+
+    #results .score-display {
+        background-color: var(--teal);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        height: 6px;
+        background-color: var(--grey);
+        margin: 0 30px 20px;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background-color: var(--teal);
+        transition: width 0.3s ease;
+        width: 10%;
+    }
+
+    @media screen and (max-width: 600px) {
+        .quiz-container {
+            margin: 0;
+        }
+
+        .slide-container,
+        .navigation,
+        .instructions {
+            padding: 15px;
+        }
+
+        .nav-buttons {
+            gap: 5px;
+        }
+
+        .nav-button {
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .arrow-button {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="instructions">
+        <p><strong>Instructions:</strong> Select the answer that most closely aligns with how you would respond in each situation as a leader.</p>
+    </div>
+
+    <div class="quiz-container">
+        <nav class="navigation" aria-label="Quiz navigation">
+            <div class="nav-buttons" role="tablist">
+                <button class="nav-button active" onclick="goToSlide(1)" role="tab" aria-selected="true" aria-controls="slide-1" id="tab-1" aria-label="Question 1">1</button>
+                <button class="nav-button" onclick="goToSlide(2)" role="tab" aria-selected="false" aria-controls="slide-2" id="tab-2" aria-label="Question 2">2</button>
+                <button class="nav-button" onclick="goToSlide(3)" role="tab" aria-selected="false" aria-controls="slide-3" id="tab-3" aria-label="Question 3">3</button>
+                <button class="nav-button" onclick="goToSlide(4)" role="tab" aria-selected="false" aria-controls="slide-4" id="tab-4" aria-label="Question 4">4</button>
+                <button class="nav-button" onclick="goToSlide(5)" role="tab" aria-selected="false" aria-controls="slide-5" id="tab-5" aria-label="Question 5">5</button>
+                <button class="nav-button" onclick="goToSlide(6)" role="tab" aria-selected="false" aria-controls="slide-6" id="tab-6" aria-label="Question 6">6</button>
+                <button class="nav-button" onclick="goToSlide(7)" role="tab" aria-selected="false" aria-controls="slide-7" id="tab-7" aria-label="Question 7">7</button>
+                <button class="nav-button" onclick="goToSlide(8)" role="tab" aria-selected="false" aria-controls="slide-8" id="tab-8" aria-label="Question 8">8</button>
+                <button class="nav-button" onclick="goToSlide(9)" role="tab" aria-selected="false" aria-controls="slide-9" id="tab-9" aria-label="Question 9">9</button>
+                <button class="nav-button" onclick="goToSlide(10)" role="tab" aria-selected="false" aria-controls="slide-10" id="tab-10" aria-label="Question 10">10</button>
+            </div>
+        </nav>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" role="progressbar"></div>
+        </div>
+        <form name="q1" onsubmit="return false" onchange="updateSubmitButton()">
+            <div class="slide-container" id="slideContainer" role="region" aria-live="polite">
+                <!-- Slide 1 -->
+                <fieldset class="slide active" id="slide-1" role="tabpanel" aria-labelledby="tab-1">
+                    <legend>
+                        <h3>You're in a meeting and a senior leader publicly criticises your approach. Your chest tightens and you feel defensive. You…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q1-a">Push back immediately to correct the record.</label>
+                        </p>
+                        <input type="radio" id="q1-a" name="question1" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q1-b">Go quiet and withdraw for the rest of the meeting.</label>
+                        </p>
+                        <input type="radio" id="q1-b" name="question1" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q1-c">Notice the trigger, slow your breathing and ask a clarifying question before responding.</label>
+                        </p>
+                        <input type="radio" id="q1-c" name="question1" value="c" autocomplete="off">
+                    </div>
+            
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q1-d">End the meeting when appropriate and follow up later by email.</label>
+                        </p>
+                        <input type="radio" id="q1-d" name="question1" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 2 -->
+                <fieldset class="slide" id="slide-2" role="tabpanel" aria-labelledby="tab-2">
+                    <legend>
+                        <h3>Two stakeholders demand opposite outcomes and both insist you "choose now." You…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q2-a">Decide quickly to stop the conflict.</label>
+                        </p>
+                        <input type="radio" id="q2-a" name="question2" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q2-b">Explain why both are wrong and restate the strategy.</label>
+                        </p>
+                        <input type="radio" id="q2-b" name="question2" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q2-c">Name the tension, set a short decision window and propose a small test that reduces risk while learning.</label>
+                        </p>
+                        <input type="radio" id="q2-c" name="question2" value="c" autocomplete="off">
+                    </div>
+
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q2-d">Escalate it upward so you're not blamed.</label>
+                        </p>
+                        <input type="radio" id="q2-d" name="question2" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 3 -->
+                <fieldset class="slide" id="slide-3" role="tabpanel" aria-labelledby="tab-3">
+                    <legend>
+                        <h3>You've been in back-to-back calls all day and your patience is thin. A team member makes a small mistake. You…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q3-a">Correct them sharply so they don't repeat it.</label>
+                        </p>
+                        <input type="radio" id="q3-a" name="question3" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q3-b">Ignore it - addressing it will take too much energy.</label>
+                        </p>
+                        <input type="radio" id="q3-b" name="question3" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q3-c">Use a quick reset (pause/water/breath), then respond with calm clarity and a next step.</label>
+                        </p>
+                        <input type="radio" id="q3-c" name="question3" value="c" autocomplete="off">
+                    </div>
+
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q3-d">Vent to a colleague afterward to release frustration.</label>
+                        </p>
+                        <input type="radio" id="q3-d" name="question3" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 4 -->
+                <fieldset class="slide" id="slide-4" role="tabpanel" aria-labelledby="tab-4">
+                    <legend>
+                        <h3>A project is slipping and you feel the urge is to micromanage. You…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q4-a">Take over key tasks to ensure quality.</label>
+                        </p>
+                        <input type="radio" id="q4-a" name="question4" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q4-b">Add more reporting and approvals to prevent surprises.</label>
+                        </p>
+                        <input type="radio" id="q4-b" name="question4" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q4-c">Identify what you need to feel confident (signals/metrics), then delegate with clear check-ins.</label>
+                        </p>
+                        <input type="radio" id="q4-c" name="question4" value="c" autocomplete="off">
+                    </div>
+
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q4-d">Assume the team can't handle it and replace the lead.</label>
+                        </p>
+                        <input type="radio" id="q4-d" name="question4" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 5 -->
+                <fieldset class="slide" id="slide-5" role="tabpanel" aria-labelledby="tab-5">
+                    <legend>
+                        <h3>You receive a blunt message: "This isn't working." You feel a shame/competence trigger. You…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q5-a">Work late to prove you can fix it alone.</label>
+                        </p>
+                        <input type="radio" id="q5-a" name="question5" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q5-b">Defend what you've done and explain constraints.</label>
+                        </p>
+                        <input type="radio" id="q5-b" name="question5" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q5-c">Acknowledge the impact, ask what "not working" looks like in evidence, and propose a next-step experiment.</label>
+                        </p>
+                        <input type="radio" id="q5-c" name="question5" value="c" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q5-d">Avoid the person until you have a perfect solution.</label>
+                        </p>
+                        <input type="radio" id="q5-d" name="question5" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 6 -->
+                <fieldset class="slide" id="slide-6" role="tabpanel" aria-labelledby="tab-6">
+                    <legend>
+                        <h3>A conflict between two team members escalates; it's emotionally charged and you feel yourself getting reactive. You…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q6-a">Choose a side based on who's more rational.</label>
+                        </p>
+                        <input type="radio" id="q6-a" name="question6" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q6-b">Shut it down and tell them to "sort it out."</label>
+                        </p>
+                        <input type="radio" id="q6-b" name="question6" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q6-c">Regulate first, then facilitate: reflect what you're hearing, slow the pace, and agree on norms and next actions.</label>
+                        </p>
+                        <input type="radio" id="q6-c" name="question6" value="c" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q6-d">Cancel the discussion to keep things productive.</label>
+                        </p>
+                        <input type="radio" id="q6-d" name="question6" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 7 -->
+                <fieldset class="slide" id="slide-7" role="tabpanel" aria-labelledby="tab-7">
+                    <legend>
+                        <h3>You're under intense time pressure and notice you're rushing decisions. The most adaptive response is…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q7-a">Continue to move at speed - speed is the priority.</label>
+                        </p>
+                        <input type="radio" id="q7-a" name="question7" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q7-b">Ask for more data until you feel certain.</label>
+                        </p>
+                        <input type="radio" id="q7-b" name="question7" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q7-c">Separate reversible from irreversible decisions, then use a short reset before committing.</label>
+                        </p>
+                        <input type="radio" id="q7-c" name="question7" value="c" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q7-d">Avoid deciding and focus on execution tasks.</label>
+                        </p>
+                        <input type="radio" id="q7-d" name="question7" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 8 -->
+                <fieldset class="slide" id="slide-8" role="tabpanel" aria-labelledby="tab-8">
+                    <legend>
+                        <h3>After a tough day, you're ruminating and can't switch off. Your most sustainable coping strategy is…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q8-a">Scroll/social media until you fall asleep.</label>
+                        </p>
+                        <input type="radio" id="q8-a" name="question8" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q8-b">Rehash the day with multiple people to discharge stress.</label>
+                        </p>
+                        <input type="radio" id="q8-b" name="question8" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q8-c">Use a deliberate recovery routine (walk/exercise/journaling/breathing) and set a boundary for when you'll revisit the issue.</label>
+                        </p>
+                        <input type="radio" id="q8-c" name="question8" value="c" autocomplete="off">
+                    </div>
+
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q8-d">Have a drink to relax.</label>
+                        </p>
+                        <input type="radio" id="q8-d" name="question8" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 9 -->
+                <fieldset class="slide" id="slide-9" role="tabpanel" aria-labelledby="tab-9">
+                    <legend>
+                        <h3>You notice a pattern: certain people consistently trigger you (e.g., a dismissive peer). A sustainable approach is to…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q9-a">Avoid working with them whenever possible.</label>
+                        </p>
+                        <input type="radio" id="q9-a" name="question9" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q9-b">Confront them in the moment every time.</label>
+                        </p>
+                        <input type="radio" id="q9-b" name="question9" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q9-c">Map your trigger (story + sensation), plan a reset cue and choose a purposeful response aligned to your values.</label>
+                        </p>
+                        <input type="radio" id="q9-c" name="question9" value="c" autocomplete="off">
+                    </div>
+
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q9-d">Treat it as their problem and wait for them to change.</label>
+                        </p>
+                        <input type="radio" id="q9-d" name="question9" value="d" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 10 -->
+                <fieldset class="slide" id="slide-10" role="tabpanel" aria-labelledby="tab-10">
+                    <legend>
+                        <h3>Your team is anxious and looking to you for certainty, but you genuinely don't know the answer yet. You…</h3>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q10-a">Project confidence and give a firm answer anyway.</label>
+                        </p>
+                        <input type="radio" id="q10-a" name="question10" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q10-b">Say nothing until you have the full solution.</label>
+                        </p>
+                        <input type="radio" id="q10-b" name="question10" value="b" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q10-c">Be transparent about what's known/unknown, state the next step, and model calm through your own regulation.</label>
+                        </p>
+                        <input type="radio" id="q10-c" name="question10" value="c" autocomplete="off">
+                    </div>
+
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q10-d">Tell them to "just focus on their tasks."</label>
+                        </p>
+                        <input type="radio" id="q10-d" name="question10" value="d" autocomplete="off">
+                    </div>
+                    <button class="submit-button" id="submitButton" onclick="formOne()" aria-label="Submit quiz and view results">
+                        Submit & View Results
+                    </button>
+                </fieldset>
+            </div>
+        </form>
+
+        <nav class="navigation" aria-label="Quiz navigation">
+            <button class="arrow-button" id="prevBtn" onclick="previousSlide()" aria-label="Previous question">
+                ← Previous
+            </button>
+            
+            <button class="arrow-button" id="nextBtn" onclick="nextSlide()" aria-label="Next question">
+                Next →
+            </button>
+        </nav>
+    </div>
+
+    <!-- Results Display -->
+    <div id="results" role="region" aria-live="polite" aria-label="Quiz results"></div>
+
+<script>
+let currentSlide = 1;
+const totalSlides = 10;
+
+function goToSlide(slideNumber) {
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    document.getElementById(`slide-${slideNumber}`).classList.add('active');
+    
+    currentSlide = slideNumber;
+    updateButtons();
+    updateArrowButtons();
+    updateProgressBar();
+    updateSubmitButton();
+}
+
+function nextSlide() {
+    if (currentSlide < totalSlides) {
+        goToSlide(currentSlide + 1);
+    }
+}
+
+function previousSlide() {
+    if (currentSlide > 1) {
+        goToSlide(currentSlide - 1);
+    }
+}
+
+function updateButtons() {
+    const buttons = document.querySelectorAll('.nav-button');
+    buttons.forEach((btn, index) => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+        if (index === currentSlide - 1) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+        }
+    });
+}
+
+function updateArrowButtons() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    prevBtn.disabled = currentSlide === 1;
+    nextBtn.disabled = currentSlide === totalSlides;
+}
+
+function updateProgressBar() {
+    const progressFill = document.getElementById('progressFill');
+    const progress = (currentSlide / totalSlides) * 100;
+    progressFill.style.width = `${progress}%`;
+}
+
+function updateSubmitButton() {
+    const submitButton = document.getElementById('submitButton');
+    if (currentSlide === totalSlides) {
+        submitButton.style.display = 'block';
+        
+        // Check if all questions are answered
+        const form = document.forms['q1'];
+        let answeredCount = 0;
+        
+        for (let i = 1; i <= 10; i++) {
+            const question = form.elements[`question${i}`];
+            if (question && question.value) {
+                answeredCount++;
+            }
+        }
+        
+        // Enable button only if all 10 questions are answered
+        submitButton.disabled = answeredCount !== 10;
+    } else {
+        submitButton.style.display = 'none';
+    }
+}
+
+function formOne() {
+    const form = document.forms['q1'];
+    let totalScore = 0;
+    
+    // Only option C is worth 1 point (the adaptive response)
+    for (let i = 1; i <= 10; i++) {
+        const question = form.elements[`question${i}`];
+        if (question && question.value === 'c') {
+            totalScore += 1;
+        }
+    }
+    
+    const results = document.getElementById("results");
+    results.style.display = "block";
+    
+    let resultHTML = `<div class="score-display">Your Score: ${totalScore} out of 10</div>`;
+    
+    if (totalScore >= 0 && totalScore <= 3) {
+        resultHTML += `
+            <h2>Reactive sustainment</h2>
+            <p><strong>What it means:</strong> Your results suggest that when pressure rises, your triggers can hijack your attention and behaviour. In those moments you're more likely to default to fast protective moves (defend, withdraw, take over, avoid), which can reduce clarity and make it harder to hold steady through conflict or uncertainty. Your biggest opportunity is to build a reliable "in-the-moment" reset - something you can use quickly when you notice early warning signs - so you can respond on purpose rather than react.</p>
+            
+            <h3>What you might do under stress</h3>
+            <ul>
+                <li>Snap, defend, withdraw or avoid hard conversations</li>
+                <li>Over-control (micromanage) or disengage ("someone else decide")</li>
+                <li>Communicate with urgency or vagueness rather than calm clarity</li>
+                <li>Uses short-term relief coping (numbing, venting, scrolling) that doesn't restore</li>
+            </ul>
+            
+            <h3>Impact on the system</h3>
+            <ul>
+                <li>Team anxiety increases; trust and psychological safety decrease</li>
+                <li>Decisions become rushed or stalled</li>
+                <li>Learning slows; adaptive challenges get "treated as technical"</li>
+                <li>Higher burnout risk for both you and the team</li>
+            </ul>
+            
+            <h3>Development focus</h3>
+            <ul>
+                <li>Trigger awareness: name your early warning signals (body sensations, thoughts, impulses)</li>
+                <li>One reset routine: a repeatable 60–90 second reset you can use in meetings (breath + pause + question)</li>
+            </ul>
+        `;
+    } else if (totalScore >= 4 && totalScore <= 7) {
+        resultHTML += `
+            <h2>Developing / inconsistent sustainment</h2>
+            <p><strong>What it means:</strong> Your results suggest you can sustain adaptive leadership under pressure, but your consistency drops when stakes are high, time is tight or you're fatigued. You likely regulate well in some situations, then slip into old patterns when stress stacks up (back-to-back demands, public challenge, uncertainty). Your biggest opportunity is to strengthen consistency: identify your top triggers and pre-plan a couple of "if/then" reset responses, while also improving recovery habits so you're not leading from depletion.</p>
+            
+            <h3>What you might do under stress</h3>
+            <ul>
+                <li>Reset sometimes, but forgets when pressure spikes</li>
+                <li>Stay calm in moderate conflict but struggle in public challenge or ambiguity</li>
+                <li>Alternate between empowering and taking over</li>
+                <li>Rely on coping strategies that work "some of the time" (and occasionally backfire)</li>
+            </ul>
+            
+            <h3>Impact on the system</h3>
+            <ul>
+                <li>Team experiences mixed signals: calm leadership some days, reactivity on others</li>
+                <li>Adaptive work starts well but loses momentum when tension rises</li>
+                <li>Decisions improve, but high-pressure moments still create rework or resentment</li>
+            </ul>
+            
+            <h3>Development focus</h3>
+            <ul>
+                <li>Consistency under load: pre-plan responses to your top 2 triggers ("If X, then I will Y")</li>
+                <li>Recovery habits: protect sleep, transitions between meetings and decompression to prevent "stress stacking"</li>
+            </ul>
+        `;
+    } else if (totalScore >= 8 && totalScore <= 10) {
+        resultHTML += `
+            <h2>Sustainable adaptive leadership</h2>
+            <p><strong>What it means:</strong> Your results suggest you reliably sustain your leadership under pressure. You tend to notice triggers early; use reset strategies to stay grounded and keep your communication calm and clear even when you don't have certainty. This steadiness helps others stay regulated too, which supports trust, learning, and progress through adaptive challenges. Your next growth edge is less about control and more about endurance at scale - protect your recovery, watch for high-risk conditions (fatigue, scrutiny, change saturation), and keep distributing leadership so you don't carry the whole load alone.</p>
+            
+            <h3>What you might do under stress</h3>
+            <ul>
+                <li>Notices triggers early and choose responses rather than reacting</li>
+                <li>Use micro-resets in real time (pause, breathe, reframe, ask)</li>
+                <li>Communicate known/unknown clearly and keep people oriented</li>
+                <li>Cope in ways that genuinely restore (movement, boundaries, reflection, support)</li>
+                <li>Shares the load: mobilises others rather than carrying everything alone</li>
+            </ul>
+            
+            <h3>Impact on the system</h3>
+            <ul>
+                <li>Team feels steadier and more psychologically safe during uncertainty</li>
+                <li>Faster learning cycles, better decisions, less drama</li>
+                <li>Higher trust, healthier conflict and sustained performance over time</li>
+            </ul>
+            
+            <h3>Development focus</h3>
+            <ul>
+                <li>Sustainability at scale: avoid over-reliance on yourself - build shared ownership and back-up capacity</li>
+                <li>Relapse prevention: recognise "high-risk conditions" (fatigue, high scrutiny, change saturation) and plan protection strategies</li>
+            </ul>
+        `;
+    }
+    
+    results.innerHTML = resultHTML;
+    results.scrollIntoView({ behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.target.tagName === 'INPUT') {
+        // Prevent Enter key from submitting the form
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            return;
+        }
+        return;
+    }
+    
+    if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        previousSlide();
+    } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        nextSlide();
+    }
+});
+
+updateArrowButtons();
+updateProgressBar();
+updateSubmitButton();
+</script>
+</body>
+</html>
