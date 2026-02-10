@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-<title>Listening Style Quiz</title>
+<title>Pressure Triggers Quiz</title>
 <style>
     .checkContainer {
         display: flex;
@@ -39,6 +39,22 @@
         border-radius: 12px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden;
+    }
+
+    .intro-section {
+        padding: 30px;
+        background-color: var(--cream);
+        text-align: center;
+    }
+
+    .intro-section h1 {
+        color: var(--AIMblue);
+        margin-bottom: 15px;
+    }
+
+    .intro-section p {
+        line-height: 1.6;
+        color: var(--darkBlue);
     }
 
     .slide-container {
@@ -181,6 +197,37 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         display: none;
+        padding: 30px;
+    }
+
+    #results h2 {
+        color: var(--AIMblue);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #results h3 {
+        color: var(--darkBlue);
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+
+    #results p, #results ul {
+        line-height: 1.6;
+        color: var(--darkBlue);
+    }
+
+    #results ul {
+        padding-left: 20px;
+    }
+
+    #results li {
+        margin-bottom: 8px;
+    }
+
+    .chart-container {
+        max-width: 400px;
+        margin: 30px auto;
         padding: 20px;
     }
 
@@ -206,7 +253,8 @@
 
         .slide-container,
         .navigation,
-        .instructions {
+        .instructions,
+        .intro-section {
             padding: 15px;
         }
 
@@ -229,6 +277,11 @@
 </head>
 <body>
     <div class="quiz-container">
+        <!-- <div class="intro-section">
+            <h1>Pressure Triggers Quiz</h1>
+            <p>To begin to understand which of these four common triggers might affect you most under pressure, take this quiz. Each question has four options. Choose the option that best reflects what you most often do under pressure (not what you wish you did).</p>
+        </div> -->
+        
         <nav class="navigation" aria-label="Quiz navigation">
             <div class="nav-buttons" role="tablist">
                 <button class="nav-button active" onclick="goToSlide(1)" role="tab" aria-selected="true" aria-controls="slide-1" id="tab-1" aria-label="Question 1">1</button>
@@ -251,33 +304,33 @@
                 <!-- Slide 1 -->
                 <fieldset class="slide active" id="slide-1" role="tabpanel" aria-labelledby="tab-1">
                     <legend>
-                        <h3>When someone starts explaining a problem to you, your first instinct is to:</h3>
+                        <h3>A project is going off track and you're getting questioned about progress. You're most likely to…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q1-a">Help them define what needs to be done and move toward a solution</label>
+                            <label for="q1-a">Step in, assign tasks and tighten oversight.</label>
                         </p>
                         <input type="radio" id="q1-a" name="question1" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q1-b">Ask clarifying questions to fully understand the situation</label>
+                            <label for="q1-b">Ask for more analysis to confirm what's really causing the issue.</label>
                         </p>
                         <input type="radio" id="q1-b" name="question1" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q1-c">Focus on how the situation is affecting them personally</label>
+                            <label for="q1-c">Reassure everyone and avoid hard feedback to keep morale up.</label>
                         </p>
                         <input type="radio" id="q1-c" name="question1" value="c" autocomplete="off">
                     </div>
             
                     <div class="checkContainer">
                         <p>
-                            <label for="q1-d">Question whether the problem is being framed correctly</label>
+                            <label for="q1-d">Push for immediate actions and rapid updates to regain momentum.</label>
                         </p>
                         <input type="radio" id="q1-d" name="question1" value="d" autocomplete="off">
                     </div>
@@ -286,33 +339,33 @@
                 <!-- Slide 2 -->
                 <fieldset class="slide" id="slide-2" role="tabpanel" aria-labelledby="tab-2">
                     <legend>
-                        <h3>During meetings, you are most satisfied when:</h3>
+                        <h3>You're asked a tough question in a meeting and you don't know the answer. You…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q2-a">Clear decisions and action items are established</label>
+                            <label for="q2-a">Redirect to what you can control - process, roles and next actions.</label>
                         </p>
                         <input type="radio" id="q2-a" name="question2" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q2-b">The information presented is thorough and well-reasoned</label>
+                            <label for="q2-b">Feel uncomfortable until you can get the facts and become certain.</label>
                         </p>
                         <input type="radio" id="q2-b" name="question2" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q2-c">Everyone feels heard and respected</label>
+                            <label for="q2-c">Try to respond in a way that keeps others confident in you.</label>
                         </p>
                         <input type="radio" id="q2-c" name="question2" value="c" autocomplete="off">
                     </div>
 
                     <div class="checkContainer">
                         <p>
-                            <label for="q2-d">Weak arguments or flawed reasoning are challenged</label>
+                            <label for="q2-d">Answer quickly so the conversation keeps moving.</label>
                         </p>
                         <input type="radio" id="q2-d" name="question2" value="d" autocomplete="off">
                     </div>
@@ -321,33 +374,33 @@
                 <!-- Slide 3 -->
                 <fieldset class="slide" id="slide-3" role="tabpanel" aria-labelledby="tab-3">
                     <legend>
-                        <h3>If a colleague is telling a long story, you tend to:</h3>
+                        <h3>Someone challenges your decision publicly. Your first impulse is to…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q3-a">Mentally summarise it into key points and outcomes</label>
+                            <label for="q3-a">Take charge and reassert expectations.</label>
                         </p>
                         <input type="radio" id="q3-a" name="question3" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q3-b">Track the sequence of events and details carefully</label>
+                            <label for="q3-b">Justify your logic and look for more evidence to prove it.</label>
                         </p>
                         <input type="radio" id="q3-b" name="question3" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q3-c">Pay attention to their tone, feelings and body language</label>
+                            <label for="q3-c">Smooth it over so the relationship isn't damaged.</label>
                         </p>
                         <input type="radio" id="q3-c" name="question3" value="c" autocomplete="off">
                     </div>
 
                     <div class="checkContainer">
                         <p>
-                            <label for="q3-d">Look for inconsistencies or unsupported claims</label>
+                            <label for="q3-d">Move to a fast decision so it doesn't drag on.</label>
                         </p>
                         <input type="radio" id="q3-d" name="question3" value="d" autocomplete="off">
                     </div>
@@ -356,33 +409,33 @@
                 <!-- Slide 4 -->
                 <fieldset class="slide" id="slide-4" role="tabpanel" aria-labelledby="tab-4">
                     <legend>
-                        <h3>When receiving instructions, you prefer them to be:</h3>
+                        <h3>You're overloaded and a teammate makes a mistake. You tend to…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q4-a">Short, direct and focused on results</label>
+                            <label for="q4-a">Fix it yourself to ensure quality.</label>
                         </p>
                         <input type="radio" id="q4-a" name="question4" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q4-b">Detailed, structured and precise</label>
+                            <label for="q4-b">Review what happened in detail so it doesn't happen again.</label>
                         </p>
                         <input type="radio" id="q4-b" name="question4" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q4-c">Friendly, encouraging and conversational</label>
+                            <label for="q4-c">Downplay it to avoid discouraging them.</label>
                         </p>
                         <input type="radio" id="q4-c" name="question4" value="c" autocomplete="off">
                     </div>
 
                     <div class="checkContainer">
                         <p>
-                            <label for="q4-d">Justified, with reasons and evidence</label>
+                            <label for="q4-d">Correct it quickly and push forward to stay on schedule.</label>
                         </p>
                         <input type="radio" id="q4-d" name="question4" value="d" autocomplete="off">
                     </div>
@@ -391,33 +444,33 @@
                 <!-- Slide 5 -->
                 <fieldset class="slide" id="slide-5" role="tabpanel" aria-labelledby="tab-5">
                     <legend>
-                        <h3>If someone disagrees with you, your listening focus is on:</h3>
+                        <h3>An ambiguous change request comes in ("make it better"). You're most likely to…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q5-a">Finding a practical way forward</label>
+                            <label for="q5-a">Define the process, structure the work, and control the scope tightly.</label>
                         </p>
                         <input type="radio" id="q5-a" name="question5" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q5-b">Understanding the logic behind their position</label>
+                            <label for="q5-b">Ask for clearer requirements and data before proceeding.</label>
                         </p>
                         <input type="radio" id="q5-b" name="question5" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q5-c">Maintaining rapport and mutual respect</label>
+                            <label for="q5-c">Ask what will make stakeholders happiest and aim to satisfy them.</label>
                         </p>
                         <input type="radio" id="q5-c" name="question5" value="c" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q5-d">Evaluating the strength of their argument</label>
+                            <label for="q5-d">Start immediately with quick changes and adjust later.</label>
                         </p>
                         <input type="radio" id="q5-d" name="question5" value="d" autocomplete="off">
                     </div>
@@ -426,33 +479,33 @@
                 <!-- Slide 6 -->
                 <fieldset class="slide" id="slide-6" role="tabpanel" aria-labelledby="tab-6">
                     <legend>
-                        <h3>When listening to a presentation, you are most likely to:</h3>
+                        <h3>Two stakeholders want opposite things and both are pressuring you. You…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q6-a">Think about how the ideas can be implemented</label>
+                            <label for="q6-a">Decide who owns the call and enforce a decision pathway.</label>
                         </p>
                         <input type="radio" id="q6-a" name="question6" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q6-b">Analyse the data and explanations</label>
+                            <label for="q6-b">Seek more information so you can make the "right" choice.</label>
                         </p>
                         <input type="radio" id="q6-b" name="question6" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q6-c">Notice how engaged and comfortable the speaker seems</label>
+                            <label for="q6-c">Try to accommodate both so no-one feels ignored.</label>
                         </p>
                         <input type="radio" id="q6-c" name="question6" value="c" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q6-d">Assess the credibility of the claims being made</label>
+                            <label for="q6-d">Choose the fastest workable option to relieve the pressure.</label>
                         </p>
                         <input type="radio" id="q6-d" name="question6" value="d" autocomplete="off">
                     </div>
@@ -461,33 +514,33 @@
                 <!-- Slide 7 -->
                 <fieldset class="slide" id="slide-7" role="tabpanel" aria-labelledby="tab-7">
                     <legend>
-                        <h3>In a conversation, you feel frustrated when:</h3>
+                        <h3>Your calendar is packed and interruptions keep happening. You respond by…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q7-a">It drags on without a clear purpose</label>
+                            <label for="q7-a">Setting stricter boundaries and controlling access/time.</label>
                         </p>
                         <input type="radio" id="q7-a" name="question7" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q7-b">Information is vague or incomplete</label>
+                            <label for="q7-b">Trying to plan perfectly so nothing is uncertain.</label>
                         </p>
                         <input type="radio" id="q7-b" name="question7" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q7-c">Emotions or relationships are ignored</label>
+                            <label for="q7-c">Staying available so people don't feel unsupported.</label>
                         </p>
                         <input type="radio" id="q7-c" name="question7" value="c" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q7-d">Poor reasoning goes unchallenged</label>
+                            <label for="q7-d">Multitasking and rushing to clear everything quickly.</label>
                         </p>
                         <input type="radio" id="q7-d" name="question7" value="d" autocomplete="off">
                     </div>
@@ -496,33 +549,33 @@
                 <!-- Slide 8 -->
                 <fieldset class="slide" id="slide-8" role="tabpanel" aria-labelledby="tab-8">
                     <legend>
-                        <h3>When someone asks for your advice, you usually respond by:</h3>
+                        <h3>You receive vague critical feedback ("This isn't working"). You're most likely to…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q8-a">Suggesting concrete steps or actions</label>
+                            <label for="q8-a">Tighten standards and increase checkpoints.</label>
                         </p>
                         <input type="radio" id="q8-a" name="question8" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q8-b">Exploring the situation from multiple angles</label>
+                            <label for="q8-b">Ask for specifics and evidence so you can understand precisely.</label>
                         </p>
                         <input type="radio" id="q8-b" name="question8" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q8-c">Acknowledging their feelings before responding</label>
+                            <label for="q8-c">Worry about how you're perceived and try to repair the relationship fast.</label>
                         </p>
                         <input type="radio" id="q8-c" name="question8" value="c" autocomplete="off">
                     </div>
 
                     <div class="checkContainer">
                         <p>
-                            <label for="q8-d">Pointing out potential flaws or risks</label>
+                            <label for="q8-d">Jump into immediate fixes to demonstrate responsiveness.</label>
                         </p>
                         <input type="radio" id="q8-d" name="question8" value="d" autocomplete="off">
                     </div>
@@ -531,33 +584,33 @@
                 <!-- Slide 9 -->
                 <fieldset class="slide" id="slide-9" role="tabpanel" aria-labelledby="tab-9">
                     <legend>
-                        <h3>You believe good listening primarily means:</h3>
+                        <h3>A decision needs to be made with incomplete information. You…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q9-a">Helping move things toward completion</label>
+                            <label for="q9-a">Create rules/guardrails and control risk through structure.</label>
                         </p>
                         <input type="radio" id="q9-a" name="question9" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q9-b">Fully understanding the message being conveyed</label>
+                            <label for="q9-b">Delay until you have enough certainty to feel confident.</label>
                         </p>
                         <input type="radio" id="q9-b" name="question9" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q9-c">Making the speaker feel understood</label>
+                            <label for="q9-c">Check how others will react and shape the decision accordingly.</label>
                         </p>
                         <input type="radio" id="q9-c" name="question9" value="c" autocomplete="off">
                     </div>
 
                     <div class="checkContainer">
                         <p>
-                            <label for="q9-d">Judging the accuracy and quality of what is said</label>
+                            <label for="q9-d">Decide fast and trust you'll figure it out as you go.</label>
                         </p>
                         <input type="radio" id="q9-d" name="question9" value="d" autocomplete="off">
                     </div>
@@ -566,33 +619,33 @@
                 <!-- Slide 10 -->
                 <fieldset class="slide" id="slide-10" role="tabpanel" aria-labelledby="tab-10">
                     <legend>
-                        <h3>After a conversation, you are most likely to remember:</h3>
+                        <h3>When you feel stress building during the day, your default is to…</h3>
                     </legend>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q10-a">What needs to happen next</label>
+                            <label for="q10-a">Clamp down on tasks and manage details more tightly.</label>
                         </p>
                         <input type="radio" id="q10-a" name="question10" value="a" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q10-b">Key facts, explanations and details</label>
+                            <label for="q10-b">Think harder, research more, and try to remove ambiguity.</label>
                         </p>
                         <input type="radio" id="q10-b" name="question10" value="b" autocomplete="off">
                     </div>
                     
                     <div class="checkContainer">
                         <p>
-                            <label for="q10-c">How the person felt and how the interaction went</label>
+                            <label for="q10-c">Seek reassurance, harmony, or approval to feel steady again.</label>
                         </p>
                         <input type="radio" id="q10-c" name="question10" value="c" autocomplete="off">
                     </div>
 
                     <div class="checkContainer">
                         <p>
-                            <label for="q10-d">Whether the arguments were sound or weak</label>
+                            <label for="q10-d">Speed up and push through to get it over with.</label>
                         </p>
                         <input type="radio" id="q10-d" name="question10" value="d" autocomplete="off">
                     </div>
@@ -617,6 +670,7 @@
     <!-- Results Display -->
     <div id="results" role="region" aria-live="polite" aria-label="Quiz results"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 let currentSlide = 1;
 const totalSlides = 10;
@@ -694,6 +748,7 @@ function updateSubmitButton() {
         submitButton.style.display = 'none';
     }
 }
+
 function formOne() {
     const form = document.forms['q1'];
     let aCount = 0;
@@ -720,60 +775,112 @@ function formOne() {
     const results = document.getElementById("results");
     results.style.display = "block";
     
-    let maxCount = Math.max(aCount, bCount, cCount, dCount);
-    
-    // Check for ties
-    const tiedItems = [];
-    if (aCount === maxCount) tiedItems.push('a');
-    if (bCount === maxCount) tiedItems.push('b');
-    if (cCount === maxCount) tiedItems.push('c');
-    if (dCount === maxCount) tiedItems.push('d');
-    
-    // Style descriptions
-    const styles = {
-        'a': {
-            title: 'Task-Oriented Listener',
-            description: '<strong>Core focus:</strong> Efficiency, outcomes and next steps. <br><strong>How you listen:</strong> You listen with the goal of identifying what needs to be done. You naturally steer conversations toward decisions, solutions and next steps, often summarising or redirecting when discussions feel unfocused.'
-        },
-        'b': {
-            title: 'Analytical Listener',
-            description: '<strong>Core focus:</strong> Understanding, logic and accuracy.  <br><strong>How you listen:</strong> You listen to make sense of information. You ask clarifying questions, seek evidence and want a complete picture before forming conclusions.'
-        },
-        'c': {
-            title: 'Relational Listener',
-            description: '<strong>Core focus:</strong> Connection, empathy and understanding people.  <br><strong>How you listen:</strong> You listen to understand the person, not just the message. You pay attention to emotions, tone and non-verbal cues, aiming to make others feel heard and supported.'
-        },
-        'd': {
-            title: 'Critical Listener',
-            description: '<strong>Core focus:</strong> Evaluation, accuracy and validity.  <br><strong>How you listen:</strong> You listen to judge the quality of what is being said. You assess logic, assumptions, bias and credibility, often questioning ideas before accepting them.'
-        }
+    // Trigger descriptions
+    const triggers = {
+        'a': 'Control',
+        'b': 'Certainty',
+        'c': 'Approval',
+        'd': 'Urgency'
     };
     
-    if (maxCount < 2) {
-        results.innerHTML = `<h2>Incomplete Quiz</h2><p>Please complete the quiz before submitting. Make sure you've answered all questions.</p>`;
+    // Find highest and second highest
+    const counts = [
+        { trigger: 'a', count: aCount },
+        { trigger: 'b', count: bCount },
+        { trigger: 'c', count: cCount },
+        { trigger: 'd', count: dCount }
+    ].sort((x, y) => y.count - x.count);
+    
+    const maxCount = counts[0].count;
+    const primaryTriggers = counts.filter(item => item.count === maxCount);
+    const secondaryCount = counts.find(item => item.count < maxCount)?.count || 0;
+    const secondaryTriggers = counts.filter(item => item.count === secondaryCount && item.count > 0);
+    
+    // Build results HTML
+    let resultsHTML = '<h2>Your pressure triggers</h2>';
+    
+    // Add chart
+    resultsHTML += '<div class="chart-container"><canvas id="resultsChart"></canvas></div>';
+    
+    // Interpretation
+    resultsHTML += '<h3>Interpreting your results</h3>';
+    
+    if (primaryTriggers.length > 1) {
+        resultsHTML += '<p><strong>Primary triggers (tied):</strong> ';
+        resultsHTML += primaryTriggers.map(t => `${triggers[t.trigger]} (${t.count})`).join(', ');
+        resultsHTML += '</p>';
+        resultsHTML += '<p>You likely switch patterns depending on context (e.g., urgency at work, approval in relationships).</p>';
+    } else {
+        resultsHTML += `<p><strong>Primary trigger:</strong> ${triggers[primaryTriggers[0].trigger]} trigger (${maxCount} responses)</p>`;
+        resultsHTML += '<p>This is your dominant pattern under pressure.</p>';
+        
+        if (secondaryTriggers.length > 0 && secondaryCount > 0) {
+            resultsHTML += `<p><strong>Secondary trigger:</strong> ${triggers[secondaryTriggers[0].trigger]} trigger (${secondaryCount} responses)</p>`;
+            resultsHTML += '<p>This often shows up when you\'re tired or stakes are high.</p>';
+        }
     }
-    else if (tiedItems.length > 1) {
-        let tieHTML = '<h2>Mixed Listening Style</h2><p>You have a balanced approach across multiple listening styles:</p>';
-        tiedItems.forEach(item => {
-            tieHTML += `<h3>${styles[item].title}</h3><p>${styles[item].description}</p>`;
+    
+    // Add scoring breakdown
+    resultsHTML += '<h3>Your score breakdown</h3><ul>';
+    resultsHTML += `<li><strong>Control trigger (A):</strong> ${aCount} responses</li>`;
+    resultsHTML += `<li><strong>Certainty trigger (B):</strong> ${bCount} responses</li>`;
+    resultsHTML += `<li><strong>Approval trigger (C):</strong> ${cCount} responses</li>`;
+    resultsHTML += `<li><strong>Urgency trigger (D):</strong> ${dCount} responses</li>`;
+    resultsHTML += '</ul>';
+    
+    results.innerHTML = resultsHTML;
+    
+    // Create chart after HTML is rendered
+    setTimeout(() => {
+        const ctx = document.getElementById('resultsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Control', 'Certainty', 'Approval', 'Urgency'],
+                datasets: [{
+                    data: [aCount, bCount, cCount, dCount],
+                    backgroundColor: [
+                        '#4353A3',  // Control - AIM blue
+                        '#5DC8B9',  // Certainty - teal
+                        '#AEBAE4',  // Approval - light blue
+                        '#AF4510'   // Urgency - rust
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            font: {
+                                size: 14,
+                                family: "'IBM Plex Sans', sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const percentage = ((value / 10) * 100).toFixed(0);
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
         });
-        results.innerHTML = tieHTML;
-    }
-    else if (maxCount === aCount) {
-        results.innerHTML = `<h2>${styles['a'].title}</h2><p>${styles['a'].description}</p>`;
-    }
-    else if (maxCount === bCount) {
-        results.innerHTML = `<h2>${styles['b'].title}</h2><p>${styles['b'].description}</p>`;
-    }
-    else if (maxCount === cCount) {
-        results.innerHTML = `<h2>${styles['c'].title}</h2><p>${styles['c'].description}</p>`;
-    }
-    else {
-        results.innerHTML = `<h2>${styles['d'].title}</h2><p>${styles['d'].description}</p>`;
-    }
+    }, 100);
     
     results.scrollIntoView({ behavior: 'smooth' });
 }
+
 document.addEventListener('keydown', function(event) {
     if (event.target.tagName === 'INPUT') {
         // Prevent Enter key from submitting the form
@@ -798,4 +905,4 @@ updateProgressBar();
 updateSubmitButton();
 </script>
 </body>
-</html>
+</html
