@@ -46,6 +46,12 @@
             animation: fadeIn 0.5s ease-in;
         }
 
+        .example {
+            
+        }
+        ul {
+            padding: 10px;
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -319,83 +325,41 @@
         <div class="activity-intro">
             <strong>Activity:</strong> Reflect on a moment where you have used the 'step off the dancefloor and onto the balcony' method. Using the simple template below, write about the experience.
         </div> -->
-
+<!-- 
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
+        </div> -->
+      <div class="section">
+          <h2 class="section-title">
+                    Example reset
+                </h2>
+                <p class="example">
+                When you notice your unique reactions to stress try and take a moment to pause, name what’s happening (“I’m feeling defensive”) and create a small gap with a reset strategy like:</p>
+                     <ul>
+                        <li><strong>Slow breath:</strong> Inhale gently for 4 seconds, exhale for 6–8 seconds and let your shoulders drop as you breathe out - repeat twice before you speak.</li>
+                        <li><strong>Grounding:</strong> Plant both feet on the floor, press your toes down, notice three things you can see, and unclench your jaw to bring your awareness back.</li>
+                        <li><strong>Brief question:</strong> Ask one centring question that buys you time and shifts you into curiosity, like “What does success look like in the next two weeks?” or “What’s the real risk if we don’t solve this today?”</li>
+                        <li><strong>Pre-planned response:</strong> Create a response to your known triggers to buy you time and move you out of the stress response using the implementation intention formula.</li>
+                        </ul>
         </div>
 
         <form id="reflectionForm">
             <div class="section">
                 <h2 class="section-title">
-                    Trigger
+                    Reset
                 </h2>
-                <p class="section-prompt">What happened that made me step back?</p>
+                <p class="section-prompt">Write down a repeatable 60–90 second reset you can use during meetings when things get heated. For example, a simple formula is breath + pause + question.</p>
                 <textarea 
                     class="reflection-input" 
                     id="trigger"
-                    placeholder="Describe the moment or situation that prompted you to step onto the balcony..."
+                    placeholder="Enter your reset plan here..."
+"
                     data-section="trigger"
                 ></textarea>
                 <div class="char-count" id="countTrigger">0 characters</div>
             </div>
 
-            <div class="section">
-                <h2 class="section-title">
-                    Pattern
-                </h2>
-                <p class="section-prompt">What system dynamic did I notice?</p>
-                <textarea 
-                    class="reflection-input" 
-                    id="pattern"
-                    placeholder="What patterns, relationships, or dynamics became visible from the balcony view..."
-                    data-section="pattern"
-                ></textarea>
-                <div class="char-count" id="countPattern">0 characters</div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">
-                    Heat
-                </h2>
-                <p class="section-prompt">Too high/low/just right - what did I do to affect it?</p>
-                <textarea 
-                    class="reflection-input" 
-                    id="heat"
-                    placeholder="Assess the level of tension or urgency. What actions did you take to regulate it..."
-                    data-section="heat"
-                ></textarea>
-                <div class="char-count" id="countHeat">0 characters</div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">
-                    Impact
-                </h2>
-                <p class="section-prompt">How did I help or hinder?</p>
-                <textarea 
-                    class="reflection-input" 
-                    id="impact"
-                    placeholder="Reflect on the consequences of your actions. What worked? What didn't..."
-                    data-section="impact"
-                ></textarea>
-                <div class="char-count" id="countImpact">0 characters</div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">
-                    Next Time
-                </h2>
-                <p class="section-prompt">One intervention I'll test earlier.</p>
-                <textarea 
-                    class="reflection-input" 
-                    id="nextTime"
-                    placeholder="What specific action or approach will you try next time you encounter a similar situation..."
-                    data-section="nextTime"
-                ></textarea>
-                <div class="char-count" id="countNextTime">0 characters</div>
-            </div>
-
-            <button type="submit" class="download-btn" id="downloadBtn">Download Reflection (PDF)</button>
+            <button type="submit" class="download-btn" id="downloadBtn">Download reset strategy (PDF)</button>
         </form>
     </div>
 
@@ -409,7 +373,7 @@
             </div>
             <h3 class="success-title">Download Successful!</h3>
             <p class="success-message">
-                Your balcony reflection has been saved as a PDF. Keep reflecting on your leadership journey!
+                Your reset plan has been saved as a PDF.
             </p>
             <button class="success-btn" onclick="closeSuccessModal()">Close</button>
         </div>
@@ -554,11 +518,7 @@
             }
 
             // Add all sections
-            addSection('TRIGGER', 'What happened that made me step back?', responses.trigger);
-            addSection('PATTERN', 'What system dynamic did I notice?', responses.pattern);
-            addSection('HEAT', 'Too high/low/just right - what did I do to affect it?', responses.heat);
-            addSection('IMPACT', 'How did I help or hinder?', responses.impact);
-            addSection('NEXT TIME', 'One intervention I\'ll test earlier.', responses.nextTime);
+            addSection('Reset', '60-90 second forumla to reset', responses.trigger);
 
             // Save the PDF
             doc.save(`balcony-reflection-${new Date().toISOString().split('T')[0]}.pdf`);
