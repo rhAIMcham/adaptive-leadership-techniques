@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adaptive Process Management Simulation</title>
+    <title>Adaptive Leadership Simulation</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -42,6 +42,182 @@
 
         .container.panel-open {
             margin-right: 450px;
+        }
+
+        /* Introduction Screen */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .intro-screen.hidden {
+            display: none;
+        }
+
+        .intro-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+        }
+
+        .intro-header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 40px 40px 32px;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .intro-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .intro-header .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .intro-body {
+            padding: 40px;
+        }
+
+        .role-card {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+        }
+
+        .role-card h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .role-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .role-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .role-card strong {
+            color: var(--primary);
+        }
+
+        .objectives-section {
+            margin-bottom: 32px;
+        }
+
+        .objectives-section h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 8px;
+        }
+
+        .objective-icon {
+            font-size: 24px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .objective-content h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .objective-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .key-concepts {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+        }
+
+        .key-concepts h3 {
+            font-size: 16px;
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+
+        .key-concepts ul {
+            margin-left: 20px;
+            color: #78350f;
+        }
+
+        .key-concepts li {
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .intro-footer {
+            padding: 24px 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 16px;
+        }
+
+        .btn-large {
+            padding: 16px 48px;
+            font-size: 18px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         /* Header */
@@ -441,30 +617,6 @@
             background: var(--bg-main);
         }
 
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            width: 100%;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background: var(--primary-dark);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
         /* Completion Modal */
         .completion-modal {
             display: none;
@@ -620,16 +772,83 @@
             .container.panel-open {
                 margin-right: 0;
             }
+
+            .intro-body {
+                padding: 24px;
+            }
+
+            .intro-header {
+                padding: 32px 24px 24px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Introduction Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-content">
+            <div class="intro-header">
+                <h1>Adaptive Leadership Simulation</h1>
+                <p class="subtitle">Customer Service Process Improvement Challenge</p>
+            </div>
+            <div class="intro-body">
+                <div class="role-card">
+                    <h2>🎯 Your Role</h2>
+                    <p>You are <strong>Alex Chen, Team Lead for Customer Service</strong> at a rapidly growing SaaS company. Your team handles 500+ support tickets weekly across email, phone, and chat.</p>
+                    <p>Leadership has tasked you with improving the customer service pipeline. You'll need to work closely with:</p>
+                    <p><strong>• Tech Team</strong> – They build the tools and systems you need<br>
+                    <strong>• Sales Team</strong> – They promise response times that affect your workload<br>
+                    <strong>• Your Service Team</strong> – 12 agents dealing with growing pressure</p>
+                    <p>The challenge? Response times are up 45%, satisfaction is down 15 points, and everyone has different priorities.</p>
+                </div>
+
+                <div class="objectives-section">
+                    <h3>Your Objectives Over 7 Weeks:</h3>
+                    <div class="objective-item">
+                        <div class="objective-icon">🔍</div>
+                        <div class="objective-content">
+                            <h4>Identify Root Causes</h4>
+                            <p>Look beyond symptoms to find systemic process issues</p>
+                        </div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-icon">🧘</div>
+                        <div class="objective-content">
+                            <h4>Manage Under Pressure</h4>
+                            <p>Make calm, strategic decisions when stakeholders are stressed</p>
+                        </div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-icon">🤝</div>
+                        <div class="objective-content">
+                            <h4>Balance Stakeholders</h4>
+                            <p>Navigate competing needs from Tech, Sales, Leadership, and your team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>🎓 Adaptive Leadership Principles</h3>
+                    <ul>
+                        <li><strong>Technical vs. Adaptive Problems:</strong> Technical problems have clear solutions; adaptive problems require new learning and behavior change</li>
+                        <li><strong>Get on the Balcony:</strong> Step back from the action to see patterns rather than reacting to pressure</li>
+                        <li><strong>Regulate Distress:</strong> Keep pressure productive—not so low people stay comfortable, not so high they shut down</li>
+                        <li><strong>Give the Work Back:</strong> Don't solve problems for people; help them develop capacity to solve problems themselves</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="intro-footer">
+                <button class="btn btn-primary btn-large" onclick="startSimulation()">Begin Simulation</button>
+            </div>
+        </div>
+    </div>
+
     <div class="container" id="mainContainer">
         <!-- Header -->
         <div class="header">
             <div>
-                <h1>Customer Service Process Redesign</h1>
-                <p class="subtitle">Adaptive Process Management Simulation</p>
+                <h1>Customer Service Process Improvement</h1>
+                <p class="subtitle">Team Lead Dashboard</p>
             </div>
             <div class="week-display">
                 <div class="week-number" id="weekNumber">Week 1</div>
@@ -658,28 +877,28 @@
 
         <!-- Stakeholder Status -->
         <div class="stakeholder-section">
-            <h2 class="section-title">Stakeholder Satisfaction</h2>
+            <h2 class="section-title">Stakeholder Relationships</h2>
             <div class="stakeholder-grid">
                 <div class="stakeholder-card">
-                    <div class="stakeholder-name">Enterprise Clients</div>
+                    <div class="stakeholder-name">Sales Team</div>
                     <div class="satisfaction-bar">
-                        <div class="satisfaction-fill low" id="satEnterprise" style="width: 45%"></div>
+                        <div class="satisfaction-fill low" id="satSales" style="width: 45%"></div>
                     </div>
-                    <div class="stakeholder-status" id="statusEnterprise">45% - Frustrated with delays</div>
+                    <div class="stakeholder-status" id="statusSales">45% - Angry about broken promises</div>
                 </div>
                 <div class="stakeholder-card">
-                    <div class="stakeholder-name">Support Team</div>
+                    <div class="stakeholder-name">Your Service Team</div>
                     <div class="satisfaction-bar">
-                        <div class="satisfaction-fill medium" id="satTeam" style="width: 60%"></div>
+                        <div class="satisfaction-fill medium" id="satTeam" style="width: 55%"></div>
                     </div>
-                    <div class="stakeholder-status" id="statusTeam">60% - Overwhelmed by volume</div>
+                    <div class="stakeholder-status" id="statusTeam">55% - Burned out and defensive</div>
                 </div>
                 <div class="stakeholder-card">
-                    <div class="stakeholder-name">Leadership</div>
+                    <div class="stakeholder-name">Tech Team</div>
                     <div class="satisfaction-bar">
-                        <div class="satisfaction-fill low" id="satLeadership" style="width: 50%"></div>
+                        <div class="satisfaction-fill medium" id="satTech" style="width: 60%"></div>
                     </div>
-                    <div class="stakeholder-status" id="statusLeadership">50% - Concerned about costs</div>
+                    <div class="stakeholder-status" id="statusTech">60% - Skeptical of more requests</div>
                 </div>
             </div>
         </div>
@@ -710,7 +929,7 @@
         <div class="panel-body">
             <div id="branchingNotice"></div>
             <div class="problem-statement">
-                <h3>Current Challenge</h3>
+                <h3>Current Situation</h3>
                 <p id="problemText"></p>
             </div>
             <div class="options-container" id="optionsContainer"></div>
@@ -729,7 +948,7 @@
         <div class="completion-content">
             <div class="completion-header">
                 <h2 class="completion-title">Simulation Complete!</h2>
-                <p class="completion-subtitle">7 weeks of adaptive process management</p>
+                <p class="completion-subtitle">7 weeks of adaptive leadership</p>
             </div>
             <div class="completion-body">
                 <div style="text-align: center;">
@@ -750,13 +969,13 @@
                         <span class="summary-value" id="finalResolution">--</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Average Stakeholder Satisfaction:</span>
+                        <span class="summary-label">Stakeholder Trust:</span>
                         <span class="summary-value" id="finalStakeholder">--</span>
                     </div>
                 </div>
 
                 <div class="key-insight">
-                    <h3>Key Insight</h3>
+                    <h3>Leadership Assessment</h3>
                     <p id="keyInsightText"></p>
                 </div>
             </div>
@@ -776,213 +995,210 @@
                 resolution: 52
             },
             stakeholders: {
-                enterprise: 45,
-                team: 60,
-                leadership: 50
+                sales: 45,
+                team: 55,
+                tech: 60
             },
             history: [],
             metricsHistory: [
                 { week: 0, responseTime: 33, satisfaction: 83, resolution: 67 }
             ],
-            decisionPath: [], // Track quality of decisions
-            branchingState: 'normal' // 'normal', 'struggling', 'crisis'
+            decisionPath: [],
+            branchingState: 'normal'
         };
 
         // ===== SCENARIO DATA =====
         const scenarios = [
             {
                 week: 1,
-                problem: "Response times have increased 45% and customer satisfaction has dropped 15 points. Enterprise clients are escalating issues, the support team feels overwhelmed, and leadership is concerned about rising costs without improved outcomes.",
+                problem: "Your inbox explodes Monday morning. Sales is furious—clients are complaining about 48-hour response times when they were promised 24 hours. Your team is overwhelmed and defensive, saying 'We're doing our best with what we have.' Tech says they can't build you more tools this quarter. Everyone wants a meeting with you today. How do you respond?",
                 options: [
                     {
-                        label: "Add more staff and extend hours",
-                        text: "Hire temporary agents and increase overtime to handle the volume spike.",
-                        outcome: "partial",
+                        label: "Schedule individual meetings with each stakeholder",
+                        text: "Meet with Sales, your team, and Tech separately to hear their perspectives and address concerns.",
+                        outcome: "poor",
                         decisionQuality: "poor",
                         impact: {
-                            responseTime: -3,
-                            satisfaction: -2,
-                            resolution: 0,
-                            enterprise: -5,
-                            team: -10,
-                            leadership: -8
+                            responseTime: 2,
+                            satisfaction: -3,
+                            resolution: -2,
+                            sales: -5,
+                            team: -8,
+                            tech: -5
                         },
                         feedback: {
-                            type: "warning",
-                            title: "Short-term relief, long-term problems",
-                            content: "Response times improved slightly but quality dropped. Agent burnout increased and costs rose 25%. The root cause—process mismatch with customer needs—remains unaddressed."
+                            type: "danger",
+                            title: "Reactive firefighting",
+                            content: "You spent 6 hours in back-to-back meetings. Each group vented. Sales blamed your team. Your team blamed Sales for overpromising. Tech said they're slammed. You're exhausted, nothing changed, and everyone feels unheard because you're just collecting complaints without a strategy."
                         }
                     },
                     {
-                        label: "Analyze process design assumptions",
-                        text: "Map what the process was designed for vs. current reality to identify systemic mismatches.",
+                        label: "Diagnose the process mismatch first",
+                        text: "Postpone meetings by 48 hours. Spend time mapping the actual workflow vs. what was designed, looking for systemic gaps.",
                         outcome: "excellent",
                         decisionQuality: "excellent",
                         impact: {
                             responseTime: 0,
-                            satisfaction: 2,
-                            resolution: 0,
-                            enterprise: 5,
-                            team: 5,
-                            leadership: 8
+                            satisfaction: 3,
+                            resolution: 2,
+                            sales: 8,
+                            team: 10,
+                            tech: 12
                         },
                         feedback: {
                             type: "success",
-                            title: "Root cause identified",
-                            content: "You discovered the process was designed for standardized queries, but 60% now require customization. Different customer segments need different service approaches. This insight sets up future improvements."
+                            title: "Getting on the balcony",
+                            content: "You discovered the root cause: Sales sells one-size-fits-all support, but customers need three different service levels. Your single-queue process can't optimize for both speed AND customization. When you share this diagnosis with stakeholders, everyone stops blaming each other and starts problem-solving."
                         }
                     },
                     {
-                        label: "Implement AI routing",
-                        text: "Deploy AI to analyze tickets and route them more intelligently to available agents.",
+                        label: "Push back on Sales immediately",
+                        text: "Tell Sales to stop overpromising. They need to align their commitments with your current capacity.",
                         outcome: "partial",
-                        decisionQuality: "partial",
+                        decisionQuality: "poor",
                         impact: {
-                            responseTime: -2,
-                            satisfaction: 1,
-                            resolution: 0,
-                            enterprise: 0,
-                            team: -3,
-                            leadership: 3
+                            responseTime: 0,
+                            satisfaction: -2,
+                            resolution: -1,
+                            sales: -15,
+                            team: 8,
+                            tech: 0
                         },
                         feedback: {
                             type: "warning",
-                            title: "Technology without strategy",
-                            content: "AI improved routing slightly but couldn't solve the fundamental issue: you're still using one process for all customer types. The technology automated confusion rather than eliminating it."
+                            title: "Protecting your team, burning bridges",
+                            content: "Your team appreciates you standing up for them. But Sales leadership escalates to your VP, saying you're 'not a team player.' The real problem—process design—remains unsolved. You've treated this as a Sales problem when it's a systems problem."
                         }
                     },
                     {
-                        label: "Collect all stakeholder complaints",
-                        text: "Create a comprehensive list of issues raised by different departments and address each one.",
+                        label: "Ask Tech to build automation immediately",
+                        text: "Request urgent help from Tech to automate ticket routing and responses to reduce the load.",
                         outcome: "poor",
-                        decisionQuality: "poor",
+                        decisionQuality: "partial",
                         impact: {
                             responseTime: 1,
-                            satisfaction: -1,
-                            resolution: -2,
-                            enterprise: -3,
-                            team: -5,
-                            leadership: -5
+                            satisfaction: 0,
+                            resolution: 0,
+                            sales: 0,
+                            team: -3,
+                            tech: -12
                         },
                         feedback: {
-                            type: "danger",
-                            title: "Lost in the noise",
-                            content: "You compiled 47 different complaints but no clear pattern emerged. Scattered efforts addressed symptoms without solving the systemic issue. Team feels you're reacting without a clear strategy."
+                            type: "warning",
+                            title: "Solution before diagnosis",
+                            content: "Tech pushes back hard. You don't even know what to automate yet. They're already underwater with product work. Relationship damaged. Your team feels you're looking for tech silver bullets instead of understanding their reality."
                         }
                     }
-                ]
+                ],
             },
             {
                 week: 2,
-                problem: "You've identified that different customer segments need different service levels, but you can't optimize for speed, personalization, AND cost simultaneously. Enterprise clients need fast personalized service, but that's expensive. How do you redesign the process?",
+                problem: "Your diagnosis revealed that enterprise clients need fast, personalized service while small customers just want quick template responses. But your single process tries to serve everyone the same way. Sales says 'just hire more people.' Your team says 'we need better tools.' Tech says 'we need clearer requirements.' How do you move forward?",
                 getBranchedOptions: function(branchingState) {
                     const baseOptions = [
                         {
-                            label: "Optimize the current single process",
-                            text: "Keep one queue but improve routing, training, and knowledge base to serve everyone better.",
+                            label: "Hire 3 temporary contractors",
+                            text: "Address the volume problem immediately by bringing on extra hands to reduce the backlog.",
                             outcome: "poor",
                             decisionQuality: "poor",
                             impact: {
-                                responseTime: -2,
-                                satisfaction: 2,
-                                resolution: 1,
-                                enterprise: 0,
-                                team: -2,
-                                leadership: 0
+                                responseTime: -4,
+                                satisfaction: 0,
+                                resolution: -2,
+                                sales: 3,
+                                team: -8,
+                                tech: 0
                             },
                             feedback: {
-                                type: "warning",
-                                title: "Marginal improvements only",
-                                content: "Slight improvements but you're still trying to make one process serve all needs. Enterprise clients still wait too long, and efficiency-focused handling frustrates customers who need personalization."
+                                type: "danger",
+                                title: "Adding capacity to a broken system",
+                                content: "Contractors help briefly, but they don't understand context so quality drops. Training takes 3 weeks. By week 8 they leave, and you're back where you started. Costs increased 18% with no lasting improvement. You added resources to an unchanged process."
                             }
                         },
                         {
-                            label: "Create tiered service processes",
-                            text: "Design three service tiers: Enterprise VIP (fast, personalized), Standard (balanced), and Self-Service (efficient, template-driven).",
+                            label: "Design tiered service pathways",
+                            text: "Create three distinct processes: VIP (enterprise, personalized), Standard (balanced), Self-Service (template-driven). Each optimized differently.",
                             outcome: "excellent",
                             decisionQuality: "excellent",
                             impact: {
-                                responseTime: -8,
-                                satisfaction: 10,
-                                resolution: 8,
-                                enterprise: 20,
-                                team: 10,
-                                leadership: 15
+                                responseTime: -6,
+                                satisfaction: 8,
+                                resolution: 7,
+                                sales: 15,
+                                team: 12,
+                                tech: 10
                             },
                             feedback: {
                                 type: "success",
-                                title: "Adaptive architecture established",
-                                content: "By creating different processes for different needs, you've solved the impossible trade-off. Enterprise gets speed + personalization, standard customers get balanced service, and self-service users get fast template responses. Each segment is satisfied."
+                                title: "Adaptive process architecture",
+                                content: "By accepting you can't optimize one process for all needs, you solved the impossible trade-off. Sales can now promise differentiated service. Your team isn't stretched thin trying to personalize everything. Tech sees clear requirements for each tier. This is adaptive leadership—changing the system, not just working harder."
                             },
                             requiredState: 'normal'
                         },
                         {
-                            label: "Let teams self-organize",
-                            text: "Remove rigid structure and let agents choose tickets based on expertise and customer needs.",
-                            outcome: "poor",
-                            decisionQuality: "poor",
+                            label: "Implement AI chatbot for tier 1 support",
+                            text: "Use technology to handle simple queries automatically, freeing your team for complex issues.",
+                            outcome: "partial",
+                            decisionQuality: "partial",
                             impact: {
-                                responseTime: 4,
-                                satisfaction: -3,
-                                resolution: -3,
-                                enterprise: -8,
-                                team: 5,
-                                leadership: -10
+                                responseTime: -2,
+                                satisfaction: 2,
+                                resolution: 1,
+                                sales: 3,
+                                team: 0,
+                                tech: -5
                             },
                             feedback: {
-                                type: "danger",
-                                title: "Autonomy without structure",
-                                content: "Agents cherry-picked easy tickets. Complex issues languished. No predictable service levels emerged. Enterprise clients sometimes waited longer than individual users. Team loved the freedom but results suffered."
+                                type: "warning",
+                                title: "Technology before strategy",
+                                content: "Chatbot helps with 25% of volume but you still have a single undifferentiated process. Enterprise clients frustrated when routed to bot. You're automating symptoms, not fixing the root cause. Tech annoyed by vague requirements."
                             }
                         }
                     ];
 
                     if (branchingState === 'struggling') {
-                        // Remove the excellent option and add a recovery path
                         return [
                             baseOptions[0],
                             {
-                                label: "Simplified two-tier approach",
-                                text: "Create just two tiers (Premium and Standard) to reduce complexity while still differentiating service.",
+                                label: "Two-tier service model",
+                                text: "Simplified approach: Premium (paying customers) and Standard (everyone else). Less complex than three tiers.",
                                 outcome: "partial",
                                 decisionQuality: "partial",
-                                locked: false,
                                 impact: {
-                                    responseTime: -4,
-                                    satisfaction: 6,
+                                    responseTime: -3,
+                                    satisfaction: 5,
                                     resolution: 4,
-                                    enterprise: 10,
-                                    team: 5,
-                                    leadership: 8
+                                    sales: 8,
+                                    team: 6,
+                                    tech: 5
                                 },
                                 feedback: {
                                     type: "success",
-                                    title: "Pragmatic recovery",
-                                    content: "Given your previous challenges, you chose a simpler approach. Two tiers are easier to manage than three, and still provide meaningful differentiation. Results are good, though not optimal."
+                                    title: "Recovery through simplicity",
+                                    content: "Given your earlier missteps, stakeholders appreciate this pragmatic approach. Two tiers are easier to manage than three. Results are good though not optimal. You're rebuilding trust through clear, achievable improvements."
                                 }
                             },
                             baseOptions[2]
                         ];
                     } else if (branchingState === 'crisis') {
-                        // Very limited options in crisis mode
                         return [
                             {
-                                label: "Emergency triage system",
-                                text: "Implement basic priority sorting: Urgent (paying customers) vs. Non-urgent (everyone else).",
+                                label: "Emergency priority system",
+                                text: "Basic triage: Urgent (revenue risk) vs. Standard (everything else). Just to stop the bleeding.",
                                 outcome: "partial",
                                 decisionQuality: "poor",
                                 impact: {
                                     responseTime: -2,
-                                    satisfaction: 3,
-                                    resolution: 2,
-                                    enterprise: 8,
-                                    team: -2,
-                                    leadership: 4
+                                    satisfaction: 2,
+                                    resolution: 1,
+                                    sales: 6,
+                                    team: -3,
+                                    tech: 0
                                 },
                                 feedback: {
                                     type: "warning",
-                                    title: "Damage control",
-                                    content: "You're in survival mode. Basic triage helps enterprise clients but doesn't solve the fundamental design problem. You're still treating symptoms, not causes."
+                                    title: "Survival mode",
+                                    content: "You're in damage control. Basic prioritization helps but doesn't solve the fundamental design problem. Sales slightly happier. Team sees this as reactive, not strategic. You're still treating symptoms."
                                 }
                             },
                             baseOptions[0],
@@ -995,72 +1211,71 @@
             },
             {
                 week: 3,
-                problem: "Your tiered process design looks good on paper, but you need to test it before full rollout. Leadership wants it implemented immediately. How do you proceed?",
+                problem: "You've designed a tiered service model. But Sales wants it launched immediately to save Q4 deals. Your team is nervous about execution. Tech wants a 6-week pilot. Leadership is pressuring you for 'quick wins.' You're getting pulled in four directions. How do you regulate this distress?",
                 getBranchedOptions: function(branchingState) {
                     const baseOptions = [
                         {
-                            label: "Full immediate rollout",
-                            text: "Launch across all customers at once. We've done the analysis—commit fully and fix issues as they arise.",
+                            label: "Launch everything immediately to show results",
+                            text: "Full rollout across all customers this week. Make adjustments in flight to build momentum.",
                             outcome: "poor",
                             decisionQuality: "poor",
                             impact: {
                                 responseTime: 8,
-                                satisfaction: -8,
-                                resolution: -5,
-                                enterprise: -10,
-                                team: -15,
-                                leadership: -12
+                                satisfaction: -10,
+                                resolution: -6,
+                                sales: -15,
+                                team: -20,
+                                tech: -15
                             },
                             feedback: {
                                 type: "danger",
-                                title: "Big bang failure",
-                                content: "Classification errors, system conflicts, and agent confusion created chaos. Customer complaints spiked. You're forced to roll back, losing credibility. Stakeholders now skeptical of any process changes."
+                                title: "Pressure led to panic",
+                                content: "Classification errors everywhere. Agents confused about which tier to use. System crashed under load. Major enterprise client escalated to CEO after being misrouted to self-service. You absorbed everyone's anxiety and made a fear-based decision. Had to roll back—credibility shattered."
                             }
                         },
                         {
-                            label: "4-week controlled pilot",
-                            text: "Test with 20% of customers, gather data weekly, adjust based on learnings, then scale gradually.",
+                            label: "Run a controlled 4-week pilot with 20% of volume",
+                            text: "Firm boundary: 'We'll test with a subset, learn, adjust, then scale confidently. No shortcuts.'",
                             outcome: "excellent",
                             decisionQuality: "excellent",
                             impact: {
-                                responseTime: -6,
-                                satisfaction: 8,
+                                responseTime: -5,
+                                satisfaction: 7,
                                 resolution: 6,
-                                enterprise: 12,
-                                team: 8,
-                                leadership: 10
+                                sales: 10,
+                                team: 12,
+                                tech: 15
                             },
                             feedback: {
                                 type: "success",
-                                title: "Safe-to-fail experimentation",
-                                content: "Pilot revealed classification edge cases and handoff bottlenecks you couldn't have predicted. You adjusted before full rollout. Now scaling with confidence and evidence. Team sees you learn and adapt, not just mandate."
+                                title: "Holding steady under pressure",
+                                content: "You regulated the distress. Told Sales: 'I understand urgency, but a failed launch hurts Q4 more than waiting 4 weeks.' Pilot revealed edge cases you'd never have predicted. Scaled with confidence. Stakeholders see you won't cave to pressure—you make sound decisions."
                             }
                         },
                         {
-                            label: "Enterprise clients only first",
-                            text: "Launch Tier 1 (VIP) service only, prove value with high-revenue customers, then expand.",
-                            outcome: "partial",
-                            decisionQuality: "partial",
+                            label: "Let each stakeholder run their own pilot",
+                            text: "Sales tests with their priority accounts, Tech tests their way, your team picks cases. Distributed approach.",
+                            outcome: "poor",
+                            decisionQuality: "poor",
                             impact: {
-                                responseTime: -3,
-                                satisfaction: 4,
-                                resolution: 2,
-                                enterprise: 15,
-                                team: 3,
-                                leadership: 5
+                                responseTime: 3,
+                                satisfaction: -4,
+                                resolution: -3,
+                                sales: -5,
+                                team: -8,
+                                tech: -10
                             },
                             feedback: {
-                                type: "warning",
-                                title: "Partial learning",
-                                content: "Enterprise clients very happy, but you didn't test interactions between tiers. When you add Tier 2/3 later, integration issues emerge. Slower learning than a full pilot would have provided."
+                                type: "danger",
+                                title: "Avoiding the heat by diffusing ownership",
+                                content: "You tried to make everyone happy by giving everyone control. Result: three inconsistent pilots, no shared learning, contradictory data. No one owns outcomes. This is avoiding leadership, not adaptive leadership."
                             }
                         }
                     ];
 
                     if (branchingState === 'crisis') {
-                        // In crisis, pilot option is locked - must do quick fix
                         baseOptions[1].locked = true;
-                        baseOptions[1].lockedReason = "Your earlier poor decisions have eroded trust. Leadership won't approve a lengthy pilot.";
+                        baseOptions[1].lockedReason = "Stakeholder trust is too low for a lengthy pilot. They need to see improvement now.";
                     }
 
                     return baseOptions;
@@ -1068,64 +1283,64 @@
             },
             {
                 week: 4,
-                problem: "Your pilot validated the approach. Now you need to scale from 20% to 100% of customers. How do you manage the transition?",
+                problem: "Pilot results are in—tiered service works! But now your team is divided. Senior agents love the VIP tier (interesting work, happy customers). Junior agents feel stuck with low-tier 'grunt work' and resent it. Two have threatened to quit. How do you address this adaptive challenge within your team?",
                 getBranchedOptions: function(branchingState) {
                     return [
                         {
-                            label: "Rapid 2-week rollout",
-                            text: "Train all agents intensively, flip the switch organization-wide, fix issues in production.",
-                            outcome: "poor",
+                            label: "Rotate everyone through all tiers equally",
+                            text: "Make it fair by having every agent spend time in each tier to avoid hierarchy resentment.",
+                            outcome: "partial",
                             decisionQuality: "poor",
                             impact: {
-                                responseTime: 4,
-                                satisfaction: -5,
-                                resolution: -3,
-                                enterprise: -5,
-                                team: -8,
-                                leadership: -6
+                                responseTime: 3,
+                                satisfaction: -3,
+                                resolution: -2,
+                                sales: -8,
+                                team: -5,
+                                tech: 0
                             },
                             feedback: {
                                 type: "warning",
-                                title: "Speed over stability",
-                                content: "Training was rushed, system bugs emerged under load, and volume predictions were wrong. Tier 1 overwhelmed. Had to pause and restabilize, delaying benefits by a month."
+                                title: "Equality over effectiveness",
+                                content: "Senior agents frustrated that expertise isn't valued. VIP customers get inconsistent service when juniors rotate in. You prioritized internal fairness over customer outcomes. This is a technical solution (rotation policy) to an adaptive challenge (career development)."
                             }
                         },
                         {
-                            label: "Phased rollout: 30% → 70% → 100%",
-                            text: "Scale in three waves over 6 weeks with learning cycles between each phase.",
+                            label: "Create clear growth pathways across tiers",
+                            text: "Map how agents develop from Standard → VIP tier, with skills, metrics, and mentorship at each level.",
                             outcome: "excellent",
                             decisionQuality: "excellent",
                             impact: {
-                                responseTime: -7,
-                                satisfaction: 9,
-                                resolution: 7,
-                                enterprise: 10,
-                                team: 12,
-                                leadership: 12
+                                responseTime: -4,
+                                satisfaction: 6,
+                                resolution: 5,
+                                sales: 8,
+                                team: 18,
+                                tech: 5
                             },
                             feedback: {
                                 type: "success",
-                                title: "Learning while scaling",
-                                content: "Each wave revealed insights that improved the next. Wave 1 showed tier boundary issues—you refined them. Wave 2 revealed peak-hour bottlenecks—you added flex capacity. Final rollout smooth and confident."
+                                title: "Giving the work back to them",
+                                content: "You facilitated a session where agents themselves defined what 'VIP-ready' looks like. Self-Service becomes training ground. Standard tier is progression. VIP is earned mastery. Junior agents now see a path, not a ceiling. You didn't solve it for them—you helped them own their development."
                             }
                         },
                         {
-                            label: "Voluntary adoption",
-                            text: "Make it available but optional. Let teams adopt when ready, share learnings organically.",
+                            label: "Pay differential for VIP tier work",
+                            text: "Compensate senior agents more for handling complex VIP cases to recognize the difficulty.",
                             outcome: "partial",
                             decisionQuality: "partial",
                             impact: {
-                                responseTime: -2,
-                                satisfaction: 4,
+                                responseTime: -1,
+                                satisfaction: 2,
                                 resolution: 2,
-                                enterprise: 3,
-                                team: 6,
-                                leadership: -5
+                                sales: 3,
+                                team: 5,
+                                tech: 0
                             },
                             feedback: {
                                 type: "warning",
-                                title: "Slow, inconsistent adoption",
-                                content: "Only 45% adopted in 6 weeks. Customers experienced inconsistent service. Leadership frustrated by slow progress. Eventually had to mandate anyway—should have done structured rollout from start."
+                                title: "Money doesn't solve adaptive challenges",
+                                content: "Pay helps short-term but doesn't address junior agents' desire for growth and meaning. You've created a compensation tier without a development system. People want mastery and purpose, not just money."
                             }
                         }
                     ];
@@ -1133,71 +1348,71 @@
             },
             {
                 week: 5,
-                problem: "The process is working, but the team escalates every decision to you. When you're out, decision-making stops. How do you create sustainable governance?",
+                problem: "You're scaling from 20% to 100% of customers. But you realize you make every decision—agent escalations, tier classification edge cases, customer exceptions. When you're in meetings, work stops. Your team looks to you for answers instead of thinking independently. How do you distribute leadership?",
                 getBranchedOptions: function(branchingState) {
                     const baseOptions = [
                         {
-                            label: "Document everything in detail",
-                            text: "Create comprehensive manual with decision trees for every scenario to eliminate ambiguity.",
+                            label: "Document every decision in a detailed playbook",
+                            text: "Create comprehensive guidelines for every scenario so agents can reference the manual instead of asking you.",
                             outcome: "poor",
                             decisionQuality: "poor",
                             impact: {
-                                responseTime: 2,
-                                satisfaction: -4,
-                                resolution: -3,
-                                enterprise: -5,
-                                team: -8,
-                                leadership: -6
+                                responseTime: 4,
+                                satisfaction: -5,
+                                resolution: -4,
+                                sales: -6,
+                                team: -12,
+                                tech: -3
                             },
                             feedback: {
                                 type: "danger",
-                                title: "Rigidity defeats adaptiveness",
-                                content: "300-page manual created but new edge cases emerged constantly. Teams followed rules mechanically even when context suggested otherwise. Process improvement stopped—'it's documented, we can't change it.'"
+                                title: "Technical fix to adaptive challenge",
+                                content: "120-page playbook created. But it can't cover every edge case. Agents follow rules mechanically even when context suggests otherwise. They stop thinking critically. New issues arise that aren't in the playbook—and decision-making freezes. You've removed judgment, not built capacity."
                             }
                         },
                         {
-                            label: "Distributed authority with guardrails",
-                            text: "Define what teams can decide locally, what needs approval, and how learning is captured.",
+                            label: "Define decision authority levels + learning cycles",
+                            text: "Specify what agents decide (routine), what team leads decide (non-routine), what needs you (strategic). Build weekly learning sessions to elevate judgment.",
                             outcome: "excellent",
                             decisionQuality: "excellent",
                             impact: {
-                                responseTime: -4,
-                                satisfaction: 8,
+                                responseTime: -5,
+                                satisfaction: 7,
                                 resolution: 6,
-                                enterprise: 8,
-                                team: 15,
-                                leadership: 12
+                                sales: 10,
+                                team: 20,
+                                tech: 8
                             },
                             feedback: {
                                 type: "success",
-                                title: "Self-adapting system created",
-                                content: "Teams now make 85% of decisions locally. Weekly huddles capture learnings. Monthly reviews surface patterns. Process continuously improves without you being the bottleneck. When you're out, work continues."
+                                title: "Building adaptive capacity",
+                                content: "You gave the work back. 80% of decisions now happen locally. Weekly 'edge case huddles' where team discusses judgment calls. People own outcomes instead of deferring to you. When you're out, work continues. You've built a learning organization, not a dependency culture."
                             }
                         },
                         {
-                            label: "Create a Process Council",
-                            text: "8-person rotating committee reviews all changes and makes adaptation decisions.",
+                            label: "Promote two senior agents to Team Lead roles",
+                            text: "Create a management layer. They handle day-to-day decisions and escalations on your behalf.",
                             outcome: "partial",
                             decisionQuality: "partial",
                             impact: {
-                                responseTime: -1,
-                                satisfaction: 3,
-                                resolution: 2,
-                                enterprise: 3,
-                                team: 5,
-                                leadership: 4
+                                responseTime: -2,
+                                satisfaction: 4,
+                                resolution: 3,
+                                sales: 5,
+                                team: 8,
+                                tech: 2
                             },
                             feedback: {
                                 type: "warning",
-                                title: "Better, but slow",
-                                content: "Council makes good strategic decisions but becomes a bottleneck for operational adjustments. Teams must wait for bi-weekly meetings. Good for policy, poor for real-time adaptation."
+                                title: "Structure without empowerment",
+                                content: "Team leads help but they just become mini-you, creating a new bottleneck. Agents still don't develop judgment—they just escalate to leads instead of you. Better than before, but you haven't distributed real decision-making authority."
                             }
                         }
                     ];
 
                     if (branchingState === 'crisis') {
                         baseOptions[1].locked = true;
-                        baseOptions[1].lockedReason = "Team trust is too low for distributed authority. They need more structure first.";
+                        baseOptions[1].lockedReason = "Team trust is too fractured for distributed authority right now. Need more structure first.";
                     }
 
                     return baseOptions;
@@ -1205,64 +1420,64 @@
             },
             {
                 week: 6,
-                problem: "Customer needs are evolving—they now want chat support, not just email/phone. How do you adapt your tiered process to new channels?",
+                problem: "Customer expectations have shifted—they now want live chat support, not just email/phone. Sales is already selling it. But adding chat would completely overwhelm your team, who barely have bandwidth now. Tech can build it but not maintain two support systems. How do you adapt to changing reality?",
                 getBranchedOptions: function(branchingState) {
                     return [
                         {
-                            label: "Add chat to all tiers immediately",
-                            text: "Deploy chat capability across all service tiers at once to meet customer expectations.",
+                            label: "Deploy chat across all tiers immediately",
+                            text: "Meet market expectations. Train everyone on chat this week and launch to stay competitive.",
                             outcome: "poor",
                             decisionQuality: "poor",
                             impact: {
-                                responseTime: 5,
-                                satisfaction: -3,
-                                resolution: -4,
-                                enterprise: -6,
-                                team: -10,
-                                leadership: -7
+                                responseTime: 7,
+                                satisfaction: -8,
+                                resolution: -6,
+                                sales: -10,
+                                team: -18,
+                                tech: -12
                             },
                             feedback: {
-                                type: "warning",
-                                title: "Overextension without preparation",
-                                content: "Agents struggled with chat volume while maintaining phone/email. Chat response times were poor. Team burnout increased. Should have tested chat in one tier first."
+                                type: "danger",
+                                title: "Overextension without learning",
+                                content: "Agents trying to handle chat, email, and phone simultaneously. Response quality crashes across all channels. Team burnout spikes—three people quit. Chat response times averaging 45 minutes (customers expect <5 min). You stretched capacity without changing process."
                             }
                         },
                         {
-                            label: "Pilot chat in Tier 1 only",
-                            text: "Test chat with Enterprise VIP customers first, learn, refine, then expand to other tiers.",
+                            label: "Pilot chat in VIP tier only, learn, then expand",
+                            text: "Test with enterprise customers where stakes are highest and volume is manageable. Refine before scaling.",
                             outcome: "excellent",
                             decisionQuality: "excellent",
                             impact: {
                                 responseTime: -3,
-                                satisfaction: 7,
+                                satisfaction: 6,
                                 resolution: 5,
-                                enterprise: 12,
-                                team: 6,
-                                leadership: 8
+                                sales: 12,
+                                team: 8,
+                                tech: 10
                             },
                             feedback: {
                                 type: "success",
-                                title: "Incremental channel expansion",
-                                content: "Tier 1 chat pilot revealed staffing needs and workflow adjustments. You refined the model before expanding to Tier 2/3. Enterprise clients love the responsiveness. Controlled, learning-based adaptation."
+                                title: "Iterative adaptation to new demands",
+                                content: "VIP pilot revealed chat needs different staffing ratios than email. You learned concurrent chat limits (3 per agent max). Workflow adjustments made. Enterprise loves it. Now scaling to Standard tier with confidence. You adapted the system to reality, not reality to wishes."
                             }
                         },
                         {
-                            label: "Outsource chat to third party",
-                            text: "Contract with chat support vendor to handle this channel while you focus on core process.",
+                            label: "Outsource chat to specialized vendor",
+                            text: "Contract with chat support company while you focus on core email/phone channels with your team.",
                             outcome: "partial",
                             decisionQuality: "partial",
                             impact: {
-                                responseTime: -2,
-                                satisfaction: 2,
-                                resolution: 1,
-                                enterprise: -3,
-                                team: 4,
-                                leadership: 3
+                                responseTime: -1,
+                                satisfaction: 1,
+                                resolution: 0,
+                                sales: -5,
+                                team: 3,
+                                tech: 2
                             },
                             feedback: {
                                 type: "warning",
-                                title: "Speed but quality concerns",
-                                content: "Chat launched quickly but vendor doesn't understand your tiering model. Enterprise clients get inconsistent service. You're now managing two processes—internal and vendor. Integration issues persist."
+                                title: "Speed over integration",
+                                content: "Chat launches fast but vendor doesn't understand your tier model. VIP customers get generic responses. Integration with your systems is clunky. Two separate processes to manage. Quick fix, but not strategic."
                             }
                         }
                     ];
@@ -1270,64 +1485,64 @@
             },
             {
                 week: 7,
-                problem: "Leadership wants to cut costs by 15% due to budget pressures. Your improved process costs 8% more than the old one. How do you respond?",
+                problem: "Leadership announces budget cuts—15% reduction across all departments due to market conditions. Your improved process costs 8% more than the old one (tiered staffing, better tools, training). CFO asks: 'Can we just go back to the old way and cut costs?' Everyone is watching how you respond under this pressure.",
                 getBranchedOptions: function(branchingState) {
                     return [
                         {
-                            label: "Reduce Tier 1 team size",
-                            text: "Cut the premium service team to reduce costs while maintaining other tiers.",
+                            label: "Agree to cut back to single-tier process",
+                            text: "Protect jobs by simplifying back to one service level and reducing tool costs.",
                             outcome: "poor",
                             decisionQuality: "poor",
                             impact: {
-                                responseTime: 6,
-                                satisfaction: -8,
-                                resolution: -5,
-                                enterprise: -20,
-                                team: -6,
-                                leadership: -10
+                                responseTime: 12,
+                                satisfaction: -15,
+                                resolution: -10,
+                                sales: -25,
+                                team: -15,
+                                tech: -8
                             },
                             feedback: {
                                 type: "danger",
-                                title: "Destroyed your gains",
-                                content: "Enterprise response times spiked back to 24+ hours. Three major clients switched to competitors. Revenue loss far exceeded cost savings. Leadership now sees the process redesign as failed."
+                                title: "Reverting under pressure",
+                                content: "Within 3 weeks, all your gains evaporated. Response times back to 45+ hours. Three enterprise clients switched to competitors (revenue loss: $1.8M). Team morale crushed—'We worked so hard for nothing.' Under pressure, you abandoned adaptive change and returned to the dysfunctional status quo."
                             }
                         },
                         {
-                            label: "Show cost vs. value analysis",
-                            text: "Present data on revenue retention, customer lifetime value, and efficiency gains from the new process.",
+                            label: "Present data-driven business case for the investment",
+                            text: "Show ROI: customer retention value, reduced churn, efficiency gains. Make the case that cutting this costs more than it saves.",
                             outcome: "excellent",
                             decisionQuality: "excellent",
                             impact: {
                                 responseTime: 0,
-                                satisfaction: 3,
-                                resolution: 2,
-                                enterprise: 5,
-                                team: 8,
-                                leadership: 15
+                                satisfaction: 4,
+                                resolution: 3,
+                                sales: 10,
+                                team: 15,
+                                tech: 8
                             },
                             feedback: {
                                 type: "success",
-                                title: "Evidence-based advocacy",
-                                content: "Your data showed 3 at-risk enterprise accounts renewed (value: $2.4M), churn decreased 12%, and NPS improved 18 points. Leadership recognized 8% cost increase delivers 25% value increase. Budget approved."
+                                title: "Leading upward with evidence",
+                                content: "Your presentation: at-risk renewals saved ($2.1M), churn down 14%, NPS up 22 points. 8% cost increase delivers 30% value increase. CFO approves budget. You showed adaptive leadership works by protecting the change while acknowledging the pressure. Team sees you fight for what works, not what's comfortable."
                             }
                         },
                         {
-                            label: "Automate Tier 3 with AI",
-                            text: "Use AI chatbots for self-service tier to reduce costs while protecting premium tiers.",
+                            label: "Propose strategic automation in Standard tier",
+                            text: "Use AI to automate 40% of Standard tier volume, reducing costs while protecting VIP quality.",
                             outcome: "partial",
                             decisionQuality: "partial",
                             impact: {
-                                responseTime: -1,
-                                satisfaction: 2,
-                                resolution: 3,
-                                enterprise: 3,
-                                team: 3,
-                                leadership: 8
+                                responseTime: -2,
+                                satisfaction: 3,
+                                resolution: 2,
+                                sales: 5,
+                                team: 5,
+                                tech: 6
                             },
                             feedback: {
                                 type: "success",
-                                title: "Strategic automation",
-                                content: "AI handles 40% of Tier 3 volume effectively, reducing costs 6%. Quality remains high because AI is well-suited for standardized queries. Good balance of efficiency and service quality."
+                                title: "Compromise with innovation",
+                                content: "Smart middle path. Automation reduces Standard tier costs by 7% while maintaining quality. VIP service untouched. Not as ideal as full funding, but you found a way to preserve core improvements while addressing budget reality. Pragmatic adaptation."
                             }
                         }
                     ];
@@ -1449,9 +1664,9 @@
 
         function getBranchingNoticeHTML() {
             if (state.branchingState === 'crisis') {
-                return '<div class="branching-notice">⚠️ <strong>Crisis Mode:</strong> Your previous poor decisions have limited your options. Some strategic approaches are no longer available.</div>';
+                return '<div class="branching-notice">⚠️ <strong>Crisis:</strong> Your earlier reactive decisions have damaged stakeholder trust. Some strategic options are no longer available.</div>';
             } else if (state.branchingState === 'struggling') {
-                return '<div class="branching-notice warning">⚡ <strong>Under Pressure:</strong> Your recent choices have constrained your next moves. Careful decision-making is crucial.</div>';
+                return '<div class="branching-notice warning">⚡ <strong>Pressure Mounting:</strong> Stakeholders are watching closely. You need to rebuild confidence through thoughtful decisions.</div>';
             }
             return '';
         }
@@ -1483,11 +1698,11 @@
         }
 
         function updateStakeholders() {
-            const stakeholders = ['enterprise', 'team', 'leadership'];
+            const stakeholders = ['sales', 'team', 'tech'];
             const labels = {
-                enterprise: ['Enterprise', 'Frustrated with delays', 'Somewhat satisfied', 'Very satisfied'],
-                team: ['Support Team', 'Overwhelmed', 'Managing well', 'Engaged and capable'],
-                leadership: ['Leadership', 'Concerned about costs', 'Cautiously optimistic', 'Confident in direction']
+                sales: ['Sales Team', 'Angry about broken promises', 'Cautiously supportive', 'Strong partnership'],
+                team: ['Service Team', 'Burned out and defensive', 'Engaged and hopeful', 'Empowered and thriving'],
+                tech: ['Tech Team', 'Skeptical of more requests', 'Willing to collaborate', 'Enthusiastic partner']
             };
 
             stakeholders.forEach(sh => {
@@ -1537,12 +1752,18 @@
                 div.className = 'history-item ' + item.outcome;
                 div.innerHTML = `
                     <div class="history-week">Week ${item.week}</div>
-                    <div class="history-problem"><strong>Challenge:</strong> ${item.problem}</div>
-                    <div class="history-action"><strong>Action:</strong> ${item.action}</div>
-                    <div class="history-outcome"><strong>Outcome:</strong> ${item.outcomeText}</div>
+                    <div class="history-problem"><strong>Situation:</strong> ${item.problem}</div>
+                    <div class="history-action"><strong>Your Action:</strong> ${item.action}</div>
+                    <div class="history-outcome"><strong>Result:</strong> ${item.outcomeText}</div>
                 `;
                 container.appendChild(div);
             });
+        }
+
+        // ===== INTRO SCREEN =====
+        function startSimulation() {
+            document.getElementById('introScreen').classList.add('hidden');
+            setTimeout(showDecisionPanel, 1000);
         }
 
         // ===== MODAL FUNCTIONS =====
@@ -1554,17 +1775,12 @@
 
             const scenario = scenarios[state.currentWeek - 1];
             
-            document.getElementById('panelTitle').textContent = 'Week ' + state.currentWeek + ' Decision';
+            document.getElementById('panelTitle').textContent = 'Week ' + state.currentWeek + ' Challenge';
             document.getElementById('panelWeek').textContent = 'Week ' + state.currentWeek + ' of 7';
             
-            // Get problem text
-            const problemText = scenario.problem;
-            document.getElementById('problemText').textContent = problemText;
-
-            // Show branching notice if applicable
+            document.getElementById('problemText').textContent = scenario.problem;
             document.getElementById('branchingNotice').innerHTML = getBranchingNoticeHTML();
 
-            // Get options (possibly branched)
             const options = scenario.getBranchedOptions ? 
                 scenario.getBranchedOptions(state.branchingState) : 
                 scenario.options;
@@ -1595,37 +1811,31 @@
         }
 
         function selectOption(option, scenario, index) {
-            // Disable all options
             document.querySelectorAll('.option').forEach(opt => {
                 opt.classList.add('disabled');
             });
 
-            // Highlight selected
             document.querySelectorAll('.option')[index].classList.add('selected');
 
-            // Track decision quality
             state.decisionPath.push(option.decisionQuality);
             updateBranchingState();
 
-            // Apply impacts
             state.metrics.responseTime += option.impact.responseTime;
             state.metrics.satisfaction += option.impact.satisfaction;
             state.metrics.resolution += option.impact.resolution;
 
-            state.stakeholders.enterprise += option.impact.enterprise;
+            state.stakeholders.sales += option.impact.sales;
             state.stakeholders.team += option.impact.team;
-            state.stakeholders.leadership += option.impact.leadership;
+            state.stakeholders.tech += option.impact.tech;
 
-            // Clamp values
             state.metrics.responseTime = Math.max(15, Math.min(60, state.metrics.responseTime));
             state.metrics.satisfaction = Math.max(0, Math.min(100, state.metrics.satisfaction));
             state.metrics.resolution = Math.max(0, Math.min(100, state.metrics.resolution));
 
-            state.stakeholders.enterprise = Math.max(0, Math.min(100, state.stakeholders.enterprise));
+            state.stakeholders.sales = Math.max(0, Math.min(100, state.stakeholders.sales));
             state.stakeholders.team = Math.max(0, Math.min(100, state.stakeholders.team));
-            state.stakeholders.leadership = Math.max(0, Math.min(100, state.stakeholders.leadership));
+            state.stakeholders.tech = Math.max(0, Math.min(100, state.stakeholders.tech));
 
-            // Record history
             state.history.push({
                 week: state.currentWeek,
                 problem: scenario.problem,
@@ -1634,7 +1844,6 @@
                 outcome: option.feedback.type
             });
 
-            // Record metrics history
             state.metricsHistory.push({
                 week: state.currentWeek,
                 responseTime: state.metrics.responseTime,
@@ -1642,13 +1851,11 @@
                 resolution: state.metrics.resolution
             });
 
-            // Show feedback
             const feedback = document.getElementById('feedbackPanel');
             feedback.className = 'feedback-panel active ' + option.feedback.type;
             document.getElementById('feedbackTitle').textContent = option.feedback.title;
             document.getElementById('feedbackContent').textContent = option.feedback.content;
 
-            // Enable continue
             document.getElementById('continueBtn').disabled = false;
         }
 
@@ -1673,17 +1880,17 @@
 
         function showCompletionModal() {
             const avgStakeholder = Math.round(
-                (state.stakeholders.enterprise + state.stakeholders.team + state.stakeholders.leadership) / 3
+                (state.stakeholders.sales + state.stakeholders.team + state.stakeholders.tech) / 3
             );
 
-            let performance = 'Good';
+            let performance = 'Developing Leader';
             let performanceClass = 'good';
             
             if (state.metrics.satisfaction >= 85 && avgStakeholder >= 75) {
-                performance = 'Excellent Performance';
+                performance = 'Adaptive Leader';
                 performanceClass = 'excellent';
             } else if (state.metrics.satisfaction < 70 || avgStakeholder < 50) {
-                performance = 'Needs Improvement';
+                performance = 'Technical Manager';
                 performanceClass = 'needs-improvement';
             }
 
@@ -1705,14 +1912,14 @@
         }
 
         function getKeyInsight() {
-            const goodDecisions = state.decisionPath.filter(d => d === 'excellent').length;
+            const excellentDecisions = state.decisionPath.filter(d => d === 'excellent').length;
             
-            if (goodDecisions >= 5) {
-                return 'You consistently chose adaptive approaches, treating process challenges systemically rather than symptomatically. Your decisions showed strong systems thinking and a learning-oriented mindset.';
-            } else if (goodDecisions >= 3) {
-                return 'You made some strong adaptive decisions but occasionally reverted to quick fixes. Continue developing systems thinking—focus on addressing root causes rather than symptoms.';
+            if (excellentDecisions >= 5) {
+                return 'You demonstrated adaptive leadership: diagnosing root causes over symptoms, regulating distress under pressure, giving work back to develop others, and making evidence-based decisions. You treated process challenges as opportunities for systemic change, not just technical fixes.';
+            } else if (excellentDecisions >= 3) {
+                return 'You showed adaptive thinking in key moments but occasionally reverted to reactive problem-solving. Continue developing your ability to distinguish technical problems (apply best practices) from adaptive challenges (require new learning). Step onto the balcony more often.';
             } else {
-                return 'Many decisions focused on symptoms rather than root causes. Adaptive challenges require rethinking process design, not just optimization. Consider how your choices create or constrain future options.';
+                return 'Your approach favored quick fixes over systemic diagnosis, and reacting to pressure over regulating distress. Adaptive leadership means seeing patterns, not just problems. Focus on: What is the underlying mismatch? Whose problem is this to solve? What can only I do vs. what should others own?';
             }
         }
 
@@ -1724,9 +1931,6 @@
         updateMetricsDisplay();
         updateStakeholders();
         updateHistory();
-
-        // Auto-start first decision
-        setTimeout(showDecisionPanel, 1000);
     </script>
 </body>
 </html>
