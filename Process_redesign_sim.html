@@ -1001,7 +1001,7 @@
         const scenarios = [
             {
                 week: 1,
-                problem: "Your inbox explodes Monday morning. Sales is furious—clients are complaining about 48-hour response times when they were promised 24 hours. Your team is overwhelmed and defensive, saying 'We're doing our best with what we have.' Tech says they can't build you more tools this quarter. Everyone wants a meeting with you today. How do you respond?",
+                problem: "Your inbox on Monday morning is full of problems. Sales is furious; clients are complaining about 48-hour response times when they were promised 24 hours. These are new clients, and first impressions haven't been great. Your team is overwhelmed and defensive, saying 'We're doing our best with what we have.' Tech says they can't build you more tools this quarter. Everyone wants a meeting with you today. How do you respond?",
                 options: [
                     {
                         label: "Schedule individual meetings with each stakeholder",
@@ -1019,7 +1019,7 @@
                         feedback: {
                             type: "danger",
                             title: "Reactive firefighting",
-                            content: "You spent 6 hours in back-to-back meetings. Each group vented. Sales blamed your team. Your team blamed Sales for overpromising. Tech said they're slammed. You're exhausted, nothing changed, and everyone feels unheard because you're just collecting complaints without a strategy."
+                            content: "You spent 6 hours in back-to-back meetings. Each group vented. Sales blamed your team, your team blamed Sales for overpromising, and Tech said they're slammed. You're exhausted, nothing changed, and everyone feels unheard because you're just collecting complaints without a strategy."
                         }
                     },
                     {
@@ -1038,7 +1038,7 @@
                         feedback: {
                             type: "success",
                             title: "Getting on the balcony",
-                            content: "You discovered the root cause: Sales sells one-size-fits-all support, but customers need three different service levels. Your single-queue process can't optimize for both speed AND customization. When you share this diagnosis with stakeholders, everyone stops blaming each other and starts problem-solving."
+                            content: "You discovered the root cause: Sales sells one-size-fits-all support, but customers need three different service levels. Your single-queue process can't optimise for both speed AND customisation. When you share this diagnosis with stakeholders, everyone stops blaming each other and starts problem-solving."
                         }
                     },
                     {
@@ -1057,7 +1057,7 @@
                         feedback: {
                             type: "warning",
                             title: "Protecting your team, burning bridges",
-                            content: "Your team appreciates you standing up for them. But Sales leadership escalates to your VP, saying you're 'not a team player.' The real problem—process design—remains unsolved. You've treated this as a Sales problem when it's a systems problem."
+                            content: "Your team appreciates you standing up for them. But Sales leadership escalates to your VP, saying you're 'not a team player.' The real problem of poor process design remains unsolved. You've treated this as a Sales problem when it's a systems problem."
                         }
                     },
                     {
@@ -1076,14 +1076,14 @@
                         feedback: {
                             type: "warning",
                             title: "Solution before diagnosis",
-                            content: "Tech pushes back hard. You don't even know what to automate yet. They're already underwater with product work. Relationship damaged. Your team feels you're looking for tech silver bullets instead of understanding their reality."
+                            content: "Tech pushes back hard, frustrated at being asked to fix a problem you don't fully understand yet. They're already over capacity with product work, and this additional task is pulling resources from their primary tasks. Your relationships are damaged. Your team feels you're looking for tech silver bullets instead of understanding their reality."
                         }
                     }
                 ],
             },
             {
                 week: 2,
-                problem: "Your diagnosis revealed that enterprise clients need fast, personalized service while small customers just want quick template responses. But your single process tries to serve everyone the same way. Sales says 'just hire more people.' Your team says 'we need better tools.' Tech says 'we need clearer requirements.' How do you move forward?",
+                problem: "Your diagnosis revealed that enterprise clients need fast, personalised service while small customers just want quick template responses. But your single process tries to serve everyone the same way. Sales says 'just hire more people.' Your team says 'we need better tools.' Tech says 'we need clearer requirements.' How do you move forward?",
                 getBranchedOptions: function(branchingState) {
                     const baseOptions = [
                         {
@@ -1107,7 +1107,7 @@
                         },
                         {
                             label: "Design tiered service pathways",
-                            text: "Create three distinct processes: VIP (enterprise, personalized), Standard (balanced), Self-Service (template-driven). Each optimized differently.",
+                            text: "Create three distinct processes: VIP (enterprise, personalised), Standard (balanced), Self-Service (template-driven). Each optimised differently.",
                             outcome: "excellent",
                             decisionQuality: "excellent",
                             impact: {
@@ -1121,7 +1121,7 @@
                             feedback: {
                                 type: "success",
                                 title: "Adaptive process architecture",
-                                content: "By accepting you can't optimize one process for all needs, you solved the impossible trade-off. Sales can now promise differentiated service. Your team isn't stretched thin trying to personalize everything. Tech sees clear requirements for each tier. This is adaptive leadership—changing the system, not just working harder."
+                                content: "By accepting you can't optimise one process for all needs, you solved the impossible trade-off. Sales can now promise differentiated service. Your team isn't stretched thin trying to personalise everything. Tech sees clear requirements for each tier. This is adaptive leadership—changing the system, not just working harder."
                             },
                             requiredState: 'normal'
                         },
@@ -1188,7 +1188,7 @@
                                 feedback: {
                                     type: "warning",
                                     title: "Survival mode",
-                                    content: "You're in damage control. Basic prioritization helps but doesn't solve the fundamental design problem. Sales slightly happier. Team sees this as reactive, not strategic. You're still treating symptoms."
+                                    content: "You're in damage control. Basic prioritisation helps but doesn't solve the fundamental design problem. Sales slightly happier. Team sees this as reactive, not strategic. You're still treating symptoms."
                                 }
                             },
                             baseOptions[0],
@@ -1292,7 +1292,7 @@
                             feedback: {
                                 type: "warning",
                                 title: "Equality over effectiveness",
-                                content: "Senior agents frustrated that expertise isn't valued. VIP customers get inconsistent service when juniors rotate in. You prioritized internal fairness over customer outcomes. This is a technical solution (rotation policy) to an adaptive challenge (career development)."
+                                content: "Senior agents frustrated that expertise isn't valued. VIP customers get inconsistent service when juniors rotate in. You prioritised internal fairness over customer outcomes. This is a technical solution (rotation policy) to an adaptive challenge (career development)."
                             }
                         },
                         {
@@ -1316,7 +1316,7 @@
                         },
                         {
                             label: "Pay differential for VIP tier work",
-                            text: "Compensate senior agents more for handling complex VIP cases to recognize the difficulty.",
+                            text: "Compensate senior agents more for handling complex VIP cases to recognise the difficulty.",
                             outcome: "partial",
                             decisionQuality: "partial",
                             impact: {
@@ -1338,7 +1338,7 @@
             },
             {
                 week: 5,
-                problem: "You're scaling from 20% to 100% of customers. But you realize you make every decision—agent escalations, tier classification edge cases, customer exceptions. When you're in meetings, work stops. Your team looks to you for answers instead of thinking independently. How do you distribute leadership?",
+                problem: "You're scaling from 20% to 100% of customers. But you realise you make every decision—agent escalations, tier classification edge cases, customer exceptions. When you're in meetings, work stops. Your team looks to you for answers instead of thinking independently. How do you distribute leadership?",
                 getBranchedOptions: function(branchingState) {
                     const baseOptions = [
                         {
@@ -1376,7 +1376,7 @@
                             feedback: {
                                 type: "success",
                                 title: "Building adaptive capacity",
-                                content: "You gave the work back. 80% of decisions now happen locally. Weekly 'edge case huddles' where team discusses judgment calls. People own outcomes instead of deferring to you. When you're out, work continues. You've built a learning organization, not a dependency culture."
+                                content: "You gave the work back. 80% of decisions now happen locally. Weekly 'edge case huddles' where team discusses judgment calls. People own outcomes instead of deferring to you. When you're out, work continues. You've built a learning organisation, not a dependency culture."
                             }
                         },
                         {
@@ -1452,7 +1452,7 @@
                             }
                         },
                         {
-                            label: "Outsource chat to specialized vendor",
+                            label: "Outsource chat to specialised vendor",
                             text: "Contract with chat support company while you focus on core email/phone channels with your team.",
                             outcome: "partial",
                             decisionQuality: "partial",
