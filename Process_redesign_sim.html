@@ -141,13 +141,6 @@
             background: var(--bg-main);
             border-radius: 8px;
         }
-
-        .objective-icon {
-            font-size: 24px;
-            margin-right: 16px;
-            flex-shrink: 0;
-        }
-
         .objective-content h4 {
             font-size: 16px;
             margin-bottom: 4px;
@@ -788,57 +781,54 @@
     <div class="intro-screen" id="introScreen">
         <div class="intro-content">
             <div class="intro-header">
-                <h1>Adaptive Leadership Simulation</h1>
-                <p class="subtitle">Customer Service Process Improvement Challenge</p>
+                <h1>Adaptive leadership simulation</h1>
+                <p class="subtitle">Customer service process improvement challenge</p>
             </div>
             <div class="intro-body">
                 <div class="role-card">
-                    <h2>🎯 Your Role</h2>
-                    <p>You are <strong>Alex Chen, Team Lead for Customer Service</strong> at a rapidly growing SaaS company. Your team handles 500+ support tickets weekly across email, phone, and chat.</p>
+                    <h2>Your role</h2>
+                    <p>You are <strong>Alex Chen, team lead for customer service</strong> at a rapidly growing SaaS company. Your team handles 500+ support tickets weekly across email, phone, and chat.</p>
                     <p>Leadership has tasked you with improving the customer service pipeline. You'll need to work closely with:</p>
-                    <p><strong>• Tech Team</strong> – They build the tools and systems you need<br>
-                    <strong>• Sales Team</strong> – They promise response times that affect your workload<br>
-                    <strong>• Your Service Team</strong> – 12 agents dealing with growing pressure</p>
-                    <p>The challenge? Response times are up 45%, satisfaction is down 15 points, and everyone has different priorities.</p>
+                    <p><strong>• Tech team</strong> – They build the tools and systems you need<br>
+                    <strong>• Sales team</strong> – They promise response times that affect your workload<br>
+                    <strong>• Your service team</strong> – 12 agents dealing with growing pressure</p>
+                    <p>The challenge? After a recent sales push, customer volume has increased, as have support requests. Response times are up 45%, satisfaction is down 15 points, and everyone has different priorities. Handle each challenge as it is presented to get to the best outcome for everyone. Use the dashboard to track how your project is doing.</p>
                 </div>
 
                 <div class="objectives-section">
-                    <h3>Your Objectives Over 7 Weeks:</h3>
+                    <h3>Your objectives over 7 weeks:</h3>
                     <div class="objective-item">
-                        <div class="objective-icon">🔍</div>
                         <div class="objective-content">
-                            <h4>Identify Root Causes</h4>
+                            <h4>Identify root causes</h4>
                             <p>Look beyond symptoms to find systemic process issues</p>
                         </div>
                     </div>
                     <div class="objective-item">
-                        <div class="objective-icon">🧘</div>
                         <div class="objective-content">
-                            <h4>Manage Under Pressure</h4>
+                            <h4>Manage under pressure</h4>
                             <p>Make calm, strategic decisions when stakeholders are stressed</p>
                         </div>
                     </div>
                     <div class="objective-item">
-                        <div class="objective-icon">🤝</div>
                         <div class="objective-content">
-                            <h4>Balance Stakeholders</h4>
+                            <h4>Balance stakeholders</h4>
                             <p>Navigate competing needs from Tech, Sales, Leadership, and your team</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="key-concepts">
-                    <h3>🎓 Adaptive Leadership Principles</h3>
+                    <h3>Adaptive leadership principles</h3>
                     <ul>
-                        <li><strong>Technical vs. Adaptive Problems:</strong> Technical problems have clear solutions; adaptive problems require new learning and behavior change</li>
-                        <li><strong>Get on the Balcony:</strong> Step back from the action to see patterns rather than reacting to pressure</li>
-                        <li><strong>Regulate Distress:</strong> Keep pressure productive—not so low people stay comfortable, not so high they shut down</li>
-                        <li><strong>Give the Work Back:</strong> Don't solve problems for people; help them develop capacity to solve problems themselves</li>
+                        <li><strong>Technical vs. adaptive problems:</strong> Technical problems have clear solutions; adaptive problems require new learning and behavior change</li>
+                        <li><strong>Get on the balcony:</strong> Step back from the action to see patterns rather than reacting to pressure</li>
+                        <li><strong>Regulate distress:</strong> Keep pressure productive—not so low people stay comfortable, not so high they shut down</li>
+                        <li><strong>Give the work back:</strong> Don't solve problems for people; help them develop capacity to solve problems themselves</li>
                     </ul>
                 </div>
             </div>
             <div class="intro-footer">
-                <button class="btn btn-primary btn-large" onclick="startSimulation()">Begin Simulation</button>
+                <button class="btn btn-primary btn-large" onclick="startSimulation()">Begin simulation</button>
             </div>
         </div>
     </div>
@@ -847,29 +837,29 @@
         <!-- Header -->
         <div class="header">
             <div>
-                <h1>Customer Service Process Improvement</h1>
-                <p class="subtitle">Team Lead Dashboard</p>
+                <h1>Customer service process improvement</h1>
+                <p class="subtitle">Team lead dashboard</p>
             </div>
             <div class="week-display">
                 <div class="week-number" id="weekNumber">Week 1</div>
-                <div class="week-label">Current Week</div>
+                <div class="week-label">Current week</div>
             </div>
         </div>
 
         <!-- Key Metrics Dashboard -->
         <div class="dashboard">
             <div class="metric-card">
-                <div class="metric-label">Response Time</div>
+                <div class="metric-label">Response time</div>
                 <div class="metric-value" id="metricResponseTime">48hrs</div>
                 <div class="metric-change negative" id="changeResponseTime">↑ 15hrs from baseline</div>
             </div>
             <div class="metric-card">
-                <div class="metric-label">Customer Satisfaction</div>
+                <div class="metric-label">Customer satisfaction</div>
                 <div class="metric-value" id="metricSatisfaction">68%</div>
                 <div class="metric-change negative" id="changeSatisfaction">↓ 15pts from baseline</div>
             </div>
             <div class="metric-card">
-                <div class="metric-label">Resolution Rate</div>
+                <div class="metric-label">Resolution rate</div>
                 <div class="metric-value" id="metricResolution">52%</div>
                 <div class="metric-change negative" id="changeResolution">↓ 15pts from baseline</div>
             </div>
@@ -877,24 +867,24 @@
 
         <!-- Stakeholder Status -->
         <div class="stakeholder-section">
-            <h2 class="section-title">Stakeholder Relationships</h2>
+            <h2 class="section-title">Stakeholder selationships</h2>
             <div class="stakeholder-grid">
                 <div class="stakeholder-card">
-                    <div class="stakeholder-name">Sales Team</div>
+                    <div class="stakeholder-name">Sales team</div>
                     <div class="satisfaction-bar">
                         <div class="satisfaction-fill low" id="satSales" style="width: 45%"></div>
                     </div>
                     <div class="stakeholder-status" id="statusSales">45% - Angry about broken promises</div>
                 </div>
                 <div class="stakeholder-card">
-                    <div class="stakeholder-name">Your Service Team</div>
+                    <div class="stakeholder-name">Your service team</div>
                     <div class="satisfaction-bar">
                         <div class="satisfaction-fill medium" id="satTeam" style="width: 55%"></div>
                     </div>
                     <div class="stakeholder-status" id="statusTeam">55% - Burned out and defensive</div>
                 </div>
                 <div class="stakeholder-card">
-                    <div class="stakeholder-name">Tech Team</div>
+                    <div class="stakeholder-name">Tech team</div>
                     <div class="satisfaction-bar">
                         <div class="satisfaction-fill medium" id="satTech" style="width: 60%"></div>
                     </div>
@@ -905,7 +895,7 @@
 
         <!-- Metrics Trend Chart -->
         <div class="chart-section">
-            <h2 class="section-title">Performance Trends</h2>
+            <h2 class="section-title">Performance trends</h2>
             <div class="chart-container">
                 <canvas id="metricsChart"></canvas>
             </div>
@@ -913,7 +903,7 @@
 
         <!-- Decision History -->
         <div class="history-section">
-            <h2 class="section-title">Decision History</h2>
+            <h2 class="section-title">Decision history</h2>
             <div id="historyContainer">
                 <p style="color: var(--text-secondary); text-align: center;">No decisions made yet. Click "Next Week" to begin.</p>
             </div>
@@ -923,13 +913,13 @@
     <!-- Side Panel for Decisions -->
     <div class="side-panel" id="decisionPanel">
         <div class="panel-header">
-            <h2 class="panel-title" id="panelTitle">Decision Required</h2>
+            <h2 class="panel-title" id="panelTitle">Decision required</h2>
             <p class="panel-week" id="panelWeek">Week 1</p>
         </div>
         <div class="panel-body">
             <div id="branchingNotice"></div>
             <div class="problem-statement">
-                <h3>Current Situation</h3>
+                <h3>Current situation</h3>
                 <p id="problemText"></p>
             </div>
             <div class="options-container" id="optionsContainer"></div>
@@ -939,7 +929,7 @@
             </div>
         </div>
         <div class="panel-footer">
-            <button class="btn btn-primary" id="continueBtn" disabled>Continue to Next Week</button>
+            <button class="btn btn-primary" id="continueBtn" disabled>Continue to next week</button>
         </div>
     </div>
 
@@ -947,35 +937,35 @@
     <div class="completion-modal" id="completionModal">
         <div class="completion-content">
             <div class="completion-header">
-                <h2 class="completion-title">Simulation Complete!</h2>
+                <h2 class="completion-title">Simulation complete!</h2>
                 <p class="completion-subtitle">7 weeks of adaptive leadership</p>
             </div>
             <div class="completion-body">
                 <div style="text-align: center;">
-                    <div class="performance-badge" id="performanceBadge">Excellent Performance</div>
+                    <div class="performance-badge" id="performanceBadge">Excellent performance</div>
                 </div>
                 
                 <div class="metrics-summary">
                     <div class="summary-row">
-                        <span class="summary-label">Response Time:</span>
+                        <span class="summary-label">Response time:</span>
                         <span class="summary-value" id="finalResponseTime">--</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Customer Satisfaction:</span>
+                        <span class="summary-label">Customer satisfaction:</span>
                         <span class="summary-value" id="finalSatisfaction">--</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Resolution Rate:</span>
+                        <span class="summary-label">Resolution rate:</span>
                         <span class="summary-value" id="finalResolution">--</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Stakeholder Trust:</span>
+                        <span class="summary-label">Stakeholder trust:</span>
                         <span class="summary-value" id="finalStakeholder">--</span>
                     </div>
                 </div>
 
                 <div class="key-insight">
-                    <h3>Leadership Assessment</h3>
+                    <h3>Leadership assessment</h3>
                     <p id="keyInsightText"></p>
                 </div>
             </div>
