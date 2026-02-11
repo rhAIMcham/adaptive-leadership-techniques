@@ -505,7 +505,7 @@
             yPosition += 15;
 
             // Function to add section
-            function addSection(icon, title, prompt, content) {
+            function addSection(title, prompt, content) {
                 // Check if we need a new page
                 if (yPosition > 250) {
                     doc.addPage();
@@ -515,7 +515,7 @@
                 // Section title
                 doc.setFontSize(14);
                 doc.setFont(undefined, 'bold');
-                doc.text(`${icon} ${title}`, leftMargin, yPosition);
+                doc.text(`${title}`, leftMargin, yPosition);
                 yPosition += 7;
 
                 // Prompt

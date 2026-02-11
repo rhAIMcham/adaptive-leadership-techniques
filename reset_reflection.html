@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Balcony Reflection</title>
+    <title>Reset Strategy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
@@ -320,27 +320,19 @@
 </head>
 <body>
     <div class="reflection-container">
-        <!-- <h1>Balcony Reflection</h1>
-        
-        <div class="activity-intro">
-            <strong>Activity:</strong> Reflect on a moment where you have used the 'step off the dancefloor and onto the balcony' method. Using the simple template below, write about the experience.
-        </div> -->
-<!-- 
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div> -->
-      <div class="section">
-          <h2 class="section-title">
-                    Example reset
-                </h2>
-                <p class="example">
-                When you notice your unique reactions to stress try and take a moment to pause, name what’s happening (“I’m feeling defensive”) and create a small gap with a reset strategy like:</p>
-                     <ul>
-                        <li><strong>Slow breath:</strong> Inhale gently for 4 seconds, exhale for 6–8 seconds and let your shoulders drop as you breathe out - repeat twice before you speak.</li>
-                        <li><strong>Grounding:</strong> Plant both feet on the floor, press your toes down, notice three things you can see, and unclench your jaw to bring your awareness back.</li>
-                        <li><strong>Brief question:</strong> Ask one centring question that buys you time and shifts you into curiosity, like “What does success look like in the next two weeks?” or “What’s the real risk if we don’t solve this today?”</li>
-                        <li><strong>Pre-planned response:</strong> Create a response to your known triggers to buy you time and move you out of the stress response using the implementation intention formula.</li>
-                        </ul>
+        <div class="section">
+            <h2 class="section-title">
+                Example reset
+            </h2>
+            <p class="example">
+                When you notice your unique reactions to stress try and take a moment to pause, name what's happening ("I'm feeling defensive") and create a small gap with a reset strategy like:
+            </p>
+            <ul>
+                <li><strong>Slow breath:</strong> Inhale gently for 4 seconds, exhale for 6–8 seconds and let your shoulders drop as you breathe out - repeat twice before you speak.</li>
+                <li><strong>Grounding:</strong> Plant both feet on the floor, press your toes down, notice three things you can see, and unclench your jaw to bring your awareness back.</li>
+                <li><strong>Brief question:</strong> Ask one centring question that buys you time and shifts you into curiosity, like "What does success look like in the next two weeks?" or "What's the real risk if we don't solve this today?"</li>
+                <li><strong>Pre-planned response:</strong> Create a response to your known triggers to buy you time and move you out of the stress response using the implementation intention formula.</li>
+            </ul>
         </div>
 
         <form id="reflectionForm">
@@ -351,12 +343,11 @@
                 <p class="section-prompt">Write down a repeatable 60–90 second reset you can use during meetings when things get heated. For example, a simple formula is breath + pause + question.</p>
                 <textarea 
                     class="reflection-input" 
-                    id="trigger"
+                    id="reset"
                     placeholder="Enter your reset plan here..."
-"
-                    data-section="trigger"
+                    data-section="reset"
                 ></textarea>
-                <div class="char-count" id="countTrigger">0 characters</div>
+                <div class="char-count" id="countReset">0 characters</div>
             </div>
 
             <button type="submit" class="download-btn" id="downloadBtn">Download reset strategy (PDF)</button>
@@ -382,13 +373,12 @@
     <script>
         // Get all textareas
         const textareas = document.querySelectorAll('.reflection-input');
-        const progressFill = document.getElementById('progressFill');
         const downloadBtn = document.getElementById('downloadBtn');
         
         // Track which sections have content
         let filledSections = new Set();
 
-        // Add input listener for character count and progress tracking
+        // Add input listener for character count
         textareas.forEach(textarea => {
             textarea.addEventListener('input', function() {
                 const sectionName = this.dataset.section;
@@ -397,23 +387,14 @@
                 // Update character count
                 charCount.textContent = `${this.value.length} characters`;
                 
-                // Track filled sections for progress bar
+                // Track filled sections
                 if (this.value.trim().length > 0) {
                     filledSections.add(sectionName);
                 } else {
                     filledSections.delete(sectionName);
                 }
-
-                // Update progress bar
-                updateProgress();
             });
         });
-
-        function updateProgress() {
-            const totalSections = 5;
-            const percentage = (filledSections.size / totalSections) * 100;
-            progressFill.style.width = percentage + '%';
-        }
 
         // Handle form submission
         document.getElementById('reflectionForm').addEventListener('submit', function(e) {
@@ -421,11 +402,7 @@
             
             // Collect all responses
             const responses = {
-                trigger: document.getElementById('trigger').value,
-                pattern: document.getElementById('pattern').value,
-                heat: document.getElementById('heat').value,
-                impact: document.getElementById('impact').value,
-                nextTime: document.getElementById('nextTime').value
+                reset: document.getElementById('reset').value,
             };
 
             // Check if at least one section is filled
@@ -452,7 +429,7 @@
             // Title
             doc.setFontSize(20);
             doc.setFont(undefined, 'bold');
-            doc.text('BALCONY REFLECTION', leftMargin, yPosition);
+            doc.text('Reset strategy', leftMargin, yPosition);
             yPosition += 10;
 
             // Date
@@ -469,7 +446,7 @@
             yPosition += 15;
 
             // Function to add section
-            function addSection(icon, title, prompt, content) {
+            function addSection(title, prompt, content) {
                 // Check if we need a new page
                 if (yPosition > 250) {
                     doc.addPage();
@@ -479,7 +456,7 @@
                 // Section title
                 doc.setFontSize(14);
                 doc.setFont(undefined, 'bold');
-                doc.text(`${icon} ${title}`, leftMargin, yPosition);
+                doc.text(`${title}`, leftMargin, yPosition);
                 yPosition += 7;
 
                 // Prompt
@@ -517,11 +494,11 @@
                 yPosition += 12;
             }
 
-            // Add all sections
-            addSection('Reset', '60-90 second forumla to reset', responses.trigger);
+            // Add all sections (FIXED: now uses responses.reset instead of responses.trigger)
+            addSection('Reset strategy', 'Write down a repeatable 60–90 second reset you can use during meetings when things get heated.', responses.reset);
 
-            // Save the PDF
-            doc.save(`balcony-reflection-${new Date().toISOString().split('T')[0]}.pdf`);
+            // Save the PDF (FIXED: updated filename to match content)
+            doc.save(`reset-strategy-${new Date().toISOString().split('T')[0]}.pdf`);
 
             // Show success modal
             showSuccessModal();
