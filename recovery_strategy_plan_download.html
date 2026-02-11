@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recovery strategy plan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --AIMblue: #4353A3;
+            --darkBlue: #38416D;
+            --teal: #5DC8B9;
+            --cream: #F1EEDE;
+            --grey: #e7e9ec;
+            --rust: #AF4510;
+            --navy: #12195C;
+            --white: #ffffff;
+            --lightBlue: #AEBAE4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IBM Plex Sans", sans-serif;
+            min-height: 90vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reflection-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+         ul {
+            padding: 10px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: var(--darkBlue);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .activity-intro {
+            color: var(--darkBlue);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--AIMblue);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4353A3 0%, #12195C 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: var(--lightBlue);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+
+        .section-title {
+            color: var(--darkBlue);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-icon {
+            background: var(--darkBlue);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .section-prompt {
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .reflection-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            resize: vertical;
+            transition: all 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .reflection-input:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(93, 200, 185, 0.1);
+        }
+
+        .reflection-input::placeholder {
+            color: #a0aec0;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .download-btn {
+            background: var(--AIMblue);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 83, 163, 0.3);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .download-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Modal Styles */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .success-modal.active {
+            display: flex;
+        }
+
+        .success-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--darkBlue);
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .success-btn {
+            background: var(--teal);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .success-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(93, 200, 185, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .reflection-container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reflection-container">
+        <form id="recoveryForm">
+            <div class="section">
+                <h2 class="section-title">
+                    Recovery strategy plan
+                </h2>
+                <p class="section-prompt">    Create a simple recovery plan using these prompts: 
+                <ul>
+                <li>What are your warning signs/trigger?</li>
+                <li>What is a first aid reset that will/might work?</li>
+                <li>What is a protection strategy</li>
+                <li>Who can you call?</li>
+                <li>What can you stop doing?</li>
+                </ul></p>
+                <textarea 
+                    class="reflection-input" 
+                    id="recovery"
+                    placeholder="Enter your recovery strategy plan here..."
+                    data-section="recovery"
+                ></textarea>
+                <div class="char-count" id="countRecovery">0 characters</div>
+            </div>
+
+            <button type="submit" class="download-btn" id="downloadBtn">Download recovery strategy (PDF)</button>
+        </form>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">
+                <svg viewBox="0 0 52 52">
+                    <polyline points="14 27 22 35 38 19"/>
+                </svg>
+            </div>
+            <h3 class="success-title">Download Successful!</h3>
+            <p class="success-message">
+                Your recovery plan has been saved as a PDF.
+            </p>
+            <button class="success-btn" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Get all textareas
+        const textareas = document.querySelectorAll('.reflection-input');
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        // Track which sections have content
+        let filledSections = new Set();
+
+        // Add input listener for character count
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                const sectionName = this.dataset.section;
+                const charCount = document.getElementById(`count${sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}`);
+                
+                // Update character count
+                charCount.textContent = `${this.value.length} characters`;
+                
+                // Track filled sections
+                if (this.value.trim().length > 0) {
+                    filledSections.add(sectionName);
+                } else {
+                    filledSections.delete(sectionName);
+                }
+            });
+        });
+
+        // Handle form submission
+        document.getElementById('recoveryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect all responses
+            const responses = {
+                recovery: document.getElementById('recovery').value,
+            };
+
+            // Check if at least one section is filled
+            const hasContent = Object.values(responses).some(val => val.trim().length > 0);
+
+            if (!hasContent) {
+                alert('Please complete at least one section before downloading your reflection.');
+                return;
+            }
+
+            // Generate PDF
+            downloadReflection(responses);
+        });
+
+        function downloadReflection(responses) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            let yPosition = 20;
+            const leftMargin = 20;
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const maxWidth = pageWidth - 40;
+
+            // Title
+            doc.setFontSize(20);
+            doc.setFont(undefined, 'bold');
+            doc.text('Recovery strategy plan', leftMargin, yPosition);
+            yPosition += 10;
+
+            // Date
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(100);
+            const today = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            doc.text(today, leftMargin, yPosition);
+            doc.setTextColor(0);
+            yPosition += 15;
+
+            // Function to add section
+            function addSection(title, prompt, content) {
+                // Check if we need a new page
+                if (yPosition > 250) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+
+                // Section title
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text(`${title}`, leftMargin, yPosition);
+                yPosition += 7;
+
+                // Prompt
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'italic');
+                doc.setTextColor(80);
+                const promptLines = doc.splitTextToSize(prompt, maxWidth);
+                doc.text(promptLines, leftMargin, yPosition);
+                yPosition += (promptLines.length * 5) + 5;
+                doc.setTextColor(0);
+
+                // Content
+                if (content.trim()) {
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    const contentLines = doc.splitTextToSize(content.trim(), maxWidth);
+                    
+                    contentLines.forEach(line => {
+                        if (yPosition > 270) {
+                            doc.addPage();
+                            yPosition = 20;
+                        }
+                        doc.text(line, leftMargin, yPosition);
+                        yPosition += 6;
+                    });
+                } else {
+                    doc.setFontSize(10);
+                    doc.setFont(undefined, 'italic');
+                    doc.setTextColor(150);
+                    doc.text('[Not completed]', leftMargin, yPosition);
+                    doc.setTextColor(0);
+                    yPosition += 6;
+                }
+
+                yPosition += 12;
+            }
+
+            // Add all sections (FIXED: now uses responses.reset instead of responses.trigger)
+            addSection('Recovery strategy plan', 'Create a simple recovery plan using these prompts; <ul>               <li>What are your warning signs/trigger?</li>                <li>What is a first aid reset that will/might work?</li>                <li>What is a protection strategy</li>                <li>Who can you call?</li>                <li>What can you stop doing?</li>                </ul>', responses.recovery);
+
+            // Save the PDF (FIXED: updated filename to match content)
+            doc.save(`recovery-strategy-${new Date().toISOString().split('T')[0]}.pdf`);
+
+            // Show success modal
+            showSuccessModal();
+        }
+
+        function showSuccessModal() {
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            }
+        });
+    </script>
+</body>
+</html>
