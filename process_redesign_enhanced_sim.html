@@ -2621,107 +2621,135 @@ week6_crisis_poor: {
 // WEEK 7
 // =====================
 
-// WEEK 7 - Excellence + Excellent
-week7_excellence_excellent: {
-  week: 7,
-  problem:
-    "Leadership announces budget cuts—15% across all departments due to market conditions. Your improved operating model costs ~8% more than the old one (tiered staffing, training, better tools). The CFO asks: ‘Can we just go back to the old way and cut costs?’ Everyone is watching how you respond under pressure.",
-  options: [
-    {
-      id: "w7ee_revertSingle",
-      label: "Agree to revert to a single-tier process",
-      text:
-        "Cut costs fast by simplifying back to one service level and reducing training/tool investment.",
-      decisionQuality: "poor",
-      impact: { responseTime: 12, satisfaction: -15, resolution: -10, sales: -25, team: -15, tech: -8 },
-      feedback: {
-        type: "danger",
-        title: "Reverting under pressure",
-        content:
-          "Within weeks, your gains evaporate: response times climb, quality slips, and churn risk rises. Your team’s morale collapses because the organisation signals ‘improvement doesn’t matter when it’s hard.’ You didn’t just cut costs—you cut credibility."
-      }
-    },
-    {
-      id: "w7ee_dataDrive",
-      label: "Present a data-driven business case for the investment",
-      text:
-        "Show ROI: retention protected, escalations reduced, faster resolution for high-value customers, and the cost of reverting (lost renewals, churn, brand damage).",
-      decisionQuality: "excellent",
-      impact: { responseTime: 0, satisfaction: 4, resolution: 3, sales: 10, team: 15, tech: 8 },
-      feedback: {
-        type: "success",
-        title: "Leading upward with evidence",
-        content:
-          "You translate operations into business outcomes: renewals protected, churn reduced, and high-value customers receiving differentiated service. You acknowledge the budget reality while showing the cost of reverting is higher than the cost of sustaining. The CFO approves continued funding—conditional on ongoing performance. Your team sees you protect what works, not what’s comfortable."
-      }
-    },
-    {
-      id: "w7ee_aiAUtomato",
-      label: "Propose targeted automation in Standard tier",
-      text:
-        "Reduce operating cost by automating high-volume Standard queries while protecting VIP quality and preserving the tier model.",
-      decisionQuality: "partial",
-      impact: { responseTime: -2, satisfaction: 3, resolution: 2, sales: 5, team: 5, tech: 6 },
-      feedback: {
-        type: "success",
-        title: "Pragmatic adaptation",
-        content:
-          "You meet the budget moment with innovation: reduce costs without destroying the operating model. It’s a compromise—automation must be governed carefully to avoid degrading customer experience—but you preserve the core of the change while responding to financial pressure."
-      }
-    }
-  ]
-},
+ // WEEK 7 - Excellence + Excellent (Best path)
+            week7_excellence_excellent: {
+                week: 7,
+                problem: "Leadership announces budget cuts—15% reduction across all departments due to market conditions. Your improved process costs 8% more than the old one (tiered staffing, better tools, training). CFO asks: 'Can we just go back to the old way and cut costs?' Everyone is watching how you respond under this pressure.",
+                options: [
+                    {
+                        id: 'w7ee_revertSingle',
+                        label: "Agree to cut back to single-tier process",
+                        text: "Protect jobs by simplifying back to one service level and reducing tool costs.",
+                        decisionQuality: "poor",
+                        impact: {
+                            responseTime: 12,
+                            satisfaction: -15,
+                            resolution: -10,
+                            sales: -25,
+                            team: -15,
+                            tech: -8
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Reverting under pressure",
+                            content: "Within 3 weeks, all your gains evaporated. Response times back to 45+ hours. Three enterprise clients switched to competitors (revenue loss: $1.8M). Team morale crushed—'We worked so hard for nothing.' Under pressure, you abandoned adaptive change and returned to the dysfunctional status quo."
+                        }
+                    },
+                    {
+                        id: 'w7ee_dataDrive',
+                        label: "Present data-driven business case for the investment",
+                        text: "Show ROI: customer retention value, reduced churn, efficiency gains. Make the case that cutting this costs more than it saves.",
+                        decisionQuality: "excellent",
+                        impact: {
+                            responseTime: 0,
+                            satisfaction: 4,
+                            resolution: 3,
+                            sales: 10,
+                            team: 15,
+                            tech: 8
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Leading upward with evidence",
+                            content: "Your presentation: at-risk renewals saved ($2.1M), improved customer satisfaction and skilled staff freed up to solve complex issues quickly. 8% cost increase delivers 30% value increase. CFO approves budget. You showed adaptive leadership works by protecting the change while acknowledging the pressure. Team sees you fight for what works, not what's comfortable."
+                        }
+                    },
+                    {
+                        id: 'w7ee_aiAUtomato',
+                        label: "Propose strategic automation in Standard tier",
+                        text: "Use AI to automate 40% of Standard tier volume, reducing costs while protecting VIP quality.",
+                        decisionQuality: "partial",
+                        impact: {
+                            responseTime: -2,
+                            satisfaction: 3,
+                            resolution: 2,
+                            sales: 5,
+                            team: 5,
+                            tech: 6
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Compromise with innovation",
+                            content: "Smart middle path. Automation reduces Standard tier costs by 7% while maintaining quality. VIP service untouched. Not as ideal as full funding, but you found a way to preserve core improvements while addressing budget reality. Pragmatic adaptation."
+                        }
+                    }
+                ]
+            },
 
-// WEEK 7 - Excellence + Partial
-week7_excellence_partial: {
-  week: 7,
-  problem:
-    "Leadership announces budget cuts—15% across all departments. Your improved model costs ~8% more than the old one, and you’ve also had some overages from early-stage teething issues. The CFO asks: ‘Should we revert to the old way to cut costs?’ Your credibility is good—but not unshakeable. How do you respond?",
-  options: [
-    {
-      id: "w7ep_revertSingle",
-      label: "Agree to revert to a single-tier process",
-      text:
-        "Simplify back to one service level to reduce spend quickly and ‘protect headcount.’",
-      decisionQuality: "poor",
-      impact: { responseTime: 12, satisfaction: -15, resolution: -10, sales: -25, team: -15, tech: -8 },
-      feedback: {
-        type: "danger",
-        title: "Short-term savings, long-term damage",
-        content:
-          "Reverting feels safe, but it recreates the original mismatch that caused the crisis. Costs return later as churn, escalations, and burnout. You taught the organisation that change is optional—only until it’s inconvenient."
-      }
-    },
-    {
-      id: "w7ep_dataDrive",
-      label: "Make the ROI case—and acknowledge the teething issues",
-      text:
-        "Present performance data and financial impact, and also show exactly how you’ll bring costs back in line without sacrificing outcomes.",
-      decisionQuality: "excellent",
-      impact: { responseTime: 0, satisfaction: 2, resolution: 3, sales: 8, team: 12, tech: 7 },
-      feedback: {
-        type: "success",
-        title: "Credibility through clarity",
-        content:
-          "You don’t pretend everything was perfect. You show what improved, what cost more, and what you’re doing to tighten execution. The CFO approves continued funding, with clear checkpoints. Your team trusts you to manage upward pressure while they keep the system running."
-      }
-    },
-    {
-      id: "w7ep_aiAUtomato",
-      label: "Use automation to offset cost increases",
-      text:
-        "Automate predictable Standard work to reduce costs while protecting VIP quality and retaining the tier structure.",
-      decisionQuality: "partial",
-      impact: { responseTime: -2, satisfaction: 3, resolution: 2, sales: 5, team: 5, tech: 6 },
-      feedback: {
-        type: "success",
-        title: "A workable compromise",
-        content:
-          "You preserve the core improvement while responding to financial constraints. The risk is governance: if automation becomes a dumping ground, satisfaction will fall. Done well, it protects the model and stabilises cost."
-      }
-    }
-  ]
-},
+            // WEEK 7 - Excellence + Partial (Good path with some struggles)
+            week7_excellence_partial: {
+                week: 7,
+                problem: "Leadership announces budget cuts—15% reduction across all departments due to market conditions. Your improved process costs 8% more than the old one (tiered staffing, better tools, training), and you are over budget in other areas due to teething issues for this new process. CFO asks: 'Can we just go back to the old way and cut costs?' Everyone is watching how you respond under this pressure.",
+                options: [
+                    {
+                        id: 'w7ep_revertSingle',
+                        label: "Agree to cut back to single-tier process",
+                        text: "Protect jobs by simplifying back to one service level and reducing tool costs.",
+                        decisionQuality: "poor",
+                        impact: {
+                            responseTime: 12,
+                            satisfaction: -15,
+                            resolution: -10,
+                            sales: -25,
+                            team: -15,
+                            tech: -8
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Reverting under pressure",
+                            content: "Within 3 weeks, all your gains evaporated. Response times back to 45+ hours. Three enterprise clients switched to competitors (revenue loss: $1.8M). Team morale crushed—'We worked so hard for nothing.' Under pressure, you abandoned adaptive change and returned to the dysfunctional status quo."
+                        }
+                    },
+                    {
+                        id: 'w7ep_dataDrive',
+                        label: "Present data-driven business case for the investment",
+                        text: "Show ROI: customer retention value, expensive agent time used wisely, efficiency gains. Make the case that cutting this costs more than it saves.",
+                        decisionQuality: "excellent",
+                        impact: {
+                            responseTime: 0,
+                            satisfaction: 2,
+                            resolution: 3,
+                            sales: 8,
+                            team: 12,
+                            tech: 7
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Leading upward with evidence",
+                            content: "Your presentation: at-risk renewals saved ($2.1M), improved customer satisfaction and skilled staff freed up to solve complex issues quickly. 8% cost increase delivers 30% value increase. CFO approves your budget, but you know you must continue to deliver to protect your credibility. You showed adaptive leadership works by protecting the change while acknowledging the pressure. Team trusts you to do the difficult work of managing stakeholders while they focus on day-to-day operations."
+                        }
+                    },
+                    {
+                        id: 'w7ep_aiAUtomato',
+                        label: "Propose strategic automation in Standard tier",
+                        text: "Use AI to automate 40% of Standard tier volume, reducing costs while protecting VIP quality.",
+                        decisionQuality: "partial",
+                        impact: {
+                            responseTime: -2,
+                            satisfaction: 3,
+                            resolution: 2,
+                            sales: 5,
+                            team: 5,
+                            tech: 6
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Compromise with innovation",
+                            content: "Smart middle path. Automation reduces Standard tier costs by 7% while maintaining quality. VIP service untouched. Not as ideal as full funding, but you found a way to preserve core improvements while addressing budget reality. Pragmatic adaptation."
+                        }
+                    }
+                ]
+            },
 
 // WEEK 7 - Struggling/Recovery + Partial
 week7_struggling_partial: {
