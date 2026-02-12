@@ -1684,1575 +1684,1290 @@
                 ]
             },
 
-            // WEEK 4 - Excellence + Excellent (Best path)
-            week4_excellence_excellent: {
-                week: 4,
-                problem: "Pilot results are in—tiered service works! But now your team is divided. Senior agents love the VIP tier (interesting work, happy customers). Junior agents feel stuck with low-tier 'grunt work' and resent it. Two have threatened to quit. How do you address this adaptive challenge within your team?",
-                options: [
-                    {
-                        id: 'w4ee_rotate',
-                        label: "Rotate everyone through all tiers equally",
-                        text: "Make it fair by having every agent spend time in each tier to avoid hierarchy resentment.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 3,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -8,
-                            team: -5,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Equality over effectiveness",
-                            content: "Senior agents frustrated that expertise isn't valued. VIP customers get inconsistent service when juniors rotate in. You prioritised internal fairness over customer outcomes. This is a technical solution (rotation policy) to an adaptive challenge (career development)."
-                        }
-                    },
-                    {
-                        id: 'w4ee_growth',
-                        label: "Launch to all enterprise clients firstCreate clear growth pathways across tiers",
-                        text: "CMap how agents develop from Standard → VIP tier, with skills, metrics, and mentorship at each level.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -4,
-                            satisfaction: 6,
-                            resolution: 5,
-                            sales: 8,
-                            team: 18,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Giving the work back to them",
-                            content: "You facilitated a session where agents themselves defined what 'VIP-ready' looks like. Self-Service becomes training ground. Standard tier is progression. VIP is earned mastery. Junior agents now see a path, not a ceiling. You didn't solve it for them—you helped them own their development."
-                        }
-                    },
-                    {
-                        id: 'w4ee_payTiers',
-                        label: "Pay differential for VIP tier work",
-                        text: "Compensate senior agents more for handling complex VIP cases to recognise the difficulty.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 0,
-                            resolution: 2,
-                            sales: 3,
-                            team: 4,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Money doesn't solve adaptive challenges",
-                            content: "Pay helps short-term but doesn't address junior agents' desire for growth and meaning. You've created a compensation tier without a development system. People want mastery and purpose, not just money."
-                        }
-                    }
-                ]
-            },
+            // =====================
+// WEEK 4
+// =====================
 
-            // WEEK 4 - Excellence + Partial (Good path with some struggles)
-            week4_excellence_partial: {
-                week: 4,
-                problem: "week 4 excellent",
-                options: [
-                    {
-                        id: 'w4ep_training',
-                        label: "week 4 excellent",
-                        text: "eek 4 excellentPause contractor onboarding. Train everyone thoroughly on tier classification and service standards.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -3,
-                            satisfaction: 6,
-                            resolution: 5,
-                            sales: 8,
-                            team: 12,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Investing in capabilityeek 4 excellent",
-                            content: "eek 4 excellentTwo days of training pays off immediately. Contractors now understand the 'why' behind tiers. Consistency improves. Your core team feels supported. You chose to build capacity over rushing forward."
-                        }
-                    },
-                    {
-                        id: 'w4ep_release',
-                        label: "Release contractors, refocus on core team",
-                        text: "Week 4 Cut losses. Let contractors go and focus on making your core team excellent at the tier model.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 3,
-                            team: 8,
-                            tech: 2
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Week 4 Back to square one on capacity",
-                            content: "Week 4 Core team is stronger but you're back to volume challenges. Contractors were a misstep, but releasing them doesn't solve the underlying capacity need. You've stabilized quality at the cost of scale."
-                        }
-                    },
-                    {
-                        id: 'w4ep_push',
-                        label: "Push contractors to perform",
-                        text: "Week 4 Set clear performance standards. Those who can't meet them by end of week are let go.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -2,
-                            resolution: -1,
-                            sales: -3,
-                            team: -5,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Week 4 Accountability without support",
-                            content: "Week 4 Contractors feel set up to fail. Two quit immediately. Core team is frustrated—they see you didn't invest in proper training but are blaming contractors. Morale drops across the board."
-                        }
-                    }
-                ]
-            },
+// WEEK 4 - Excellence + Excellent
+week4_excellence_excellent: {
+  week: 4,
+  problem:
+    "Pilot results are in—tiered service works. VIP response times are down, escalations are cleaner, and Sales is suddenly calmer. But a new tension is brewing inside your team: senior agents love the VIP tier (complex work, grateful customers), while junior agents feel stuck doing low-tier ‘grunt work.’ Two have privately said they’ll resign if nothing changes. How do you address this adaptive challenge without breaking what’s working?",
+  options: [
+    {
+      id: "w4ee_rotate",
+      label: "Rotate everyone through all tiers equally",
+      text:
+        "Make it ‘fair’ by having every agent spend equal time in each tier, regardless of capability, to reduce resentment.",
+      decisionQuality: "poor",
+      impact: { responseTime: 3, satisfaction: -3, resolution: -2, sales: -8, team: -5, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Equality over effectiveness",
+        content:
+          "Rotation feels fair, but it creates chaos. VIP customers experience inconsistent quality, senior agents feel their expertise isn’t valued, and junior agents feel exposed and overwhelmed. You applied a technical policy (rotation) to an adaptive need (growth, meaning, and status). The resentment shifts—but it doesn’t disappear."
+      }
+    },
+    {
+      id: "w4ee_growth",
+      label: "Create clear growth pathways across tiers",
+      text:
+        "Co-design a progression pathway from Self-Service → Standard → VIP, with clear skills, metrics, and mentorship—so junior agents can see a path, not a ceiling.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -4, satisfaction: 6, resolution: 5, sales: 8, team: 18, tech: 5 },
+      feedback: {
+        type: "success",
+        title: "Giving the work back to them",
+        content:
+          "You run a team workshop and let agents define what ‘VIP-ready’ looks like—skills, behaviors, and decision judgment. Self-Service becomes a safe training ground, Standard becomes the growth tier, and VIP becomes earned mastery. Junior agents stop seeing the lower tiers as ‘punishment’ and start seeing them as progression. You didn’t fix morale for them—you built a system where they can grow themselves."
+      }
+    },
+    {
+      id: "w4ee_payTiers",
+      label: "Pay differential for VIP tier work",
+      text:
+        "Introduce additional pay for VIP work to recognise complexity and signal that VIP cases are ‘higher value.’",
+      decisionQuality: "partial",
+      impact: { responseTime: -2, satisfaction: 0, resolution: 2, sales: 3, team: 4, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Money soothes—then the question returns",
+        content:
+          "The pay differential quiets frustration briefly, but it hardens the tier boundary. Juniors now want a path—and a fair process—to reach VIP, not just a reminder that they’re not there yet. You improved recognition, but you still haven’t addressed the deeper adaptive need: growth, mastery, and dignity in the work."
+      }
+    }
+  ]
+},
 
-            // WEEK 4 - Struggling/Recovery + Partial (Recovery path)
-            week4_struggling_partial: {
-                week: 4,
-                problem: "Week 4 Your two-tier model from last week is showing promise, but implementation is messy. Premium customers are happy, but Standard tier is still struggling. Sales wants to upsell everyone to Premium. Your team is handling the split inconsistently. You need to tighten execution while maintaining momentum.",
-                options: [
-                    {
-                        id: 'w4sp_training',
-                        label: "Intensive 2-day training workshop",
-                        text: "Week 4 Pause new implementations. Train the entire team on tier classification, escalation paths, and service standards for each tier.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -3,
-                            satisfaction: 6,
-                            resolution: 6,
-                            sales: 8,
-                            team: 12,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Investing in capability",
-                            content: "Two days of training pays off immediately. Agents now understand the 'why' behind tiers, not just the 'what.' Consistency improves. Your team feels empowered, not confused. You chose to build capacity over rushing forward."
-                        }
-                    },
-                    {
-                        id: 'w4sp_playbook',
-                        label: "Create detailed decision playbook",
-                        text: "Week 4 Document every scenario and edge case. Give agents a manual to follow for consistency.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 2,
-                            resolution: 2,
-                            sales: 3,
-                            team: -2,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Rules over judgment",
-                            content: "Playbook helps with consistency but agents follow rules mechanically. They stop thinking critically. New situations arise not covered in the playbook—decision-making freezes. You chose documentation over developing judgment."
-                        }
-                    },
-                    {
-                        id: 'w4sp_push',
-                        label: "Push forward despite messiness",
-                        text: "Week 4 Inconsistency is part of learning. Keep moving, fix problems as they arise.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -5,
-                            team: -5,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Losing control",
-                            content: "Week 4 Inconsistency breeds customer complaints. Agents are confused and making it up as they go. The tier system is becoming meaningless. You had momentum—now you're losing it by not investing in proper execution."
-                        }
-                    }
-                ]
-            },
+// WEEK 4 - Excellence + Partial
+week4_excellence_partial: {
+  week: 4,
+  problem:
+    "The pilot is trending positive, but your execution still relies heavily on a few strong performers. Now the team is splitting: senior agents want to stay in VIP; juniors feel stuck and resentful, and two have threatened to quit. You need to stabilise morale without losing service quality.",
+  options: [
+    {
+      id: "w4ee_rotate",
+      label: "Rotate everyone through all tiers equally",
+      text:
+        "Enforce equal time across tiers to reduce status tension—even if capability varies.",
+      decisionQuality: "poor",
+      impact: { responseTime: 3, satisfaction: -3, resolution: -2, sales: -8, team: -5, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Fairness becomes volatility",
+        content:
+          "You reduced perceived hierarchy, but you created inconsistent outcomes for customers. Juniors feel thrown in the deep end, seniors feel pulled away from the work they’re best at, and the tier model starts to feel like a revolving door rather than a system. Morale doesn’t improve—people just complain about different things."
+      }
+    },
+    {
+      id: "w4ee_growth",
+      label: "Create clear growth pathways across tiers",
+      text:
+        "Clarify what advancement looks like, build mentoring into the week, and set transparent criteria for moving up tiers.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -4, satisfaction: 6, resolution: 5, sales: 8, team: 18, tech: 5 },
+      feedback: {
+        type: "success",
+        title: "Progression replaces resentment",
+        content:
+          "You make the system legible: what skills matter, how people develop, and how they prove readiness. Juniors stop feeling trapped, seniors become coaches (not gatekeepers), and the team begins to self-regulate quality. The tier model strengthens because people can see themselves inside it."
+      }
+    },
+    {
+      id: "w4ee_payTiers",
+      label: "Pay differential for VIP tier work",
+      text:
+        "Offer extra compensation for VIP handling to reward expertise and retention.",
+      decisionQuality: "partial",
+      impact: { responseTime: -2, satisfaction: 0, resolution: 2, sales: 3, team: 4, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Recognition without development",
+        content:
+          "You’ve acknowledged senior expertise, but juniors still don’t know how to grow. The pay gap becomes a symbol of ‘who matters.’ A development pathway would turn that same gap into motivation; without it, it becomes division."
+      }
+    }
+  ]
+},
 
-            // WEEK 4 - Struggling + Poor (Sliding toward crisis)
-            week4_struggling_poor: {
-                week: 4,
-                problem: "Week 4 After hiring contractors last week without a clear plan, you're dealing with quality issues and team frustration. Two contractors made serious errors with VIP clients. Your core team is demoralized. Sales is getting complaints. You need to stop the bleeding.",
-                options: [
-                    {
-                        id: 'w4spo_roadmap',
-                        label: "Present 60-day improvement roadmap",
-                        text: "Week 4 Be transparent: Here's our current state, here's the plan to get to sustainable operations, here are the milestones.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 10,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leadership through honesty",
-                            content: "Week 4 Your roadmap acknowledges reality while showing a clear path forward. Stakeholders appreciate the honesty and structure. Your VP commits resources. Team sees hope instead of chaos. You've turned crisis into a managed recovery plan."
-                        }
-                    },
-                    {
-                        id: 'w4spo_release',
-                        label: "Release all contractors immediately",
-                        text: "Week 4 Cut losses. Focus on stabilizing with just your core team.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 1,
-                            satisfaction: 1,
-                            resolution: 1,
-                            sales: 2,
-                            team: 5,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Damage control",
-                            content: "Week 4 Quality improves but you're back to capacity issues. Core team appreciates the decision but is overwhelmed by volume. You've chosen stability over scale, which may be right for now but doesn't solve the long-term problem."
-                        }
-                    },
-                    {
-                        id: 'w4spo_blame',
-                        label: "Escalate contractor issues to VP",
-                        text: "Week 4 Explain that contractors weren't properly vetted. Request better hiring support from HR.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -5,
-                            team: -8,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Deflecting responsibility",
-                            content: "Week 4 VP asks: 'Who decided to hire them without a training plan?' You look like you're avoiding ownership. Team sees you're not taking responsibility for your decisions. Trust drops further."
-                        }
-                    }
-                ]
-            },
+// WEEK 4 - Struggling/Recovery + Partial
+week4_struggling_partial: {
+  week: 4,
+  problem:
+    "Your simplified tier approach is showing promise, but implementation is inconsistent. Premium customers are happy, Standard is still messy, and agents aren’t classifying work the same way. Sales is pushing to upsell everyone to Premium. You need tighter execution without crushing momentum.",
+  options: [
+    {
+      id: "w4sp_training",
+      label: "Run an intensive 2-day calibration workshop",
+      text:
+        "Pause expansion. Train the whole team on tier classification, escalation paths, and what ‘good’ looks like in each tier—with live practice and calibration.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -3, satisfaction: 6, resolution: 6, sales: 8, team: 12, tech: 5 },
+      feedback: {
+        type: "success",
+        title: "Investing in capability",
+        content:
+          "The workshop creates shared judgment, not just shared rules. Agents align on what belongs in Premium vs Standard, how to escalate, and when to break the pattern. Consistency improves quickly, and Sales gains confidence because you can now explain the model clearly—without overselling it."
+      }
+    },
+    {
+      id: "w4sp_playbook",
+      label: "Create a detailed decision playbook",
+      text:
+        "Document common scenarios and edge cases so agents can follow a manual for consistent classification and escalation.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 2, resolution: 2, sales: 3, team: -2, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Rules over judgment",
+        content:
+          "The playbook helps at first, but agents start ‘checking the manual’ instead of thinking. When a case doesn’t fit, work stalls and escalations spike. You improved consistency, but you didn’t build confidence in decision-making."
+      }
+    },
+    {
+      id: "w4sp_push",
+      label: "Push forward and fix issues as they appear",
+      text:
+        "Accept inconsistency as the cost of learning. Keep scaling and patch problems in real time.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -5, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Momentum without control",
+        content:
+          "Customers experience wildly different service week to week. Agents improvise their own tier logic, and the model starts to lose meaning. You didn’t regulate distress—now the team is stressed, Sales is nervous, and Tech is frustrated by constant ‘urgent’ changes."
+      }
+    }
+  ]
+},
 
-            // WEEK 4 - Crisis + Partial (In the depths)
-            week4_crisis_partial: {
-                week: 4,
-                problem: "Week 4 After your emergency triage last week, things have barely stabilized. Your VP is watching closely. Sales grudgingly accepts VIP prioritization but warns 'this better be temporary.' Your team is exhausted. One contractor is working out; two are disasters. You're still in crisis mode but need to show a path forward.",
-                options: [
-                    {
-                        id: 'w4cp_roadmap',
-                        label: "Present 60-day improvement roadmap",
-                        text: "Week 4 Be transparent: Here's our current state, here's the plan to get to sustainable operations, here are the milestones.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 10,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leadership through honesty",
-                            content: "Week 4 Your roadmap acknowledges reality while showing a clear path forward. Stakeholders appreciate the honesty and structure. Your VP commits resources. Team sees hope instead of chaos. You've turned crisis into a managed recovery plan."
-                        }
-                    },
-                    {
-                        id: 'w4cp_keep',
-                        label: "Keep doing emergency triage",
-                        text: "Week 4 Don't rock the boat. VIP prioritization is working well enough. Just maintain this until pressure decreases.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: -1,
-                            resolution: 0,
-                            sales: 3,
-                            team: -8,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Stuck in survival mode",
-                            content: "Week 4 You're confusing stability with progress. Team morale continues dropping—they see no end in sight. Standard customers are being neglected. Your VP loses patience: 'What's the actual plan here?' Triage isn't strategy."
-                        }
-                    },
-                    {
-                        id: 'w4cp_escalate',
-                        label: "Request additional senior leadership support",
-                        text: "Week 4 Ask VP to assign a director-level person to co-lead the recovery with you.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -1,
-                            satisfaction: 2,
-                            resolution: 2,
-                            sales: 5,
-                            team: 3,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Shared leadership",
-                            content: "Week 4 VP assigns a director to help. It takes pressure off you but also signals you couldn't handle it alone. The director brings expertise but you've lost some autonomy. Progress happens but at the cost of your leadership credibility."
-                        }
-                    }
-                ]
-            },
+// WEEK 4 - Struggling + Poor
+week4_struggling_poor: {
+  week: 4,
+  problem:
+    "After expanding capacity too quickly, you’re now dealing with quality failures and team frustration. Two contractors made serious mistakes with VIP clients. Your core team is demoralised and feels like they’re cleaning up someone else’s mess. Sales is getting complaints. You need to stop the bleeding and restore trust fast.",
+  options: [
+    {
+      id: "w4spo_roadmap",
+      label: "Present a 60-day recovery roadmap",
+      text:
+        "Be transparent about current performance, define the recovery plan, and set weekly milestones for quality, staffing, and process stability.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -2, satisfaction: 4, resolution: 3, sales: 10, team: 10, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "Leadership through honesty",
+        content:
+          "You name what’s true without blame: quality dipped, trust is fragile, and the system needs stabilising before scaling. Stakeholders respect the clarity. Your VP agrees to short-term support. The team feels relief because there’s finally a plan—this is no longer an endless emergency."
+      }
+    },
+    {
+      id: "w4spo_release",
+      label: "Release all contractors immediately",
+      text:
+        "Cut losses and stabilise using only the core team—even if capacity drops in the short term.",
+      decisionQuality: "partial",
+      impact: { responseTime: 1, satisfaction: 1, resolution: 1, sales: 2, team: 5, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Stability over scale",
+        content:
+          "Quality improves, but you’re back to a volume cliff. The core team appreciates the move, but the backlog grows and stress returns. You stopped the bleeding, but you haven’t yet created a sustainable system to handle demand."
+      }
+    },
+    {
+      id: "w4spo_blame",
+      label: "Escalate contractor issues and request better vetting",
+      text:
+        "Tell leadership the contractors weren’t properly vetted and ask HR/VP for better hiring support.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -8, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Deflecting ownership",
+        content:
+          "Leadership hears ‘not my fault.’ Your team hears the same. The real issue wasn’t just vetting—it was onboarding, standards, and supervision. Trust drops further, and you lose credibility at the exact moment you need others to follow your lead."
+      }
+    }
+  ]
+},
 
-            // WEEK 4 - Crisis + Poor (Rock bottom)
-            week4_crisis_poor: {
-                week: 4,
-                problem: "Week 4 Last week's overtime push backfired catastrophically. Another team member quit. Contractors are underperforming. Customer complaints have doubled. Your VP called an emergency meeting: 'We need to see immediate improvement or make leadership changes.' This is your last chance.",
-                options: [
-                    {
-                        id: 'w4cpo_honest',
-                        label: "Transparent assessment and ask for help",
-                        text: "Week 4 Complete honesty: 'I made mistakes. Here's what I've learned. Here's what I need to succeed.'",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -1,
-                            satisfaction: 3,
-                            resolution: 2,
-                            sales: 8,
-                            team: 12,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Humility opens doors",
-                            content: "Week 4 Your honest assessment stuns the room. VP respects the self-awareness. Team sees you're learning. You get a coach, additional budget, and 30 days to turn it around. You've earned a genuine second chance through vulnerability."
-                        }
-                    },
-                    {
-                        id: 'w4cpo_promises',
-                        label: "Promise dramatic improvement",
-                        text: "Week 4 Commit to 50% improvement in 2 weeks. Work nights and weekends to make it happen.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 1,
-                            satisfaction: -4,
-                            resolution: -3,
-                            sales: -8,
-                            team: -15,
-                            tech: -5
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Week 4 Desperation makes it worse",
-                            content: "Week 4 You can't deliver on the promise. Work yourself to exhaustion. Make errors. Team sees panic. VP sees unrealistic thinking. Two weeks later, metrics are worse. You're facing reassignment or termination."
-                        }
-                    },
-                    {
-                        id: 'w4cpo_basic',
-                        label: "Implement most basic fixes only",
-                        text: "Week 4 Strip everything down to absolute basics. Just answer tickets in order received. No sophistication.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 0,
-                            resolution: 0,
-                            sales: 2,
-                            team: -3,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Survival baseline",
-                            content: "Week 4 You've stopped the bleeding but haven't shown any path to improvement. VP gives you 2 more weeks to show a real plan. You're stable but on thin ice. Better than disaster, barely."
-                        }
-                    }
-                ]
-            },
+// WEEK 4 - Crisis + Partial
+week4_crisis_partial: {
+  week: 4,
+  problem:
+    "You’ve stabilised enough to breathe, but you’re still in crisis. VIP prioritisation reduced the loudest escalations, yet Standard customers are slipping and the team is exhausted. One contractor is working out; two are causing rework. Your VP wants evidence this is moving toward sustainability—not just survival. What do you do next?",
+  options: [
+    {
+      id: "w4cp_roadmap",
+      label: "Present a 60-day improvement roadmap",
+      text:
+        "Lay out current reality, the minimum viable operating model, and milestones for staffing, quality, and process stability over the next 60 days.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -2, satisfaction: 4, resolution: 3, sales: 10, team: 10, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "From triage to strategy",
+        content:
+          "Your roadmap turns panic into a managed recovery. You name the trade-offs, define what stops now, and what gets built next. Your VP stops hovering and starts supporting. The team sees an end to the chaos—and that reduces burnout more than another pep talk ever could."
+      }
+    },
+    {
+      id: "w4cp_keep",
+      label: "Keep doing emergency triage",
+      text:
+        "Don’t rock the boat. Keep prioritising VIP and handling Standard when possible until the pressure decreases.",
+      decisionQuality: "poor",
+      impact: { responseTime: 0, satisfaction: -1, resolution: 0, sales: 3, team: -8, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Stuck in survival mode",
+        content:
+          "Stability isn’t progress. The team can’t sustain ‘forever triage,’ and Standard customers keep deteriorating. Your VP’s question becomes sharper: ‘What’s the plan?’ Triage buys time—but without strategy, you just spend that time."
+      }
+    },
+    {
+      id: "w4cp_escalate",
+      label: "Request senior leadership co-lead support",
+      text:
+        "Ask your VP to assign a director-level partner to help you run recovery and manage stakeholders while you stabilise operations.",
+      decisionQuality: "partial",
+      impact: { responseTime: -1, satisfaction: 2, resolution: 2, sales: 5, team: 3, tech: 5 },
+      feedback: {
+        type: "warning",
+        title: "Help comes with trade-offs",
+        content:
+          "The extra leadership support reduces pressure, but it also changes the narrative: you’re no longer seen as fully owning the turnaround. Progress improves, but you lose some autonomy—and you’ll need to rebuild credibility through results."
+      }
+    }
+  ]
+},
 
-            // == WEEK 5 ==//
+// WEEK 4 - Crisis + Poor
+week4_crisis_poor: {
+  week: 4,
+  problem:
+    "Last week’s overtime push backfired. Another team member quit. Contractors are underperforming. Complaints doubled. Your VP called an emergency meeting: ‘We need immediate improvement or we make leadership changes.’ This is your last chance to reset the situation credibly.",
+  options: [
+    {
+      id: "w4cpo_honest",
+      label: "Give a transparent assessment and ask for help",
+      text:
+        "Own the missteps, explain what you’ve learned, and request specific support (coaching, temporary cover, and a defined recovery window).",
+      decisionQuality: "excellent",
+      impact: { responseTime: -1, satisfaction: 3, resolution: 2, sales: 8, team: 12, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "Humility opens doors",
+        content:
+          "Your honesty changes the tone of the meeting. Instead of defending yourself, you show learning and accountability. Leadership gives you support and a clear runway to recover. The team sees you stop performing certainty and start leading reality—trust begins to return."
+      }
+    },
+    {
+      id: "w4cpo_promises",
+      label: "Promise dramatic improvement immediately",
+      text:
+        "Commit to an aggressive improvement target in two weeks and push nights/weekends to force results.",
+      decisionQuality: "poor",
+      impact: { responseTime: 1, satisfaction: -4, resolution: -3, sales: -8, team: -15, tech: -5 },
+      feedback: {
+        type: "danger",
+        title: "Desperation compounds failure",
+        content:
+          "You can’t deliver the promise. Exhaustion creates errors, and errors create escalations. Your team watches panic masquerade as confidence. Two weeks later, results worsen—and leadership interprets it as poor judgment, not bad luck."
+      }
+    },
+    {
+      id: "w4cpo_basic",
+      label: "Strip back to basic queue processing",
+      text:
+        "Stop all complexity. Work first-in-first-out with minimal exceptions to stabilise throughput.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 0, resolution: 0, sales: 2, team: -3, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "You’ve stopped the bleeding—barely",
+        content:
+          "Throughput stabilises, but leadership still can’t see a path to improvement. Your VP gives you a short window to present a real recovery plan. You bought time, but you haven’t used it yet."
+      }
+    }
+  ]
+},
 
-            // WEEK 5 - Excellence + Excellent (Best path)
-            week5_excellence_excellent: {
-                week: 5,
-                problem: "5Your tiered service model design is excellent, but now comes execution. Sales wants it launched immediately to save Q4 deals. Your team is excited but nervous. Tech wants a 6-week pilot. Leadership is pressuring for 'quick wins.' How do you manage this pressure?",
-                options: [
-                    {
-                        id: 'w5ee_pilot',
-                        label: "5Run controlled 4-week pilot with 20% of volume",
-                        text: "5Firm boundary: 'We'll test with a subset, learn, adjust, then scale confidently. No shortcuts.'",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -6,
-                            satisfaction: 8,
-                            resolution: 7,
-                            sales: 12,
-                            team: 15,
-                            tech: 18
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "5Holding steady under pressure",
-                            content: "5You regulated the distress. Told Sales: 'I understand urgency, but a failed launch hurts Q4 more than waiting 4 weeks.' Pilot revealed edge cases you'd never have predicted. Scaled with confidence. Stakeholders see you won't cave to pressure—you make sound decisions."
-                        }
-                    },
-                    {
-                        id: 'w5ee_launch',
-                        label: "5Launch to all enterprise clients first",
-                        text: "5Compromise: Full rollout for VIP tier only, learn from real usage, then expand to other tiers.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -4,
-                            satisfaction: 5,
-                            resolution: 4,
-                            sales: 8,
-                            team: 5,
-                            tech: 3
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "5Managed risk",
-                            content: "5VIP-only launch is less risky than full rollout but more risky than pilot. Some classification issues emerge. You're moving fast but not recklessly. Stakeholders appreciate speed but worry you're cutting corners."
-                        }
-                    },
-                    {
-                        id: 'w5ee_immediate',
-                        label: "5Launch everything immediately",
-                        text: "5Show confidence in your design. Full rollout this week across all tiers.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 5,
-                            satisfaction: -8,
-                            resolution: -5,
-                            sales: -12,
-                            team: -15,
-                            tech: -12
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "5Overconfidence destroys momentum",
-                            content: "5Classification errors everywhere. System crashes. Enterprise client escalated to CEO after misrouting. Had to roll back. All your credibility from the great design evaporated. Pressure made you rush instead of regulate distress."
-                        }
-                    }
-                ]
-            },
 
-            // WEEK 5 - Excellence + Partial (Good path with some struggles)
-            week5_excellence_partial: {
-                week: 5,
-                problem: "week 5 excellent",
-                options: [
-                    {
-                        id: 'w5ep_training',
-                        label: "week 5 excellent",
-                        text: "eek 5 excellentPause contractor onboarding. Train everyone thoroughly on tier classification and service standards.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -3,
-                            satisfaction: 6,
-                            resolution: 5,
-                            sales: 8,
-                            team: 12,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "5Investing in capabilityeek 5 excellent",
-                            content: "5eek 4 excellentTwo days of training pays off immediately. Contractors now understand the 'why' behind tiers. Consistency improves. Your core team feels supported. You chose to build capacity over rushing forward."
-                        }
-                    },
-                    {
-                        id: 'w5ep_release',
-                        label: "5Release contractors, refocus on core team",
-                        text: "5Cut losses. Let contractors go and focus on making your core team excellent at the tier model.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 3,
-                            team: 8,
-                            tech: 2
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "5 Back to square one on capacity",
-                            content: "5 Core team is stronger but you're back to volume challenges. Contractors were a misstep, but releasing them doesn't solve the underlying capacity need. You've stabilized quality at the cost of scale."
-                        }
-                    },
-                    {
-                        id: 'w5ep_push',
-                        label: "Push contractors to perform",
-                        text: "Week 5 Set clear performance standards. Those who can't meet them by end of week are let go.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -2,
-                            resolution: -1,
-                            sales: -3,
-                            team: -5,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Week 5 Accountability without support",
-                            content: "Week 5 Contractors feel set up to fail. Two quit immediately. Core team is frustrated—they see you didn't invest in proper training but are blaming contractors. Morale drops across the board."
-                        }
-                    }
-                ]
-            },
+// =====================
+// WEEK 5
+// =====================
 
-            // WEEK 5 - Struggling/Recovery + Partial (Recovery path)
-            week5_struggling_partial: {
-                week: 5,
-                problem: "Week 5 Your two-tier model from last week is showing promise, but implementation is messy. Premium customers are happy, but Standard tier is still struggling. Sales wants to upsell everyone to Premium. Your team is handling the split inconsistently. You need to tighten execution while maintaining momentum.",
-                options: [
-                    {
-                        id: 'w5sp_training',
-                        label: "Intensive 2-day training workshop",
-                        text: "Week 5 Pause new implementations. Train the entire team on tier classification, escalation paths, and service standards for each tier.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -3,
-                            satisfaction: 6,
-                            resolution: 6,
-                            sales: 8,
-                            team: 12,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "5Investing in capability",
-                            content: "5Two days of training pays off immediately. Agents now understand the 'why' behind tiers, not just the 'what.' Consistency improves. Your team feels empowered, not confused. You chose to build capacity over rushing forward."
-                        }
-                    },
-                    {
-                        id: 'w5sp_playbook',
-                        label: "Create detailed decision playbook",
-                        text: "Week 5 Document every scenario and edge case. Give agents a manual to follow for consistency.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 2,
-                            resolution: 2,
-                            sales: 3,
-                            team: -2,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Rules over judgment",
-                            content: "5Playbook helps with consistency but agents follow rules mechanically. They stop thinking critically. New situations arise not covered in the playbook—decision-making freezes. You chose documentation over developing judgment."
-                        }
-                    },
-                    {
-                        id: 'w5sp_push',
-                        label: "Push forward despite messiness",
-                        text: "Week 5 Inconsistency is part of learning. Keep moving, fix problems as they arise.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -5,
-                            team: -5,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Losing control",
-                            content: "Week 5 Inconsistency breeds customer complaints. Agents are confused and making it up as they go. The tier system is becoming meaningless. You had momentum—now you're losing it by not investing in proper execution."
-                        }
-                    }
-                ]
-            },
+// WEEK 5 - Excellence + Excellent
+week5_excellence_excellent: {
+  week: 5,
+  problem:
+    "You’re scaling from pilot to full volume. A new bottleneck appears: you make every judgment call—tier edge cases, customer exceptions, escalations. When you’re in meetings, decisions stall. Your team has started ‘waiting for Alex’ instead of thinking. How do you distribute leadership without losing quality?",
+  options: [
+    {
+      id: "w5ee_pilot",
+      label: "Define decision authority levels + weekly learning cycles",
+      text:
+        "Clarify what agents decide (routine), what team leads decide (non-routine), and what needs you (strategic). Add weekly edge-case huddles to grow judgment.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -6, satisfaction: 8, resolution: 7, sales: 12, team: 15, tech: 18 },
+      feedback: {
+        type: "success",
+        title: "You built capacity, not dependency",
+        content:
+          "Within two weeks, 80% of decisions are made locally. Agents stop asking ‘What should I do?’ and start bringing options and trade-offs. The edge-case huddles become a learning engine: judgment improves, escalations drop, and the model scales without you becoming the bottleneck."
+      }
+    },
+    {
+      id: "w5ee_launch",
+      label: "Promote two senior agents into Team Lead roles",
+      text:
+        "Create a formal layer: appoint two leads to handle daily escalations and tier disputes so you can focus on stakeholder management.",
+      decisionQuality: "partial",
+      impact: { responseTime: -4, satisfaction: 5, resolution: 4, sales: 8, team: 5, tech: 3 },
+      feedback: {
+        type: "warning",
+        title: "Structure helps—but the bottleneck moves",
+        content:
+          "Your new leads absorb pressure, but agents still escalate instead of developing judgment. You reduced your load, but you didn’t fully distribute authority. It’s progress—just not yet a learning organisation."
+      }
+    },
+    {
+      id: "w5ee_immediate",
+      label: "Write a comprehensive decision playbook for everything",
+      text:
+        "Solve the escalation problem with documentation: build a detailed guide so agents can follow rules without asking you.",
+      decisionQuality: "poor",
+      impact: { responseTime: 5, satisfaction: -8, resolution: -5, sales: -12, team: -15, tech: -12 },
+      feedback: {
+        type: "danger",
+        title: "A manual can’t replace judgment",
+        content:
+          "Agents cling to the playbook even when context suggests otherwise. When something new appears, work freezes and escalations surge. The team stops thinking—and dependency deepens. You tried to standardise your way out of an adaptive challenge."
+      }
+    }
+  ]
+},
 
-            // WEEK 5 - Struggling + Poor (Sliding toward crisis)
-            week5_struggling_poor: {
-                week: 5,
-                problem: "Week 5 After hiring contractors last week without a clear plan, you're dealing with quality issues and team frustration. Two contractors made serious errors with VIP clients. Your core team is demoralized. Sales is getting complaints. You need to stop the bleeding.",
-                options: [
-                    {
-                        id: 'w5spo_roadmap',
-                        label: "Present 60-day improvement roadmap",
-                        text: "Week 5 Be transparent: Here's our current state, here's the plan to get to sustainable operations, here are the milestones.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 10,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leadership through honesty",
-                            content: "Week 4 Your roadmap acknowledges reality while showing a clear path forward. Stakeholders appreciate the honesty and structure. Your VP commits resources. Team sees hope instead of chaos. You've turned crisis into a managed recovery plan."
-                        }
-                    },
-                    {
-                        id: 'w5spo_release',
-                        label: "Release all contractors immediately",
-                        text: "Week 5 Cut losses. Focus on stabilizing with just your core team.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 1,
-                            satisfaction: 1,
-                            resolution: 1,
-                            sales: 2,
-                            team: 5,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Damage control",
-                            content: "Week 4 Quality improves but you're back to capacity issues. Core team appreciates the decision but is overwhelmed by volume. You've chosen stability over scale, which may be right for now but doesn't solve the long-term problem."
-                        }
-                    },
-                    {
-                        id: 'w5spo_blame',
-                        label: "Escalate contractor issues to VP",
-                        text: "Week 4 Explain that contractors weren't properly vetted. Request better hiring support from HR.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -5,
-                            team: -8,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Deflecting responsibility",
-                            content: "Week 5 VP asks: 'Who decided to hire them without a training plan?' You look like you're avoiding ownership. Team sees you're not taking responsibility for your decisions. Trust drops further."
-                        }
-                    }
-                ]
-            },
+// WEEK 5 - Excellence + Partial
+week5_excellence_partial: {
+  week: 5,
+  problem:
+    "The tier model is working, but execution is fragile. You’re still over-involved in daily decisions, and recent teething issues have made people cautious. Sales wants speed; your team wants clarity. How do you scale decision-making without creating chaos?",
+  options: [
+    {
+      id: "w5ep_training",
+      label: "Set decision authority levels + run weekly edge-case calibration",
+      text:
+        "Define who decides what, then run short weekly sessions where the team reviews edge cases and refines shared judgment.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -3, satisfaction: 6, resolution: 5, sales: 8, team: 12, tech: 5 },
+      feedback: {
+        type: "success",
+        title: "Less you, more capability",
+        content:
+          "You stop being the default answer. Agents learn to make calls, justify them, and learn from misses. Confidence rises, escalations drop, and stakeholders see you stabilising scale through learning—not heroics."
+      }
+    },
+    {
+      id: "w5ep_release",
+      label: "Create Team Leads to absorb escalations",
+      text:
+        "Appoint senior agents as escalation owners and let them make day-to-day classification calls while you focus upward.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 4, resolution: 3, sales: 3, team: 8, tech: 2 },
+      feedback: {
+        type: "warning",
+        title: "Better flow, limited learning",
+        content:
+          "You reduced your bottleneck, but agents still ‘hand off’ thinking. The system is more stable, but the organisation is not yet more adaptive. You’ll need a learning loop to avoid creating a new dependency layer."
+      }
+    },
+    {
+      id: "w5ep_push",
+      label: "Push accountability hard without changing the system",
+      text:
+        "Tell agents they must ‘figure it out’ and stop escalating—effective immediately.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -2, resolution: -1, sales: -3, team: -5, tech: 0 },
+      feedback: {
+        type: "danger",
+        title: "Accountability without support breaks trust",
+        content:
+          "Agents interpret this as abandonment. They either escalate anyway (just louder), or they make unsafe calls to avoid being blamed. Quality becomes inconsistent and fear rises. You demanded independence without building capability."
+      }
+    }
+  ]
+},
 
-            // WEEK 5 - Crisis + Partial (In the depths)
-            week5_crisis_partial: {
-                week: 5,
-                problem: "Week 5 After your emergency triage last week, things have barely stabilized. Your VP is watching closely. Sales grudgingly accepts VIP prioritization but warns 'this better be temporary.' Your team is exhausted. One contractor is working out; two are disasters. You're still in crisis mode but need to show a path forward.",
-                options: [
-                    {
-                        id: 'w5cp_roadmap',
-                        label: "Present 60-day improvement roadmap",
-                        text: "Week 5 Be transparent: Here's our current state, here's the plan to get to sustainable operations, here are the milestones.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 10,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leadership through honesty",
-                            content: "Week 5 Your roadmap acknowledges reality while showing a clear path forward. Stakeholders appreciate the honesty and structure. Your VP commits resources. Team sees hope instead of chaos. You've turned crisis into a managed recovery plan."
-                        }
-                    },
-                    {
-                        id: 'w5cp_keep',
-                        label: "Keep doing emergency triage",
-                        text: "Week 5 Don't rock the boat. VIP prioritization is working well enough. Just maintain this until pressure decreases.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: -1,
-                            resolution: 0,
-                            sales: 3,
-                            team: -8,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Stuck in survival mode",
-                            content: "Week 4 You're confusing stability with progress. Team morale continues dropping—they see no end in sight. Standard customers are being neglected. Your VP loses patience: 'What's the actual plan here?' Triage isn't strategy."
-                        }
-                    },
-                    {
-                        id: 'w5cp_escalate',
-                        label: "Request additional senior leadership support",
-                        text: "Week 5 Ask VP to assign a director-level person to co-lead the recovery with you.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -1,
-                            satisfaction: 2,
-                            resolution: 2,
-                            sales: 5,
-                            team: 3,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Shared leadership",
-                            content: "Week 5 VP assigns a director to help. It takes pressure off you but also signals you couldn't handle it alone. The director brings expertise but you've lost some autonomy. Progress happens but at the cost of your leadership credibility."
-                        }
-                    }
-                ]
-            },
+// WEEK 5 - Struggling/Recovery + Partial
+week5_struggling_partial: {
+  week: 5,
+  problem:
+    "Your tier model is still inconsistent and stakeholder patience is thinning. You’re making too many decisions personally, and it’s slowing everything down. How do you increase consistency while helping the team develop judgment?",
+  options: [
+    {
+      id: "w5sp_training",
+      label: "Run a 2-day calibration + decision-authority reset",
+      text:
+        "Train the team on classification and escalation, then define what decisions agents can make immediately and what gets reviewed weekly.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -3, satisfaction: 6, resolution: 6, sales: 8, team: 12, tech: 5 },
+      feedback: {
+        type: "success",
+        title: "Consistency through shared judgment",
+        content:
+          "Instead of just telling people the rules, you help them learn how to think inside the model. Escalations drop, decisions speed up, and you stop being the single point of failure."
+      }
+    },
+    {
+      id: "w5sp_playbook",
+      label: "Write a detailed decision playbook",
+      text:
+        "Document scenarios so people can ‘follow the guide’ for consistency.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 2, resolution: 2, sales: 3, team: -2, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Helpful—until reality changes",
+        content:
+          "The playbook reduces some variability, but agents stop building judgment. New situations trigger confusion and escalations. You improved standardisation but not adaptability."
+      }
+    },
+    {
+      id: "w5sp_push",
+      label: "Keep scaling and fix problems as they appear",
+      text:
+        "Accept inconsistency as learning and push forward without a deliberate capability plan.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -5, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Scaling amplifies inconsistency",
+        content:
+          "As volume increases, small disagreements become daily friction. Customers notice uneven service. Stakeholders conclude the model is ‘unreliable.’ Momentum turns into rework."
+      }
+    }
+  ]
+},
 
-            // WEEK 5 - Crisis + Poor (Rock bottom)
-            week5_crisis_poor: {
-                week: 5,
-                problem: "Week 5 Last week's overtime push backfired catastrophically. Another team member quit. Contractors are underperforming. Customer complaints have doubled. Your VP called an emergency meeting: 'We need to see immediate improvement or make leadership changes.' This is your last chance.",
-                options: [
-                    {
-                        id: 'w5cpo_honest',
-                        label: "Transparent assessment and ask for help",
-                        text: "Week 5 Complete honesty: 'I made mistakes. Here's what I've learned. Here's what I need to succeed.'",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -1,
-                            satisfaction: 3,
-                            resolution: 2,
-                            sales: 8,
-                            team: 12,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Humility opens doors",
-                            content: "Week 5 Your honest assessment stuns the room. VP respects the self-awareness. Team sees you're learning. You get a coach, additional budget, and 30 days to turn it around. You've earned a genuine second chance through vulnerability."
-                        }
-                    },
-                    {
-                        id: 'w5cpo_promises',
-                        label: "Promise dramatic improvement",
-                        text: "Week 5 Commit to 50% improvement in 2 weeks. Work nights and weekends to make it happen.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 1,
-                            satisfaction: -4,
-                            resolution: -3,
-                            sales: -8,
-                            team: -15,
-                            tech: -5
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Week 5 Desperation makes it worse",
-                            content: "Week 5 You can't deliver on the promise. Work yourself to exhaustion. Make errors. Team sees panic. VP sees unrealistic thinking. Two weeks later, metrics are worse. You're facing reassignment or termination."
-                        }
-                    },
-                    {
-                        id: 'w5cpo_basic',
-                        label: "Implement most basic fixes only",
-                        text: "Week 5 Strip everything down to absolute basics. Just answer tickets in order received. No sophistication.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 0,
-                            resolution: 0,
-                            sales: 2,
-                            team: -3,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Survival baseline",
-                            content: "Week 5 You've stopped the bleeding but haven't shown any path to improvement. VP gives you 2 more weeks to show a real plan. You're stable but on thin ice. Better than disaster, barely."
-                        }
-                    }
-                ]
-            },
+// WEEK 5 - Struggling + Poor
+week5_struggling_poor: {
+  week: 5,
+  problem:
+    "Quality issues have made stakeholders impatient. Your core team feels blamed, contractors are inconsistent, and your time is spent firefighting escalations. You need to restore confidence with a credible recovery approach.",
+  options: [
+    {
+      id: "w5spo_roadmap",
+      label: "Present a 60-day recovery roadmap",
+      text:
+        "Define the minimum viable service model, quality standards, staffing plan, and weekly milestones to rebuild trust.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -2, satisfaction: 4, resolution: 3, sales: 10, team: 10, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "A plan that others can follow",
+        content:
+          "The roadmap stops the spiral. Sales and leadership understand what’s changing and when. Your team stops guessing. Tech can sequence support instead of reacting to emergencies."
+      }
+    },
+    {
+      id: "w5spo_release",
+      label: "Release contractors and stabilise with the core team",
+      text:
+        "Remove variability to protect customers and rebuild internal confidence, even if capacity drops temporarily.",
+      decisionQuality: "partial",
+      impact: { responseTime: 1, satisfaction: 1, resolution: 1, sales: 2, team: 5, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Quality rises, capacity falls",
+        content:
+          "The team feels safer, but backlog pressure returns quickly. You’ve stabilised the floor, but you still need a sustainable operating model to prevent another collapse."
+      }
+    },
+    {
+      id: "w5spo_blame",
+      label: "Escalate contractor failures and request external fixes",
+      text:
+        "Push responsibility upward—better hiring, better vetting, better support—without changing how work is run day to day.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -8, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Blame doesn’t rebuild trust",
+        content:
+          "Stakeholders hear deflection, not leadership. Your team hears the same. The underlying operational gaps remain, and you lose the influence you need to secure help."
+      }
+    }
+  ]
+},
 
-            //== Week 6 ==//
+// WEEK 5 - Crisis + Partial
+week5_crisis_partial: {
+  week: 5,
+  problem:
+    "You’re still in crisis conditions: the VP is watching, Sales is impatient, and the team is exhausted. You can’t personally carry every decision and escalation. You need a path from survival to sustainable operations.",
+  options: [
+    {
+      id: "w5cp_roadmap",
+      label: "Move from triage to a 60-day recovery roadmap",
+      text:
+        "Set a clear recovery plan with milestones and define what must stop immediately to protect quality and capacity.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -2, satisfaction: 4, resolution: 3, sales: 10, team: 10, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "You turned crisis into managed work",
+        content:
+          "The roadmap gives everyone a shared reference point. Instead of arguing daily about what matters, you’ve defined priorities and boundaries. That alone reduces chaos and burnout."
+      }
+    },
+    {
+      id: "w5cp_keep",
+      label: "Keep running emergency triage",
+      text:
+        "Continue prioritising VIP issues and hope the pressure drops soon.",
+      decisionQuality: "poor",
+      impact: { responseTime: 0, satisfaction: -1, resolution: 0, sales: 3, team: -8, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Triage buys time—then spends it",
+        content:
+          "Without a plan, every week becomes the same crisis with new faces. The team can’t see an end, and leadership stops believing there is one."
+      }
+    },
+    {
+      id: "w5cp_escalate",
+      label: "Request senior co-lead support",
+      text:
+        "Bring in a director-level partner to share stakeholder management and help rebuild operational stability.",
+      decisionQuality: "partial",
+      impact: { responseTime: -1, satisfaction: 2, resolution: 2, sales: 5, team: 3, tech: 5 },
+      feedback: {
+        type: "warning",
+        title: "Support helps—but shifts perception",
+        content:
+          "You get bandwidth and expertise, but you also signal you can’t carry the turnaround alone. Progress improves, but you’ll need visible wins to rebuild leadership credibility."
+      }
+    }
+  ]
+},
 
-            // WEEK 6 - Excellence + Excellent (Best path)
-            week6_excellence_excellent: {
-                week: 6,
-                problem: "Your tiered service model design is excellent, but now comes execution. Sales wants it launched immediately to save Q4 deals. Your team is excited but nervous. Tech wants a 6-week pilot. Leadership is pressuring for 'quick wins.' How do you manage this pressure?",
-                options: [
-                    {
-                        id: 'w6ee_pilot',
-                        label: "Run controlled 4-week pilot with 20% of volume",
-                        text: "6Firm boundary: 'We'll test with a subset, learn, adjust, then scale confidently. No shortcuts.'",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -6,
-                            satisfaction: 8,
-                            resolution: 7,
-                            sales: 12,
-                            team: 15,
-                            tech: 18
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Holding steady under pressure",
-                            content: "You regulated the distress. Told Sales: 'I understand urgency, but a failed launch hurts Q4 more than waiting 4 weeks.' Pilot revealed edge cases you'd never have predicted. Scaled with confidence. Stakeholders see you won't cave to pressure—you make sound decisions."
-                        }
-                    },
-                    {
-                        id: 'w6ee_launch',
-                        label: "Launch to all enterprise clients first",
-                        text: "6Compromise: Full rollout for VIP tier only, learn from real usage, then expand to other tiers.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -4,
-                            satisfaction: 5,
-                            resolution: 4,
-                            sales: 8,
-                            team: 5,
-                            tech: 3
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Managed risk",
-                            content: "VIP-only launch is less risky than full rollout but more risky than pilot. Some classification issues emerge. You're moving fast but not recklessly. Stakeholders appreciate speed but worry you're cutting corners."
-                        }
-                    },
-                    {
-                        id: 'w6ee_immediate',
-                        label: "Launch everything immediately",
-                        text: "6Show confidence in your design. Full rollout this week across all tiers.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 5,
-                            satisfaction: -8,
-                            resolution: -5,
-                            sales: -12,
-                            team: -15,
-                            tech: -12
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Overconfidence destroys momentum",
-                            content: "6Classification errors everywhere. System crashes. Enterprise client escalated to CEO after misrouting. Had to roll back. All your credibility from the great design evaporated. Pressure made you rush instead of regulate distress."
-                        }
-                    }
-                ]
-            },
+// WEEK 5 - Crisis + Poor
+week5_crisis_poor: {
+  week: 5,
+  problem:
+    "Leadership is close to making changes. Complaints are high, morale is low, and trust is thin. You need to reset expectations and secure the support required to deliver real improvement.",
+  options: [
+    {
+      id: "w5cpo_honest",
+      label: "Transparent assessment and a specific ask",
+      text:
+        "Own what happened, describe what you’re changing, and ask for targeted support (resources + a defined runway).",
+      decisionQuality: "excellent",
+      impact: { responseTime: -1, satisfaction: 3, resolution: 2, sales: 8, team: 12, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "Credibility through honesty",
+        content:
+          "Your clarity and accountability create a second chance. Leadership supports a recovery window, your team regains hope, and stakeholders stop escalating every issue as if it’s a surprise."
+      }
+    },
+    {
+      id: "w5cpo_promises",
+      label: "Promise rapid dramatic improvement",
+      text:
+        "Commit to aggressive targets and push the team harder to hit them.",
+      decisionQuality: "poor",
+      impact: { responseTime: 1, satisfaction: -4, resolution: -3, sales: -8, team: -15, tech: -5 },
+      feedback: {
+        type: "danger",
+        title: "Pressure breaks what’s left",
+        content:
+          "The team can’t sustainably give more. Quality dips, people disengage, and leadership concludes the strategy is unrealistic."
+      }
+    },
+    {
+      id: "w5cpo_basic",
+      label: "Drop complexity and run FIFO only",
+      text:
+        "Simplify operations to the bare minimum to keep tickets moving.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 0, resolution: 0, sales: 2, team: -3, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Stability without progress",
+        content:
+          "You reduced chaos, but leadership still can’t see a path to recovery. You’ve bought time—now you must use it to build a plan."
+      }
+    }
+  ]
+},
 
-            // WEEK 6 - Excellence + Partial (Good path with some struggles)
-            week6_excellence_partial: {
-                week: 6,
-                problem: "week 6 excellent",
-                options: [
-                    {
-                        id: 'w6ep_training',
-                        label: "week 6 excellent",
-                        text: "6Pause contractor onboarding. Train everyone thoroughly on tier classification and service standards.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -3,
-                            satisfaction: 6,
-                            resolution: 5,
-                            sales: 8,
-                            team: 12,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Investing in capabilityeek 4 excellent",
-                            content: "6Two days of training pays off immediately. Contractors now understand the 'why' behind tiers. Consistency improves. Your core team feels supported. You chose to build capacity over rushing forward."
-                        }
-                    },
-                    {
-                        id: 'w6ep_release',
-                        label: "Release contractors, refocus on core team",
-                        text: "6Cut losses. Let contractors go and focus on making your core team excellent at the tier model.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 3,
-                            team: 8,
-                            tech: 2
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Back to square one on capacity",
-                            content: "6Core team is stronger but you're back to volume challenges. Contractors were a misstep, but releasing them doesn't solve the underlying capacity need. You've stabilized quality at the cost of scale."
-                        }
-                    },
-                    {
-                        id: 'w6ep_push',
-                        label: "Push contractors to perform",
-                        text: "6Set clear performance standards. Those who can't meet them by end of week are let go.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -2,
-                            resolution: -1,
-                            sales: -3,
-                            team: -5,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "6Accountability without support",
-                            content: "6Contractors feel set up to fail. Two quit immediately. Core team is frustrated—they see you didn't invest in proper training but are blaming contractors. Morale drops across the board."
-                        }
-                    }
-                ]
-            },
 
-            // WEEK 6 - Struggling/Recovery + Partial (Recovery path)
-            week6_struggling_partial: {
-                week: 6,
-                problem: "Week 6 Your two-tier model from last week is showing promise, but implementation is messy. Premium customers are happy, but Standard tier is still struggling. Sales wants to upsell everyone to Premium. Your team is handling the split inconsistently. You need to tighten execution while maintaining momentum.",
-                options: [
-                    {
-                        id: 'w6sp_training',
-                        label: "Intensive 2-day training workshop",
-                        text: "Week 6 Pause new implementations. Train the entire team on tier classification, escalation paths, and service standards for each tier.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -3,
-                            satisfaction: 6,
-                            resolution: 6,
-                            sales: 8,
-                            team: 12,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Investing in capability",
-                            content: "6Two days of training pays off immediately. Agents now understand the 'why' behind tiers, not just the 'what.' Consistency improves. Your team feels empowered, not confused. You chose to build capacity over rushing forward."
-                        }
-                    },
-                    {
-                        id: 'w6sp_playbook',
-                        label: "Create detailed decision playbook",
-                        text: "Week 6 Document every scenario and edge case. Give agents a manual to follow for consistency.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 2,
-                            resolution: 2,
-                            sales: 3,
-                            team: -2,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Rules over judgment",
-                            content: "6Playbook helps with consistency but agents follow rules mechanically. They stop thinking critically. New situations arise not covered in the playbook—decision-making freezes. You chose documentation over developing judgment."
-                        }
-                    },
-                    {
-                        id: 'w6sp_push',
-                        label: "Push forward despite messiness",
-                        text: "Week 6 Inconsistency is part of learning. Keep moving, fix problems as they arise.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -5,
-                            team: -5,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Losing control",
-                            content: "Week 6 Inconsistency breeds customer complaints. Agents are confused and making it up as they go. The tier system is becoming meaningless. You had momentum—now you're losing it by not investing in proper execution."
-                        }
-                    }
-                ]
-            },
+// =====================
+// WEEK 6
+// =====================
 
-            // WEEK 6 - Struggling + Poor (Sliding toward crisis)
-            week6_struggling_poor: {
-                week: 6,
-                problem: "Week 6 After hiring contractors last week without a clear plan, you're dealing with quality issues and team frustration. Two contractors made serious errors with VIP clients. Your core team is demoralized. Sales is getting complaints. You need to stop the bleeding.",
-                options: [
-                    {
-                        id: 'w6spo_roadmap',
-                        label: "Present 60-day improvement roadmap",
-                        text: "Week 6 Be transparent: Here's our current state, here's the plan to get to sustainable operations, here are the milestones.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 10,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leadership through honesty",
-                            content: "Week 6 Your roadmap acknowledges reality while showing a clear path forward. Stakeholders appreciate the honesty and structure. Your VP commits resources. Team sees hope instead of chaos. You've turned crisis into a managed recovery plan."
-                        }
-                    },
-                    {
-                        id: 'w6spo_release',
-                        label: "Release all contractors immediately",
-                        text: "Week 6 Cut losses. Focus on stabilizing with just your core team.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 1,
-                            satisfaction: 1,
-                            resolution: 1,
-                            sales: 2,
-                            team: 5,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Damage control",
-                            content: "Week 6 Quality improves but you're back to capacity issues. Core team appreciates the decision but is overwhelmed by volume. You've chosen stability over scale, which may be right for now but doesn't solve the long-term problem."
-                        }
-                    },
-                    {
-                        id: 'w6spo_blame',
-                        label: "Escalate contractor issues to VP",
-                        text: "Week 6 Explain that contractors weren't properly vetted. Request better hiring support from HR.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -5,
-                            team: -8,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Deflecting responsibility",
-                            content: "Week 6 VP asks: 'Who decided to hire them without a training plan?' You look like you're avoiding ownership. Team sees you're not taking responsibility for your decisions. Trust drops further."
-                        }
-                    }
-                ]
-            },
+// WEEK 6 - Excellence + Excellent
+week6_excellence_excellent: {
+  week: 6,
+  problem:
+    "Customer expectations have shifted: they now expect live chat support, not just email/phone. Sales is already selling it. But adding chat could overwhelm your team, and Tech says they can’t maintain two parallel support systems long-term. How do you adapt without collapsing your current gains?",
+  options: [
+    {
+      id: "w6ee_pilot",
+      label: "Pilot chat in VIP tier only, learn, then expand",
+      text:
+        "Start with enterprise/VIP customers where volume is manageable and stakes are high. Use what you learn to design staffing ratios and workflows before scaling.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -6, satisfaction: 8, resolution: 7, sales: 12, team: 15, tech: 18 },
+      feedback: {
+        type: "success",
+        title: "Iterative adaptation to new reality",
+        content:
+          "The VIP pilot reveals chat requires different coverage and concurrency limits (agents can’t juggle unlimited chats). You redesign workflows, define ‘chat-worthy’ issues, and protect the rest of the system. Sales still gets a marketable win, and your team doesn’t get crushed."
+      }
+    },
+    {
+      id: "w6ee_launch",
+      label: "Outsource chat to a specialised vendor",
+      text:
+        "Launch quickly by contracting a vendor, while your team protects core email/phone performance.",
+      decisionQuality: "partial",
+      impact: { responseTime: -4, satisfaction: 5, resolution: 4, sales: 8, team: 5, tech: 3 },
+      feedback: {
+        type: "warning",
+        title: "Speed over integration",
+        content:
+          "Chat launches fast, but responses feel generic and don’t align with your tier model. VIP customers complain about context loss, and you now manage two service cultures. You gained speed, but you created operational complexity."
+      }
+    },
+    {
+      id: "w6ee_immediate",
+      label: "Deploy chat across all tiers immediately",
+      text:
+        "Train everyone this week and launch broadly to meet market expectations fast.",
+      decisionQuality: "poor",
+      impact: { responseTime: 5, satisfaction: -8, resolution: -5, sales: -12, team: -15, tech: -12 },
+      feedback: {
+        type: "danger",
+        title: "Overextension without learning",
+        content:
+          "Agents try to handle chat plus email/phone and quality collapses across all channels. Customers expect near-instant chat responses and get delays. Burnout spikes, mistakes rise, and the gains from your tier model evaporate under overload."
+      }
+    }
+  ]
+},
 
-            // WEEK 6 - Crisis + Partial (In the depths)
-            week6_crisis_partial: {
-                week: 6,
-                problem: "Week 6 After your emergency triage last week, things have barely stabilized. Your VP is watching closely. Sales grudgingly accepts VIP prioritization but warns 'this better be temporary.' Your team is exhausted. One contractor is working out; two are disasters. You're still in crisis mode but need to show a path forward.",
-                options: [
-                    {
-                        id: 'w6cp_roadmap',
-                        label: "Present 60-day improvement roadmap",
-                        text: "Week 6 Be transparent: Here's our current state, here's the plan to get to sustainable operations, here are the milestones.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 10,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leadership through honesty",
-                            content: "Week 6 Your roadmap acknowledges reality while showing a clear path forward. Stakeholders appreciate the honesty and structure. Your VP commits resources. Team sees hope instead of chaos. You've turned crisis into a managed recovery plan."
-                        }
-                    },
-                    {
-                        id: 'w6cp_keep',
-                        label: "Keep doing emergency triage",
-                        text: "Week 6 Don't rock the boat. VIP prioritization is working well enough. Just maintain this until pressure decreases.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: -1,
-                            resolution: 0,
-                            sales: 3,
-                            team: -8,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Stuck in survival mode",
-                            content: "Week 6 You're confusing stability with progress. Team morale continues dropping—they see no end in sight. Standard customers are being neglected. Your VP loses patience: 'What's the actual plan here?' Triage isn't strategy."
-                        }
-                    },
-                    {
-                        id: 'w6cp_escalate',
-                        label: "Request additional senior leadership support",
-                        text: "Week 6 Ask VP to assign a director-level person to co-lead the recovery with you.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -1,
-                            satisfaction: 2,
-                            resolution: 2,
-                            sales: 5,
-                            team: 3,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Shared leadership",
-                            content: "Week 6 VP assigns a director to help. It takes pressure off you but also signals you couldn't handle it alone. The director brings expertise but you've lost some autonomy. Progress happens but at the cost of your leadership credibility."
-                        }
-                    }
-                ]
-            },
+// WEEK 6 - Excellence + Partial
+week6_excellence_partial: {
+  week: 6,
+  problem:
+    "You’ve improved service levels, but the system still feels fragile. Now chat is being sold as a promise, and you don’t have the capacity or model to absorb it safely. What’s your move?",
+  options: [
+    {
+      id: "w6ep_training",
+      label: "Pilot chat in VIP tier with clear constraints",
+      text:
+        "Run a VIP-only pilot with explicit coverage rules, concurrency limits, and defined handoffs back to email/phone.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -3, satisfaction: 6, resolution: 5, sales: 8, team: 12, tech: 5 },
+      feedback: {
+        type: "success",
+        title: "Constrained experimentation",
+        content:
+          "You protect the team by setting boundaries: what chat is for, what it isn’t, and how escalation works. You get real data without risking a full-system collapse—and you can now negotiate with Sales using evidence instead of fear."
+      }
+    },
+    {
+      id: "w6ep_release",
+      label: "Outsource chat temporarily while you stabilise",
+      text:
+        "Use a vendor as a bridge solution while you stabilise internal processes and define a long-term support model.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 4, resolution: 3, sales: 3, team: 8, tech: 2 },
+      feedback: {
+        type: "warning",
+        title: "A bridge—if you treat it like one",
+        content:
+          "The vendor reduces immediate pressure, but you must actively manage quality and integration, or you’ll end up with parallel systems and inconsistent customer experiences."
+      }
+    },
+    {
+      id: "w6ep_push",
+      label: "Add chat on top of everything else",
+      text:
+        "Ask the team to ‘make it work’—chat, email, and phone—without changing staffing or workflows.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -2, resolution: -1, sales: -3, team: -5, tech: 0 },
+      feedback: {
+        type: "danger",
+        title: "More channels, same capacity",
+        content:
+          "Chat doesn’t just add work—it changes work. Without redesign, the team is interrupted constantly and can’t complete complex cases. Response times rise everywhere, and frustration turns into attrition risk."
+      }
+    }
+  ]
+},
 
-            // WEEK 6 - Crisis + Poor (Rock bottom)
-            week6_crisis_poor: {
-                week: 6,
-                problem: "Week 6 Last week's overtime push backfired catastrophically. Another team member quit. Contractors are underperforming. Customer complaints have doubled. Your VP called an emergency meeting: 'We need to see immediate improvement or make leadership changes.' This is your last chance.",
-                options: [
-                    {
-                        id: 'w6cpo_honest',
-                        label: "Transparent assessment and ask for help",
-                        text: "Week 6 Complete honesty: 'I made mistakes. Here's what I've learned. Here's what I need to succeed.'",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -1,
-                            satisfaction: 3,
-                            resolution: 2,
-                            sales: 8,
-                            team: 12,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Humility opens doors",
-                            content: "Week 6 Your honest assessment stuns the room. VP respects the self-awareness. Team sees you're learning. You get a coach, additional budget, and 30 days to turn it around. You've earned a genuine second chance through vulnerability."
-                        }
-                    },
-                    {
-                        id: 'w6cpo_promises',
-                        label: "Promise dramatic improvement",
-                        text: "Week 6 Commit to 50% improvement in 2 weeks. Work nights and weekends to make it happen.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 1,
-                            satisfaction: -4,
-                            resolution: -3,
-                            sales: -8,
-                            team: -15,
-                            tech: -5
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Week 6 Desperation makes it worse",
-                            content: "Week 6 You can't deliver on the promise. Work yourself to exhaustion. Make errors. Team sees panic. VP sees unrealistic thinking. Two weeks later, metrics are worse. You're facing reassignment or termination."
-                        }
-                    },
-                    {
-                        id: 'w6cpo_basic',
-                        label: "Implement most basic fixes only",
-                        text: "Week 6 Strip everything down to absolute basics. Just answer tickets in order received. No sophistication.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 0,
-                            resolution: 0,
-                            sales: 2,
-                            team: -3,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Survival baseline",
-                            content: "Week 6 You've stopped the bleeding but haven't shown any path to improvement. VP gives you 2 more weeks to show a real plan. You're stable but on thin ice. Better than disaster, barely."
-                        }
-                    }
-                ]
-            },
-            //== Week 7 ==//
+// WEEK 6 - Struggling/Recovery + Partial
+week6_struggling_partial: {
+  week: 6,
+  problem:
+    "Implementation is still uneven, and now live chat is being sold as ‘the new standard.’ You need to respond to market expectations without overwhelming an already stressed operation.",
+  options: [
+    {
+      id: "w6sp_training",
+      label: "Pilot chat narrowly + retrain workflows",
+      text:
+        "Launch a limited pilot (VIP or a small segment) and use the pilot to retrain workflows, staffing ratios, and escalation patterns.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -3, satisfaction: 6, resolution: 6, sales: 8, team: 12, tech: 5 },
+      feedback: {
+        type: "success",
+        title: "Learning before scaling",
+        content:
+          "Your limited pilot reveals what chat does to attention, workload, and throughput. You adjust staffing and guardrails before it hits full volume, preventing a predictable overload."
+      }
+    },
+    {
+      id: "w6sp_playbook",
+      label: "Write chat rules and launch more broadly",
+      text:
+        "Create a set of rules for chat handling and roll it out quickly to meet expectations.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 2, resolution: 2, sales: 3, team: -2, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Rules help, but reality will outrun them",
+        content:
+          "Chat creates live edge cases every hour. A rules-first approach reduces some confusion, but without a learning loop, the team becomes brittle under real-time pressure."
+      }
+    },
+    {
+      id: "w6sp_push",
+      label: "Deploy chat immediately and adjust later",
+      text:
+        "Accept the mess, launch now, and patch gaps as complaints come in.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -5, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "You scaled uncertainty",
+        content:
+          "Chat issues show up instantly and loudly. Without guardrails, interruptions explode and quality drops across channels. Stakeholders interpret it as failure, not learning."
+      }
+    }
+  ]
+},
 
-            // WEEK 7 - Excellence + Excellent (Best path)
-            week7_excellence_excellent: {
-                week: 7,
-                problem: "Leadership announces budget cuts—15% reduction across all departments due to market conditions. Your improved process costs 8% more than the old one (tiered staffing, better tools, training). CFO asks: 'Can we just go back to the old way and cut costs?' Everyone is watching how you respond under this pressure.",
-                options: [
-                    {
-                        id: 'w7ee_revertSingle',
-                        label: "Agree to cut back to single-tier process",
-                        text: "Protect jobs by simplifying back to one service level and reducing tool costs.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 12,
-                            satisfaction: -15,
-                            resolution: -10,
-                            sales: -25,
-                            team: -15,
-                            tech: -8
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Reverting under pressure",
-                            content: "Within 3 weeks, all your gains evaporated. Response times back to 45+ hours. Three enterprise clients switched to competitors (revenue loss: $1.8M). Team morale crushed—'We worked so hard for nothing.' Under pressure, you abandoned adaptive change and returned to the dysfunctional status quo."
-                        }
-                    },
-                    {
-                        id: 'w7ee_dataDrive',
-                        label: "Present data-driven business case for the investment",
-                        text: "Show ROI: customer retention value, reduced churn, efficiency gains. Make the case that cutting this costs more than it saves.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 15,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leading upward with evidence",
-                            content: "Your presentation: at-risk renewals saved ($2.1M), improved customer satisfaction and skilled staff freed up to solve complex issues quickly. 8% cost increase delivers 30% value increase. CFO approves budget. You showed adaptive leadership works by protecting the change while acknowledging the pressure. Team sees you fight for what works, not what's comfortable."
-                        }
-                    },
-                    {
-                        id: 'w7ee_aiAUtomato',
-                        label: "Propose strategic automation in Standard tier",
-                        text: "Use AI to automate 40% of Standard tier volume, reducing costs while protecting VIP quality.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 3,
-                            resolution: 2,
-                            sales: 5,
-                            team: 5,
-                            tech: 6
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Compromise with innovation",
-                            content: "Smart middle path. Automation reduces Standard tier costs by 7% while maintaining quality. VIP service untouched. Not as ideal as full funding, but you found a way to preserve core improvements while addressing budget reality. Pragmatic adaptation."
-                        }
-                    }
-                ]
-            },
+// WEEK 6 - Struggling + Poor
+week6_struggling_poor: {
+  week: 6,
+  problem:
+    "You’re still recovering from quality issues, and leadership is anxious. Now Sales is selling live chat. If you say ‘no,’ they escalate. If you say ‘yes,’ you risk another collapse. What do you do?",
+  options: [
+    {
+      id: "w6spo_roadmap",
+      label: "Add chat to the 60-day roadmap with a controlled pilot",
+      text:
+        "Position chat as a phased capability: pilot in VIP, define staffing and workflows, then expand—tied to milestones and resourcing.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -2, satisfaction: 4, resolution: 3, sales: 10, team: 10, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "You negotiated with structure",
+        content:
+          "Instead of resisting or caving, you give stakeholders a credible ‘yes, and’—yes to chat, and only in a way that protects customers and staff. The roadmap reduces escalation because it gives people something to hold onto."
+      }
+    },
+    {
+      id: "w6spo_release",
+      label: "Outsource chat to stabilise internal quality",
+      text:
+        "Use a vendor to satisfy Sales while your team focuses on core service stabilisation.",
+      decisionQuality: "partial",
+      impact: { responseTime: 1, satisfaction: 1, resolution: 1, sales: 2, team: 5, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "A tactical relief valve",
+        content:
+          "You reduce immediate overload, but you risk creating a ‘two-class’ experience if the vendor’s quality doesn’t match VIP expectations. It works only if you actively manage standards and integration."
+      }
+    },
+    {
+      id: "w6spo_blame",
+      label: "Tell Sales to stop selling chat until you’re ready",
+      text:
+        "Refuse the request outright and push responsibility back to Sales for overpromising again.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -8, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Conflict without an alternative",
+        content:
+          "Sales escalates immediately because you gave them a ‘no’ without a plan. You may be right, but you’ve lost the chance to lead them toward a workable commitment."
+      }
+    }
+  ]
+},
 
-            // WEEK 7 - Excellence + Partial (Good path with some struggles)
-            week7_excellence_partial: {
-                week: 7,
-                problem: "Leadership announces budget cuts—15% reduction across all departments due to market conditions. Your improved process costs 8% more than the old one (tiered staffing, better tools, training), and you are over budget in other areas due to teething issues for this new process. CFO asks: 'Can we just go back to the old way and cut costs?' Everyone is watching how you respond under this pressure.",
-                options: [
-                    {
-                        id: 'w7ep_revertSingle',
-                        label: "Agree to cut back to single-tier process",
-                        text: "Protect jobs by simplifying back to one service level and reducing tool costs.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 12,
-                            satisfaction: -15,
-                            resolution: -10,
-                            sales: -25,
-                            team: -15,
-                            tech: -8
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Reverting under pressure",
-                            content: "Within 3 weeks, all your gains evaporated. Response times back to 45+ hours. Three enterprise clients switched to competitors (revenue loss: $1.8M). Team morale crushed—'We worked so hard for nothing.' Under pressure, you abandoned adaptive change and returned to the dysfunctional status quo."
-                        }
-                    },
-                    {
-                        id: 'w7ep_dataDrive',
-                        label: "Present data-driven business case for the investment",
-                        text: "Show ROI: customer retention value, expensive agent time used wisely, efficiency gains. Make the case that cutting this costs more than it saves.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 2,
-                            resolution: 3,
-                            sales: 8,
-                            team: 12,
-                            tech: 7
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leading upward with evidence",
-                            content: "Your presentation: at-risk renewals saved ($2.1M), improved customer satisfaction and skilled staff freed up to solve complex issues quickly. 8% cost increase delivers 30% value increase. CFO approves your budget, but you know you must continue to deliver to protect your credibility. You showed adaptive leadership works by protecting the change while acknowledging the pressure. Team trusts you to do the difficult work of managing stakeholders while they focus on day-to-day operations."
-                        }
-                    },
-                    {
-                        id: 'w7ep_aiAUtomato',
-                        label: "Propose strategic automation in Standard tier",
-                        text: "Use AI to automate 40% of Standard tier volume, reducing costs while protecting VIP quality.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 3,
-                            resolution: 2,
-                            sales: 5,
-                            team: 5,
-                            tech: 6
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Compromise with innovation",
-                            content: "Smart middle path. Automation reduces Standard tier costs by 7% while maintaining quality. VIP service untouched. Not as ideal as full funding, but you found a way to preserve core improvements while addressing budget reality. Pragmatic adaptation."
-                        }
-                    }
-                ]
-            },
+// WEEK 6 - Crisis + Partial
+week6_crisis_partial: {
+  week: 6,
+  problem:
+    "You’re still in crisis recovery, and everyone is sensitive to another failure. Now chat is being demanded. You need to respond to market pressure while protecting a fragile operation.",
+  options: [
+    {
+      id: "w6cp_roadmap",
+      label: "Approve a VIP-only chat pilot as part of recovery",
+      text:
+        "Commit to a narrowly scoped pilot with strict guardrails and clear success criteria, tied to the recovery plan.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -2, satisfaction: 4, resolution: 3, sales: 10, team: 10, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "Controlled change inside crisis",
+        content:
+          "You avoid the trap of ‘do nothing’ or ‘do everything.’ The pilot gives Sales a credible story, gives Tech a bounded scope, and gives your team a chance to learn without being overwhelmed."
+      }
+    },
+    {
+      id: "w6cp_keep",
+      label: "Avoid chat and keep triage going",
+      text:
+        "Stick to VIP triage and postpone chat entirely until things feel calmer.",
+      decisionQuality: "poor",
+      impact: { responseTime: 0, satisfaction: -1, resolution: 0, sales: 3, team: -8, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Stability becomes avoidance",
+        content:
+          "Stakeholders interpret delay as inability to adapt. Sales continues selling anyway, which sets you up for an even more chaotic launch later—without your input."
+      }
+    },
+    {
+      id: "w6cp_escalate",
+      label: "Ask leadership to pause chat commitments company-wide",
+      text:
+        "Request executive alignment: Sales stops selling chat until you complete a pilot and define an operational model.",
+      decisionQuality: "partial",
+      impact: { responseTime: -1, satisfaction: 2, resolution: 2, sales: 5, team: 3, tech: 5 },
+      feedback: {
+        type: "warning",
+        title: "A strong move—if you can hold it",
+        content:
+          "Leadership may agree, but only briefly. This buys time, not a solution. You still need a pilot and an operating model fast, or the pause will collapse under pressure."
+      }
+    }
+  ]
+},
 
-            // WEEK 7 - Struggling/Recovery + Partial (Recovery path)
-            week7_struggling_partial: {
-                week: 7,
-                problem: "Week 7 Your two-tier model from last week is showing promise, but implementation is messy. Premium customers are happy, but Standard tier is still struggling. Sales wants to upsell everyone to Premium. Your team is handling the split inconsistently. You need to tighten execution while maintaining momentum.",
-                options: [
-                    {
-                        id: 'w7sp_training',
-                        label: "Intensive 2-day training workshop",
-                        text: "Week 47 Pause new implementations. Train the entire team on tier classification, escalation paths, and service standards for each tier.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -3,
-                            satisfaction: 6,
-                            resolution: 6,
-                            sales: 8,
-                            team: 12,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Investing in capability",
-                            content: "7Two days of training pays off immediately. Agents now understand the 'why' behind tiers, not just the 'what.' Consistency improves. Your team feels empowered, not confused. You chose to build capacity over rushing forward."
-                        }
-                    },
-                    {
-                        id: 'w7sp_playbook',
-                        label: "Create detailed decision playbook",
-                        text: "Week 7 Document every scenario and edge case. Give agents a manual to follow for consistency.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 2,
-                            resolution: 2,
-                            sales: 3,
-                            team: -2,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Rules over judgment",
-                            content: "7Playbook helps with consistency but agents follow rules mechanically. They stop thinking critically. New situations arise not covered in the playbook—decision-making freezes. You chose documentation over developing judgment."
-                        }
-                    },
-                    {
-                        id: 'w7sp_push',
-                        label: "Push forward despite messiness",
-                        text: "Week 7 Inconsistency is part of learning. Keep moving, fix problems as they arise.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -5,
-                            team: -5,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Losing control",
-                            content: "Week 7 Inconsistency breeds customer complaints. Agents are confused and making it up as they go. The tier system is becoming meaningless. You had momentum—now you're losing it by not investing in proper execution."
-                        }
-                    }
-                ]
-            },
+// WEEK 6 - Crisis + Poor
+week6_crisis_poor: {
+  week: 6,
+  problem:
+    "You’re on thin ice. Another visible failure could trigger leadership changes. Now chat is being demanded as a ‘quick win.’ Whatever you choose will be watched closely.",
+  options: [
+    {
+      id: "w6cpo_honest",
+      label: "Set a constrained ‘yes’ with guardrails",
+      text:
+        "Acknowledge reality: approve a narrow pilot with explicit staffing, quality checks, and clear stop conditions if metrics worsen.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -1, satisfaction: 3, resolution: 2, sales: 8, team: 12, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "You regulated distress instead of absorbing it",
+        content:
+          "You don’t overpromise, and you don’t refuse. The guardrails protect the team and show leadership you’re capable of disciplined change—even under scrutiny."
+      }
+    },
+    {
+      id: "w6cpo_promises",
+      label: "Promise a full chat launch immediately",
+      text:
+        "Commit to broad launch fast to prove momentum and regain credibility.",
+      decisionQuality: "poor",
+      impact: { responseTime: 1, satisfaction: -4, resolution: -3, sales: -8, team: -15, tech: -5 },
+      feedback: {
+        type: "danger",
+        title: "A fast promise becomes a public failure",
+        content:
+          "Chat exposes your instability in real time. Response delays and poor handoffs become highly visible, quickly. Stakeholders conclude you can’t judge risk under pressure."
+      }
+    },
+    {
+      id: "w6cpo_basic",
+      label: "Refuse chat and focus only on backlog basics",
+      text:
+        "Say no to chat and strip back to minimum operations to survive.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 0, resolution: 0, sales: 2, team: -3, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Survival is not adaptation",
+        content:
+          "You may stabilise throughput, but you look unresponsive to market reality. Leadership grants a short extension—conditional on you presenting a credible plan to meet changing expectations."
+      }
+    }
+  ]
+},
 
-            // WEEK 7 - Struggling + Poor (Sliding toward crisis)
-            week7_struggling_poor: {
-                week: 7,
-                problem: "Week 7 After hiring contractors last week without a clear plan, you're dealing with quality issues and team frustration. Two contractors made serious errors with VIP clients. Your core team is demoralized. Sales is getting complaints. You need to stop the bleeding.",
-                options: [
-                    {
-                        id: 'w7spo_roadmap',
-                        label: "Present 60-day improvement roadmap",
-                        text: "Week 7 Be transparent: Here's our current state, here's the plan to get to sustainable operations, here are the milestones.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 10,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leadership through honesty",
-                            content: "Week 7 Your roadmap acknowledges reality while showing a clear path forward. Stakeholders appreciate the honesty and structure. Your VP commits resources. Team sees hope instead of chaos. You've turned crisis into a managed recovery plan."
-                        }
-                    },
-                    {
-                        id: 'w7spo_release',
-                        label: "Release all contractors immediately",
-                        text: "Week 7 Cut losses. Focus on stabilizing with just your core team.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 1,
-                            satisfaction: 1,
-                            resolution: 1,
-                            sales: 2,
-                            team: 5,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Damage control",
-                            content: "Week 7 Quality improves but you're back to capacity issues. Core team appreciates the decision but is overwhelmed by volume. You've chosen stability over scale, which may be right for now but doesn't solve the long-term problem."
-                        }
-                    },
-                    {
-                        id: 'w7spo_blame',
-                        label: "Escalate contractor issues to VP",
-                        text: "Week 7 Explain that contractors weren't properly vetted. Request better hiring support from HR.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 2,
-                            satisfaction: -3,
-                            resolution: -2,
-                            sales: -5,
-                            team: -8,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Deflecting responsibility",
-                            content: "Week 7 VP asks: 'Who decided to hire them without a training plan?' You look like you're avoiding ownership. Team sees you're not taking responsibility for your decisions. Trust drops further."
-                        }
-                    }
-                ]
-            },
 
-            // WEEK 7 - Crisis + Partial (In the depths)
-            week7_crisis_partial: {
-                week: 7,
-                problem: "Week 7 After your emergency triage last week, things have barely stabilized. Your VP is watching closely. Sales grudgingly accepts VIP prioritization but warns 'this better be temporary.' Your team is exhausted. One contractor is working out; two are disasters. You're still in crisis mode but need to show a path forward.",
-                options: [
-                    {
-                        id: 'w7cp_roadmap',
-                        label: "Present 60-day improvement roadmap",
-                        text: "Week 7 Be transparent: Here's our current state, here's the plan to get to sustainable operations, here are the milestones.",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -2,
-                            satisfaction: 4,
-                            resolution: 3,
-                            sales: 10,
-                            team: 10,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Leadership through honesty",
-                            content: "Week 4 Your roadmap acknowledges reality while showing a clear path forward. Stakeholders appreciate the honesty and structure. Your VP commits resources. Team sees hope instead of chaos. You've turned crisis into a managed recovery plan."
-                        }
-                    },
-                    {
-                        id: 'w7cp_keep',
-                        label: "Keep doing emergency triage",
-                        text: "Week 7 Don't rock the boat. VIP prioritization is working well enough. Just maintain this until pressure decreases.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: -1,
-                            resolution: 0,
-                            sales: 3,
-                            team: -8,
-                            tech: -3
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Stuck in survival mode",
-                            content: "Week 7 You're confusing stability with progress. Team morale continues dropping—they see no end in sight. Standard customers are being neglected. Your VP loses patience: 'What's the actual plan here?' Triage isn't strategy."
-                        }
-                    },
-                    {
-                        id: 'w7cp_escalate',
-                        label: "Request additional senior leadership support",
-                        text: "Week 7 Ask VP to assign a director-level person to co-lead the recovery with you.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -1,
-                            satisfaction: 2,
-                            resolution: 2,
-                            sales: 5,
-                            team: 3,
-                            tech: 5
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Shared leadership",
-                            content: "Week 7 VP assigns a director to help. It takes pressure off you but also signals you couldn't handle it alone. The director brings expertise but you've lost some autonomy. Progress happens but at the cost of your leadership credibility."
-                        }
-                    }
-                ]
-            },
+// =====================
+// WEEK 7
+// =====================
 
-            // WEEK 7 - Crisis + Poor (Rock bottom)
-            week7_crisis_poor: {
-                week: 7,
-                problem: "Week 4 Last week's overtime push backfired catastrophically. Another team member quit. Contractors are underperforming. Customer complaints have doubled. Your VP called an emergency meeting: 'We need to see immediate improvement or make leadership changes.' This is your last chance.",
-                options: [
-                    {
-                        id: 'w7cpo_honest',
-                        label: "Transparent assessment and ask for help",
-                        text: "Week 7 Complete honesty: 'I made mistakes. Here's what I've learned. Here's what I need to succeed.'",
-                        decisionQuality: "excellent",
-                        impact: {
-                            responseTime: -1,
-                            satisfaction: 3,
-                            resolution: 2,
-                            sales: 8,
-                            team: 12,
-                            tech: 8
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Humility opens doors",
-                            content: "Week 7 Your honest assessment stuns the room. VP respects the self-awareness. Team sees you're learning. You get a coach, additional budget, and 30 days to turn it around. You've earned a genuine second chance through vulnerability."
-                        }
-                    },
-                    {
-                        id: 'w7cpo_promises',
-                        label: "Promise dramatic improvement",
-                        text: "Week 7 Commit to 50% improvement in 2 weeks. Work nights and weekends to make it happen.",
-                        decisionQuality: "poor",
-                        impact: {
-                            responseTime: 1,
-                            satisfaction: -4,
-                            resolution: -3,
-                            sales: -8,
-                            team: -15,
-                            tech: -5
-                        },
-                        feedback: {
-                            type: "danger",
-                            title: "Week 7 Desperation makes it worse",
-                            content: "Week 7 You can't deliver on the promise. Work yourself to exhaustion. Make errors. Team sees panic. VP sees unrealistic thinking. Two weeks later, metrics are worse. You're facing reassignment or termination."
-                        }
-                    },
-                    {
-                        id: 'w7cpo_basic',
-                        label: "Implement most basic fixes only",
-                        text: "Week 7 Strip everything down to absolute basics. Just answer tickets in order received. No sophistication.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: 0,
-                            satisfaction: 0,
-                            resolution: 0,
-                            sales: 2,
-                            team: -3,
-                            tech: 0
-                        },
-                        feedback: {
-                            type: "warning",
-                            title: "Survival baseline",
-                            content: "Week 7 You've stopped the bleeding but haven't shown any path to improvement. VP gives you 2 more weeks to show a real plan. You're stable but on thin ice. Better than disaster, barely."
-                        }
-                    }
-                ]
-            }
+// WEEK 7 - Excellence + Excellent
+week7_excellence_excellent: {
+  week: 7,
+  problem:
+    "Leadership announces budget cuts—15% across all departments due to market conditions. Your improved operating model costs ~8% more than the old one (tiered staffing, training, better tools). The CFO asks: ‘Can we just go back to the old way and cut costs?’ Everyone is watching how you respond under pressure.",
+  options: [
+    {
+      id: "w7ee_revertSingle",
+      label: "Agree to revert to a single-tier process",
+      text:
+        "Cut costs fast by simplifying back to one service level and reducing training/tool investment.",
+      decisionQuality: "poor",
+      impact: { responseTime: 12, satisfaction: -15, resolution: -10, sales: -25, team: -15, tech: -8 },
+      feedback: {
+        type: "danger",
+        title: "Reverting under pressure",
+        content:
+          "Within weeks, your gains evaporate: response times climb, quality slips, and churn risk rises. Your team’s morale collapses because the organisation signals ‘improvement doesn’t matter when it’s hard.’ You didn’t just cut costs—you cut credibility."
+      }
+    },
+    {
+      id: "w7ee_dataDrive",
+      label: "Present a data-driven business case for the investment",
+      text:
+        "Show ROI: retention protected, escalations reduced, faster resolution for high-value customers, and the cost of reverting (lost renewals, churn, brand damage).",
+      decisionQuality: "excellent",
+      impact: { responseTime: 0, satisfaction: 4, resolution: 3, sales: 10, team: 15, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "Leading upward with evidence",
+        content:
+          "You translate operations into business outcomes: renewals protected, churn reduced, and high-value customers receiving differentiated service. You acknowledge the budget reality while showing the cost of reverting is higher than the cost of sustaining. The CFO approves continued funding—conditional on ongoing performance. Your team sees you protect what works, not what’s comfortable."
+      }
+    },
+    {
+      id: "w7ee_aiAUtomato",
+      label: "Propose targeted automation in Standard tier",
+      text:
+        "Reduce operating cost by automating high-volume Standard queries while protecting VIP quality and preserving the tier model.",
+      decisionQuality: "partial",
+      impact: { responseTime: -2, satisfaction: 3, resolution: 2, sales: 5, team: 5, tech: 6 },
+      feedback: {
+        type: "success",
+        title: "Pragmatic adaptation",
+        content:
+          "You meet the budget moment with innovation: reduce costs without destroying the operating model. It’s a compromise—automation must be governed carefully to avoid degrading customer experience—but you preserve the core of the change while responding to financial pressure."
+      }
+    }
+  ]
+},
+
+// WEEK 7 - Excellence + Partial
+week7_excellence_partial: {
+  week: 7,
+  problem:
+    "Leadership announces budget cuts—15% across all departments. Your improved model costs ~8% more than the old one, and you’ve also had some overages from early-stage teething issues. The CFO asks: ‘Should we revert to the old way to cut costs?’ Your credibility is good—but not unshakeable. How do you respond?",
+  options: [
+    {
+      id: "w7ep_revertSingle",
+      label: "Agree to revert to a single-tier process",
+      text:
+        "Simplify back to one service level to reduce spend quickly and ‘protect headcount.’",
+      decisionQuality: "poor",
+      impact: { responseTime: 12, satisfaction: -15, resolution: -10, sales: -25, team: -15, tech: -8 },
+      feedback: {
+        type: "danger",
+        title: "Short-term savings, long-term damage",
+        content:
+          "Reverting feels safe, but it recreates the original mismatch that caused the crisis. Costs return later as churn, escalations, and burnout. You taught the organisation that change is optional—only until it’s inconvenient."
+      }
+    },
+    {
+      id: "w7ep_dataDrive",
+      label: "Make the ROI case—and acknowledge the teething issues",
+      text:
+        "Present performance data and financial impact, and also show exactly how you’ll bring costs back in line without sacrificing outcomes.",
+      decisionQuality: "excellent",
+      impact: { responseTime: 0, satisfaction: 2, resolution: 3, sales: 8, team: 12, tech: 7 },
+      feedback: {
+        type: "success",
+        title: "Credibility through clarity",
+        content:
+          "You don’t pretend everything was perfect. You show what improved, what cost more, and what you’re doing to tighten execution. The CFO approves continued funding, with clear checkpoints. Your team trusts you to manage upward pressure while they keep the system running."
+      }
+    },
+    {
+      id: "w7ep_aiAUtomato",
+      label: "Use automation to offset cost increases",
+      text:
+        "Automate predictable Standard work to reduce costs while protecting VIP quality and retaining the tier structure.",
+      decisionQuality: "partial",
+      impact: { responseTime: -2, satisfaction: 3, resolution: 2, sales: 5, team: 5, tech: 6 },
+      feedback: {
+        type: "success",
+        title: "A workable compromise",
+        content:
+          "You preserve the core improvement while responding to financial constraints. The risk is governance: if automation becomes a dumping ground, satisfaction will fall. Done well, it protects the model and stabilises cost."
+      }
+    }
+  ]
+},
+
+// WEEK 7 - Struggling/Recovery + Partial
+week7_struggling_partial: {
+  week: 7,
+  problem:
+    "You’ve made progress, but the model still isn’t fully stable—and now budget cuts hit. Leadership wants savings fast, Sales wants promises kept, and your team is tired of ‘new changes’ every week. The CFO asks if reverting is the simplest option. How do you protect improvement while acknowledging reality?",
+  options: [
+    {
+      id: "w7sp_training",
+      label: "Stabilise execution and show a cost-control plan",
+      text:
+        "Recalibrate the team on tier judgment and tighten workflow so you can show predictable outcomes—and pair it with a concrete plan to reduce overages.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -3, satisfaction: 6, resolution: 6, sales: 8, team: 12, tech: 5 },
+      feedback: {
+        type: "success",
+        title: "Confidence through stability",
+        content:
+          "You don’t argue abstractly—you improve reliability. When you show leadership predictable service levels plus a plan to control cost, the ‘revert’ option loses its appeal. The team feels the ground steady under their feet for the first time in weeks."
+      }
+    },
+    {
+      id: "w7sp_playbook",
+      label: "Codify rules and push compliance",
+      text:
+        "Write a stricter manual and enforce adherence to reduce variation and cost.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 2, resolution: 2, sales: 3, team: -2, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "Control improves consistency—but can reduce adaptability",
+        content:
+          "You reduce some chaos, but agents become less flexible and more risk-averse. It helps in the short term, but it won’t be enough on its own to defend the model under budget scrutiny."
+      }
+    },
+    {
+      id: "w7sp_push",
+      label: "Keep pushing forward and hope results defend you",
+      text:
+        "Continue as-is and assume leadership will see improvement over time.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -5, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Hope is not a strategy",
+        content:
+          "Under budget cuts, leadership won’t ‘wait and see.’ Without a clear story and stabilised execution, the revert option looks like the only certainty. You lose the narrative because you didn’t provide one."
+      }
+    }
+  ]
+},
+
+// WEEK 7 - Struggling + Poor
+week7_struggling_poor: {
+  week: 7,
+  problem:
+    "You’re still dealing with quality issues and low trust, and now budget cuts land. Leadership is looking for ‘clean’ cost reductions, and your program is an obvious target. If you can’t frame a credible recovery plus cost plan, reverting becomes likely.",
+  options: [
+    {
+      id: "w7spo_roadmap",
+      label: "Present a recovery + cost-control roadmap",
+      text:
+        "Show the path to stable quality and the specific levers to reduce cost without undoing the operating model.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -2, satisfaction: 4, resolution: 3, sales: 10, team: 10, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "A credible ‘stay the course’ case",
+        content:
+          "You connect improvement to financial reality: what must be preserved, what can be trimmed, and what milestones will prove it. Leadership doesn’t love risk right now—but they can support a plan they can measure."
+      }
+    },
+    {
+      id: "w7spo_release",
+      label: "Cut capacity spend quickly and stabilise quality",
+      text:
+        "Reduce variable cost fast (e.g., contractors), accept a short-term slowdown, and protect quality while you rebuild credibility.",
+      decisionQuality: "partial",
+      impact: { responseTime: 1, satisfaction: 1, resolution: 1, sales: 2, team: 5, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "A stabilising cut—if paired with a plan",
+        content:
+          "This reduces risk, but leadership will still ask: ‘What replaces that capacity?’ Without an operating plan, you’ll be back to backlog and escalations quickly."
+      }
+    },
+    {
+      id: "w7spo_blame",
+      label: "Argue the cuts are unfair and push back hard",
+      text:
+        "Challenge the CFO’s framing and insist the budget pressure is ‘short-sighted,’ without offering alternatives.",
+      decisionQuality: "poor",
+      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -8, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Conflict without a solution",
+        content:
+          "You may be right, but you’re not persuasive. Leadership hears defensiveness, not strategy. Your program becomes the easiest thing to cut because it’s framed as ‘a problem’ rather than ‘an investment with options.’"
+      }
+    }
+  ]
+},
+
+// WEEK 7 - Crisis + Partial
+week7_crisis_partial: {
+  week: 7,
+  problem:
+    "You’re still in crisis recovery when budget cuts hit. The CFO wants certainty, Sales wants commitments, and your team is exhausted. Reverting is being discussed as the ‘cleanest’ cost cut. How do you respond in a way that preserves the possibility of improvement?",
+  options: [
+    {
+      id: "w7cp_roadmap",
+      label: "Make a hard-nosed recovery + ROI case",
+      text:
+        "Present a measured plan: minimum viable service model, cost controls, and what reverting would cost in churn, escalations, and burnout.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -2, satisfaction: 4, resolution: 3, sales: 10, team: 10, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "You earned time with a plan",
+        content:
+          "You don’t ask for faith—you offer milestones. Leadership grants a defined runway and checkpoints. It’s not full support, but it prevents a panic revert and keeps recovery possible."
+      }
+    },
+    {
+      id: "w7cp_keep",
+      label: "Keep triage going and avoid the budget conversation",
+      text:
+        "Focus on day-to-day survival and hope the budget decision goes away.",
+      decisionQuality: "poor",
+      impact: { responseTime: 0, satisfaction: -1, resolution: 0, sales: 3, team: -8, tech: -3 },
+      feedback: {
+        type: "danger",
+        title: "Silence becomes the decision",
+        content:
+          "If you don’t tell a story, someone else will. Leadership defaults to the simplest cost cut: revert. Avoiding the conversation guarantees you lose it."
+      }
+    },
+    {
+      id: "w7cp_escalate",
+      label: "Request executive sponsorship to protect the model",
+      text:
+        "Ask your VP to sponsor the model explicitly and negotiate budget trade-offs at the leadership level.",
+      decisionQuality: "partial",
+      impact: { responseTime: -1, satisfaction: 2, resolution: 2, sales: 5, team: 3, tech: 5 },
+      feedback: {
+        type: "warning",
+        title: "Protection can be temporary",
+        content:
+          "Sponsorship buys breathing room, but it’s fragile without results. You still need a credible operating plan quickly—or the sponsorship will fade under financial pressure."
+      }
+    }
+  ]
+},
+
+// WEEK 7 - Crisis + Poor
+week7_crisis_poor: {
+  week: 7,
+  problem:
+    "You’re at rock bottom: trust is low, performance is fragile, and budget cuts are forcing hard choices. The CFO asks directly if reverting to the old model is the safest option. Your answer will define whether you remain in role.",
+  options: [
+    {
+      id: "w7cpo_honest",
+      label: "Own reality and propose a constrained path forward",
+      text:
+        "Acknowledge failures, present the smallest viable version of the improved model, and offer measurable checkpoints to earn continued funding.",
+      decisionQuality: "excellent",
+      impact: { responseTime: -1, satisfaction: 3, resolution: 2, sales: 8, team: 12, tech: 8 },
+      feedback: {
+        type: "success",
+        title: "A credible reset under scrutiny",
+        content:
+          "You don’t overclaim. You show what must be preserved, what you’ll cut, and how leadership will know it’s working. That realism buys you a defined runway—and a chance to recover credibility through delivery."
+      }
+    },
+    {
+      id: "w7cpo_promises",
+      label: "Promise results you can’t guarantee",
+      text:
+        "Commit to dramatic improvement fast to avoid cuts and preserve your role.",
+      decisionQuality: "poor",
+      impact: { responseTime: 1, satisfaction: -4, resolution: -3, sales: -8, team: -15, tech: -5 },
+      feedback: {
+        type: "danger",
+        title: "Overpromising ends the story",
+        content:
+          "In a budget cycle, leaders punish risk. An unrealistic promise reads as poor judgment. When results don’t materialise instantly, leadership concludes you can’t lead under pressure."
+      }
+    },
+    {
+      id: "w7cpo_basic",
+      label: "Accept the revert and run the old model",
+      text:
+        "Choose certainty: revert to the old process and focus on moving tickets as cheaply as possible.",
+      decisionQuality: "partial",
+      impact: { responseTime: 0, satisfaction: 0, resolution: 0, sales: 2, team: -3, tech: 0 },
+      feedback: {
+        type: "warning",
+        title: "You survived—but you didn’t lead",
+        content:
+          "Reverting reduces short-term complexity, but it reintroduces the root mismatch that created the crisis. Leadership may tolerate it briefly, but the same problems will return—and you’ll be asked why you didn’t build a better path when you had the chance."
+      }
+    }
+  ]
+}
         };
-
+//== Update story path ==//
+function updateStoryPath() {
+    // Recalculate story path based on last 2 decisions
+    if (state.decisionPath.length === 0) {
+        state.storyPath = 'normal';
+        return;
+    }
+    
+    if (state.decisionPath.length === 1) {
+        // Week 2: based on week 1 decision
+        const w1Quality = state.decisionPath[0];
+        if (w1Quality === 'excellent') {
+            state.storyPath = 'excellence';
+        } else if (w1Quality === 'poor') {
+            state.storyPath = 'crisis';
+        } else {
+            state.storyPath = 'struggling';
+        }
+        return;
+    }
+    
+    // Week 3+: check last 2 decisions
+    const lastTwo = state.decisionPath.slice(-2);
+    const hasExcellent = lastTwo.includes('excellent');
+    const bothPoorOrPartial = lastTwo.every(d => d === 'poor' || d === 'partial');
+    const hasPoor = lastTwo.includes('poor');
+    
+    if (hasExcellent) {
+        state.storyPath = 'excellence';
+    } else if (bothPoorOrPartial && hasPoor) {
+        state.storyPath = 'crisis';
+    } else if (bothPoorOrPartial) {
+        state.storyPath = 'struggling';
+    } else {
+        state.storyPath = 'struggling';
+    }
+}
         // ===== PATH DETERMINATION LOGIC =====
         function determineNextScenario() {
             const week = state.currentWeek;
+            updateStoryPath();
             
             // Week 1 is universal
             if (week === 1) {
@@ -3320,7 +3035,7 @@
 
         // Week 5 - Branch based on Week 2 decision AND path
             if (week === 5) {
-                const w4Quality = state.decisionPath[2];
+                const w4Quality = state.decisionPath[3];
                 const pathKey = `week4_${state.storyPath}_${w4Quality}`;
                 
                 // Map to actual scenario keys
@@ -3342,7 +3057,7 @@
 
         // Week 6 - Branch based on Week 2 decision AND path
             if (week === 6) {
-                const w5Quality = state.decisionPath[2];
+                const w5Quality = state.decisionPath[4];
                 const pathKey = `week4_${state.storyPath}_${w5Quality}`;
                 
                 // Map to actual scenario keys
@@ -3365,7 +3080,7 @@
 
         // Week 7 - Branch based on Week 2 decision AND path
             if (week === 7) {
-                const w6Quality = state.decisionPath[2];
+                const w6Quality = state.decisionPath[5];
                 const pathKey = `week4_${state.storyPath}_${w6Quality}`;
                 
                 // Map to actual scenario keys
@@ -3600,7 +3315,7 @@
             updatePathIndicator();
             
             document.getElementById('panelTitle').textContent = 'Week ' + state.currentWeek + ' Challenge';
-            document.getElementById('panelWeek').textContent = 'Week ' + state.currentWeek + ' of 4';
+            document.getElementById('panelWeek').textContent = 'Week ' + state.currentWeek + ' of 7';
             
             document.getElementById('problemText').textContent = scenario.problem;
             document.getElementById('branchingNotice').innerHTML = getBranchingNoticeHTML();
