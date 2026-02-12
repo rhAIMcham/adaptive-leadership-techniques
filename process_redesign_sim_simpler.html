@@ -793,7 +793,7 @@
                 </div>
 
                 <div class="objectives-section">
-                    <h3>Your objectives over 5 weeks:</h3>
+                    <h3>Your objectives over 7 weeks:</h3>
                     <div class="objective-item">
                         <div class="objective-content">
                             <h4>Identify root causes</h4>
@@ -936,7 +936,7 @@
         <div class="completion-content">
             <div class="completion-header">
                 <h2 class="completion-title">Simulation complete!</h2>
-                <p class="completion-subtitle">5 weeks of adaptive leadership</p>
+                <p class="completion-subtitle">7 weeks of adaptive leadership</p>
             </div>
             <div class="completion-body">
                 <div style="text-align: center;">
@@ -1017,7 +1017,7 @@
                         feedback: {
                             type: "success",
                             title: "Getting on the balcony",
-                            content: "You discovered the root cause: Sales sells one-size-fits-all support, but customers need three different service levels. Your single-queue process can't optimize for both speed AND customization. When you share this diagnosis with stakeholders, everyone stops blaming each other and starts problem-solving."
+                            content: "You discovered the root cause: Sales sells one-size-fits-all support, but customers need three different service levels. Your single-queue process can't optimise for both speed AND customisation. When you share this diagnosis with stakeholders, everyone stops blaming each other and starts problem-solving."
                         }
                     },
                     {
@@ -1066,7 +1066,7 @@
                 options: [
                     {
                         label: "Design tiered service pathways",
-                        text: "Create three distinct processes: VIP (enterprise, personalized), Standard (balanced), Self-Service (template-driven). Each optimized differently.",
+                        text: "Create three distinct processes: VIP (enterprise, personalised), Standard (balanced), Self-Service (template-driven). Each optimised differently.",
                         quality: "good",
                         impact: {
                             responseTime: -8,
@@ -1079,7 +1079,7 @@
                         feedback: {
                             type: "success",
                             title: "Adaptive process architecture",
-                            content: "By accepting you can't optimize one process for all needs, you solved the impossible trade-off. Sales can now promise differentiated service. Your team isn't stretched thin. Tech sees clear requirements. This is adaptive leadership."
+                            content: "By accepting you can't optimise one process for all needs, you solved the impossible trade-off. Sales can now promise differentiated service. Your team isn't stretched thin. Tech sees clear requirements. This is adaptive leadership."
                         }
                     },
                     {
@@ -1317,7 +1317,7 @@
                         feedback: {
                             type: "warning",
                             title: "Solving with resources, not redesign",
-                            content: "VP approves 3 people (not 5). You're adding capacity to a process that could be optimized. When volume grows again, you'll be back asking for more headcount."
+                            content: "VP approves 3 people (not 5). You're adding capacity to a process that could be optimised. When volume grows again, you'll be back asking for more headcount."
                         }
                     }
                 ]
@@ -1406,6 +1406,182 @@
                             type: "danger",
                             title: "Giving up progress",
                             content: "Sales loses competitive differentiation. Customers churn. Team sees that improvements don't last. You took the path of least resistance instead of defending what works."
+                        }
+                    }
+                ]
+            },
+
+            // Week 6 - Excellence Path (Technical Crisis)
+            week6_excellence: {
+                week: 6,
+                problem: "A major platform outage hits. Your company's core product is down for 8 hours. Support tickets explode—2,000+ in one day (4x normal volume). Angry customers flooding all channels. Meanwhile, Tech urgently needs your senior agents to help document customer-reported bugs. This would pull your best people away from the queue just when you need them most. How do you handle this crisis?",
+                options: [
+                    {
+                        label: "Dedicate 3 senior agents to Tech, activate emergency triage",
+                        text: "Split resources: Best agents help Tech fix root cause faster. Remaining team handles critical escalations only. Pause non-urgent work.",
+                        quality: "good",
+                        impact: {
+                            responseTime: 4,
+                            satisfaction: -2,
+                            resolution: 3,
+                            sales: 10,
+                            team: 8,
+                            tech: 20
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Strategic sacrifice for long-term gain",
+                            content: "By helping Tech document bugs, platform is fixed 4 hours faster. This reduces total incident duration and customer pain. Your team sees you prioritise solving root cause over just managing symptoms. Tech relationship strengthens significantly. Short-term metrics hurt, but trust increases."
+                        }
+                    },
+                    {
+                        label: "Keep all agents on support, refuse Tech's request",
+                        text: "Your job is customer support, not product debugging. Tell Tech to use their own resources. All hands on tickets.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 3,
+                            satisfaction: -4,
+                            resolution: -2,
+                            sales: -5,
+                            team: -3,
+                            tech: -15
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Siloed thinking in a crisis",
+                            content: "Platform stays down 4 extra hours because Tech struggles alone. This generates 800 MORE support tickets. Your 'protection' of the support queue backfired—more volume, angrier customers, longer crisis. Tech sees you as territorial. You optimised locally but made the company-wide problem worse."
+                        }
+                    }
+                ]
+            },
+
+            // Week 6 - Struggling Path (Technical Crisis)
+            week6_struggling: {
+                week: 6,
+                problem: "A major platform outage hits. Your fragile two-tier system is immediately overwhelmed—2,000+ tickets in one day. Your automation breaks under load. Tech urgently needs help documenting customer-reported bugs but you're already drowning. Your VP is watching how you handle this crisis. What do you do?",
+                options: [
+                    {
+                        label: "Partner with Tech on root cause, accept short-term chaos",
+                        text: "Assign your 2 strongest agents to work with Tech. Focus remaining team on VIP customers only. Let Standard tier queue grow.",
+                        quality: "good",
+                        impact: {
+                            responseTime: 5,
+                            satisfaction: -1,
+                            resolution: 2,
+                            sales: 5,
+                            team: 5,
+                            tech: 15
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Crisis reveals priorities",
+                            content: "Helping Tech fixes the platform faster. VIP customers protected. Standard tier suffers but you communicated clearly. Your VP sees you can make tough calls. Tech relationship improves. This crisis showed you can think beyond your department."
+                        }
+                    },
+                    {
+                        label: "All hands on tickets, tell Tech you can't help",
+                        text: "You're barely holding it together. Cannot spare anyone. Tech will have to figure it out.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 6,
+                            satisfaction: -6,
+                            resolution: -4,
+                            sales: -10,
+                            team: -8,
+                            tech: -18
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Survival mode blocks collaboration",
+                            content: "Platform down longer. More tickets generated. Your team exhausted by the flood. Tech frustrated—felt abandoned in crisis. VP questions your judgment: 'You made the crisis worse by refusing to help solve the root cause.' Departmental thinking when systems thinking was needed."
+                        }
+                    }
+                ]
+            },
+
+            // Week 7 - Excellence Path (Post-Crisis Recovery)
+            week7_excellence: {
+                week: 7,
+                problem: "Post-outage, there's a backlog of 600 tickets and team morale is fragile after the crisis. But you also just received glowing feedback: Tech leadership publicly thanked your team for crisis partnership. Your VP wants you to present 'lessons learned' to the executive team. How do you use this moment?",
+                options: [
+                    {
+                        label: "Present systems-thinking approach to crisis management",
+                        text: "Share how cross-functional collaboration during crisis reduced total customer pain. Propose permanent 'escalation partnership' between Support and Tech.",
+                        quality: "good",
+                        impact: {
+                            responseTime: -3,
+                            satisfaction: 6,
+                            resolution: 5,
+                            sales: 12,
+                            team: 15,
+                            tech: 18
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Adaptive leadership synthesis",
+                            content: "Your presentation reframes crises as opportunities for systemic improvement. Executives approve your proposal: joint on-call rotation, shared metrics, and integrated escalation paths. You've moved from managing support to shaping how the company solves problems. This is adaptive leadership—changing the system, not just working within it."
+                        }
+                    },
+                    {
+                        label: "Focus presentation on your team's heroic effort",
+                        text: "Highlight how your team handled record volume. Request recognition, bonuses, and additional headcount as reward.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: -1,
+                            satisfaction: 2,
+                            resolution: 1,
+                            sales: 3,
+                            team: 5,
+                            tech: -5
+                        },
+                        feedback: {
+                            type: "warning",
+                            title: "Missing the strategic moment",
+                            content: "Your team appreciates the recognition. But executives expected strategic insights, not a victory lap. Tech feels you took credit for joint work. You had a chance to influence company-wide process and used it for departmental gain. Opportunity missed."
+                        }
+                    }
+                ]
+            },
+
+            // Week 7 - Struggling Path (Post-Crisis Recovery)
+            week7_struggling: {
+                week: 7,
+                problem: "Post-outage backlog is 800 tickets. Your team is exhausted. Tech relationship is strained from your refusal to help during crisis. Your VP is concerned about the ticket backlog and asks for your recovery plan. How do you respond?",
+                options: [
+                    {
+                        label: "Propose cross-functional 'recovery task force'",
+                        text: "Invite Tech to co-lead backlog reduction. Share escalation patterns to prevent future outages. Use crisis as reset point for collaboration.",
+                        quality: "good",
+                        impact: {
+                            responseTime: -2,
+                            satisfaction: 4,
+                            resolution: 4,
+                            sales: 8,
+                            team: 10,
+                            tech: 12
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Recovery through partnership",
+                            content: "By extending an olive branch to Tech, you repair the relationship. Joint task force clears backlog AND identifies product improvements to prevent future issues. Your VP sees you learning from mistakes. You turned a failure into a foundation for better collaboration."
+                        }
+                    },
+                    {
+                        label: "Request emergency contractors to clear backlog",
+                        text: "Standard approach: throw bodies at the problem. Request budget for 5 temps for 3 weeks.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: -1,
+                            satisfaction: 1,
+                            resolution: 0,
+                            sales: 2,
+                            team: -3,
+                            tech: 0
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Repeating old patterns",
+                            content: "Contractors clear some backlog but quality suffers. You haven't learned from the crisis. Tech relationship stays broken. Your VP is disappointed: 'You had a chance to think differently and just asked for more people.' This reactive thinking is why you've struggled all simulation."
                         }
                     }
                 ]
@@ -1640,7 +1816,7 @@
         function showDecisionPanel() {
             const scenario = determineNextScenario();
             
-            if (!scenario || state.currentWeek > 5) {
+            if (!scenario || state.currentWeek > 7) {
                 showCompletionModal();
                 return;
             }
@@ -1648,7 +1824,7 @@
             updatePathIndicator();
             
             document.getElementById('panelTitle').textContent = 'Week ' + state.currentWeek + ' Challenge';
-            document.getElementById('panelWeek').textContent = 'Week ' + state.currentWeek + ' of 5';
+            document.getElementById('panelWeek').textContent = 'Week ' + state.currentWeek + ' of 7';
             
             document.getElementById('problemText').textContent = scenario.problem;
             document.getElementById('branchingNotice').innerHTML = getBranchingNoticeHTML();
@@ -1738,7 +1914,7 @@
             document.getElementById('decisionPanel').classList.remove('active');
             document.getElementById('mainContainer').classList.remove('panel-open');
 
-            if (state.currentWeek <= 5) {
+            if (state.currentWeek <= 7) {
                 setTimeout(showDecisionPanel, 800);
             } else {
                 showCompletionModal();
