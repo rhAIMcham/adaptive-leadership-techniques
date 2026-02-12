@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Leadership Simulation - Simplified</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            transition: margin-right 0.3s ease;
+        }
+
+        .container.panel-open {
+            margin-right: 450px;
+        }
+
+        /* Introduction Screen */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .intro-screen.hidden {
+            display: none;
+        }
+
+        .intro-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+        }
+
+        .intro-header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 40px 40px 32px;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .intro-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .intro-header .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .intro-body {
+            padding: 40px;
+        }
+
+        .role-card {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+        }
+
+        .role-card h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .role-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .role-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .role-card strong {
+            color: var(--primary);
+        }
+
+        .objectives-section {
+            margin-bottom: 32px;
+        }
+
+        .objectives-section h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 8px;
+        }
+        .objective-content h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .objective-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .key-concepts {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+        }
+
+        .key-concepts h3 {
+            font-size: 16px;
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+
+        .key-concepts ul {
+            margin-left: 20px;
+            color: #78350f;
+        }
+
+        .key-concepts li {
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .intro-footer {
+            padding: 24px 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 16px;
+        }
+
+        .btn-large {
+            padding: 16px 48px;
+            font-size: 18px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-card);
+            padding: 24px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .week-display {
+            text-align: right;
+        }
+
+        .week-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .week-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .path-indicator {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .path-indicator.excellence {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .path-indicator.struggling {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Dashboard Grid */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        /* Metric Cards */
+        .metric-card {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .metric-change {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .metric-change.positive {
+            color: var(--success);
+        }
+
+        .metric-change.negative {
+            color: var(--danger);
+        }
+
+        /* Stakeholder Section */
+        .stakeholder-section {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stakeholder-card {
+            padding: 16px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background: #f8fafc;
+        }
+
+        .stakeholder-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .satisfaction-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .satisfaction-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .satisfaction-fill.high {
+            background: var(--success);
+        }
+
+        .satisfaction-fill.medium {
+            background: var(--warning);
+        }
+
+        .satisfaction-fill.low {
+            background: var(--danger);
+        }
+
+        .stakeholder-status {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Chart Section */
+        .chart-section {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        /* Decision History */
+        .history-section {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .history-item {
+            padding: 16px;
+            border-left: 4px solid var(--primary);
+            background: #f8fafc;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .history-item.success {
+            border-left-color: var(--success);
+        }
+
+        .history-item.warning {
+            border-left-color: var(--warning);
+        }
+
+        .history-item.danger {
+            border-left-color: var(--danger);
+        }
+
+        .history-week {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .history-problem {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .history-action {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .history-outcome {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Side Panel */
+        .side-panel {
+            position: fixed;
+            top: 0;
+            right: -500px;
+            width: 500px;
+            height: 100vh;
+            background: var(--bg-card);
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-panel.active {
+            right: 0;
+        }
+
+        .panel-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-main);
+        }
+
+        .panel-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .panel-week {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .panel-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .problem-statement {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .problem-statement h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #92400e;
+        }
+
+        .problem-statement p {
+            font-size: 14px;
+            color: #78350f;
+            line-height: 1.6;
+        }
+
+        .branching-notice {
+            background: #fee2e2;
+            border-left: 4px solid var(--danger);
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #991b1b;
+        }
+
+        .branching-notice.success {
+            background: #d1fae5;
+            border-left-color: var(--success);
+            color: #065f46;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: #dbeafe;
+        }
+
+        .option.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .option-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .option-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .feedback-panel {
+            background: #dbeafe;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .feedback-panel.active {
+            display: block;
+        }
+
+        .feedback-panel.success {
+            background: #d1fae5;
+            border-color: var(--success);
+        }
+
+        .feedback-panel.warning {
+            background: #fef3c7;
+            border-color: var(--warning);
+        }
+
+        .feedback-panel.danger {
+            background: #fee2e2;
+            border-color: var(--danger);
+        }
+
+        .feedback-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feedback-content {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .panel-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--border);
+            background: var(--bg-main);
+        }
+
+        /* Completion Modal */
+        .completion-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .completion-modal.active {
+            display: flex;
+        }
+
+        .completion-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+        }
+
+        .completion-header {
+            padding: 32px 32px 24px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .completion-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .completion-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .completion-body {
+            padding: 32px;
+        }
+
+        .performance-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .performance-badge.excellence {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .performance-badge.struggling {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .metrics-summary {
+            background: var(--bg-main);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .summary-value {
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .key-insight {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .key-insight h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #92400e;
+        }
+
+        .key-insight p {
+            font-size: 14px;
+            color: #78350f;
+            line-height: 1.6;
+        }
+
+        .completion-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard,
+            .stakeholder-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .week-display {
+                text-align: center;
+            }
+
+            .side-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .container.panel-open {
+                margin-right: 0;
+            }
+
+            .intro-body {
+                padding: 24px;
+            }
+
+            .intro-header {
+                padding: 32px 24px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Introduction Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-content">
+            <div class="intro-header">
+                <h1>Adaptive leadership simulation</h1>
+                <p class="subtitle">Customer service process improvement challenge</p>
+            </div>
+            <div class="intro-body">
+                <div class="role-card">
+                    <h2>Your role</h2>
+                    <p>You are <strong>Alex Chen, team lead for customer service</strong> at a rapidly growing SaaS company. Your team handles 500+ support tickets weekly across email, phone, and chat.</p>
+                    <p>Leadership has tasked you with improving the customer service pipeline. You'll need to work closely with:</p>
+                    <p><strong>• Tech team</strong> – They build the tools and systems you need<br>
+                    <strong>• Sales team</strong> – They promise response times that affect your workload<br>
+                    <strong>• Your service team</strong> – 12 agents dealing with growing pressure</p>
+                    <p>The challenge? After a recent sales push, customer volume has increased, as have support requests. Response times are up 45%, satisfaction is down 15 points, and everyone has different priorities. Handle each challenge as it is presented to get to the best outcome for everyone. Use the dashboard to track how your project is doing.</p>
+                </div>
+
+                <div class="objectives-section">
+                    <h3>Your objectives over 5 weeks:</h3>
+                    <div class="objective-item">
+                        <div class="objective-content">
+                            <h4>Identify root causes</h4>
+                            <p>Look beyond symptoms to find systemic process issues</p>
+                        </div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-content">
+                            <h4>Manage under pressure</h4>
+                            <p>Make calm, strategic decisions when stakeholders are stressed</p>
+                        </div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-content">
+                            <h4>Balance stakeholders</h4>
+                            <p>Navigate competing needs from Tech, Sales, Leadership, and your team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>Adaptive leadership principles</h3>
+                    <ul>
+                        <li><strong>Technical vs. adaptive problems:</strong> Technical problems have clear solutions; adaptive problems require new learning and behavior change</li>
+                        <li><strong>Get on the balcony:</strong> Step back from the action to see patterns rather than reacting to pressure</li>
+                        <li><strong>Regulate distress:</strong> Keep pressure productive—not so low people stay comfortable, not so high they shut down</li>
+                        <li><strong>Give the work back:</strong> Don't solve problems for people; help them develop capacity to solve problems themselves</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="intro-footer">
+                <button class="btn btn-primary btn-large" onclick="startSimulation()">Begin simulation</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="mainContainer">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>Customer service process improvement</h1>
+                <p class="subtitle">Team lead dashboard</p>
+                <div class="path-indicator" id="pathIndicator">Starting...</div>
+            </div>
+            <div class="week-display">
+                <div class="week-number" id="weekNumber">Week 1</div>
+                <div class="week-label">Current week</div>
+            </div>
+        </div>
+
+        <!-- Key Metrics Dashboard -->
+        <div class="dashboard">
+            <div class="metric-card">
+                <div class="metric-label">Response time</div>
+                <div class="metric-value" id="metricResponseTime">48hrs</div>
+                <div class="metric-change negative" id="changeResponseTime">↑ 15hrs from baseline</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Customer satisfaction</div>
+                <div class="metric-value" id="metricSatisfaction">68%</div>
+                <div class="metric-change negative" id="changeSatisfaction">↓ 15pts from baseline</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Resolution rate</div>
+                <div class="metric-value" id="metricResolution">52%</div>
+                <div class="metric-change negative" id="changeResolution">↓ 15pts from baseline</div>
+            </div>
+        </div>
+
+        <!-- Stakeholder Status -->
+        <div class="stakeholder-section">
+            <h2 class="section-title">Stakeholder relationships</h2>
+            <div class="stakeholder-grid">
+                <div class="stakeholder-card">
+                    <div class="stakeholder-name">Sales team</div>
+                    <div class="satisfaction-bar">
+                        <div class="satisfaction-fill low" id="satSales" style="width: 45%"></div>
+                    </div>
+                    <div class="stakeholder-status" id="statusSales">45% - Angry about broken promises</div>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="stakeholder-name">Your service team</div>
+                    <div class="satisfaction-bar">
+                        <div class="satisfaction-fill medium" id="satTeam" style="width: 55%"></div>
+                    </div>
+                    <div class="stakeholder-status" id="statusTeam">55% - Burned out and defensive</div>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="stakeholder-name">Tech team</div>
+                    <div class="satisfaction-bar">
+                        <div class="satisfaction-fill medium" id="satTech" style="width: 60%"></div>
+                    </div>
+                    <div class="stakeholder-status" id="statusTech">60% - Skeptical of more requests</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics Trend Chart -->
+        <div class="chart-section">
+            <h2 class="section-title">Performance trends</h2>
+            <div class="chart-container">
+                <canvas id="metricsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Decision History -->
+        <div class="history-section">
+            <h2 class="section-title">Decision history</h2>
+            <div id="historyContainer">
+                <p style="color: var(--text-secondary); text-align: center;">No decisions made yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Panel for Decisions -->
+    <div class="side-panel" id="decisionPanel">
+        <div class="panel-header">
+            <h2 class="panel-title" id="panelTitle">Decision required</h2>
+            <p class="panel-week" id="panelWeek">Week 1</p>
+        </div>
+        <div class="panel-body">
+            <div id="branchingNotice"></div>
+            <div class="problem-statement">
+                <h3>Current situation</h3>
+                <p id="problemText"></p>
+            </div>
+            <div class="options-container" id="optionsContainer"></div>
+            <div class="feedback-panel" id="feedbackPanel">
+                <div class="feedback-title" id="feedbackTitle"></div>
+                <div class="feedback-content" id="feedbackContent"></div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary" id="continueBtn" disabled>Continue to next week</button>
+        </div>
+    </div>
+
+    <!-- Completion Modal -->
+    <div class="completion-modal" id="completionModal">
+        <div class="completion-content">
+            <div class="completion-header">
+                <h2 class="completion-title">Simulation complete!</h2>
+                <p class="completion-subtitle">5 weeks of adaptive leadership</p>
+            </div>
+            <div class="completion-body">
+                <div style="text-align: center;">
+                    <div class="performance-badge" id="performanceBadge">Path Complete</div>
+                </div>
+                
+                <div class="metrics-summary">
+                    <div class="summary-row">
+                        <span class="summary-label">Response time:</span>
+                        <span class="summary-value" id="finalResponseTime">--</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Customer satisfaction:</span>
+                        <span class="summary-value" id="finalSatisfaction">--</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Resolution rate:</span>
+                        <span class="summary-value" id="finalResolution">--</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Path taken:</span>
+                        <span class="summary-value" id="finalPath">--</span>
+                    </div>
+                </div>
+
+                <div class="key-insight">
+                    <h3>Leadership assessment</h3>
+                    <p id="keyInsightText"></p>
+                </div>
+            </div>
+            <div class="completion-footer">
+                <button class="btn btn-primary" onclick="location.reload()">Restart simulation</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== STATE MANAGEMENT =====
+        const state = {
+            currentWeek: 1,
+            metrics: {
+                responseTime: 48,
+                satisfaction: 68,
+                resolution: 52
+            },
+            stakeholders: {
+                sales: 45,
+                team: 55,
+                tech: 60
+            },
+            history: [],
+            metricsHistory: [
+                { week: 0, responseTime: 33, satisfaction: 83, resolution: 67 }
+            ],
+            storyPath: 'normal', // 'normal', 'excellence', or 'struggling'
+            decisionPath: [] // Track 'good' or 'poor' for each week
+        };
+
+        // ===== SIMPLIFIED SCENARIO DATA (2 PATHS) =====
+        const scenarios = {
+            // Week 1 - Universal starting point
+            week1: {
+                week: 1,
+                problem: "Your inbox on Monday morning is full of problems. Sales is furious; clients are complaining about 48-hour response times when they were promised 24 hours. Your team is overwhelmed and defensive. Tech says they can't build you more tools this quarter. Everyone wants a meeting with you today. How do you respond?",
+                options: [
+                    {
+                        label: "Diagnose the process mismatch first",
+                        text: "Postpone meetings by 48 hours. Spend time mapping the actual workflow vs. what was designed, looking for systemic gaps.",
+                        quality: "good",
+                        impact: {
+                            responseTime: 0,
+                            satisfaction: 3,
+                            resolution: 2,
+                            sales: 8,
+                            team: 10,
+                            tech: 12
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Getting on the balcony",
+                            content: "You discovered the root cause: Sales sells one-size-fits-all support, but customers need three different service levels. Your single-queue process can't optimize for both speed AND customization. When you share this diagnosis with stakeholders, everyone stops blaming each other and starts problem-solving."
+                        }
+                    },
+                    {
+                        label: "Schedule individual meetings with each stakeholder",
+                        text: "Meet with Sales, your team, and Tech separately to hear their perspectives and address concerns.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 2,
+                            satisfaction: -3,
+                            resolution: -2,
+                            sales: -5,
+                            team: -8,
+                            tech: -5
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Reactive firefighting",
+                            content: "You spent 6 hours in back-to-back meetings. Each group vented. Sales blamed your team, your team blamed Sales, and Tech said they're slammed. You're exhausted, nothing changed, and everyone feels unheard because you're just collecting complaints without a strategy."
+                        }
+                    },
+                    {
+                        label: "Push back on Sales immediately",
+                        text: "Tell Sales to stop overpromising. They need to align their commitments with your current capacity.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 0,
+                            satisfaction: -2,
+                            resolution: -1,
+                            sales: -15,
+                            team: 8,
+                            tech: 0
+                        },
+                        feedback: {
+                            type: "warning",
+                            title: "Protecting your team, burning bridges",
+                            content: "Your team appreciates you standing up for them. But Sales leadership escalates to your VP, saying you're 'not a team player.' The real problem of poor process design remains unsolved."
+                        }
+                    }
+                ]
+            },
+
+            // Week 2 - Excellence Path
+            week2_excellence: {
+                week: 2,
+                problem: "Your diagnosis revealed that enterprise clients need fast, personalized service while small customers just want quick template responses. With strong stakeholder buy-in from your diagnosis, how do you redesign the system?",
+                options: [
+                    {
+                        label: "Design tiered service pathways",
+                        text: "Create three distinct processes: VIP (enterprise, personalized), Standard (balanced), Self-Service (template-driven). Each optimized differently.",
+                        quality: "good",
+                        impact: {
+                            responseTime: -8,
+                            satisfaction: 10,
+                            resolution: 8,
+                            sales: 18,
+                            team: 15,
+                            tech: 12
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Adaptive process architecture",
+                            content: "By accepting you can't optimize one process for all needs, you solved the impossible trade-off. Sales can now promise differentiated service. Your team isn't stretched thin. Tech sees clear requirements. This is adaptive leadership."
+                        }
+                    },
+                    {
+                        label: "Hire 3 temporary contractors",
+                        text: "Address the volume problem immediately by bringing on extra hands to reduce the backlog.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: -4,
+                            satisfaction: 2,
+                            resolution: 0,
+                            sales: 3,
+                            team: -5,
+                            tech: 0
+                        },
+                        feedback: {
+                            type: "warning",
+                            title: "Missing the strategic opportunity",
+                            content: "Contractors help with volume but you haven't solved the fundamental process mismatch. You had momentum and stakeholder trust; this was the moment to redesign the system."
+                        }
+                    }
+                ]
+            },
+
+            // Week 2 - Struggling Path
+            week2_struggling: {
+                week: 2,
+                problem: "After your reactive approach last week, stakeholders are skeptical. Sales says 'just hire more people.' Your team says 'we need better tools.' Tech says 'we need clearer requirements.' You need to show strategic thinking to rebuild credibility.",
+                options: [
+                    {
+                        label: "Two-tier service model",
+                        text: "Simplified approach: Premium (paying customers) and Standard (everyone else). Less complex than three tiers, more strategic than just adding people.",
+                        quality: "good",
+                        impact: {
+                            responseTime: -5,
+                            satisfaction: 6,
+                            resolution: 5,
+                            sales: 10,
+                            team: 8,
+                            tech: 7
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Recovery through simplicity",
+                            content: "Given your earlier missteps, stakeholders appreciate this pragmatic approach. Two tiers are simpler to implement and show you're thinking systemically. You're rebuilding trust through achievable improvements."
+                        }
+                    },
+                    {
+                        label: "Hire contractors + basic automation",
+                        text: "Quick wins: bring on temp staff and add automated responses for common questions.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: -2,
+                            satisfaction: 0,
+                            resolution: -1,
+                            sales: 2,
+                            team: -6,
+                            tech: -3
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Doubling down on reactive approach",
+                            content: "You had a chance to show strategic thinking. Instead, you're still treating symptoms. Contractors drain budget without solving the process problem. Stakeholders lose faith."
+                        }
+                    }
+                ]
+            },
+
+            // Week 3 - Excellence Path
+            week3_excellence: {
+                week: 3,
+                problem: "Your tiered service model design is excellent, but now comes execution. Sales wants it launched immediately. Your team is excited but nervous. Tech wants a pilot. Leadership is pressuring for 'quick wins.' How do you manage this pressure?",
+                options: [
+                    {
+                        label: "Run controlled 4-week pilot with 20% of volume",
+                        text: "Firm boundary: 'We'll test with a subset, learn, adjust, then scale confidently. No shortcuts.'",
+                        quality: "good",
+                        impact: {
+                            responseTime: -6,
+                            satisfaction: 8,
+                            resolution: 7,
+                            sales: 12,
+                            team: 15,
+                            tech: 18
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Holding steady under pressure",
+                            content: "You regulated the distress. Pilot revealed edge cases you'd never have predicted. Scaled with confidence. Stakeholders see you won't cave to pressure—you make sound decisions."
+                        }
+                    },
+                    {
+                        label: "Launch everything immediately",
+                        text: "Show confidence in your design. Full rollout this week across all tiers.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 5,
+                            satisfaction: -8,
+                            resolution: -5,
+                            sales: -12,
+                            team: -15,
+                            tech: -12
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Overconfidence destroys momentum",
+                            content: "Classification errors everywhere. System crashes. Enterprise client escalated to CEO. Had to roll back. All your credibility from the great design evaporated."
+                        }
+                    }
+                ]
+            },
+
+            // Week 3 - Struggling Path
+            week3_struggling: {
+                week: 3,
+                problem: "Your two-tier model is showing promise but implementation is messy. Premium customers are happy, but Standard tier is still struggling. You need to tighten execution while maintaining momentum.",
+                options: [
+                    {
+                        label: "Intensive 2-day training workshop",
+                        text: "Pause expansion. Train the entire team on tier classification, escalation paths, and service standards for each tier.",
+                        quality: "good",
+                        impact: {
+                            responseTime: -3,
+                            satisfaction: 6,
+                            resolution: 6,
+                            sales: 8,
+                            team: 12,
+                            tech: 5
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Investing in capability",
+                            content: "Two days of training pays off immediately. Agents now understand the 'why' behind tiers. Consistency improves. Your team feels empowered. You chose to build capacity over rushing forward."
+                        }
+                    },
+                    {
+                        label: "Push forward despite messiness",
+                        text: "Inconsistency is part of learning. Keep moving, fix problems as they arise.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 2,
+                            satisfaction: -3,
+                            resolution: -2,
+                            sales: -5,
+                            team: -5,
+                            tech: -3
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Losing control",
+                            content: "Inconsistency breeds customer complaints. Agents are confused. The tier system is becoming meaningless. You had momentum—now you're losing it."
+                        }
+                    }
+                ]
+            },
+
+            // Week 4 - Excellence Path
+            week4_excellence: {
+                week: 4,
+                problem: "Pilot results are excellent! But now your team is divided. Senior agents love the VIP tier (complex work, grateful customers). Junior agents feel stuck with low-tier 'grunt work' and resent it. Two have threatened to quit. How do you address this?",
+                options: [
+                    {
+                        label: "Create clear growth pathways across tiers",
+                        text: "Co-design a progression pathway from Self-Service → Standard → VIP, with clear skills, metrics, and mentorship.",
+                        quality: "good",
+                        impact: {
+                            responseTime: -4,
+                            satisfaction: 6,
+                            resolution: 5,
+                            sales: 8,
+                            team: 14,
+                            tech: 5
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Giving the work back to them",
+                            content: "You run a team workshop where agents define what 'VIP-ready' looks like. Self-Service becomes training ground. Junior agents see a path, not a ceiling. You didn't fix morale for them—you built a system where they can grow themselves."
+                        }
+                    },
+                    {
+                        label: "Rotate everyone through all tiers equally",
+                        text: "Make it 'fair' by having every agent spend equal time in each tier, regardless of capability.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 3,
+                            satisfaction: -3,
+                            resolution: -2,
+                            sales: -3,
+                            team: -8,
+                            tech: 0
+                        },
+                        feedback: {
+                            type: "warning",
+                            title: "Equality over effectiveness",
+                            content: "Rotation feels fair but creates chaos. VIP customers experience inconsistent quality. Senior agents feel undervalued. You applied a technical policy to an adaptive need."
+                        }
+                    }
+                ]
+            },
+
+            // Week 4 - Struggling Path
+            week4_struggling: {
+                week: 4,
+                problem: "Your two-tier system is improving but you're hitting capacity limits. The backlog is growing again. Your VP is asking how you'll scale without just throwing more people at it.",
+                options: [
+                    {
+                        label: "Pilot automation in Standard tier",
+                        text: "Use AI chatbot to handle 30% of Standard tier volume, freeing team for Premium and complex issues.",
+                        quality: "good",
+                        impact: {
+                            responseTime: -4,
+                            satisfaction: 5,
+                            resolution: 4,
+                            sales: 7,
+                            team: 8,
+                            tech: 10
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Strategic use of technology",
+                            content: "Chatbot handles routine queries well. Team focuses on work requiring judgment. You've found a way to scale that doesn't just mean hiring. This shows adaptive thinking."
+                        }
+                    },
+                    {
+                        label: "Request budget for 5 more team members",
+                        text: "Make the case that you need more capacity to handle the volume sustainably.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: -2,
+                            satisfaction: 1,
+                            resolution: 1,
+                            sales: 2,
+                            team: 3,
+                            tech: 0
+                        },
+                        feedback: {
+                            type: "warning",
+                            title: "Solving with resources, not redesign",
+                            content: "VP approves 3 people (not 5). You're adding capacity to a process that could be optimized. When volume grows again, you'll be back asking for more headcount."
+                        }
+                    }
+                ]
+            },
+
+            // Week 5 - Excellence Path
+            week5_excellence: {
+                week: 5,
+                problem: "Leadership announces budget cuts—15% reduction across all departments. Your improved process costs 8% more than the old one. CFO asks: 'Can we just go back to the old way and cut costs?' How do you respond?",
+                options: [
+                    {
+                        label: "Present data-driven business case for the investment",
+                        text: "Show ROI: customer retention value, reduced churn, efficiency gains. Make the case that cutting this costs more than it saves.",
+                        quality: "good",
+                        impact: {
+                            responseTime: 0,
+                            satisfaction: 4,
+                            resolution: 3,
+                            sales: 10,
+                            team: 15,
+                            tech: 8
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Leading upward with evidence",
+                            content: "Your presentation: at-risk renewals saved ($2.1M), churn down 14%, NPS up 22 points. CFO approves budget. You showed adaptive leadership works by protecting the change while acknowledging the pressure."
+                        }
+                    },
+                    {
+                        label: "Agree to cut back to single-tier process",
+                        text: "Protect jobs by simplifying back to one service level and reducing tool costs.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 12,
+                            satisfaction: -15,
+                            resolution: -10,
+                            sales: -25,
+                            team: -15,
+                            tech: -8
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Reverting under pressure",
+                            content: "Within 3 weeks, all your gains evaporated. Response times back to 45+ hours. Three enterprise clients switched to competitors. Team morale crushed. Under pressure, you abandoned adaptive change."
+                        }
+                    }
+                ]
+            },
+
+            // Week 5 - Struggling Path
+            week5_struggling: {
+                week: 5,
+                problem: "Same budget cuts hit your team. Your two-tier system is working but fragile. You've made progress but it's not as defensible as a fully mature system. How do you respond to the CFO's pressure?",
+                options: [
+                    {
+                        label: "Propose strategic automation to reduce costs",
+                        text: "Use AI to automate 40% of Standard tier volume, reducing costs while protecting Premium quality.",
+                        quality: "good",
+                        impact: {
+                            responseTime: -3,
+                            satisfaction: 4,
+                            resolution: 3,
+                            sales: 6,
+                            team: 8,
+                            tech: 7
+                        },
+                        feedback: {
+                            type: "success",
+                            title: "Pragmatic adaptation",
+                            content: "Smart middle path. Automation reduces Standard tier costs by 7% while maintaining quality. Premium service untouched. You found a way to preserve improvements while addressing budget reality."
+                        }
+                    },
+                    {
+                        label: "Accept cuts and reduce service levels across the board",
+                        text: "Lower commitments: 48-hour response for Premium, 72-hour for Standard. Adjust expectations down.",
+                        quality: "poor",
+                        impact: {
+                            responseTime: 6,
+                            satisfaction: -8,
+                            resolution: -5,
+                            sales: -15,
+                            team: -10,
+                            tech: -5
+                        },
+                        feedback: {
+                            type: "danger",
+                            title: "Giving up progress",
+                            content: "Sales loses competitive differentiation. Customers churn. Team sees that improvements don't last. You took the path of least resistance instead of defending what works."
+                        }
+                    }
+                ]
+            }
+        };
+
+        // ===== PATH DETERMINATION =====
+        function determineNextScenario() {
+            const week = state.currentWeek;
+            
+            if (week === 1) {
+                return scenarios.week1;
+            }
+
+            // After week 1, determine if on excellence or struggling path
+            if (week >= 2) {
+                // Check last decision
+                const lastDecision = state.decisionPath[state.decisionPath.length - 1];
+                
+                // Update path based on decision
+                if (lastDecision === 'good') {
+                    state.storyPath = 'excellence';
+                } else {
+                    state.storyPath = 'struggling';
+                }
+            }
+
+            const scenarioKey = `week${week}_${state.storyPath}`;
+            return scenarios[scenarioKey] || null;
+        }
+
+        function updatePathIndicator() {
+            const indicator = document.getElementById('pathIndicator');
+            const pathLabels = {
+                'normal': 'Starting...',
+                'excellence': '🌟 Excellence path',
+                'struggling': '⚠️ Struggling path'
+            };
+
+            indicator.textContent = pathLabels[state.storyPath] || pathLabels['normal'];
+            indicator.className = 'path-indicator ' + state.storyPath;
+        }
+
+        function getBranchingNoticeHTML() {
+            if (state.currentWeek === 1) {
+                return '';
+            }
+
+            const notices = {
+                'excellence': '<div class="branching-notice success"><strong>Excellence Path:</strong> Your strategic diagnosis has built strong stakeholder trust. You have access to high-leverage options.</div>',
+                'struggling': '<div class="branching-notice"><strong>Struggling Path:</strong> Your earlier reactive decision created challenges. Focus on rebuilding trust through thoughtful choices.</div>'
+            };
+
+            return notices[state.storyPath] || '';
+        }
+
+        // ===== CHART INITIALIZATION =====
+        let metricsChart;
+
+        function initChart() {
+            const ctx = document.getElementById('metricsChart').getContext('2d');
+            metricsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Baseline'],
+                    datasets: [
+                        {
+                            label: 'Response Time (hrs)',
+                            data: [33],
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            tension: 0.4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Satisfaction (%)',
+                            data: [83],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: 'Resolution (%)',
+                            data: [67],
+                            borderColor: '#2563eb',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Response Time (hours)'
+                            },
+                            min: 0,
+                            max: 60
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Percentage (%)'
+                            },
+                            min: 0,
+                            max: 100,
+                            grid: {
+                                drawOnChartArea: false,
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ===== UI UPDATE FUNCTIONS =====
+        function updateMetricsDisplay() {
+            document.getElementById('metricResponseTime').textContent = state.metrics.responseTime + 'hrs';
+            document.getElementById('metricSatisfaction').textContent = state.metrics.satisfaction + '%';
+            document.getElementById('metricResolution').textContent = state.metrics.resolution + '%';
+
+            const rtChange = state.metrics.responseTime - 33;
+            const satChange = state.metrics.satisfaction - 83;
+            const resChange = state.metrics.resolution - 67;
+
+            document.getElementById('changeResponseTime').textContent = 
+                (rtChange >= 0 ? '↑ ' : '↓ ') + Math.abs(rtChange) + 'hrs from baseline';
+            document.getElementById('changeResponseTime').className = 
+                'metric-change ' + (rtChange >= 0 ? 'negative' : 'positive');
+
+            document.getElementById('changeSatisfaction').textContent = 
+                (satChange >= 0 ? '↑ ' : '↓ ') + Math.abs(satChange) + 'pts from baseline';
+            document.getElementById('changeSatisfaction').className = 
+                'metric-change ' + (satChange >= 0 ? 'positive' : 'negative');
+
+            document.getElementById('changeResolution').textContent = 
+                (resChange >= 0 ? '↑ ' : '↓ ') + Math.abs(resChange) + 'pts from baseline';
+            document.getElementById('changeResolution').className = 
+                'metric-change ' + (resChange >= 0 ? 'positive' : 'negative');
+        }
+
+        function updateStakeholders() {
+            const stakeholders = ['sales', 'team', 'tech'];
+            const labels = {
+                sales: ['Sales Team', 'Stressed about clients', 'Cautiously supportive', 'Strong partnership'],
+                team: ['Service Team', 'Burned out', 'Engaged and hopeful', 'Empowered and thriving'],
+                tech: ['Tech Team', 'Skeptical', 'Willing to collaborate', 'Enthusiastic partner']
+            };
+
+            stakeholders.forEach(sh => {
+                const value = state.stakeholders[sh];
+                const fill = document.getElementById('sat' + sh.charAt(0).toUpperCase() + sh.slice(1));
+                const status = document.getElementById('status' + sh.charAt(0).toUpperCase() + sh.slice(1));
+
+                fill.style.width = value + '%';
+
+                if (value >= 70) {
+                    fill.className = 'satisfaction-fill high';
+                    status.textContent = value + '% - ' + labels[sh][3];
+                } else if (value >= 50) {
+                    fill.className = 'satisfaction-fill medium';
+                    status.textContent = value + '% - ' + labels[sh][2];
+                } else {
+                    fill.className = 'satisfaction-fill low';
+                    status.textContent = value + '% - ' + labels[sh][1];
+                }
+            });
+        }
+
+        function updateChart() {
+            const labels = state.metricsHistory.map((_, idx) => idx === 0 ? 'Baseline' : 'Week ' + idx);
+            const responseData = state.metricsHistory.map(m => m.responseTime);
+            const satisfactionData = state.metricsHistory.map(m => m.satisfaction);
+            const resolutionData = state.metricsHistory.map(m => m.resolution);
+
+            metricsChart.data.labels = labels;
+            metricsChart.data.datasets[0].data = responseData;
+            metricsChart.data.datasets[1].data = satisfactionData;
+            metricsChart.data.datasets[2].data = resolutionData;
+            metricsChart.update();
+        }
+
+        function updateHistory() {
+            const container = document.getElementById('historyContainer');
+            
+            if (state.history.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No decisions made yet.</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+            state.history.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'history-item ' + item.outcome;
+                div.innerHTML = `
+                    <div class="history-week">Week ${item.week}</div>
+                    <div class="history-problem"><strong>Situation:</strong> ${item.problem.substring(0, 120)}...</div>
+                    <div class="history-action"><strong>Your Action:</strong> ${item.action}</div>
+                    <div class="history-outcome"><strong>Result:</strong> ${item.outcomeText.substring(0, 180)}...</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // ===== INTRO SCREEN =====
+        function startSimulation() {
+            document.getElementById('introScreen').classList.add('hidden');
+            setTimeout(showDecisionPanel, 1000);
+        }
+
+        // ===== MODAL FUNCTIONS =====
+        function showDecisionPanel() {
+            const scenario = determineNextScenario();
+            
+            if (!scenario || state.currentWeek > 5) {
+                showCompletionModal();
+                return;
+            }
+
+            updatePathIndicator();
+            
+            document.getElementById('panelTitle').textContent = 'Week ' + state.currentWeek + ' Challenge';
+            document.getElementById('panelWeek').textContent = 'Week ' + state.currentWeek + ' of 5';
+            
+            document.getElementById('problemText').textContent = scenario.problem;
+            document.getElementById('branchingNotice').innerHTML = getBranchingNoticeHTML();
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            scenario.options.forEach((option, index) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.innerHTML = `
+                    <div class="option-label">Option ${index + 1}: ${option.label}</div>
+                    <div class="option-text">${option.text}</div>
+                `;
+                
+                div.onclick = () => selectOption(option, scenario, index);
+                
+                optionsContainer.appendChild(div);
+            });
+
+            document.getElementById('feedbackPanel').classList.remove('active');
+            document.getElementById('continueBtn').disabled = true;
+            document.getElementById('decisionPanel').classList.add('active');
+            document.getElementById('mainContainer').classList.add('panel-open');
+        }
+
+        function selectOption(option, scenario, index) {
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.add('disabled');
+            });
+
+            document.querySelectorAll('.option')[index].classList.add('selected');
+
+            // Track decision quality
+            state.decisionPath.push(option.quality);
+
+            // Apply impacts
+            state.metrics.responseTime += option.impact.responseTime;
+            state.metrics.satisfaction += option.impact.satisfaction;
+            state.metrics.resolution += option.impact.resolution;
+
+            state.stakeholders.sales += option.impact.sales;
+            state.stakeholders.team += option.impact.team;
+            state.stakeholders.tech += option.impact.tech;
+
+            // Clamp to valid ranges
+            state.metrics.responseTime = Math.max(15, Math.min(60, state.metrics.responseTime));
+            state.metrics.satisfaction = Math.max(0, Math.min(100, state.metrics.satisfaction));
+            state.metrics.resolution = Math.max(0, Math.min(100, state.metrics.resolution));
+
+            state.stakeholders.sales = Math.max(0, Math.min(100, state.stakeholders.sales));
+            state.stakeholders.team = Math.max(0, Math.min(100, state.stakeholders.team));
+            state.stakeholders.tech = Math.max(0, Math.min(100, state.stakeholders.tech));
+
+            state.history.push({
+                week: state.currentWeek,
+                problem: scenario.problem,
+                action: option.label,
+                outcomeText: option.feedback.content,
+                outcome: option.feedback.type
+            });
+
+            state.metricsHistory.push({
+                week: state.currentWeek,
+                responseTime: state.metrics.responseTime,
+                satisfaction: state.metrics.satisfaction,
+                resolution: state.metrics.resolution
+            });
+
+            const feedback = document.getElementById('feedbackPanel');
+            feedback.className = 'feedback-panel active ' + option.feedback.type;
+            document.getElementById('feedbackTitle').textContent = option.feedback.title;
+            document.getElementById('feedbackContent').textContent = option.feedback.content;
+
+            document.getElementById('continueBtn').disabled = false;
+        }
+
+        function continueToNextWeek() {
+            state.currentWeek++;
+            document.getElementById('weekNumber').textContent = 'Week ' + state.currentWeek;
+            
+            updateMetricsDisplay();
+            updateStakeholders();
+            updateChart();
+            updateHistory();
+
+            document.getElementById('decisionPanel').classList.remove('active');
+            document.getElementById('mainContainer').classList.remove('panel-open');
+
+            if (state.currentWeek <= 5) {
+                setTimeout(showDecisionPanel, 800);
+            } else {
+                showCompletionModal();
+            }
+        }
+
+        function showCompletionModal() {
+            const avgStakeholder = Math.round(
+                (state.stakeholders.sales + state.stakeholders.team + state.stakeholders.tech) / 3
+            );
+
+            // Determine badge based on path
+            const pathBadges = {
+                'excellence': { text: '🌟 Excellence Path', class: 'excellence' },
+                'struggling': { text: '⚠️ Struggling Path', class: 'struggling' }
+            };
+
+            const badge = pathBadges[state.storyPath] || { text: 'Path Complete', class: 'struggling' };
+
+            document.getElementById('performanceBadge').textContent = badge.text;
+            document.getElementById('performanceBadge').className = 'performance-badge ' + badge.class;
+            
+            document.getElementById('finalResponseTime').textContent = state.metrics.responseTime + ' hrs';
+            document.getElementById('finalSatisfaction').textContent = state.metrics.satisfaction + '%';
+            document.getElementById('finalResolution').textContent = state.metrics.resolution + '%';
+            document.getElementById('finalPath').textContent = badge.text;
+            
+            document.getElementById('keyInsightText').textContent = getKeyInsight();
+
+            document.getElementById('completionModal').classList.add('active');
+        }
+
+        function getKeyInsight() {
+            const goodCount = state.decisionPath.filter(d => d === 'good').length;
+            
+            if (state.storyPath === 'excellence' && goodCount >= 3) {
+                return 'You demonstrated adaptive leadership: diagnosing root causes, designing systemic solutions, and regulating pressure. Your decisions show you understand the difference between technical fixes and adaptive change.';
+            } else if (state.storyPath === 'struggling') {
+                return 'You showed adaptive thinking in moments but also reactive problem-solving. The key learning: When facing pressure, step back to diagnose patterns before jumping to solutions.';
+            }
+            
+            return 'You navigated these weeks with mixed approaches. Continue developing your ability to distinguish technical problems (apply fixes) from adaptive challenges (require systemic change).';
+        }
+
+        // ===== EVENT LISTENERS =====
+        document.getElementById('continueBtn').addEventListener('click', continueToNextWeek);
+
+        // ===== INITIALIZATION =====
+        initChart();
+        updateMetricsDisplay();
+        updateStakeholders();
+        updateHistory();
+        updatePathIndicator();
+    </script>
+</body>
+</html>

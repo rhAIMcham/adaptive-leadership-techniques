@@ -1009,7 +1009,8 @@
             storyPath: 'normal',
             specificChoices: {
                 week1Choice: null,
-                week2Choice: null
+                week2Choice: null,
+                hiredContractors: false  // ADD THIS LINE
             }
         };
 
@@ -1127,7 +1128,7 @@
                         id: 'w2e_contractors',
                         label: "Hire 3 temporary contractors",
                         text: "Address the volume problem immediately by bringing on extra hands to reduce the backlog.",
-                        decisionQuality: "partial",
+                        decisionQuality: "poor",
                         impact: {
                             responseTime: -4,
                             satisfaction: 2,
@@ -1387,6 +1388,7 @@
                         id: 'w3ep_release',
                         label: "Release contractors, refocus on core team",
                         text: "Cut losses. Let contractors go and focus on making your core team excellent at the tier model.",
+                        shouldShow: () => state.specificChoices.hiredContractors,
                         decisionQuality: "partial",
                         impact: {
                             responseTime: 0,
@@ -1517,6 +1519,7 @@
                         id: 'w3spo_release',
                         label: "Release all contractors immediately",
                         text: "Cut losses. Focus on stabilizing with just your core team.",
+                         shouldShow: () => state.specificChoices.hiredContractors, // ADD 
                         decisionQuality: "partial",
                         impact: {
                             responseTime: 1,
@@ -1700,7 +1703,7 @@ week4_excellence_excellent: {
       text:
         "Make it ‘fair’ by having every agent spend equal time in each tier, regardless of capability, to reduce resentment.",
       decisionQuality: "poor",
-      impact: { responseTime: 3, satisfaction: -3, resolution: -2, sales: -8, team: -5, tech: 0 },
+      impact: { responseTime: 3, satisfaction: -3, resolution: -2, sales: -3, team: -8, tech: 0 },
       feedback: {
         type: "warning",
         title: "Equality over effectiveness",
@@ -1714,7 +1717,7 @@ week4_excellence_excellent: {
       text:
         "Co-design a progression pathway from Self-Service → Standard → VIP, with clear skills, metrics, and mentorship—so junior agents can see a path, not a ceiling.",
       decisionQuality: "excellent",
-      impact: { responseTime: -4, satisfaction: 6, resolution: 5, sales: 8, team: 18, tech: 5 },
+      impact: { responseTime: -4, satisfaction: 6, resolution: 5, sales: 8, team: 14, tech: 5 },
       feedback: {
         type: "success",
         title: "Giving the work back to them",
@@ -1751,12 +1754,12 @@ week4_excellence_partial: {
       text:
         "Enforce equal time across tiers to reduce status tension—even if capability varies.",
       decisionQuality: "poor",
-      impact: { responseTime: 3, satisfaction: -3, resolution: -2, sales: -8, team: -5, tech: 0 },
+      impact: { responseTime: 3, satisfaction: -3, resolution: -2, sales: -4, team: -8, tech: 0 },
       feedback: {
         type: "warning",
         title: "Fairness becomes volatility",
         content:
-          "You reduced perceived hierarchy, but you created inconsistent outcomes for customers. Juniors feel thrown in the deep end, seniors feel pulled away from the work they’re best at, and the tier model starts to feel like a revolving door rather than a system. Morale doesn’t improve—people just complain about different things."
+          "You reduced perceived hierarchy, but you created inconsistent outcomes for customers. Juniors feel thrown in the deep end, seniors feel pulled away from the work they’re best at, and the tier model starts to feel like a revolving door rather than a system. Morale doesn’t improve, people just complain about different things."
       }
     },
     {
@@ -1765,7 +1768,7 @@ week4_excellence_partial: {
       text:
         "Clarify what advancement looks like, build mentoring into the week, and set transparent criteria for moving up tiers.",
       decisionQuality: "excellent",
-      impact: { responseTime: -4, satisfaction: 6, resolution: 5, sales: 8, team: 18, tech: 5 },
+      impact: { responseTime: -4, satisfaction: 6, resolution: 5, sales: 8, team: 12, tech: 2 },
       feedback: {
         type: "success",
         title: "Progression replaces resentment",
@@ -1807,7 +1810,7 @@ week4_struggling_partial: {
         type: "success",
         title: "Investing in capability",
         content:
-          "The workshop creates shared judgment, not just shared rules. Agents align on what belongs in Premium vs Standard, how to escalate, and when to break the pattern. Consistency improves quickly, and Sales gains confidence because you can now explain the model clearly—without overselling it."
+          "The workshop allows for your staff to share their knowledge, building connection and team identify. Agents align on what belongs in Premium vs Standard, how to escalate, and when to break the pattern. Consistency improves quickly, and Sales gains confidence because you can now explain the model clearly without overselling it."
       }
     },
     {
@@ -1816,12 +1819,12 @@ week4_struggling_partial: {
       text:
         "Document common scenarios and edge cases so agents can follow a manual for consistent classification and escalation.",
       decisionQuality: "partial",
-      impact: { responseTime: 0, satisfaction: 2, resolution: 2, sales: 3, team: -2, tech: 0 },
+      impact: { responseTime: 0, satisfaction: 2, resolution: 2, sales: -1, team: -2, tech: 0 },
       feedback: {
         type: "warning",
         title: "Rules over judgment",
         content:
-          "The playbook helps at first, but agents start ‘checking the manual’ instead of thinking. When a case doesn’t fit, work stalls and escalations spike. You improved consistency, but you didn’t build confidence in decision-making."
+          "The playbook helps at first, but agents start ‘checking the manual’ instead of thinking, getting bogged down in tasks they previously could have solved easily. When a case doesn’t fit, work stalls and escalations spike. You improved consistency, but you didn’t build confidence in decision-making."
       }
     },
     {
@@ -1830,12 +1833,12 @@ week4_struggling_partial: {
       text:
         "Accept inconsistency as the cost of learning. Keep scaling and patch problems in real time.",
       decisionQuality: "poor",
-      impact: { responseTime: 2, satisfaction: -3, resolution: -2, sales: -5, team: -5, tech: -3 },
+      impact: { responseTime: 6, satisfaction: -7, resolution: -2, sales: -9, team: -8, tech: -6 },
       feedback: {
         type: "danger",
         title: "Momentum without control",
         content:
-          "Customers experience wildly different service week to week. Agents improvise their own tier logic, and the model starts to lose meaning. You didn’t regulate distress—now the team is stressed, Sales is nervous, and Tech is frustrated by constant ‘urgent’ changes."
+          "Customers experience wildly different service week to week. Agents improvise their own tier logic, and the model starts to lose meaning. You didn’t regulate distress, now the team is stressed, Sales is nervous, and Tech is frustrated by constant ‘urgent’ changes."
       }
     }
   ]
@@ -1845,7 +1848,7 @@ week4_struggling_partial: {
 week4_struggling_poor: {
   week: 4,
   problem:
-    "After expanding capacity too quickly, you’re now dealing with quality failures and team frustration. Two contractors made serious mistakes with VIP clients. Your core team is demoralised and feels like they’re cleaning up someone else’s mess. Sales is getting complaints. You need to stop the bleeding and restore trust fast.",
+    "s mistAfter expanding capacity too quickly, you’re now dealing with quality failures and team frustration. Your core team is demoralised and feels like they’re cleaning up someone else’s mess. Sales is getting complaints. You need to stop the bleeding and restore trust fast.",
   options: [
     {
       id: "w4spo_roadmap",
@@ -1867,6 +1870,7 @@ week4_struggling_poor: {
       text:
         "Cut losses and stabilise using only the core team—even if capacity drops in the short term.",
       decisionQuality: "partial",
+       shouldShow: () => state.specificChoices.hiredContractors, // ADD 
       impact: { responseTime: 1, satisfaction: 1, resolution: 1, sales: 2, team: 5, tech: 0 },
       feedback: {
         type: "warning",
@@ -2957,40 +2961,35 @@ week7_crisis_poor: {
         };
 //== Update story path ==//
 function updateStoryPath() {
-    // Recalculate story path based on last 2 decisions
+    // Recalculate story path based on all decisions made so far
     if (state.decisionPath.length === 0) {
         state.storyPath = 'normal';
         return;
     }
     
-    if (state.decisionPath.length === 1) {
-        // Week 2: based on week 1 decision
-        const w1Quality = state.decisionPath[0];
-        if (w1Quality === 'excellent') {
-            state.storyPath = 'excellence';
-        } else if (w1Quality === 'poor') {
-            state.storyPath = 'crisis';
-        } else {
-            state.storyPath = 'struggling';
-        }
+    // Check if ANY decision is excellent
+    const hasExcellent = state.decisionPath.includes('excellent');
+    if (hasExcellent) {
+        state.storyPath = 'excellence';
         return;
     }
     
-    // Week 3+: check last 2 decisions
-    const lastTwo = state.decisionPath.slice(-2);
-    const hasExcellent = lastTwo.includes('excellent');
-    const bothPoorOrPartial = lastTwo.every(d => d === 'poor' || d === 'partial');
-    const hasPoor = lastTwo.includes('poor');
-    
-    if (hasExcellent) {
-        state.storyPath = 'excellence';
-    } else if (bothPoorOrPartial && hasPoor) {
+    // Check if ALL decisions are poor (crisis path)
+    const allPoor = state.decisionPath.every(d => d === 'poor');
+    if (allPoor) {
         state.storyPath = 'crisis';
-    } else if (bothPoorOrPartial) {
-        state.storyPath = 'struggling';
-    } else {
-        state.storyPath = 'struggling';
+        return;
     }
+    
+    // Check if there are any poor decisions mixed with partial
+    const hasPoor = state.decisionPath.includes('poor');
+    if (hasPoor) {
+        state.storyPath = 'struggling';
+        return;
+    }
+    
+    // All decisions are partial (no excellent, no poor)
+    state.storyPath = 'struggling';
 }
         // ===== PATH DETERMINATION LOGIC =====
         function determineNextScenario() {
@@ -3352,6 +3351,9 @@ function updateStoryPath() {
             optionsContainer.innerHTML = '';
 
             scenario.options.forEach((option, index) => {
+                  if (option.shouldShow && !option.shouldShow()) {
+        return; // Don't render this option
+    }
                 const div = document.createElement('div');
                 div.className = 'option' + (option.locked ? ' locked' : '');
                 div.innerHTML = `
@@ -3389,6 +3391,12 @@ function updateStoryPath() {
                 state.specificChoices.week2Choice = option.id;
             }
 
+                    // ADD THIS: Track contractor hiring
+            if (option.id === 'w2e_contractors' || 
+                option.id === 'w2s_contractors' || 
+                option.id === 'w2c_contractors') {
+                state.specificChoices.hiredContractors = true;
+            }
             // Apply impacts
             state.metrics.responseTime += option.impact.responseTime;
             state.metrics.satisfaction += option.impact.satisfaction;
