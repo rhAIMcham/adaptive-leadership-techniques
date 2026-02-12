@@ -1687,63 +1687,63 @@
             // WEEK 4 - Excellence + Excellent (Best path)
             week4_excellence_excellent: {
                 week: 4,
-                problem: "Your tiered service model design is excellent, but now comes execution. Sales wants it launched immediately to save Q4 deals. Your team is excited but nervous. Tech wants a 6-week pilot. Leadership is pressuring for 'quick wins.' How do you manage this pressure?",
+                problem: "Pilot results are in—tiered service works! But now your team is divided. Senior agents love the VIP tier (interesting work, happy customers). Junior agents feel stuck with low-tier 'grunt work' and resent it. Two have threatened to quit. How do you address this adaptive challenge within your team?",
                 options: [
                     {
-                        id: 'w4ee_pilot',
-                        label: "Run controlled 4-week pilot with 20% of volume",
-                        text: "Firm boundary: 'We'll test with a subset, learn, adjust, then scale confidently. No shortcuts.'",
-                        decisionQuality: "excellent",
+                        id: 'w4ee_rotate',
+                        label: "Rotate everyone through all tiers equally",
+                        text: "Make it fair by having every agent spend time in each tier to avoid hierarchy resentment.",
+                        decisionQuality: "poor",
                         impact: {
-                            responseTime: -6,
-                            satisfaction: 8,
-                            resolution: 7,
-                            sales: 12,
-                            team: 15,
-                            tech: 18
-                        },
-                        feedback: {
-                            type: "success",
-                            title: "Holding steady under pressure",
-                            content: "You regulated the distress. Told Sales: 'I understand urgency, but a failed launch hurts Q4 more than waiting 4 weeks.' Pilot revealed edge cases you'd never have predicted. Scaled with confidence. Stakeholders see you won't cave to pressure—you make sound decisions."
-                        }
-                    },
-                    {
-                        id: 'w4ee_launch',
-                        label: "Launch to all enterprise clients first",
-                        text: "Compromise: Full rollout for VIP tier only, learn from real usage, then expand to other tiers.",
-                        decisionQuality: "partial",
-                        impact: {
-                            responseTime: -4,
-                            satisfaction: 5,
-                            resolution: 4,
-                            sales: 8,
-                            team: 5,
-                            tech: 3
+                            responseTime: 3,
+                            satisfaction: -3,
+                            resolution: -2,
+                            sales: -8,
+                            team: -5,
+                            tech: 0
                         },
                         feedback: {
                             type: "warning",
-                            title: "Managed risk",
-                            content: "VIP-only launch is less risky than full rollout but more risky than pilot. Some classification issues emerge. You're moving fast but not recklessly. Stakeholders appreciate speed but worry you're cutting corners."
+                            title: "Equality over effectiveness",
+                            content: "Senior agents frustrated that expertise isn't valued. VIP customers get inconsistent service when juniors rotate in. You prioritised internal fairness over customer outcomes. This is a technical solution (rotation policy) to an adaptive challenge (career development)."
                         }
                     },
                     {
-                        id: 'w4ee_immediate',
-                        label: "Launch everything immediately",
-                        text: "Show confidence in your design. Full rollout this week across all tiers.",
-                        decisionQuality: "poor",
+                        id: 'w4ee_growth',
+                        label: "Launch to all enterprise clients firstCreate clear growth pathways across tiers",
+                        text: "CMap how agents develop from Standard → VIP tier, with skills, metrics, and mentorship at each level.",
+                        decisionQuality: "excellent",
                         impact: {
-                            responseTime: 5,
-                            satisfaction: -8,
-                            resolution: -5,
-                            sales: -12,
-                            team: -15,
-                            tech: -12
+                            responseTime: -4,
+                            satisfaction: 6,
+                            resolution: 5,
+                            sales: 8,
+                            team: 18,
+                            tech: 5
                         },
                         feedback: {
-                            type: "danger",
-                            title: "Overconfidence destroys momentum",
-                            content: "Classification errors everywhere. System crashes. Enterprise client escalated to CEO after misrouting. Had to roll back. All your credibility from the great design evaporated. Pressure made you rush instead of regulate distress."
+                            type: "success",
+                            title: "Giving the work back to them",
+                            content: "You facilitated a session where agents themselves defined what 'VIP-ready' looks like. Self-Service becomes training ground. Standard tier is progression. VIP is earned mastery. Junior agents now see a path, not a ceiling. You didn't solve it for them—you helped them own their development."
+                        }
+                    },
+                    {
+                        id: 'w4ee_payTiers',
+                        label: "Pay differential for VIP tier work",
+                        text: "Compensate senior agents more for handling complex VIP cases to recognise the difficulty.",
+                        decisionQuality: "partial",
+                        impact: {
+                            responseTime: -2,
+                            satisfaction: 0,
+                            resolution: 2,
+                            sales: 3,
+                            team: 4,
+                            tech: 0
+                        },
+                        feedback: {
+                            type: "warning",
+                            title: "Money doesn't solve adaptive challenges",
+                            content: "Pay helps short-term but doesn't address junior agents' desire for growth and meaning. You've created a compensation tier without a development system. People want mastery and purpose, not just money."
                         }
                     }
                 ]
