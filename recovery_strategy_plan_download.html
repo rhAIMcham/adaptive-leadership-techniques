@@ -370,7 +370,7 @@
         // Add input listener for character count
         textareas.forEach(textarea => {
             textarea.addEventListener('input', function() {
-                const sectionName = this.dataset.section;
+                const sectionName = this.dataset.reflection-input;
                 const charCount = document.getElementById(`count${sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}`);
                 
                 // Update character count
@@ -435,18 +435,18 @@
             yPosition += 15;
 
             // Function to add section
-            function addSection(title, prompt, content) {
+            function addSection(prompt, content) {
                 // Check if we need a new page
                 if (yPosition > 250) {
                     doc.addPage();
                     yPosition = 20;
                 }
 
-                // Section title
-                doc.setFontSize(14);
-                doc.setFont(undefined, 'bold');
-                doc.text(`${title}`, leftMargin, yPosition);
-                yPosition += 7;
+                // // Section title
+                // doc.setFontSize(14);
+                // doc.setFont(undefined, 'bold');
+                // doc.text(`${title}`, leftMargin, yPosition);
+                // yPosition += 7;
 
                 // Prompt
                 doc.setFontSize(10);
@@ -484,7 +484,7 @@
             }
 
             // Add all sections (FIXED: now uses responses.reset instead of responses.trigger)
-            addSection('Recovery strategy plan', 'Create a simple recovery plan using these prompts; <ul>               <li>What are your warning signs/trigger?</li>                <li>What is a first aid reset that will/might work?</li>                <li>What is a protection strategy</li>                <li>Who can you call?</li>                <li>What can you stop doing?</li>                </ul>', responses.recovery);
+            addSection( 'Here is the recovery response plan you created', responses.recovery);
 
             // Save the PDF (FIXED: updated filename to match content)
             doc.save(`recovery-strategy-${new Date().toISOString().split('T')[0]}.pdf`);
