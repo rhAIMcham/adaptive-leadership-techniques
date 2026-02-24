@@ -30,7 +30,7 @@
       font-family: "IBM Plex Sans", sans-serif;
       min-height: 100vh;
       padding: 30px 20px;
-      background: #f5f6f8;
+      /* background: #f5f6f8; */
     }
 
     .container {
@@ -418,7 +418,7 @@
         <div class="panel-header">Variables</div>
         <div class="input-section">
           <input type="text" id="variableInput" class="variable-input" placeholder="Enter variable name..." maxlength="100">
-          <button class="add-variable-btn" onclick="addVariable()">Add Variable</button>
+          <button class="add-variable-btn" onclick="addVariable()">Add variable</button>
         </div>
         <div class="item-counter" id="itemCounter">0 / 10 items</div>
         <div id="variablesList"></div>
@@ -426,7 +426,7 @@
 
       <div class="diagram-area">
         <div class="connection-mode" id="connectionMode">
-          <p>Connection Mode: Click a node to start, then click another to connect</p>
+          <p>Connection mode: Click a node to start, then click another to connect</p>
           <div class="btn-group">
             <button class="btn secondary" onclick="setConnectionType('positive')">+ Positive</button>
             <button class="btn secondary" onclick="setConnectionType('negative')">− Negative</button>
